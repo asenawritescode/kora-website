@@ -1,8 +1,6 @@
 const YAML_EXAMPLE = `name: Customer
 module: CRM
 title_field: customer_name
-sort_field: modified
-sort_order: DESC
 
 fields:
   - fieldname: customer_name
@@ -10,7 +8,6 @@ fields:
     label: Customer Name
     reqd: true
     in_list_view: true
-    search_index: true
 
   - fieldname: email
     fieldtype: Data
@@ -29,12 +26,6 @@ fields:
   - fieldname: annual_revenue
     fieldtype: Currency
     label: Annual Revenue
-    in_list_view: true
-
-  - fieldname: is_active
-    fieldtype: Check
-    label: Active Customer
-    default: "1"
 
   - fieldname: notes
     fieldtype: Text
@@ -42,24 +33,24 @@ fields:
 
 export function YamlConfigSection() {
   return (
-    <section className="mb-[120px]">
-      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-4 border-b border-outline-variant pb-2">
+    <section className="mb-24" id="yaml-configuration">
+      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
         YAML Configuration
       </h2>
-      <p className="mb-4 text-[#5d5f5f]">
-        DocTypes are defined declaratively in YAML. Define fields, types, constraints,
-        and relationships — Kora generates the database table, REST API, and React forms automatically.
+      <p className="text-base text-[#5d5f5f] mb-4 leading-relaxed">
+        Define your data model in YAML. Kora reads it and generates the database table,
+        REST API, React forms, and analytics — automatically.
       </p>
-      <p className="mb-4 text-[#5d5f5f]">
-        <strong>For non-technical users:</strong> You don&apos;t need to write YAML directly.
-        Use the AI Chat to describe your business in plain English, and Kora creates
-        validated doctype drafts for you. Review and activate when ready.
+      <p className="text-sm text-[#5d5f5f] mb-6 leading-relaxed">
+        <strong>Not comfortable writing YAML?</strong> Use the AI Chat instead. Describe
+        your business in plain English and Kora creates validated doctype drafts for you.
+        Review them, activate when ready — no YAML required.
       </p>
       <div className="bg-[#0A0A0A] rounded-sm border border-outline-variant overflow-hidden">
-        <div className="flex items-center justify-between px-4 py-2 bg-[#1A1A1A] border-b border-outline-variant/30">
-          <span className="text-sm text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
+        <div className="flex items-center px-4 py-2 bg-[#1A1A1A] border-b border-outline-variant/30">
+          <span className="text-xs text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
         </div>
-        <pre className="p-4 text-sm text-[#E5E5E5] overflow-x-auto" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <pre className="p-4 text-sm text-[#E5E5E5] overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
           <code>
             {YAML_EXAMPLE.split('\n').map((line, i) => {
               const keyMatch = line.match(/^(\s*)([a-zA-Z_-]+):/)
@@ -78,6 +69,10 @@ export function YamlConfigSection() {
           </code>
         </pre>
       </div>
+      <p className="text-xs text-[#5d5f5f] mt-3" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        This creates a full CRUD app at <code className="text-black">/workspace/Customer</code> —
+        list view, form, search, and filters. Ready in seconds.
+      </p>
     </section>
   )
 }

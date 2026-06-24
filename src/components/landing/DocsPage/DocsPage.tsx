@@ -11,7 +11,7 @@ export default function DocsPage() {
     <>
       {/* Breadcrumbs */}
       <div className="flex items-center gap-2 text-xs text-[#5d5f5f] mb-8" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-        <a href="#" className="hover:text-black transition-colors">Docs</a>
+        <span>Docs</span>
         <span className="text-sm">›</span>
         <span className="text-black">Getting Started</span>
       </div>
@@ -21,10 +21,9 @@ export default function DocsPage() {
         <h1 className="text-[48px] leading-[56px] font-semibold text-black mb-4 tracking-[-0.03em]">
           Documentation
         </h1>
-        <p className="text-lg leading-7 text-[#5d5f5f]">
-          Everything you need to build applications with Kora — from your first
-          doctype to production deployment. Whether you prefer YAML, the admin UI,
-          or describing your business to the AI, this guide covers it all.
+        <p className="text-lg leading-7 text-[#5d5f5f] max-w-xl">
+          Build your first application in under two minutes.
+          No code generation. No vendor lock-in. Just YAML and a single binary.
         </p>
       </div>
 

@@ -1,26 +1,24 @@
-import { Search } from 'lucide-react'
-
 const SECTIONS = [
   {
     title: 'Getting Started',
     links: [
-      { label: 'Quick Start', active: true },
-      { label: 'Core Concepts', active: false },
+      { label: 'Quick Start', href: '#quick-start' },
+      { label: 'Core Concepts', href: '#core-concepts' },
     ],
   },
   {
     title: 'Platform',
     links: [
-      { label: 'Architecture', active: false },
-      { label: 'YAML Configuration', active: false },
-      { label: 'API Reference', active: false },
+      { label: 'Architecture', href: '#architecture' },
+      { label: 'YAML Configuration', href: '#yaml-configuration' },
+      { label: 'API Reference', href: '#api-reference' },
     ],
   },
   {
     title: 'Operations',
     links: [
-      { label: 'CLI Commands', active: false },
-      { label: 'Deployment', active: false },
+      { label: 'CLI Commands', href: '#cli-commands' },
+      { label: 'Deployment', href: '#deployment' },
     ],
   },
 ]
@@ -28,16 +26,6 @@ const SECTIONS = [
 export function DocsSidebar() {
   return (
     <aside className="hidden md:block w-64 shrink-0 border-r border-outline-variant pt-8 pr-8 overflow-y-auto h-[calc(100vh-64px)] sticky top-16">
-      <div className="relative mb-8">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5d5f5f] h-3.5 w-3.5" />
-        <input
-          className="w-full pl-9 pr-3 py-2 bg-[#f1edec] border border-outline-variant rounded-sm text-sm text-black focus:border-black focus:ring-0 focus:outline-none placeholder-[#5d5f5f] transition-colors"
-          placeholder="Search docs..."
-          type="text"
-          style={{ fontFamily: "'Geist Mono Variable', monospace" }}
-        />
-      </div>
-
       <nav className="space-y-6">
         {SECTIONS.map((section) => (
           <div key={section.title}>
@@ -48,12 +36,8 @@ export function DocsSidebar() {
               {section.links.map((link) => (
                 <li key={link.label}>
                   <a
-                    href="#"
-                    className={`block px-2 py-1.5 text-sm rounded-sm transition-colors ${
-                      link.active
-                        ? 'text-black font-medium bg-[#f1edec]'
-                        : 'text-[#5d5f5f] hover:text-black hover:bg-gray-50'
-                    }`}
+                    href={link.href}
+                    className="block px-2 py-1.5 text-sm rounded-sm text-[#5d5f5f] hover:text-black hover:bg-gray-50 transition-colors"
                   >
                     {link.label}
                   </a>
