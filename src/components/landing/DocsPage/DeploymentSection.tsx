@@ -9,6 +9,10 @@ const ENV_VARS = [
   { var: 'CONSOLE_EMAIL', default: 'admin@kora.local', desc: 'Console admin login' },
   { var: 'CONSOLE_PASSWORD', default: 'admin123', desc: 'Console admin password' },
   { var: 'KORA_ANALYTICS', default: 'false', desc: 'Enable analytics (true/false)' },
+  { var: 'KORA_SHARED_AI_ENABLED', default: 'false', desc: 'Enable shared AI key for all sites' },
+  { var: 'KORA_SHARED_OPENAI_API_KEY', default: '—', desc: 'Shared OpenAI key (fallback when site has none)' },
+  { var: 'KORA_SHARED_DEEPSEEK_API_KEY', default: '—', desc: 'Shared DeepSeek key' },
+  { var: 'KORA_SHARED_ANTHROPIC_API_KEY', default: '—', desc: 'Shared Anthropic key' },
 ]
 
 export function DeploymentSection() {
@@ -77,6 +81,15 @@ export function DeploymentSection() {
           </p>
         </div>
       </div>
+
+      <h3 className="font-bold text-black mt-8 mb-3">Shared AI Keys</h3>
+      <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">
+        Superadmins can set a global AI provider key so new users get AI chat immediately
+        — no per-site configuration needed. Set{' '}
+        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">KORA_SHARED_AI_ENABLED=true</code>
+        {' '}and one of the shared key env vars. Site-specific keys always take priority.
+        Disable at any time by removing the env var.
+      </p>
     </section>
   )
 }

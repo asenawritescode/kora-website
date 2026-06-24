@@ -5,9 +5,14 @@ import { TerminalDemo } from './TerminalDemo'
 export function HeroSection() {
   return (
     <section className="max-w-[960px] mx-auto px-4 sm:px-6 py-20 md:py-[120px] text-center">
-      <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-4 tracking-[-0.03em] md:tracking-[-0.04em]">
+      <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-3 tracking-[-0.03em] md:tracking-[-0.04em]">
         Custom business software,<br />without custom development.
       </h1>
+      <div className="mb-6">
+        <span className="inline-block text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
+          AI-Powered
+        </span>
+      </div>
       <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-6">
         Describe your business in plain English, and Kora builds the database, API, and UI instantly.
       </p>
