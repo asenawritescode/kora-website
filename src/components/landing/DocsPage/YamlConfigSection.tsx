@@ -1,39 +1,63 @@
-import { Copy } from 'lucide-react'
+const YAML_EXAMPLE = `name: Customer
+module: CRM
+title_field: customer_name
+sort_field: modified
+sort_order: DESC
 
-const YAML_EXAMPLE = `version: "1.0"
-name: my-frontend-service
-type: web
+fields:
+  - fieldname: customer_name
+    fieldtype: Data
+    label: Customer Name
+    reqd: true
+    in_list_view: true
+    search_index: true
 
-deployment:
-  image: registry.kora.io/library/nginx:alpine
-  replicas: 3
-  regions:
-    - us-east-1
-    - eu-west-1
+  - fieldname: email
+    fieldtype: Data
+    label: Email
+    unique: true
 
-resources:
-  cpu: "0.5"
-  memory: "512Mi"
+  - fieldname: industry
+    fieldtype: Select
+    label: Industry
+    options: |
+      Technology
+      Healthcare
+      Manufacturing
+      Retail
 
-env:
-  - NODE_ENV: production
-  - API_ENDPOINT: https://api.internal.local`
+  - fieldname: annual_revenue
+    fieldtype: Currency
+    label: Annual Revenue
+    in_list_view: true
+
+  - fieldname: is_active
+    fieldtype: Check
+    label: Active Customer
+    default: "1"
+
+  - fieldname: notes
+    fieldtype: Text
+    label: Notes`
 
 export function YamlConfigSection() {
   return (
     <section className="mb-[120px]">
-      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-8 border-b border-outline-variant pb-2">
+      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-4 border-b border-outline-variant pb-2">
         YAML Configuration
       </h2>
       <p className="mb-4 text-[#5d5f5f]">
-        Workloads are defined declaratively using standard YAML syntax. Below is an example of a basic web service deployment configuration.
+        DocTypes are defined declaratively in YAML. Define fields, types, constraints,
+        and relationships — Kora generates the database table, REST API, and React forms automatically.
+      </p>
+      <p className="mb-4 text-[#5d5f5f]">
+        <strong>For non-technical users:</strong> You don&apos;t need to write YAML directly.
+        Use the AI Chat to describe your business in plain English, and Kora creates
+        validated doctype drafts for you. Review and activate when ready.
       </p>
       <div className="bg-[#0A0A0A] rounded-sm border border-outline-variant overflow-hidden">
         <div className="flex items-center justify-between px-4 py-2 bg-[#1A1A1A] border-b border-outline-variant/30">
-          <span className="text-sm text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>kora-service.yaml</span>
-          <button className="text-[#5d5f5f] hover:text-white transition-colors">
-            <Copy className="h-3.5 w-3.5" />
-          </button>
+          <span className="text-sm text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
         </div>
         <pre className="p-4 text-sm text-[#E5E5E5] overflow-x-auto" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
           <code>

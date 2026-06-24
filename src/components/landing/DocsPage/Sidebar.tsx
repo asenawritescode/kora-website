@@ -2,10 +2,9 @@ import { Search } from 'lucide-react'
 
 const SECTIONS = [
   {
-    title: 'Introduction',
+    title: 'Getting Started',
     links: [
-      { label: 'Getting Started', active: true },
-      { label: 'Installation', active: false },
+      { label: 'Quick Start', active: true },
       { label: 'Core Concepts', active: false },
     ],
   },
@@ -13,22 +12,15 @@ const SECTIONS = [
     title: 'Platform',
     links: [
       { label: 'Architecture', active: false },
-      { label: 'Data Models', active: false },
-      { label: 'Security', active: false },
-    ],
-  },
-  {
-    title: 'Configuration',
-    links: [
       { label: 'YAML Configuration', active: false },
-      { label: 'Environment Variables', active: false },
+      { label: 'API Reference', active: false },
     ],
   },
   {
-    title: 'Reference',
+    title: 'Operations',
     links: [
-      { label: 'API Reference', active: false },
       { label: 'CLI Commands', active: false },
+      { label: 'Deployment', active: false },
     ],
   },
 ]
@@ -36,7 +28,6 @@ const SECTIONS = [
 export function DocsSidebar() {
   return (
     <aside className="hidden md:block w-64 shrink-0 border-r border-outline-variant pt-8 pr-8 overflow-y-auto h-[calc(100vh-64px)] sticky top-16">
-      {/* Search */}
       <div className="relative mb-8">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5d5f5f] h-3.5 w-3.5" />
         <input

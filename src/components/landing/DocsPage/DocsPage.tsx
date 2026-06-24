@@ -1,7 +1,10 @@
 import { QuickStartSection } from './QuickStartSection'
+import { CoreConceptsSection } from './CoreConceptsSection'
 import { ArchitectureSection } from './ArchitectureSection'
 import { YamlConfigSection } from './YamlConfigSection'
 import { ApiReferenceSection } from './ApiReferenceSection'
+import { CliCommandsSection } from './CliCommandsSection'
+import { DeploymentSection } from './DeploymentSection'
 
 export default function DocsPage() {
   return (
@@ -16,17 +19,22 @@ export default function DocsPage() {
       {/* Page Header */}
       <div className="mb-12 border-b border-outline-variant pb-8">
         <h1 className="text-[48px] leading-[56px] font-semibold text-black mb-4 tracking-[-0.03em]">
-          Getting Started with Kora
+          Documentation
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f]">
-          A comprehensive guide to initializing your infrastructure, configuring your first cluster, and deploying standard workloads using the Kora CLI.
+          Everything you need to build applications with Kora — from your first
+          doctype to production deployment. Whether you prefer YAML, the admin UI,
+          or describing your business to the AI, this guide covers it all.
         </p>
       </div>
 
       <QuickStartSection />
+      <CoreConceptsSection />
       <ArchitectureSection />
       <YamlConfigSection />
       <ApiReferenceSection />
+      <CliCommandsSection />
+      <DeploymentSection />
     </>
   )
 }
