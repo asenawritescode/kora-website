@@ -14,17 +14,17 @@ export function HeroPost() {
         <div className="space-y-4">
           <div className="flex items-center gap-3">
             <span className="text-xs font-medium bg-[#f1edec] text-black px-2 py-1 rounded-sm uppercase tracking-wider" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-              Infrastructure
+              Architecture
             </span>
             <span className="text-sm text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-              Oct 24, 2024
+              Jun 24, 2026
             </span>
           </div>
           <h2 className="text-[48px] leading-[56px] font-semibold text-black group-hover:text-black/80 transition-colors tracking-[-0.03em]">
-            Building Infrastructure from Africa for the World
+            Building Application Infrastructure from Africa
           </h2>
           <p className="text-base text-[#444748] line-clamp-3">
-            An architectural breakdown of how we engineered a multi-region distributed system capable of handling high-throughput financial transactions, leveraging global edge networks while maintaining core integrity.
+            How we built a config-driven application engine that turns YAML definitions into production database schemas, REST APIs, and React UIs — all from a single Go binary.
           </p>
         </div>
         <div className="flex items-center gap-3 pt-4 border-t border-outline-variant">
@@ -32,7 +32,7 @@ export function HeroPost() {
             <User className="h-4 w-4 text-[#5d5f5f]" />
           </div>
           <div className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-            By Engineering Team
+            By Kora Team
           </div>
           <div className="ml-auto text-black group-hover:translate-x-2 transition-transform duration-300">
             <ArrowRight />

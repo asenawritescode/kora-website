@@ -6,11 +6,19 @@
   --font-sans: 'Geist Variable', sans-serif;
   --font-mono: 'Geist Mono Variable', monospace;
   --color-accent-orange: #FF6B35;
+  --color-outline-variant: #e5e5e5;
+  --color-surface-container: #f1edec;
+  --color-on-surface-variant: #444748;
 }
 
 body {
-  font-family: 'Geist Variable', sans-serif;
+  font-family: var(--font-sans);
   background-color: #fdf8f8;
   color: #1c1b1b;
   -webkit-font-smoothing: antialiased;
+}
+
+/* Anchor scroll offset for fixed navbar */
+section[id] {
+  scroll-margin-top: 80px;
 }

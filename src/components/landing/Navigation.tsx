@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Link } from '@tanstack/react-router'
+import { Link, useLocation } from '@tanstack/react-router'
 import { Menu, X } from 'lucide-react'
 
 const NAV_LINKS = [
@@ -12,6 +12,7 @@ const NAV_LINKS = [
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
+  const location = useLocation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 80)
@@ -19,8 +20,7 @@ export function Navigation() {
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  // Determine active link from current path
-  const currentPath = window.location.pathname
+  const currentPath = location.pathname
 
   return (
     <nav

@@ -14,7 +14,7 @@ const TRUST_ITEMS = [
   {
     icon: Database,
     title: 'Direct SQL Access',
-    description: 'No proprietary formats. Just standard PostgreSQL.',
+    description: 'No proprietary formats. MySQL or LibSQL — your choice.',
   },
   {
     icon: GitBranch,

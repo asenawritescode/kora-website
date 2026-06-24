@@ -21,7 +21,7 @@ export default function ExamplesPage() {
       {/* Hero */}
       <div className="mb-[120px] text-center">
         <h1 className="text-[72px] leading-[80px] font-bold text-black mb-4 tracking-[-0.04em]">
-          16 Industry Templates
+          Industry Templates
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-2xl mx-auto">
           Accelerate your build with production-ready schemas, workflows, and UI patterns tailored for specific operational domains.

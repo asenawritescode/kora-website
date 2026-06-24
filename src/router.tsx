@@ -7,8 +7,15 @@ import ExamplesPage from '@/routes/landing/examples'
 import DocsPage from '@/routes/landing/docs'
 import BlogPage from '@/routes/landing/blog'
 import BlogPostPage from '@/routes/landing/blog-post'
+import NotFound from '@/components/landing/NotFound'
 
 const rootRoute = createRootRoute()
+
+const notFoundRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '$',
+  component: () => <MarketingLayout><NotFound /></MarketingLayout>,
+})
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -46,6 +53,7 @@ const routeTree = rootRoute.addChildren([
   docsRoute,
   blogRoute,
   blogPostRoute,
+  notFoundRoute,
 ])
 
 export const router = createRouter({ routeTree })
