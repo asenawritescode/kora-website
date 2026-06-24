@@ -5,6 +5,5 @@ dist
 .env.local
 Dockerfile
 .dockerignore
-nginx.conf
 README.md
 *.log
