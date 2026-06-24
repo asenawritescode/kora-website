@@ -29,7 +29,7 @@ export function HeroSection() {
       <div className="flex justify-center gap-6 text-xs text-[#5d5f5f] mb-[120px]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
         <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>Open source</span></div>
         <div className="flex items-center gap-2"><Terminal className="h-4 w-4" /><span>Single 30MB binary</span></div>
-        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>MIT licensed</span></div>
+        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>AGPL-3.0</span></div>
       </div>
 
       <TerminalDemo />

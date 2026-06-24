@@ -3,7 +3,7 @@ import { Scale, Server, Database, GitBranch } from 'lucide-react'
 const TRUST_ITEMS = [
   {
     icon: Scale,
-    title: 'MIT License',
+    title: 'AGPL-3.0',
     description: 'Free for commercial use, forever.',
   },
   {
