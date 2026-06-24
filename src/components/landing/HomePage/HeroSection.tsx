@@ -20,7 +20,7 @@ export function HeroSection() {
         <Link to="/onboard" className="bg-[#FF6B35] text-white text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-[#E55B25] transition-colors font-mono">
           Start Building
           <ArrowRight className="h-4 w-4" />
-        </a>
+        </Link>
         <Link to="/docs" className="bg-transparent text-black border border-outline-variant text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-gray-50 transition-colors font-mono">
           Read the Docs
           <ArrowRight className="h-4 w-4" />
