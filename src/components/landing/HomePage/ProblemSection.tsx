@@ -1,8 +1,7 @@
-import { X } from 'lucide-react'
-
 const PROBLEMS = [
   {
     title: 'Spreadsheets',
+    subtitle: '"I just need something searchable"',
     items: [
       'Data gets corrupted easily',
       'Hard to build distinct UIs for different roles',
@@ -11,6 +10,7 @@ const PROBLEMS = [
   },
   {
     title: 'SaaS',
+    subtitle: '"It almost fits our workflow but not quite"',
     items: [
       'You must adapt your workflow to their model',
       'Expensive per-seat pricing',
@@ -19,6 +19,7 @@ const PROBLEMS = [
   },
   {
     title: 'Custom Build',
+    subtitle: '"We got quoted $85K"',
     items: [
       'Months of development time',
       'High upfront and maintenance costs',
@@ -30,17 +31,39 @@ const PROBLEMS = [
 export function ProblemSection() {
   return (
     <section className="max-w-[960px] mx-auto px-6 py-[120px]">
-      <h2 className="text-[48px] leading-[56px] font-semibold text-center mb-[120px] tracking-[-0.03em]">
-        Software should adapt to your business.<br />Not the other way around.
-      </h2>
-      <div className="grid md:grid-cols-3 gap-6">
+      <div className="text-center mb-20">
+        <h2 className="text-[48px] leading-[56px] font-semibold mb-4 tracking-[-0.03em]">
+          Software should adapt to your business.
+        </h2>
+        <p className="text-lg text-[#5d5f5f] max-w-xl mx-auto">
+          Not the other way around. But today, you&apos;re stuck choosing between
+          three bad options.
+        </p>
+      </div>
+
+      <div className="grid md:grid-cols-3 gap-px bg-[#e5e5e5]">
         {PROBLEMS.map((problem) => (
-          <div key={problem.title} className="bg-[#FAFAFA] border border-outline-variant p-8 rounded-sm">
-            <h3 className="text-[30px] leading-[38px] font-semibold mb-4">{problem.title}</h3>
-            <ul className="space-y-4 text-base text-[#444748]">
+          <div key={problem.title} className="bg-[#fdf8f8] p-10 flex flex-col">
+            {/* Icon + Title */}
+            <div className="mb-6">
+              <div className="w-10 h-10 rounded-full border-2 border-[#e5e5e5] flex items-center justify-center mb-4">
+                <span className="text-sm font-bold text-[#5d5f5f] font-mono">
+                  {problem.title.charAt(0)}
+                </span>
+              </div>
+              <h3 className="text-[24px] leading-tight font-semibold text-black mb-1">
+                {problem.title}
+              </h3>
+              <p className="text-sm text-[#5d5f5f] italic font-mono">
+                {problem.subtitle}
+              </p>
+            </div>
+
+            {/* Pain points */}
+            <ul className="space-y-4 text-base text-[#444748] flex-grow">
               {problem.items.map((item) => (
-                <li key={item} className="flex items-start gap-2">
-                  <X className="h-4 w-4 text-[#DC2626] mt-1 shrink-0" />
+                <li key={item} className="flex items-start gap-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#c4c7c7] mt-2 shrink-0" />
                   <span>{item}</span>
                 </li>
               ))}
@@ -48,6 +71,11 @@ export function ProblemSection() {
           </div>
         ))}
       </div>
+
+      <p className="text-center text-sm text-[#5d5f5f] mt-12 font-mono">
+        There&apos;s nothing between &quot;too simple&quot; and &quot;too expensive.&quot;
+        That gap is where businesses give up.
+      </p>
     </section>
   )
 }
