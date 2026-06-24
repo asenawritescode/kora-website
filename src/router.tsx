@@ -7,9 +7,16 @@ import ExamplesPage from '@/routes/landing/examples'
 import DocsPage from '@/routes/landing/docs'
 import BlogPage from '@/routes/landing/blog'
 import BlogPostPage from '@/routes/landing/blog-post'
+import OnboardPage from '@/routes/landing/onboard'
 import NotFound from '@/components/landing/NotFound'
 
 const rootRoute = createRootRoute()
+
+const onboardRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/onboard',
+  component: () => <MarketingLayout><OnboardPage /></MarketingLayout>,
+})
 
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -48,6 +55,7 @@ const blogPostRoute = createRoute({
 })
 
 const routeTree = rootRoute.addChildren([
+  onboardRoute,
   homeRoute,
   examplesRoute,
   docsRoute,

@@ -62,12 +62,12 @@ export function Navigation() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center">
-          <a
-            href="https://github.com/asenawritescode/kora"
+          <Link
+            to="/onboard"
             className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono"
           >
             Start Building
-          </a>
+          </Link>
         </div>
 
         {/* Mobile hamburger — animated */}
@@ -126,12 +126,12 @@ export function Navigation() {
                 </Link>
               )
             })}
-            <a
-              href="https://github.com/asenawritescode/kora"
+            <Link
+              to="/onboard"
               className="block w-full text-center bg-black text-white text-sm font-medium px-4 py-3 rounded-sm mt-3 font-mono"
             >
               Start Building
-            </a>
+            </Link>
           </div>
         </div>
       )}
