@@ -1,4 +1,5 @@
 export interface Article {
+  slug: string
   category: string
   title: string
   description: string
@@ -7,21 +8,24 @@ export interface Article {
 
 export const ARTICLES: Article[] = [
   {
+    slug: 'why-yaml-matters',
     category: 'DevOps',
     title: 'Why YAML matters',
-    description: 'Exploring the syntax, the pitfalls, and why declarative configuration remains the cornerstone of modern deployment pipelines.',
+    description: 'Exploring how declarative configuration became the cornerstone of config-driven application development.',
     readTime: '5 min read',
   },
   {
+    slug: 'deploying-on-raspberry-pi',
     category: 'Edge Computing',
     title: 'Deploying on Raspberry Pi',
-    description: 'A practical guide to utilizing low-power ARM architecture for high-availability microservices at the edge of the network.',
+    description: 'A practical guide to running local-first business applications on low-power ARM hardware.',
     readTime: '8 min read',
   },
   {
+    slug: 'multi-tenancy-at-scale',
     category: 'Architecture',
     title: 'Multi-tenancy at Scale',
-    description: 'Database isolation strategies, routing mechanisms, and ensuring absolute data integrity across thousands of isolated organizational units.',
+    description: 'Database isolation strategies, routing mechanisms, and ensuring data integrity across isolated sites.',
     readTime: '12 min read',
   },
 ]

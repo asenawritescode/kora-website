@@ -1,8 +1,9 @@
+import { Link } from '@tanstack/react-router'
 import { User } from 'lucide-react'
 
 export function HeroPost() {
   return (
-    <section className="group cursor-pointer border border-outline-variant bg-white overflow-hidden flex flex-col md:flex-row hover:border-black transition-colors duration-300">
+    <Link to="/blog/$slug" params={{ slug: 'building-from-africa' }} className="group border border-outline-variant bg-white overflow-hidden flex flex-col md:flex-row hover:border-black transition-colors duration-300">
       {/* Image */}
       <div className="md:w-3/5 border-b md:border-b-0 md:border-r border-outline-variant bg-[#f1edec] overflow-hidden h-[300px] md:h-auto">
         <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-white opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
@@ -38,7 +39,7 @@ export function HeroPost() {
           </div>
         </div>
       </div>
-    </section>
+    </Link>
   )
 }
 

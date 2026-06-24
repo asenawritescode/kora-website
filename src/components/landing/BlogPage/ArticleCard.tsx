@@ -1,8 +1,9 @@
+import { Link } from '@tanstack/react-router'
 import type { Article } from './data'
 
 export function ArticleCard({ article }: { article: Article }) {
   return (
-    <article className="group cursor-pointer flex flex-col border border-outline-variant bg-white hover:border-black transition-colors">
+    <Link to="/blog/$slug" params={{ slug: article.slug }} className="group flex flex-col border border-outline-variant bg-white hover:border-black transition-colors">
       {/* Image */}
       <div className="h-48 border-b border-outline-variant overflow-hidden bg-[#f1edec] relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-[#FF6B35] z-10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
@@ -24,6 +25,6 @@ export function ArticleCard({ article }: { article: Article }) {
           <span className="group-hover:text-black transition-colors">↗</span>
         </div>
       </div>
-    </article>
+    </Link>
   )
 }
