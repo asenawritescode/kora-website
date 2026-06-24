@@ -1,0 +1,16 @@
+@import "tailwindcss";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+@theme inline {
+  --font-sans: 'Geist Variable', sans-serif;
+  --font-mono: 'Geist Mono Variable', monospace;
+  --color-accent-orange: #FF6B35;
+}
+
+body {
+  font-family: 'Geist Variable', sans-serif;
+  background-color: #fdf8f8;
+  color: #1c1b1b;
+  -webkit-font-smoothing: antialiased;
+}
