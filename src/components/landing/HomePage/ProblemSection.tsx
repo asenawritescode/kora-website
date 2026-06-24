@@ -32,7 +32,7 @@ export function ProblemSection() {
   return (
     <section className="max-w-[960px] mx-auto px-6 py-[120px]">
       <div className="text-center mb-20">
-        <h2 className="text-[48px] leading-[56px] font-semibold mb-4 tracking-[-0.03em]">
+        <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-4 tracking-[-0.02em] md:tracking-[-0.03em]">
           Software should adapt to your business.
         </h2>
         <p className="text-lg text-[#5d5f5f] max-w-xl mx-auto">

@@ -56,7 +56,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
               <Clock className="h-3 w-3" /> {post.readTime}
             </span>
           </div>
-          <h1 className="text-[48px] leading-[56px] font-semibold text-black mb-8 tracking-[-0.03em]">
+          <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold text-black mb-8 tracking-[-0.02em] md:tracking-[-0.03em]">
             {post.title}
           </h1>
           <p className="text-lg leading-7 text-[#444748] max-w-2xl">

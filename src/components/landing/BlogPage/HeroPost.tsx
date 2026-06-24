@@ -20,7 +20,7 @@ export function HeroPost() {
               Jun 24, 2026
             </span>
           </div>
-          <h2 className="text-[48px] leading-[56px] font-semibold text-black group-hover:text-black/80 transition-colors tracking-[-0.03em]">
+          <h2 className="text-[28px] leading-[36px] sm:text-[36px] sm:leading-[44px] md:text-[48px] md:leading-[56px] font-semibold text-black group-hover:text-black/80 transition-colors tracking-[-0.02em] md:tracking-[-0.03em]">
             Building Application Infrastructure from Africa
           </h2>
           <p className="text-base text-[#444748] line-clamp-3">

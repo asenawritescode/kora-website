@@ -20,7 +20,7 @@ export default function ExamplesPage() {
     <section className="max-w-[960px] mx-auto px-6 pb-[120px]">
       {/* Hero */}
       <div className="mb-[120px] text-center">
-        <h1 className="text-[72px] leading-[80px] font-bold text-black mb-4 tracking-[-0.04em]">
+        <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-4 tracking-[-0.03em] md:tracking-[-0.04em]">
           Industry Templates
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-2xl mx-auto">

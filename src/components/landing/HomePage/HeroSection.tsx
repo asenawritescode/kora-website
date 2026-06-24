@@ -4,8 +4,8 @@ import { TerminalDemo } from './TerminalDemo'
 
 export function HeroSection() {
   return (
-    <section className="max-w-[960px] mx-auto px-6 py-[120px] text-center">
-      <h1 className="text-[72px] leading-[80px] font-bold text-black mb-4 tracking-[-0.04em]">
+    <section className="max-w-[960px] mx-auto px-4 sm:px-6 py-20 md:py-[120px] text-center">
+      <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-4 tracking-[-0.03em] md:tracking-[-0.04em]">
         Custom business software,<br />without custom development.
       </h1>
       <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-8">
@@ -26,7 +26,7 @@ export function HeroSection() {
       </div>
 
       {/* Trust signals */}
-      <div className="flex justify-center gap-6 text-xs text-[#5d5f5f] mb-[120px]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+      <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#5d5f5f] mb-16 md:mb-[120px] flex-wrap font-mono">
         <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>Open source</span></div>
         <div className="flex items-center gap-2"><Terminal className="h-4 w-4" /><span>Single 30MB binary</span></div>
         <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>AGPL-3.0</span></div>

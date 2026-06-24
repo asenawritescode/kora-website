@@ -27,7 +27,7 @@ export function BuiltForOwnership() {
   return (
     <section className="bg-[#f1edec] py-[120px]">
       <div className="max-w-[960px] mx-auto px-6 text-center">
-        <h2 className="text-[48px] leading-[56px] font-semibold mb-8 tracking-[-0.03em]">
+        <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-6 md:mb-8 tracking-[-0.02em] md:tracking-[-0.03em]">
           Built for Ownership
         </h2>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-[120px]">
