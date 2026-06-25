@@ -8,8 +8,9 @@ const ENV_VARS = [
   { var: 'KORA_HTTP_PORT', default: '8000', desc: 'Server port' },
   { var: 'CONSOLE_EMAIL', default: 'admin@kora.local', desc: 'Console admin login' },
   { var: 'CONSOLE_PASSWORD', default: 'admin123', desc: 'Console admin password' },
+  { var: 'KORA_HOST', default: '—', desc: 'Public app hostname for cookie validation' },
   { var: 'KORA_ANALYTICS', default: 'false', desc: 'Enable analytics (true/false)' },
-  { var: 'KORA_SHARED_AI_ENABLED', default: 'false', desc: 'Enable shared AI key for all sites' },
+  { var: 'KORA_SHARED_AI_ENABLED', default: 'false', desc: 'Enable shared AI keys for all sites' },
   { var: 'KORA_SHARED_OPENAI_API_KEY', default: '—', desc: 'Shared OpenAI key (fallback when site has none)' },
   { var: 'KORA_SHARED_DEEPSEEK_API_KEY', default: '—', desc: 'Shared DeepSeek key' },
   { var: 'KORA_SHARED_ANTHROPIC_API_KEY', default: '—', desc: 'Shared Anthropic key' },
@@ -81,6 +82,17 @@ export function DeploymentSection() {
           </p>
         </div>
       </div>
+
+      <h3 className="font-bold text-black mt-8 mb-3">Self-Service Onboarding</h3>
+      <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">
+        Users can create their own sites at{' '}
+        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">/onboard</code>
+        {' '}— no admin intervention needed. Each site gets its own database, admin user,
+        and workspace. Rate limited to 3 creations per hour per IP. On success, users
+        are redirected to their new workspace. Superadmins can monitor all sites from
+        the console at{' '}
+        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">/console</code>.
+      </p>
 
       <h3 className="font-bold text-black mt-8 mb-3">Shared AI Keys</h3>
       <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">

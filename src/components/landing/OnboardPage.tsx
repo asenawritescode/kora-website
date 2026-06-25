@@ -44,7 +44,7 @@ export default function OnboardPage() {
         return
       }
 
-      setSuccess(data.data?.workspace_url || `/s/${hostname}/workspace`)
+      setSuccess(`https://app.kora.mradiafrica.com/s/${hostname}/workspace`)
     } catch {
       setError('Network error. Please check your connection and try again.')
     } finally {
