@@ -15,6 +15,13 @@ const SECTIONS = [
     ],
   },
   {
+    title: 'Extend',
+    links: [
+      { label: 'Extensibility', href: '#extensibility' },
+      { label: 'SDKs & Tools', href: '#sdks' },
+    ],
+  },
+  {
     title: 'Operations',
     links: [
       { label: 'CLI Commands', href: '#cli-commands' },

@@ -3,6 +3,8 @@ import { CoreConceptsSection } from './CoreConceptsSection'
 import { ArchitectureSection } from './ArchitectureSection'
 import { YamlConfigSection } from './YamlConfigSection'
 import { ApiReferenceSection } from './ApiReferenceSection'
+import { ExtensibilitySection } from './ExtensibilitySection'
+import { SdkSection } from './SdkSection'
 import { CliCommandsSection } from './CliCommandsSection'
 import { DeploymentSection } from './DeploymentSection'
 
@@ -32,6 +34,8 @@ export default function DocsPage() {
       <ArchitectureSection />
       <YamlConfigSection />
       <ApiReferenceSection />
+      <ExtensibilitySection />
+      <SdkSection />
       <CliCommandsSection />
       <DeploymentSection />
     </>
