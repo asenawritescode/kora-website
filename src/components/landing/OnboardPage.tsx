@@ -1,6 +1,9 @@
 import { useState, type FormEvent } from 'react'
 import { BadgeCheck, Server, Database, Terminal } from 'lucide-react'
 
+const onboardAPIBaseURL = 'https://cloud.kora.mradiafrica.com'
+const workspaceBaseURL = (import.meta.env.VITE_KORA_APP_BASE_URL as string | undefined)?.replace(/\/$/, '') || 'https://app.kora.mradiafrica.com'
+
 const TEMPLATES = [
   'Kiosk & Retail', 'B2B CRM', 'Clinic Admin', 'School Admin',
   'Property Mgmt', 'SACCO Core', 'Logistics Fleet', 'Event Ticketing',
@@ -27,11 +30,11 @@ export default function OnboardPage() {
     setLoading(true)
 
     try {
-      const res = await fetch('https://app.kora.mradiafrica.com/api/console/sites/onboard', {
+      const res = await fetch(`${onboardAPIBaseURL}/api/cloud/onboard`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          hostname: `${hostname}.local`,
+          site_name: hostname,
           admin_email: email,
           admin_password: password,
         }),
@@ -44,7 +47,10 @@ export default function OnboardPage() {
         return
       }
 
-      setSuccess(`https://app.kora.mradiafrica.com/s/${hostname}/workspace`)
+      const engineURL = typeof data?.site?.engine_url === 'string' && data.site.engine_url.length > 0
+        ? data.site.engine_url.replace(/\/$/, '')
+        : `${workspaceBaseURL}/s/${hostname}`
+      setSuccess(`${engineURL}/workspace`)
     } catch {
       setError('Network error. Please check your connection and try again.')
     } finally {
