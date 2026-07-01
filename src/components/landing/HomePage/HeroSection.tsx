@@ -14,7 +14,7 @@ export function HeroSection() {
         </span>
       </div>
       <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-6">
-        Describe your business in plain English, and Kora builds the database, API, and UI instantly.
+        Describe your business in plain English, and Kora builds the database, API, UI, and workflows instantly.
       </p>
       <p className="text-sm text-[#8E8E8E] max-w-xl mx-auto mb-8">
         For developers and businesses that need custom software without custom engineering.

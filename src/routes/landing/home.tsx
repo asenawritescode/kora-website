@@ -6,7 +6,7 @@ export default function HomeRoute() {
     <>
       <Seo
         title="Kora — Custom business software, without custom development"
-        description="Build internal tools, client portals, and operational apps from YAML with one Go backend, database, admin UI, workflows, and AI."
+        description="Describe your business in English and Kora builds the database, API, admin UI, workflows, and AI-powered backend."
         path="/"
         jsonLd={{
           '@context': 'https://schema.org',
