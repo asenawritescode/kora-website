@@ -8,6 +8,10 @@ import DocsPage from '@/routes/landing/docs'
 import BlogPage from '@/routes/landing/blog'
 import BlogPostPage from '@/routes/landing/blog-post'
 import OnboardPage from '@/routes/landing/onboard'
+import CloudPage from '@/routes/landing/cloud'
+import BenefitsPage from '@/routes/landing/benefits'
+import AIBuilderPage from '@/routes/landing/ai-builder'
+import PricingPage from '@/routes/landing/pricing'
 import NotFound from '@/components/landing/NotFound'
 
 const rootRoute = createRootRoute()
@@ -16,6 +20,30 @@ const onboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/onboard',
   component: () => <MarketingLayout><OnboardPage /></MarketingLayout>,
+})
+
+const cloudRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/cloud',
+  component: () => <MarketingLayout><CloudPage /></MarketingLayout>,
+})
+
+const benefitsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/benefits',
+  component: () => <MarketingLayout><BenefitsPage /></MarketingLayout>,
+})
+
+const aiBuilderRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/ai-builder',
+  component: () => <MarketingLayout><AIBuilderPage /></MarketingLayout>,
+})
+
+const pricingRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/pricing',
+  component: () => <MarketingLayout><PricingPage /></MarketingLayout>,
 })
 
 const notFoundRoute = createRoute({
@@ -56,6 +84,10 @@ const blogPostRoute = createRoute({
 
 const routeTree = rootRoute.addChildren([
   onboardRoute,
+  cloudRoute,
+  benefitsRoute,
+  aiBuilderRoute,
+  pricingRoute,
   homeRoute,
   examplesRoute,
   docsRoute,

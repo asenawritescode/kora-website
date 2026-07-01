@@ -3,6 +3,10 @@ import { Link, useLocation } from '@tanstack/react-router'
 
 const NAV_LINKS = [
   { label: 'Product', href: '/' },
+  { label: 'Cloud', href: '/cloud' },
+  { label: 'Benefits', href: '/benefits' },
+  { label: 'AI Builder', href: '/ai-builder' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'Examples', href: '/examples' },
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
