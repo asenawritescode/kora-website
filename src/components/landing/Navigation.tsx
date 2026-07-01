@@ -1,11 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
 
-const NAV_LINKS = [
+const PRIMARY_LINKS = [
   { label: 'Product', href: '/' },
   { label: 'Cloud', href: '/cloud' },
-  { label: 'Benefits', href: '/benefits' },
   { label: 'AI Builder', href: '/ai-builder' },
+]
+
+const SECONDARY_LINKS = [
+  { label: 'Benefits', href: '/benefits' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Examples', href: '/examples' },
   { label: 'Docs', href: '/docs' },
@@ -36,14 +39,14 @@ export function Navigation() {
         scrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-white/90 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-[960px] mx-auto px-4 sm:px-6 flex justify-between items-center h-16">
+      <div className="max-w-[1120px] mx-auto px-4 sm:px-6 flex justify-between items-center h-16 gap-4">
         {/* Logo + Desktop Links */}
-        <div className="flex items-center gap-6 sm:gap-8">
-          <Link to="/" className="text-[24px] sm:text-[30px] leading-[38px] font-semibold text-black tracking-tight">
+        <div className="flex items-center gap-4 sm:gap-6 min-w-0">
+          <Link to="/" className="text-[22px] sm:text-[28px] leading-[1] font-semibold text-black tracking-tight shrink-0">
             Kora
           </Link>
-          <div className="hidden md:flex gap-4">
-            {NAV_LINKS.map((link) => {
+          <div className="hidden lg:flex items-center gap-1 xl:gap-2 min-w-0">
+            {PRIMARY_LINKS.map((link) => {
               const isActive = link.href === '/'
                 ? currentPath === '/'
                 : currentPath.startsWith(link.href)
@@ -51,9 +54,9 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`text-xs font-medium uppercase tracking-wider px-3 py-2 rounded-sm transition-colors font-mono ${
+                  className={`text-[11px] xl:text-xs font-medium uppercase tracking-[0.12em] px-2.5 py-2 rounded-sm transition-colors font-mono whitespace-nowrap ${
                     isActive
-                      ? 'text-black border-b-2 border-black'
+                      ? 'text-black bg-[#f1edec]'
                       : 'text-[#5d5f5f] hover:text-black hover:bg-gray-100'
                   }`}
                 >
@@ -61,14 +64,34 @@ export function Navigation() {
                 </Link>
               )
             })}
+            <details className="relative">
+              <summary className="list-none cursor-pointer text-[11px] xl:text-xs font-medium uppercase tracking-[0.12em] px-2.5 py-2 rounded-sm transition-colors font-mono whitespace-nowrap text-[#5d5f5f] hover:text-black hover:bg-gray-100">
+                More
+              </summary>
+              <div className="absolute left-0 mt-2 w-44 rounded-sm border border-[#e5e5e5] bg-white shadow-sm py-2 z-20">
+                {SECONDARY_LINKS.map((link) => (
+                  <Link
+                    key={link.label}
+                    to={link.href}
+                    className={`block px-3 py-2 text-sm transition-colors ${
+                      currentPath.startsWith(link.href)
+                        ? 'text-black bg-[#f1edec]'
+                        : 'text-[#5d5f5f] hover:text-black hover:bg-gray-50'
+                    }`}
+                  >
+                    {link.label}
+                  </Link>
+                ))}
+              </div>
+            </details>
           </div>
         </div>
 
         {/* Desktop CTA */}
-        <div className="hidden md:flex items-center">
+        <div className="hidden lg:flex items-center shrink-0">
           <Link
             to="/onboard"
-            className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono"
+            className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono whitespace-nowrap"
           >
             Start Building
           </Link>
@@ -76,7 +99,7 @@ export function Navigation() {
 
         {/* Mobile hamburger — animated */}
         <button
-          className="md:hidden group p-2 -mr-2"
+          className="lg:hidden group p-2 -mr-2 shrink-0"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -110,9 +133,9 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {mobileOpen && (
-        <div className="md:hidden border-t border-outline-variant bg-white">
+        <div className="lg:hidden border-t border-outline-variant bg-white">
           <div className="px-4 py-4 space-y-1">
-            {NAV_LINKS.map((link) => {
+            {[...PRIMARY_LINKS, ...SECONDARY_LINKS].map((link) => {
               const isActive = link.href === '/'
                 ? currentPath === '/'
                 : currentPath.startsWith(link.href)
