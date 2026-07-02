@@ -4,10 +4,10 @@ import { Link, useLocation } from '@tanstack/react-router'
 const PRIMARY_LINKS = [
   { label: 'Product', href: '/' },
   { label: 'Cloud', href: '/cloud' },
-  { label: 'AI Builder', href: '/ai-builder' },
 ]
 
 const SECONDARY_LINKS = [
+  { label: 'AI Builder', href: '/ai-builder' },
   { label: 'Benefits', href: '/benefits' },
   { label: 'Pricing', href: '/pricing' },
   { label: 'Examples', href: '/examples' },

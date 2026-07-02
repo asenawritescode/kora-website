@@ -2,10 +2,10 @@ import { ArrowRight, MessageSquareText, Sparkles, Workflow, Table2 } from 'lucid
 import { Link } from '@tanstack/react-router'
 
 const EXAMPLES = [
-  'Create a CRM for our sales team',
-  'Add approvals for purchase requests',
-  'Track customers, payments, and onboarding',
-  'Build a clinic system with appointments and billing',
+  'Prompt: Create a CRM for our sales team',
+  'Output: Customers, deals, activities, and pipelines',
+  'Prompt: Add approvals for purchase requests',
+  'Output: Request, approval, and status workflow',
 ]
 
 const CAPABILITIES = [

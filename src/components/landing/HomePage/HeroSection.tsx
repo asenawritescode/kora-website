@@ -6,7 +6,7 @@ export function HeroSection() {
   return (
     <section className="max-w-[960px] mx-auto px-4 sm:px-6 py-20 md:py-[120px] text-center">
       <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-3 tracking-[-0.03em] md:tracking-[-0.04em]">
-        Custom business software,<br />without custom development.
+        Talk in English,<br />get a working system.
       </h1>
       <div className="mb-6">
         <span className="inline-block text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
@@ -17,7 +17,7 @@ export function HeroSection() {
         Describe your business in plain English, and Kora builds the database, API, UI, and workflows instantly.
       </p>
       <p className="text-sm text-[#8E8E8E] max-w-xl mx-auto mb-8">
-        For developers and businesses that need custom software without custom engineering.
+        For teams that want custom software without custom engineering.
       </p>
 
       {/* CTAs */}
