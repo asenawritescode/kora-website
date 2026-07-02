@@ -66,10 +66,10 @@ export default function OnboardPage() {
             <BadgeCheck className="h-8 w-8 text-[#10B981]" />
           </div>
           <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-4">
-            Your application is ready
+            Your app is ready
           </h2>
           <p className="text-base text-[#5d5f5f] mb-8">
-            Your database has been created. Your admin UI, REST API, and AI chat are ready. Start building.
+            Your app has been set up. You can open it now and start using it.
           </p>
           <a
             href={success}
@@ -78,8 +78,7 @@ export default function OnboardPage() {
             Open your workspace →
           </a>
           <p className="text-xs text-[#5d5f5f] mt-6 font-mono">
-            Want analytics? Enable KORA_ANALYTICS=true.<br />
-            Need AI? Add your API key at /workspace/admin/secrets.
+            For builders: the database, admin UI, API, and AI tools are ready in the workspace.
           </p>
         </div>
       </div>
@@ -94,11 +93,10 @@ export default function OnboardPage() {
           <div className="md:col-span-3 space-y-8">
             <div>
               <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[56px] md:leading-[64px] font-bold text-black mb-4 tracking-[-0.03em]">
-                Create your application.
+                Create your app.
               </h1>
               <p className="text-lg text-[#5d5f5f] max-w-lg">
-                No credit card. No time limit. You&apos;ll have a working database,
-                REST API, admin UI, and AI chat in under two minutes.
+                Tell us what you need and we&apos;ll set it up for you.
               </p>
             </div>
 
@@ -119,7 +117,7 @@ export default function OnboardPage() {
                 ))}
               </div>
               <p className="text-xs text-[#5d5f5f] mt-2 font-mono">
-                Pick one or start from scratch — you can add doctypes anytime.
+                Pick one or start from scratch.
               </p>
             </div>
 
@@ -131,15 +129,15 @@ export default function OnboardPage() {
               <ul className="space-y-2 text-sm text-[#5d5f5f]">
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">1.</span>
-                  Your database and system tables are created automatically.
+                  We create your app setup for you.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">2.</span>
-                  You get a full REST API, admin UI, and AI chat.
+                  You get a working app you can open right away.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">3.</span>
-                  Add doctypes, workflows, and users — or use AI to do it for you.
+                  You can add more details and users later.
                 </li>
               </ul>
             </div>
@@ -229,13 +227,13 @@ export default function OnboardPage() {
                   disabled={loading}
                   className="w-full bg-[#FF6B35] text-white text-sm font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-mono"
                 >
-                  {loading ? 'Creating your application...' : 'Create my application →'}
+                  {loading ? 'Creating your app...' : 'Create my app →'}
                 </button>
               </form>
 
               <p className="text-[10px] text-[#c4c7c7] mt-4 leading-relaxed font-mono">
-                By creating an application you agree to our Terms.
-                Your data lives in your own database. No vendor lock-in.
+                By creating an app you agree to our Terms.
+                Your data lives in your own database.
               </p>
             </div>
           </div>
