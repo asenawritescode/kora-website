@@ -1,4 +1,5 @@
 export interface Template {
+  slug: string
   name: string
   description: string
   icon: string
@@ -8,6 +9,7 @@ export interface Template {
 
 export const TEMPLATES: Template[] = [
   {
+    slug: 'kiosk-pos',
     name: 'Kiosk POS',
     description: 'A streamlined point-of-sale system for rapid retail environments.',
     icon: 'Store',
@@ -19,6 +21,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'b2b-crm',
     name: 'B2B CRM',
     description: 'Manage high-value sales pipelines and account relationships.',
     icon: 'Users',
@@ -30,6 +33,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'clinic-admin',
     name: 'Clinic Admin',
     description: 'Patient scheduling, electronic records, and billing infrastructure.',
     icon: 'HeartPulse',
@@ -41,6 +45,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'school-admin',
     name: 'School Admin',
     description: 'Manage enrollments, grades, attendance, and faculty.',
     icon: 'GraduationCap',
@@ -52,6 +57,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'property-management',
     name: 'Property Mgmt',
     description: 'Lease tracking, maintenance requests, and rent collection.',
     icon: 'Building2',
@@ -63,6 +69,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'sacco-core',
     name: 'SACCO Core',
     description: 'Savings and Credit Cooperative ledger and member management.',
     icon: 'Landmark',
@@ -74,6 +81,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'logistics-fleet',
     name: 'Logistics Fleet',
     description: 'Vehicle tracking, maintenance schedules, and dispatch.',
     icon: 'Truck',
@@ -85,6 +93,7 @@ export const TEMPLATES: Template[] = [
     ],
   },
   {
+    slug: 'event-ticketing',
     name: 'Event Ticketing',
     description: 'Manage events, ticket tiers, and attendee scanning.',
     icon: 'Calendar',

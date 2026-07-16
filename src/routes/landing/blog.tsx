@@ -5,8 +5,8 @@ export default function BlogRoute() {
   return (
     <>
       <Seo
-        title="Kora Blog"
-        description="Architecture notes, product decisions, and operational lessons from building Kora."
+        title="Kora Blog — Business app guides, comparisons, and open-source notes"
+        description="Guides, comparisons, use cases, and technical notes about building custom business apps with Kora."
         path="/blog"
       />
       <BlogPage />

@@ -32,10 +32,10 @@ export default function AIBuilderPage() {
           AI Builder
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Talk to Kora in English and get a system.
+          Describe your workflow. Kora builds the app structure.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          The AI feature is not a chat toy. It is a way to move from business language to a real backend with data models, workflows, and UI.
+          Tell Kora what your team tracks, approves, and updates. It creates the starting structure for a real business app that you can keep editing.
         </p>
       </header>
 

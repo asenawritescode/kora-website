@@ -26,6 +26,11 @@
     <priority>0.9</priority>
   </url>
   <url>
+    <loc>https://kora.mradiafrica.com/open-source</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://kora.mradiafrica.com/onboard</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
@@ -47,6 +52,21 @@
   </url>
   <url>
     <loc>https://kora.mradiafrica.com/blog/building-from-africa</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kora.mradiafrica.com/blog/spreadsheet-to-business-app</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kora.mradiafrica.com/blog/airtable-vs-kora</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://kora.mradiafrica.com/blog/retool-vs-kora</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

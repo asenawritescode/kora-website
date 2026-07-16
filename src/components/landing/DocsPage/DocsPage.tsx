@@ -24,9 +24,16 @@ export default function DocsPage() {
           Documentation
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-xl">
-          Build your first application in under two minutes.
-          No code generation. No vendor lock-in. Just YAML and a single binary.
+          Technical documentation for building, extending, deploying, and self-hosting Kora.
         </p>
+        <div className="flex flex-wrap gap-3 mt-6">
+          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono">
+            GitHub
+          </a>
+          <a href="/open-source" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-4 py-2 rounded-sm hover:border-black transition-colors font-mono">
+            Open Source
+          </a>
+        </div>
       </div>
 
       <QuickStartSection />

@@ -5,8 +5,8 @@ export default function OnboardRoute() {
   return (
     <>
       <Seo
-        title="Start with Kora"
-        description="Create a Kora site and get a database, admin UI, API, and AI chat in under two minutes."
+        title="Create your Kora workspace"
+        description="Create a real Kora workspace with an admin account, forms, database, workflows, API, and AI assistance."
         path="/onboard"
       />
       <OnboardPage />

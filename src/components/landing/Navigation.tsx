@@ -3,14 +3,15 @@ import { Link, useLocation } from '@tanstack/react-router'
 
 const PRIMARY_LINKS = [
   { label: 'Product', href: '/' },
+  { label: 'Templates', href: '/examples' },
   { label: 'Cloud', href: '/cloud' },
+  { label: 'Pricing', href: '/pricing' },
+  { label: 'Open Source', href: '/open-source' },
 ]
 
 const SECONDARY_LINKS = [
   { label: 'AI Builder', href: '/ai-builder' },
   { label: 'Benefits', href: '/benefits' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Examples', href: '/examples' },
   { label: 'Docs', href: '/docs' },
   { label: 'Blog', href: '/blog' },
 ]
@@ -93,7 +94,7 @@ export function Navigation() {
             to="/onboard"
             className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono whitespace-nowrap"
           >
-            Start Building
+            Start free
           </Link>
         </div>
 
@@ -157,7 +158,7 @@ export function Navigation() {
               to="/onboard"
               className="block w-full text-center bg-black text-white text-sm font-medium px-4 py-3 rounded-sm mt-3 font-mono"
             >
-              Start Building
+              Start free
             </Link>
           </div>
         </div>

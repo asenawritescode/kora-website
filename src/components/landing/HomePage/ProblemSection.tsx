@@ -33,11 +33,10 @@ export function ProblemSection() {
     <section className="max-w-[960px] mx-auto px-6 py-[120px]">
       <div className="text-center mb-20">
         <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-4 tracking-[-0.02em] md:tracking-[-0.03em]">
-          Software should adapt to your business.
+          Why teams choose Kora.
         </h2>
         <p className="text-lg text-[#5d5f5f] max-w-xl mx-auto">
-          Not the other way around. But today, you&apos;re stuck choosing between
-          three bad options.
+          When the work is real, spreadsheets break, generic SaaS bends the process, and custom builds take too long.
         </p>
       </div>
 
@@ -73,8 +72,7 @@ export function ProblemSection() {
       </div>
 
       <p className="text-center text-sm text-[#5d5f5f] mt-12 font-mono">
-        There&apos;s nothing between &quot;too simple&quot; and &quot;too expensive.&quot;
-        That gap is where businesses give up.
+        Kora gives teams a practical middle path: fast to start, flexible enough to keep.
       </p>
     </section>
   )

@@ -5,8 +5,8 @@ export default function BenefitsRoute() {
   return (
     <>
       <Seo
-        title="Kora Cloud Benefits"
-        description="See how Kora Cloud helps sales, ops, and devs move faster with one control plane."
+        title="Why Kora — Custom apps without spreadsheets or custom builds"
+        description="See why teams use Kora instead of spreadsheets, rigid SaaS, or expensive custom software projects."
         path="/benefits"
       />
       <BenefitsPage />

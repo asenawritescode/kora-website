@@ -12,6 +12,7 @@ import CloudPage from '@/routes/landing/cloud'
 import BenefitsPage from '@/routes/landing/benefits'
 import AIBuilderPage from '@/routes/landing/ai-builder'
 import PricingPage from '@/routes/landing/pricing'
+import OpenSourcePage from '@/routes/landing/open-source'
 import NotFound from '@/components/landing/NotFound'
 
 const rootRoute = createRootRoute()
@@ -44,6 +45,12 @@ const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/pricing',
   component: () => <MarketingLayout><PricingPage /></MarketingLayout>,
+})
+
+const openSourceRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/open-source',
+  component: () => <MarketingLayout><OpenSourcePage /></MarketingLayout>,
 })
 
 const notFoundRoute = createRoute({
@@ -88,6 +95,7 @@ const routeTree = rootRoute.addChildren([
   benefitsRoute,
   aiBuilderRoute,
   pricingRoute,
+  openSourceRoute,
   homeRoute,
   examplesRoute,
   docsRoute,

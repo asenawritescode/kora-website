@@ -42,10 +42,10 @@ export default function BenefitsPage() {
           Benefits
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Benefits that sales, ops, and devs can act on.
+          Why teams use Kora instead of spreadsheets, rigid SaaS, or custom builds.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Kora Cloud is not only a way to host software. It is a system for getting customers live, keeping them paid, and seeing what is happening across the lifecycle.
+          Kora gives teams a practical way to turn messy business processes into usable software without waiting months or forcing the work into the wrong tool.
         </p>
       </header>
 
@@ -62,10 +62,10 @@ export default function BenefitsPage() {
       <section className="grid md:grid-cols-5 gap-6 items-start">
         <div className="md:col-span-2">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
-            What the control panel should show
+            What better business software should make possible
           </h2>
           <p className="text-lg leading-7 text-[#5d5f5f] mb-6">
-            The point is not to collect data for its own sake. The point is to make the next action obvious.
+            The point is to help the team act: create records, move work forward, approve changes, and keep the data useful.
           </p>
           <Link to="/cloud" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
             See Kora Cloud

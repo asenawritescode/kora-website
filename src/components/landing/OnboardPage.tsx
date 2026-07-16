@@ -1,12 +1,18 @@
-import { useState, type FormEvent } from 'react'
+import { useMemo, useState, type FormEvent } from 'react'
 import { BadgeCheck, Server, Database, Terminal } from 'lucide-react'
 
 const onboardAPIBaseURL = 'https://cloud.kora.mradiafrica.com'
 const workspaceBaseURL = (import.meta.env.VITE_KORA_APP_BASE_URL as string | undefined)?.replace(/\/$/, '') || 'https://app.kora.mradiafrica.com'
 
 const TEMPLATES = [
-  'Kiosk & Retail', 'B2B CRM', 'Clinic Admin', 'School Admin',
-  'Property Mgmt', 'SACCO Core', 'Logistics Fleet', 'Event Ticketing',
+  { slug: 'kiosk-pos', label: 'Kiosk & Retail' },
+  { slug: 'b2b-crm', label: 'B2B CRM' },
+  { slug: 'clinic-admin', label: 'Clinic Admin' },
+  { slug: 'school-admin', label: 'School Admin' },
+  { slug: 'property-management', label: 'Property Mgmt' },
+  { slug: 'sacco-core', label: 'SACCO Core' },
+  { slug: 'logistics-fleet', label: 'Logistics Fleet' },
+  { slug: 'event-ticketing', label: 'Event Ticketing' },
 ]
 
 const TRUST_SIGNALS = [
@@ -23,6 +29,11 @@ export default function OnboardPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const initialTemplate = useMemo(() => {
+    if (typeof window === 'undefined') return ''
+    return new URLSearchParams(window.location.search).get('template') || ''
+  }, [])
+  const [selectedTemplate, setSelectedTemplate] = useState(initialTemplate)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -37,6 +48,7 @@ export default function OnboardPage() {
           site_name: hostname,
           admin_email: email,
           admin_password: password,
+          template: selectedTemplate || undefined,
         }),
       })
 
@@ -96,7 +108,7 @@ export default function OnboardPage() {
                 Create your app.
               </h1>
               <p className="text-lg text-[#5d5f5f] max-w-lg">
-                Tell us what you need and we&apos;ll set it up for you.
+                This creates a real workspace you can open immediately. No credit card required.
               </p>
             </div>
 
@@ -108,16 +120,19 @@ export default function OnboardPage() {
               <div className="flex flex-wrap gap-2">
                 {TEMPLATES.map((t) => (
                   <button
-                    key={t}
+                    key={t.slug}
                     type="button"
-                    className="text-xs font-medium text-[#5d5f5f] bg-[#FAFAFA] border border-outline-variant rounded-sm px-3 py-1.5 hover:border-black hover:text-black transition-colors font-mono"
+                    onClick={() => setSelectedTemplate(t.slug)}
+                    className={`text-xs font-medium bg-[#FAFAFA] border rounded-sm px-3 py-1.5 hover:border-black hover:text-black transition-colors font-mono ${
+                      selectedTemplate === t.slug ? 'border-[#FF6B35] text-black' : 'border-outline-variant text-[#5d5f5f]'
+                    }`}
                   >
-                    {t}
+                    {t.label}
                   </button>
                 ))}
               </div>
               <p className="text-xs text-[#5d5f5f] mt-2 font-mono">
-                Pick one or start from scratch.
+                Pick one or start from scratch. Template selection helps us understand your starting point.
               </p>
             </div>
 
@@ -129,15 +144,15 @@ export default function OnboardPage() {
               <ul className="space-y-2 text-sm text-[#5d5f5f]">
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">1.</span>
-                  We create your app setup for you.
+                  We create your admin account and workspace.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">2.</span>
-                  You get a working app you can open right away.
+                  You get a workspace you can open right away.
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">3.</span>
-                  You can add more details and users later.
+                  You can add app details, records, and users later.
                 </li>
               </ul>
             </div>
@@ -157,7 +172,7 @@ export default function OnboardPage() {
           <div className="md:col-span-2">
             <div className="bg-white border border-outline-variant rounded-sm p-6 md:p-8 sticky top-24">
               <h3 className="text-lg font-semibold text-black mb-6">
-                Get started free
+                Create your workspace
               </h3>
 
               <form onSubmit={handleSubmit} className="space-y-4">

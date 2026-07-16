@@ -1,7 +1,7 @@
 import { ArticleCard } from './ArticleCard'
-import { ARTICLES } from './data'
+import { ARTICLES, type Article } from './data'
 
-export function ArticleGrid() {
+export function ArticleGrid({ articles = ARTICLES }: { articles?: Article[] }) {
   return (
     <section>
       <div className="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
@@ -15,7 +15,7 @@ export function ArticleGrid() {
         </a>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-        {ARTICLES.map((article) => (
+        {articles.map((article) => (
           <ArticleCard key={article.title} article={article} />
         ))}
       </div>

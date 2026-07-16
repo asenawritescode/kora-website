@@ -6,6 +6,27 @@ interface BlogPostProps {
 }
 
 const POSTS: Record<string, { title: string; category: string; date: string; readTime: string; description: string }> = {
+  'spreadsheet-to-business-app': {
+    title: 'How to turn a spreadsheet into a business app',
+    category: 'Guides',
+    date: 'Jul 16, 2026',
+    readTime: '7 min read',
+    description: 'A practical path from fragile spreadsheet workflows to a structured app with users, records, workflows, and an API.',
+  },
+  'airtable-vs-kora': {
+    title: 'Airtable vs Kora',
+    category: 'Comparisons',
+    date: 'Jul 16, 2026',
+    readTime: '6 min read',
+    description: 'How to think about flexible databases, business workflows, self-hosting, and long-term ownership.',
+  },
+  'retool-vs-kora': {
+    title: 'Retool vs Kora',
+    category: 'Comparisons',
+    date: 'Jul 16, 2026',
+    readTime: '6 min read',
+    description: 'A comparison for teams deciding between internal tool builders and workflow-first business apps.',
+  },
   'why-yaml-matters': {
     title: 'Why YAML Matters',
     category: 'DevOps',

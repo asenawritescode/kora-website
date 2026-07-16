@@ -36,13 +36,13 @@ export function AISection() {
             AI Builder
           </div>
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
-            Talk to Kora in English.
+            Describe your workflow.
           </h2>
           <p className="text-lg leading-7 text-[#444748] mb-6">
-            Describe the system you want, and Kora turns that into doctypes, workflows, permissions, and a working admin UI.
+            Tell Kora what your team needs to track, approve, and update. It turns that into app structure you can keep editing.
           </p>
           <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
-            Try it now
+            Try the builder
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

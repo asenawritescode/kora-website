@@ -27,6 +27,9 @@ export function TemplateCard({ template }: { template: Template }) {
             </li>
           ))}
         </ul>
+        <a href={`/onboard?template=${template.slug}`} className="inline-block mt-4 text-xs font-medium text-[#FF6B35] font-mono">
+          Start with this →
+        </a>
       </div>
     </div>
   )

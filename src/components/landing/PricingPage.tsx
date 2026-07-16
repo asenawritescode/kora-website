@@ -3,14 +3,19 @@ import { Link } from '@tanstack/react-router'
 
 const PLANS = [
   {
-    name: 'Shared Cloud',
-    price: 'Manual billing',
-    features: ['Fast onboarding', 'Shared operating platform', 'Good for small teams and trials'],
+    name: 'Free Workspace',
+    price: 'Start free',
+    features: ['Try Kora', 'Build a small app', 'No credit card to start'],
   },
   {
-    name: 'Managed Instance',
-    price: 'Private deployment',
-    features: ['Dedicated runtime', 'More operational control', 'Best for a named customer or agency client'],
+    name: 'Managed Cloud',
+    price: 'Hosted workspace',
+    features: ['Team access', 'Operational support', 'Best for running real workflows'],
+  },
+  {
+    name: 'Private Instance',
+    price: 'Dedicated runtime',
+    features: ['Custom support boundary', 'Private deployment path', 'Best for agencies and larger customers'],
   },
 ]
 
@@ -23,14 +28,14 @@ export default function PricingPage() {
           Pricing
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Simple pricing that matches how you sell now.
+          Simple plans for building and running business apps.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Start with manual paid/unpaid tracking. Add automation later when the business justifies it.
+          Start free, then upgrade when the workspace becomes part of daily operations.
         </p>
       </header>
 
-      <section className="grid md:grid-cols-2 gap-4">
+      <section className="grid md:grid-cols-3 gap-4">
         {PLANS.map((plan) => (
           <div key={plan.name} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
             <h2 className="text-2xl font-semibold text-black mb-2">{plan.name}</h2>
@@ -47,21 +52,30 @@ export default function PricingPage() {
         ))}
       </section>
 
+      <section className="bg-white border border-[#e5e5e5] p-8 rounded-sm">
+        <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-6">What every plan includes</h2>
+        <div className="grid md:grid-cols-3 gap-3 text-sm text-[#444748]">
+          {['Forms', 'Database', 'Workflows', 'Users and roles', 'API', 'AI builder'].map((item) => (
+            <div key={item} className="border border-[#e5e5e5] rounded-sm px-4 py-3">{item}</div>
+          ))}
+        </div>
+      </section>
+
       <section className="grid md:grid-cols-3 gap-4">
         <div className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
           <Users className="h-6 w-6 text-[#FF6B35] mb-4" />
           <h3 className="text-lg font-semibold text-black mb-2">Sales-friendly</h3>
-          <p className="text-sm text-[#444748]">Track who is onboarded, who is paying, and who needs follow-up.</p>
+          <p className="text-sm text-[#444748]">Start free and move to a managed plan when the workspace matters.</p>
         </div>
         <div className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
           <Layers3 className="h-6 w-6 text-[#FF6B35] mb-4" />
           <h3 className="text-lg font-semibold text-black mb-2">Ops-friendly</h3>
-          <p className="text-sm text-[#444748]">See provisioning jobs, failures, and site health without digging through servers.</p>
+          <p className="text-sm text-[#444748]">Use hosted cloud for fast starts or private instances for dedicated customers.</p>
         </div>
         <div className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
           <BadgeCheck className="h-6 w-6 text-[#FF6B35] mb-4" />
           <h3 className="text-lg font-semibold text-black mb-2">Low-friction</h3>
-          <p className="text-sm text-[#444748]">Start manually, automate later, and keep the business moving.</p>
+          <p className="text-sm text-[#444748]">Keep ownership of the app structure and data path as the business grows.</p>
         </div>
       </section>
 
