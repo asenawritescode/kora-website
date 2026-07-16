@@ -51,6 +51,22 @@ export async function fetchPublicBlogPosts(): Promise<Article[]> {
     category: String(item.category || 'Guides'),
     title: String(item.title || ''),
     description: String(item.description || ''),
-    readTime: '5 min read',
+    readTime: estimateReadTime(String(item.body || item.description || '')),
+    body: String(item.body || ''),
+    publishedAt: String(item.published_at || ''),
+    authorName: String(item.author_name || 'Kora Team'),
+    seoTitle: String(item.seo_title || ''),
+    seoDescription: String(item.seo_description || ''),
+    ogImage: String(item.og_image || ''),
   })).filter((item: Article) => item.slug && item.title)
+}
+
+export async function fetchPublicBlogPost(slug: string): Promise<Article | null> {
+  const posts = await fetchPublicBlogPosts()
+  return posts.find((item) => item.slug === slug) ?? null
+}
+
+function estimateReadTime(text: string): string {
+  const words = text.trim().split(/\s+/).filter(Boolean).length
+  return `${Math.max(1, Math.ceil(words / 220))} min read`
 }

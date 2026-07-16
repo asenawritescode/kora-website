@@ -7,6 +7,8 @@ import { fetchPublicBlogPosts } from '@/lib/public-content'
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>(ARTICLES)
   const [loadError, setLoadError] = useState(false)
+  const heroArticle = articles[0] || ARTICLES[0]
+  const gridArticles = articles.slice(1)
 
   useEffect(() => {
     let alive = true
@@ -44,8 +46,8 @@ export default function BlogPage() {
         </div>
       )}
 
-      <HeroPost />
-      <ArticleGrid articles={articles} />
+      <HeroPost article={heroArticle} />
+      <ArticleGrid articles={gridArticles.length ? gridArticles : articles} />
     </div>
   )
 }
