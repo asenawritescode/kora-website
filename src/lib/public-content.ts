@@ -1,5 +1,5 @@
-import { TEMPLATES as FALLBACK_TEMPLATES, type Template } from '@/components/landing/ExamplesPage/data'
-import { ARTICLES as FALLBACK_ARTICLES, type Article } from '@/components/landing/BlogPage/data'
+import type { Template } from '@/components/landing/ExamplesPage/data'
+import type { Article } from '@/components/landing/BlogPage/data'
 
 const publicContentBaseURL = (import.meta.env.VITE_KORA_PUBLIC_CONTENT_BASE_URL as string | undefined)?.replace(/\/$/, '')
   || 'https://cloud.kora.mradiafrica.com/api/cloud/public'
@@ -21,9 +21,6 @@ export async function fetchPublicTemplates(): Promise<Template[]> {
   }
   const payload = await res.json()
   const items: PublicTemplate[] = Array.isArray(payload.items) ? payload.items : []
-  if (items.length === 0) {
-    return FALLBACK_TEMPLATES
-  }
   return items.map((item) => ({
     slug: item.slug,
     name: item.name,
@@ -43,9 +40,6 @@ export async function fetchPublicBlogPosts(): Promise<Article[]> {
   }
   const payload = await res.json()
   const items = Array.isArray(payload.items) ? payload.items : []
-  if (items.length === 0) {
-    return FALLBACK_ARTICLES
-  }
   return items.map((item: any) => ({
     slug: String(item.slug || ''),
     category: String(item.category || 'Guides'),

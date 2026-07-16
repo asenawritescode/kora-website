@@ -5,19 +5,26 @@ import { ARTICLES, type Article } from './data'
 import { fetchPublicBlogPosts } from '@/lib/public-content'
 
 export default function BlogPage() {
-  const [articles, setArticles] = useState<Article[]>(ARTICLES)
+  const [articles, setArticles] = useState<Article[]>([])
+  const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
-  const heroArticle = articles[0] || ARTICLES[0]
-  const gridArticles = articles.slice(1)
+  const visibleArticles = loadError ? ARTICLES : articles
+  const heroArticle = visibleArticles[0]
+  const gridArticles = visibleArticles.slice(1)
 
   useEffect(() => {
     let alive = true
+    setIsLoading(true)
+    setLoadError(false)
     fetchPublicBlogPosts()
       .then((items) => {
         if (alive) setArticles(items)
       })
       .catch(() => {
         if (alive) setLoadError(true)
+      })
+      .finally(() => {
+        if (alive) setIsLoading(false)
       })
     return () => {
       alive = false
@@ -46,8 +53,51 @@ export default function BlogPage() {
         </div>
       )}
 
-      <HeroPost article={heroArticle} />
-      <ArticleGrid articles={gridArticles.length ? gridArticles : articles} />
+      {isLoading ? (
+        <BlogLoadingState />
+      ) : heroArticle ? (
+        <>
+          <HeroPost article={heroArticle} />
+          <ArticleGrid articles={gridArticles.length ? gridArticles : visibleArticles} />
+        </>
+      ) : (
+        <div className="bg-white border border-[#e5e5e5] rounded-sm p-6 text-sm text-[#5d5f5f]">
+          No published articles are available yet.
+        </div>
+      )}
     </div>
+  )
+}
+
+function BlogLoadingState() {
+  return (
+    <>
+      <div className="border border-outline-variant bg-white overflow-hidden flex flex-col md:flex-row">
+        <div className="md:w-3/5 h-[300px] md:h-auto bg-[#f1edec]" />
+        <div className="md:w-2/5 p-8 md:p-10 space-y-6">
+          <div className="h-4 w-32 bg-[#f1edec]" />
+          <div className="space-y-3">
+            <div className="h-8 w-full bg-[#f1edec]" />
+            <div className="h-8 w-4/5 bg-[#f1edec]" />
+          </div>
+          <div className="space-y-2">
+            <div className="h-4 w-full bg-[#f1edec]" />
+            <div className="h-4 w-5/6 bg-[#f1edec]" />
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {[0, 1, 2].map((item) => (
+          <div key={item} className="border border-outline-variant bg-white">
+            <div className="h-48 bg-[#f1edec]" />
+            <div className="p-6 space-y-4">
+              <div className="h-4 w-24 bg-[#f1edec]" />
+              <div className="h-7 w-full bg-[#f1edec]" />
+              <div className="h-4 w-5/6 bg-[#f1edec]" />
+            </div>
+          </div>
+        ))}
+      </div>
+    </>
   )
 }

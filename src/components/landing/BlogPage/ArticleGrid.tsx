@@ -1,7 +1,7 @@
 import { ArticleCard } from './ArticleCard'
-import { ARTICLES, type Article } from './data'
+import type { Article } from './data'
 
-export function ArticleGrid({ articles = ARTICLES }: { articles?: Article[] }) {
+export function ArticleGrid({ articles }: { articles: Article[] }) {
   return (
     <section>
       <div className="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
