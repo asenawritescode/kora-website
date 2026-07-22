@@ -1,22 +1,21 @@
 import { HeroPost } from './HeroPost'
 import { ArticleGrid } from './ArticleGrid'
 import { useEffect, useState } from 'react'
-import { ARTICLES, type Article } from './data'
-import { fetchPublicBlogPosts } from '@/lib/public-content'
+import { type Article } from './data'
+import { getPublicBlogPosts } from '@/lib/public-content'
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
-  const visibleArticles = loadError ? ARTICLES : articles
-  const heroArticle = visibleArticles[0]
-  const gridArticles = visibleArticles.slice(1)
+  const heroArticle = articles[0]
+  const gridArticles = articles.slice(1)
 
   useEffect(() => {
     let alive = true
     setIsLoading(true)
     setLoadError(false)
-    fetchPublicBlogPosts()
+    getPublicBlogPosts()
       .then((items) => {
         if (alive) setArticles(items)
       })
@@ -58,7 +57,7 @@ export default function BlogPage() {
       ) : heroArticle ? (
         <>
           <HeroPost article={heroArticle} />
-          <ArticleGrid articles={gridArticles.length ? gridArticles : visibleArticles} />
+          <ArticleGrid articles={gridArticles.length ? gridArticles : articles} />
         </>
       ) : (
         <div className="bg-white border border-[#e5e5e5] rounded-sm p-6 text-sm text-[#5d5f5f]">

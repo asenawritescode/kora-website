@@ -12,7 +12,32 @@ type PublicTemplate = {
   features?: string[]
 }
 
-export async function fetchPublicTemplates(): Promise<Template[]> {
+// ── Module-level fetch-once cache ──────────────────────────────────────────
+// Templates and blog posts are fetched once per page load and shared across
+// every component that needs them. The cache lives for the lifetime of the
+// SPA session (no expiry needed — the user isn't on the page long enough
+// for CMS data to go stale, and a hard refresh gets fresh data).
+
+let templatesCache: Promise<Template[]> | null = null
+let blogPostsCache: Promise<Article[]> | null = null
+
+export function getPublicTemplates(): Promise<Template[]> {
+  if (!templatesCache) {
+    templatesCache = fetchPublicTemplates()
+  }
+  return templatesCache
+}
+
+export function getPublicBlogPosts(): Promise<Article[]> {
+  if (!blogPostsCache) {
+    blogPostsCache = fetchPublicBlogPosts()
+  }
+  return blogPostsCache
+}
+
+// ── Raw fetch functions (internal) ────────────────────────────────────────
+
+async function fetchPublicTemplates(): Promise<Template[]> {
   const res = await fetch(`${publicContentBaseURL}/templates`, {
     headers: { Accept: 'application/json' },
   })
@@ -56,7 +81,7 @@ export async function fetchPublicBlogPosts(): Promise<Article[]> {
 }
 
 export async function fetchPublicBlogPost(slug: string): Promise<Article | null> {
-  const posts = await fetchPublicBlogPosts()
+  const posts = await getPublicBlogPosts()
   return posts.find((item) => item.slug === slug) ?? null
 }
 

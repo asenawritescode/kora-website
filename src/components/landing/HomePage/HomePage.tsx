@@ -4,6 +4,8 @@ import { ProblemSection } from './ProblemSection'
 import { FinalCTA } from './FinalCTA'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, Bot, Database, FileText, KeyRound, Plug, Workflow } from 'lucide-react'
+import { getPublicTemplates } from '@/lib/public-content'
+import { useEffect, useState } from 'react'
 
 const CREATED = [
   { icon: FileText, title: 'Forms', description: 'Clean screens for capturing the records your team already works with.' },
@@ -14,8 +16,6 @@ const CREATED = [
   { icon: Bot, title: 'AI Assistant', description: 'Use plain English to create structures and work with records faster.' },
 ]
 
-const TEMPLATES = ['CRM', 'Inventory', 'Fieldwork', 'Invoicing', 'Helpdesk', 'Property Management']
-
 const STEPS = [
   'Describe your workflow',
   'Kora builds the app',
@@ -24,6 +24,22 @@ const STEPS = [
 ]
 
 export default function HomePage() {
+  const [homeTemplates, setHomeTemplates] = useState<{ slug: string; name: string; description: string }[]>([])
+  const [homeTemplatesLoading, setHomeTemplatesLoading] = useState(true)
+
+  useEffect(() => {
+    let alive = true
+    setHomeTemplatesLoading(true)
+    getPublicTemplates()
+      .then((items) => {
+        if (alive) setHomeTemplates(items.slice(0, 6))
+      })
+      .catch(() => {})
+      .finally(() => {
+        if (alive) setHomeTemplatesLoading(false)
+      })
+    return () => { alive = false }
+  }, [])
   return (
     <>
       <HeroSection />
@@ -75,12 +91,28 @@ export default function HomePage() {
           </Link>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
-          {TEMPLATES.map((template) => (
-            <a key={template} href={`/onboard?template=${template.toLowerCase().replaceAll(' ', '-')}`} className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
-              <h3 className="text-2xl font-semibold text-black mb-2">{template}</h3>
-              <p className="text-sm text-[#5d5f5f]">Start with this workspace pattern and customize it for your operations.</p>
-            </a>
-          ))}
+          {homeTemplatesLoading ? (
+            [0, 1, 2, 3, 4, 5].map((i) => (
+              <div key={i} className="bg-white border border-[#e5e5e5] p-6 rounded-sm space-y-3">
+                <div className="h-7 w-2/3 bg-[#f1edec] rounded-sm animate-pulse" />
+                <div className="h-4 w-full bg-[#f1edec] rounded-sm animate-pulse" />
+              </div>
+            ))
+          ) : homeTemplates.length > 0 ? (
+            homeTemplates.map((t) => (
+              <a key={t.slug} href={`/onboard?template=${t.slug}`} className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+                <h3 className="text-2xl font-semibold text-black mb-2">{t.name}</h3>
+                <p className="text-sm text-[#5d5f5f]">{t.description || 'Start with this workspace pattern and customize it for your operations.'}</p>
+              </a>
+            ))
+          ) : (
+            <div className="md:col-span-3 bg-white border border-[#e5e5e5] rounded-sm p-8 text-center">
+              <p className="text-sm text-[#5d5f5f] mb-4">Template catalog is temporarily unavailable.</p>
+              <a href="/onboard" className="text-xs font-medium text-[#FF6B35] hover:underline font-mono">
+                Start from scratch →
+              </a>
+            </div>
+          )}
         </div>
       </section>
       <ProblemSection />

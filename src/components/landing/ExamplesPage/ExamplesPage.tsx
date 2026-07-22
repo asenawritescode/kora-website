@@ -1,8 +1,8 @@
 import { useEffect, useMemo, useState } from 'react'
 import { FilterBar } from './FilterBar'
 import { TemplateCard } from './TemplateCard'
-import { TEMPLATES, type Template } from './data'
-import { fetchPublicTemplates } from '@/lib/public-content'
+import { type Template } from './data'
+import { getPublicTemplates } from '@/lib/public-content'
 
 export default function ExamplesPage() {
   const [activeCategory, setActiveCategory] = useState('All')
@@ -10,13 +10,12 @@ export default function ExamplesPage() {
   const [templates, setTemplates] = useState<Template[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
-  const visibleTemplates = loadError ? TEMPLATES : templates
 
   useEffect(() => {
     let alive = true
     setIsLoading(true)
     setLoadError(false)
-    fetchPublicTemplates()
+    getPublicTemplates()
       .then((items) => {
         if (alive) setTemplates(items)
       })
@@ -32,18 +31,18 @@ export default function ExamplesPage() {
   }, [])
 
   const filtered = useMemo(() => {
-    return visibleTemplates.filter((t) => {
+    return templates.filter((t) => {
       const cat = activeCategory === 'All' || t.category === activeCategory
       const q = !search || t.name.toLowerCase().includes(search.toLowerCase())
         || t.description.toLowerCase().includes(search.toLowerCase())
       return cat && q
     })
-  }, [activeCategory, search, visibleTemplates])
+  }, [activeCategory, search, templates])
 
   const preferredPopular = ['b2b-crm', 'fieldwork', 'kiosk-pos']
-  const popular = visibleTemplates
+  const popular = templates
     .filter((t) => preferredPopular.includes(t.slug))
-    .concat(visibleTemplates.filter((t) => !preferredPopular.includes(t.slug)))
+    .concat(templates.filter((t) => !preferredPopular.includes(t.slug)))
     .slice(0, 3)
 
   return (
@@ -60,7 +59,7 @@ export default function ExamplesPage() {
 
       {loadError && (
         <div className="mb-8 bg-white border border-[#e5e5e5] rounded-sm p-4 text-sm text-[#5d5f5f]">
-          Showing starter templates while the public catalog is unavailable.
+          Templates are temporarily unavailable. Please try again shortly.
         </div>
       )}
 

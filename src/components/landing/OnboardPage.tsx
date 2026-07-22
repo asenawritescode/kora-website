@@ -1,19 +1,9 @@
-import { useMemo, useState, type FormEvent } from 'react'
+import { useMemo, useState, useEffect, type FormEvent } from 'react'
 import { BadgeCheck, Server, Database, Terminal } from 'lucide-react'
+import { getPublicTemplates } from '@/lib/public-content'
 
 const onboardAPIBaseURL = 'https://cloud.kora.mradiafrica.com'
 const workspaceBaseURL = (import.meta.env.VITE_KORA_APP_BASE_URL as string | undefined)?.replace(/\/$/, '') || 'https://app.kora.mradiafrica.com'
-
-const TEMPLATES = [
-  { slug: 'kiosk-pos', label: 'Kiosk & Retail' },
-  { slug: 'b2b-crm', label: 'B2B CRM' },
-  { slug: 'clinic-admin', label: 'Clinic Admin' },
-  { slug: 'school-admin', label: 'School Admin' },
-  { slug: 'property-management', label: 'Property Mgmt' },
-  { slug: 'sacco-core', label: 'SACCO Core' },
-  { slug: 'logistics-fleet', label: 'Logistics Fleet' },
-  { slug: 'event-ticketing', label: 'Event Ticketing' },
-]
 
 const TRUST_SIGNALS = [
   { icon: BadgeCheck, label: 'AGPL-3.0 open source' },
@@ -29,11 +19,32 @@ export default function OnboardPage() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [success, setSuccess] = useState<string | null>(null)
+  const [templates, setTemplates] = useState<{ slug: string; label: string }[]>([])
+  const [templatesLoading, setTemplatesLoading] = useState(true)
   const initialTemplate = useMemo(() => {
     if (typeof window === 'undefined') return ''
     return new URLSearchParams(window.location.search).get('template') || ''
   }, [])
   const [selectedTemplate, setSelectedTemplate] = useState(initialTemplate)
+
+  // Fetch templates dynamically from CMS via the public content proxy.
+  useEffect(() => {
+    let alive = true
+    setTemplatesLoading(true)
+    getPublicTemplates()
+      .then((items) => {
+        if (alive) {
+          setTemplates(items.map((t) => ({ slug: t.slug, label: t.name })))
+        }
+      })
+      .catch(() => {
+        // Templates unavailable — chips stay empty, form still works.
+      })
+      .finally(() => {
+        if (alive) setTemplatesLoading(false)
+      })
+    return () => { alive = false }
+  }, [])
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
@@ -117,23 +128,37 @@ export default function OnboardPage() {
               <h3 className="text-sm font-semibold text-black mb-3 font-mono uppercase tracking-wider">
                 What are you building?
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {TEMPLATES.map((t) => (
-                  <button
-                    key={t.slug}
-                    type="button"
-                    onClick={() => setSelectedTemplate(t.slug)}
-                    className={`text-xs font-medium bg-[#FAFAFA] border rounded-sm px-3 py-1.5 hover:border-black hover:text-black transition-colors font-mono ${
-                      selectedTemplate === t.slug ? 'border-[#FF6B35] text-black' : 'border-outline-variant text-[#5d5f5f]'
-                    }`}
-                  >
-                    {t.label}
-                  </button>
-                ))}
-              </div>
-              <p className="text-xs text-[#5d5f5f] mt-2 font-mono">
-                Pick one or start from scratch. Template selection helps us understand your starting point.
-              </p>
+              {templatesLoading ? (
+                <div className="flex flex-wrap gap-2">
+                  {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
+                    <div key={i} className="h-7 w-28 bg-[#f1edec] rounded-sm animate-pulse" />
+                  ))}
+                </div>
+              ) : templates.length > 0 ? (
+                <>
+                  <div className="flex flex-wrap gap-2">
+                    {templates.map((t) => (
+                      <button
+                        key={t.slug}
+                        type="button"
+                        onClick={() => setSelectedTemplate(t.slug)}
+                        className={`text-xs font-medium bg-[#FAFAFA] border rounded-sm px-3 py-1.5 hover:border-black hover:text-black transition-colors font-mono ${
+                          selectedTemplate === t.slug ? 'border-[#FF6B35] text-black' : 'border-outline-variant text-[#5d5f5f]'
+                        }`}
+                      >
+                        {t.label}
+                      </button>
+                    ))}
+                  </div>
+                  <p className="text-xs text-[#5d5f5f] mt-2 font-mono">
+                    Pick one or start from scratch. Template selection helps us understand your starting point.
+                  </p>
+                </>
+              ) : (
+                <p className="text-xs text-[#c4c7c7] font-mono">
+                  Template catalog is currently unavailable.
+                </p>
+              )}
             </div>
 
             {/* What happens next */}
