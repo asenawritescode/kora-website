@@ -6,28 +6,28 @@ export function HeroSection() {
   return (
     <section className="max-w-[960px] mx-auto px-4 sm:px-6 py-20 md:py-[120px] text-center">
       <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-3 tracking-[-0.03em] md:tracking-[-0.04em]">
-        Build custom business apps<br />from plain English.
+        Get a custom business app.<br />No coding. No big setup.
       </h1>
       <div className="mb-6">
         <span className="inline-block text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
-        AI-Powered
+        No code needed
         </span>
       </div>
-      <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-6">
-        Describe your workflow and Kora creates a working app with forms, database, users, workflows, API, and AI assistance.
+      <p className="text-lg leading-7 text-[#444748] max-w-xl mx-auto mb-2">
+        Describe what your team does. Kora builds the forms, tables, and workflows — ready to use.
       </p>
       <p className="text-sm text-[#8E8E8E] max-w-xl mx-auto mb-8">
-        For teams replacing spreadsheets, rigid SaaS, or expensive custom software projects.
+        9 templates to start from. Or build your own from scratch. No credit card required.
       </p>
 
       {/* CTAs */}
       <div className="flex justify-center items-center gap-4 mb-8">
         <Link to="/onboard" className="bg-[#FF6B35] text-white text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-[#E55B25] transition-colors font-mono">
-          Start free
+          Get your first app
           <ArrowRight className="h-4 w-4" />
         </Link>
         <Link to="/examples" className="bg-transparent text-black border border-outline-variant text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-gray-50 transition-colors font-mono">
-          View templates
+          See templates
           <ArrowRight className="h-4 w-4" />
         </Link>
       </div>
@@ -35,9 +35,9 @@ export function HeroSection() {
       {/* Trust signals */}
       <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#5d5f5f] mb-16 md:mb-[120px] flex-wrap font-mono">
         <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>No credit card</span></div>
-        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source available</span></div>
+        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source</span></div>
         <div className="flex items-center gap-2"><Cloud className="h-4 w-4" /><span>Managed cloud</span></div>
-        <div className="flex items-center gap-2"><Database className="h-4 w-4" /><span>Own your data</span></div>
+        <div className="flex items-center gap-2"><Database className="h-4 w-4" /><span>Export anytime</span></div>
       </div>
 
       <WorkspacePreview />

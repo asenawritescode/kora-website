@@ -1,29 +1,29 @@
 const PROBLEMS = [
   {
     title: 'Spreadsheets',
-    subtitle: '"I just need something searchable"',
+    subtitle: '"Someone deleted the formula again"',
     items: [
-      'Data gets corrupted easily',
-      'Hard to build distinct UIs for different roles',
-      'Zero API integrations out of the box',
+      'One wrong edit breaks everything',
+      'No way to control who sees what',
+      'Can\'t connect to anything else',
     ],
   },
   {
-    title: 'SaaS',
-    subtitle: '"It almost fits our workflow but not quite"',
+    title: 'Ready-made apps',
+    subtitle: '"It almost fits, but not quite"',
     items: [
-      'You must adapt your workflow to their model',
-      'Expensive per-seat pricing',
-      'Your data is locked in their cloud',
+      'You bend your process to fit the tool',
+      'Per-person pricing adds up fast',
+      'Your data lives on their servers',
     ],
   },
   {
-    title: 'Custom Build',
-    subtitle: '"We got quoted $85K"',
+    title: 'Custom software',
+    subtitle: '"They quoted us months and a fortune"',
     items: [
-      'Months of development time',
-      'High upfront and maintenance costs',
-      'Requires dedicated engineering team',
+      'Takes months, not days',
+      'One change costs extra',
+      'Need a developer on speed dial',
     ],
   },
 ]
@@ -33,10 +33,10 @@ export function ProblemSection() {
     <section className="max-w-[960px] mx-auto px-6 py-[120px]">
       <div className="text-center mb-20">
         <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-4 tracking-[-0.02em] md:tracking-[-0.03em]">
-          Why teams choose Kora.
+          What you're using now. And why it slows you down.
         </h2>
         <p className="text-lg text-[#5d5f5f] max-w-xl mx-auto">
-          When the work is real, spreadsheets break, generic SaaS bends the process, and custom builds take too long.
+          When the work is real, spreadsheets break, generic apps bend your process, and custom builds take too long.
         </p>
       </div>
 
@@ -72,7 +72,7 @@ export function ProblemSection() {
       </div>
 
       <p className="text-center text-sm text-[#5d5f5f] mt-12 font-mono">
-        Kora gives teams a practical middle path: fast to start, flexible enough to keep.
+        Kora is the middle ground. Start in minutes. Change anything. No developer needed.
       </p>
     </section>
   )

@@ -5,8 +5,8 @@ export default function PricingRoute() {
   return (
     <>
       <Seo
-        title="Kora Pricing — Plans for custom business apps"
-        description="Simple plans for building and running custom business apps with Kora, from a free workspace to managed cloud and private instances."
+        title="Kora Pricing — Free workspace, managed cloud, private instances"
+        description="Start free with 5 doctypes. Upgrade to managed cloud from $20/month or request a private instance."
         path="/pricing"
         jsonLd={{
           '@context': 'https://schema.org',

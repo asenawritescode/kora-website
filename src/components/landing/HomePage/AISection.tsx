@@ -36,10 +36,11 @@ export function AISection() {
             AI Builder
           </div>
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
-            Describe your workflow.
+            Tell it what you need.<br />Watch it build.
           </h2>
           <p className="text-lg leading-7 text-[#444748] mb-6">
-            Tell Kora what your team needs to track, approve, and update. It turns that into app structure you can keep editing.
+            "Track our sales team deals." "Add stock alerts when we run low."
+            Just say what you want — Kora builds the screens, database, everything.
           </p>
           <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
             Try the builder

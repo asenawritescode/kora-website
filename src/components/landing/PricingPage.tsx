@@ -4,18 +4,18 @@ import { Link } from '@tanstack/react-router'
 const PLANS = [
   {
     name: 'Free Workspace',
-    price: 'Start free',
-    features: ['Try Kora', 'Build a small app', 'No credit card to start'],
+    price: 'Free forever',
+    features: ['1 workspace', 'Up to 5 doctypes', 'Community support'],
   },
   {
     name: 'Managed Cloud',
-    price: 'Hosted workspace',
-    features: ['Team access', 'Operational support', 'Best for running real workflows'],
+    price: 'From $20/month',
+    features: ['Unlimited doctypes', 'Team access', 'Email support'],
   },
   {
     name: 'Private Instance',
-    price: 'Dedicated runtime',
-    features: ['Custom support boundary', 'Private deployment path', 'Best for agencies and larger customers'],
+    price: 'Custom pricing',
+    features: ['Dedicated deployment', 'Custom domain', 'Priority support'],
   },
 ]
 
@@ -31,7 +31,7 @@ export default function PricingPage() {
           Simple plans for building and running business apps.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Start free, then upgrade when the workspace becomes part of daily operations.
+          Start free. Upgrade when you're ready.
         </p>
       </header>
 

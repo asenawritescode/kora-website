@@ -5,8 +5,8 @@ export default function HomeRoute() {
   return (
     <>
       <Seo
-        title="Kora — Build custom business apps from plain English"
-        description="Describe your workflow and Kora creates a working business app with forms, database, users, workflows, API, and AI assistance."
+        title="Kora — Get a custom business app. No coding."
+        description="Describe your work and Kora builds it — forms, database, workflows. 9 templates to start from. No credit card required."
         path="/"
         jsonLd={[
           {
