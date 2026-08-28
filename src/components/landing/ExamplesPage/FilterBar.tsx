@@ -1,6 +1,6 @@
 import { Search } from 'lucide-react'
 
-const CATEGORIES = ['All', 'Operations', 'Finance', 'Education', 'Retail']
+const CATEGORIES = ['All', 'Operations', 'Finance', 'Education', 'Retail', 'Guides']
 
 interface FilterBarProps {
   activeCategory: string

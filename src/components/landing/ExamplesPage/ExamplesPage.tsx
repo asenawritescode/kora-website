@@ -41,6 +41,8 @@ export default function ExamplesPage() {
 
   const preferredPopular = ['b2b-crm', 'fieldwork', 'kiosk-pos']
   const popular = templates
+    .slice()
+    .sort((a, b) => (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER))
     .filter((t) => preferredPopular.includes(t.slug))
     .concat(templates.filter((t) => !preferredPopular.includes(t.slug)))
     .slice(0, 3)

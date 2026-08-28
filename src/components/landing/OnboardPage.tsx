@@ -27,7 +27,7 @@ export default function OnboardPage() {
   }, [])
   const [selectedTemplate, setSelectedTemplate] = useState(initialTemplate)
 
-  // Fetch templates dynamically from CMS via the public content proxy.
+  // Fetch templates dynamically from the shared public-content helper.
   useEffect(() => {
     let alive = true
     setTemplatesLoading(true)

@@ -2,12 +2,21 @@ import { Link } from '@tanstack/react-router'
 import type { Article } from './data'
 
 export function ArticleCard({ article }: { article: Article }) {
+  const heroImage = article.heroImage || article.ogImage
   return (
     <Link to="/blog/$slug" params={{ slug: article.slug }} className="group flex flex-col border border-outline-variant bg-white hover:border-black transition-colors">
       {/* Image */}
       <div className="h-48 border-b border-outline-variant overflow-hidden bg-[#f1edec] relative">
         <div className="absolute top-0 left-0 w-full h-1 bg-[#FF6B35] z-10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
-        <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-white opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+        {heroImage ? (
+          <img
+            src={heroImage}
+            alt={article.title}
+            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-white opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+        )}
       </div>
 
       <div className="p-6 flex flex-col flex-grow gap-4">

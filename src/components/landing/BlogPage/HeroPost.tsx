@@ -3,11 +3,20 @@ import { User } from 'lucide-react'
 import type { Article } from './data'
 
 export function HeroPost({ article }: { article: Article }) {
+  const heroImage = article.heroImage || article.ogImage
   return (
     <Link to="/blog/$slug" params={{ slug: article.slug }} className="group border border-outline-variant bg-white overflow-hidden flex flex-col md:flex-row hover:border-black transition-colors duration-300">
       {/* Image */}
       <div className="md:w-3/5 border-b md:border-b-0 md:border-r border-outline-variant bg-[#f1edec] overflow-hidden h-[300px] md:h-auto">
-        <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-white opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+        {heroImage ? (
+          <img
+            src={heroImage}
+            alt={article.title}
+            className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700"
+          />
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-gray-200 via-gray-100 to-white opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700" />
+        )}
       </div>
 
       {/* Content */}
