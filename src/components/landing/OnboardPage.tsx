@@ -2,7 +2,10 @@ import { useMemo, useState, useEffect, type FormEvent } from 'react'
 import { BadgeCheck, Server, Database, Terminal } from 'lucide-react'
 import { getPublicTemplates } from '@/lib/public-content'
 
-const onboardAPIBaseURL = 'https://cloud.kora.mradiafrica.com'
+const onboardAPIBaseURL = (
+  import.meta.env.VITE_KORA_ONBOARD_API_BASE_URL as string | undefined
+  || 'https://cloud.kora.mradiafrica.com'
+).replace(/\/$/, '')
 const workspaceBaseURL = (import.meta.env.VITE_KORA_APP_BASE_URL as string | undefined)?.replace(/\/$/, '') || 'https://app.kora.mradiafrica.com'
 
 const TRUST_SIGNALS = [

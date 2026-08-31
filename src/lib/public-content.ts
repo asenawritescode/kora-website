@@ -8,7 +8,7 @@ const publicContentBaseURL = (
 
 const publicContentSiteName = (
   import.meta.env.VITE_KORA_PUBLIC_CMS_SITE_NAME as string | undefined
-  || 'kora-content'
+  || 'kora-cms'
 ).trim()
 
 type CmsListResponse<T = any> = {
