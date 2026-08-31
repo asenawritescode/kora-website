@@ -53,6 +53,16 @@ type CmsBlogPost = {
   heroImage?: string
 }
 
+const BLOG_IMAGE_FALLBACKS: Record<string, string> = {
+  'multi-tenancy-at-scale': '/blog-images/multi-tenancy-at-scale.png',
+  'deploying-on-raspberry-pi': '/blog-images/deploying-on-a-raspberry-pi.png',
+  'publish-website-content-from-kora-cms': '/blog-images/publish-website-content-from-kora-cms.png',
+  'dogfooding-kora-product-validation': '/blog-images/dogfooding-kora-product-validation.png',
+  'create-kora-site-from-template': '/blog-images/create-kora-site-from-a-template.png',
+  'spreadsheet-to-business-app': '/blog-images/spreadsheet-to-business-app.png',
+  'kora-0-9-view-engine-templates': '/blog-images/kora-0-9-view-engine-templates.png',
+}
+
 let templatesCache: Promise<Template[]> | null = null
 let blogPostsCache: Promise<Article[]> | null = null
 let blogPostCache = new Map<string, Promise<Article | null>>()
@@ -133,8 +143,12 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
   const publishedAt = String(item.published_at || item.publishedAt || '').trim()
   const body = String(item.body || '').trim()
   const description = String(item.description || '').trim()
+  const slug = String(item.slug || '').trim()
+  const fallbackImage = BLOG_IMAGE_FALLBACKS[slug]
+  const heroImage = normalizeOptionalString(item.hero_image || item.heroImage) || fallbackImage
+  const ogImage = normalizeOptionalString(item.og_image || item.ogImage) || heroImage || fallbackImage
   return {
-    slug: String(item.slug || '').trim(),
+    slug,
     category: String(item.category || 'Guides').trim() || 'Guides',
     title: String(item.title || '').trim(),
     description,
@@ -144,8 +158,8 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
     authorName: String(item.author_name || item.authorName || 'Kora Team').trim() || 'Kora Team',
     seoTitle: normalizeOptionalString(item.seo_title || item.seoTitle),
     seoDescription: normalizeOptionalString(item.seo_description || item.seoDescription),
-    heroImage: normalizeOptionalString(item.hero_image || item.heroImage),
-    ogImage: normalizeOptionalString(item.og_image || item.ogImage),
+    heroImage,
+    ogImage,
   }
 }
 

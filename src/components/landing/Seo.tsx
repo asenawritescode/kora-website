@@ -11,10 +11,20 @@ type SeoProps = {
   canonical?: string
   noindex?: boolean
   jsonLd?: JsonValue | JsonValue[]
+  image?: string
 }
 
 function getSiteUrl() {
   return (import.meta.env.VITE_KORA_SITE_URL as string | undefined)?.replace(/\/$/, '') || DEFAULT_SITE_URL
+}
+
+function resolveUrl(siteUrl: string, value?: string) {
+  if (!value) return undefined
+  try {
+    return new URL(value, siteUrl).toString()
+  } catch {
+    return undefined
+  }
 }
 
 function upsertMeta(selector: string, attrs: Record<string, string>) {
@@ -51,10 +61,15 @@ function upsertJsonLd(id: string, data?: JsonValue | JsonValue[]) {
   if (!existing) document.head.appendChild(el)
 }
 
-export function Seo({ title, description, path, canonical, noindex, jsonLd }: SeoProps) {
+function removeMeta(selector: string) {
+  document.head.querySelector<HTMLMetaElement>(selector)?.remove()
+}
+
+export function Seo({ title, description, path, canonical, noindex, jsonLd, image }: SeoProps) {
   useEffect(() => {
     const siteUrl = getSiteUrl()
     const url = canonical || (path ? `${siteUrl}${path.startsWith('/') ? path : `/${path}`}` : siteUrl)
+    const imageUrl = resolveUrl(siteUrl, image)
 
     document.title = title
     upsertMeta('meta[name="description"]', { name: 'description', content: description })
@@ -62,9 +77,21 @@ export function Seo({ title, description, path, canonical, noindex, jsonLd }: Se
     upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description })
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: url })
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: path?.startsWith('/blog/') ? 'article' : 'website' })
+    if (imageUrl) {
+      upsertMeta('meta[property="og:image"]', { property: 'og:image', content: imageUrl })
+      upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: title })
+    } else {
+      removeMeta('meta[property="og:image"]')
+      removeMeta('meta[property="og:image:alt"]')
+    }
     upsertMeta('meta[name="twitter:card"]', { name: 'twitter:card', content: 'summary_large_image' })
     upsertMeta('meta[name="twitter:title"]', { name: 'twitter:title', content: title })
     upsertMeta('meta[name="twitter:description"]', { name: 'twitter:description', content: description })
+    if (imageUrl) {
+      upsertMeta('meta[name="twitter:image"]', { name: 'twitter:image', content: imageUrl })
+    } else {
+      removeMeta('meta[name="twitter:image"]')
+    }
     upsertLink('canonical', url)
 
     if (noindex) {
@@ -74,7 +101,7 @@ export function Seo({ title, description, path, canonical, noindex, jsonLd }: Se
     }
 
     upsertJsonLd('primary', jsonLd)
-  }, [canonical, description, jsonLd, noindex, path, title])
+  }, [canonical, description, image, jsonLd, noindex, path, title])
 
   return null
 }

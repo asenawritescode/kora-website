@@ -83,6 +83,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
         title={`${post.seoTitle} — Kora Blog`}
         description={post.seoDescription}
         path={`/blog/${slug}`}
+        image={cmsPost.heroImage || cmsPost.ogImage}
       />
       <ArticleShell>
         <header className="mb-[120px] max-w-3xl">
@@ -113,16 +114,26 @@ export default function BlogPost({ slug }: BlogPostProps) {
         </header>
 
         <div className="mb-[120px] w-full aspect-[21/9] bg-black rounded-xl overflow-hidden border border-outline-variant relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black opacity-90" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="flex items-center justify-center gap-3">
-              <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
-              <div className="w-32 h-[1px] bg-[#FF6B35]/50" />
-              <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
-              <div className="w-32 h-[1px] bg-[#FF6B35]/50" />
-              <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
-            </div>
-          </div>
+          {cmsPost.heroImage || cmsPost.ogImage ? (
+            <img
+              src={cmsPost.heroImage || cmsPost.ogImage}
+              alt={post.title}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <>
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black opacity-90" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="flex items-center justify-center gap-3">
+                  <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
+                  <div className="w-32 h-[1px] bg-[#FF6B35]/50" />
+                  <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
+                  <div className="w-32 h-[1px] bg-[#FF6B35]/50" />
+                  <div className="w-3 h-3 rounded-full bg-[#FF6B35]" />
+                </div>
+              </div>
+            </>
+          )}
         </div>
 
         <div className="max-w-2xl mx-auto text-base text-[#444748] leading-relaxed space-y-8">
