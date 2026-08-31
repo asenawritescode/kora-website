@@ -53,16 +53,6 @@ type CmsBlogPost = {
   heroImage?: string
 }
 
-const BLOG_IMAGE_FALLBACKS: Record<string, string> = {
-  'multi-tenancy-at-scale': '/blog-images/multi-tenancy-at-scale.png',
-  'deploying-on-raspberry-pi': '/blog-images/deploying-on-a-raspberry-pi.png',
-  'publish-website-content-from-kora-cms': '/blog-images/publish-website-content-from-kora-cms.png',
-  'dogfooding-kora-product-validation': '/blog-images/dogfooding-kora-product-validation.png',
-  'create-kora-site-from-template': '/blog-images/create-kora-site-from-a-template.png',
-  'spreadsheet-to-business-app': '/blog-images/spreadsheet-to-business-app.png',
-  'kora-0-9-view-engine-templates': '/blog-images/kora-0-9-view-engine-templates.png',
-}
-
 let templatesCache: Promise<Template[]> | null = null
 let blogPostsCache: Promise<Article[]> | null = null
 let blogPostCache = new Map<string, Promise<Article | null>>()
@@ -144,9 +134,8 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
   const body = String(item.body || '').trim()
   const description = String(item.description || '').trim()
   const slug = String(item.slug || '').trim()
-  const fallbackImage = BLOG_IMAGE_FALLBACKS[slug]
-  const heroImage = normalizeOptionalString(item.hero_image || item.heroImage) || fallbackImage
-  const ogImage = normalizeOptionalString(item.og_image || item.ogImage) || heroImage || fallbackImage
+  const heroImage = resolveCmsAssetUrl(normalizeOptionalString(item.hero_image || item.heroImage))
+  const ogImage = resolveCmsAssetUrl(normalizeOptionalString(item.og_image || item.ogImage)) || heroImage
   return {
     slug,
     category: String(item.category || 'Guides').trim() || 'Guides',
@@ -180,6 +169,23 @@ function normalizeOptionalStringList(value: string[] | string | undefined): stri
 function normalizeOptionalString(value: string | undefined): string | undefined {
   const normalized = String(value || '').trim()
   return normalized || undefined
+}
+
+function resolveCmsAssetUrl(value?: string): string | undefined {
+  if (!value) return undefined
+  if (/^(https?:)?\/\//.test(value) || value.startsWith('data:')) {
+    return value
+  }
+  const normalized = value.replace(/^\/+/, '')
+  if (!normalized) return undefined
+  return `${publicContentBaseURL}/s/${encodeURIComponent(publicContentSiteName)}/api/public/files/${encodePath(normalized)}`
+}
+
+function encodePath(path: string): string {
+  return path
+    .split('/')
+    .map((segment) => encodeURIComponent(segment))
+    .join('/')
 }
 
 function normalizeOptionalNumber(value: number | string | undefined): number | undefined {
