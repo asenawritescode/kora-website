@@ -47,8 +47,12 @@ type CmsBlogPost = {
   seoTitle?: string
   seo_description?: string
   seoDescription?: string
+  og_image_url?: string
+  ogImageUrl?: string
   og_image?: string
   ogImage?: string
+  hero_image_url?: string
+  heroImageUrl?: string
   hero_image?: string
   heroImage?: string
 }
@@ -134,8 +138,13 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
   const body = String(item.body || '').trim()
   const description = String(item.description || '').trim()
   const slug = String(item.slug || '').trim()
-  const heroImage = resolveCmsAssetUrl(normalizeOptionalString(item.hero_image || item.heroImage))
-  const ogImage = resolveCmsAssetUrl(normalizeOptionalString(item.og_image || item.ogImage)) || heroImage
+  const heroImage =
+    normalizeOptionalString(item.hero_image_url || item.heroImageUrl)
+    || resolveCmsAssetUrl(normalizeOptionalString(item.hero_image || item.heroImage))
+  const ogImage =
+    normalizeOptionalString(item.og_image_url || item.ogImageUrl)
+    || resolveCmsAssetUrl(normalizeOptionalString(item.og_image || item.ogImage))
+    || heroImage
   return {
     slug,
     category: String(item.category || 'Guides').trim() || 'Guides',
