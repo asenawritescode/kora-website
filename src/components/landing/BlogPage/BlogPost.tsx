@@ -1,6 +1,8 @@
 import { ArrowLeft, Clock, User } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { useEffect, useState, type ReactNode } from 'react'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
 import { Seo } from '@/components/landing/Seo'
 import { fetchPublicBlogPost } from '@/lib/public-content'
 import type { Article } from './data'
@@ -136,12 +138,8 @@ export default function BlogPost({ slug }: BlogPostProps) {
           )}
         </div>
 
-        <div className="max-w-2xl mx-auto text-base text-[#444748] leading-relaxed space-y-8">
-          {cmsPost?.body ? (
-            <CmsBody body={cmsPost.body} />
-          ) : (
-            <p>{cmsPost.description}</p>
-          )}
+        <div className="max-w-2xl mx-auto">
+          {cmsPost?.body ? <CmsBody body={cmsPost.body} /> : <p>{cmsPost.description}</p>}
         </div>
       </ArticleShell>
     </>
@@ -194,29 +192,9 @@ function formatPublishedDate(value?: string) {
 }
 
 function CmsBody({ body }: { body: string }) {
-  const blocks = body.split(/\n{2,}/).map((block) => block.trim()).filter(Boolean)
   return (
-    <>
-      {blocks.map((block, index) => {
-        if (block.startsWith('## ')) {
-          return <h2 key={index} className="text-[30px] leading-[38px] font-semibold text-black mt-16 mb-6">{block.slice(3)}</h2>
-        }
-        if (block.startsWith('### ')) {
-          return <h3 key={index} className="text-[24px] leading-[32px] font-semibold text-black mt-12 mb-4">{block.slice(4)}</h3>
-        }
-        if (block.split('\n').every((line) => line.trim().startsWith('- '))) {
-          return (
-            <ul key={index} className="list-disc pl-6 space-y-2">
-              {block.split('\n').map((line) => <li key={line}>{line.trim().slice(2)}</li>)}
-            </ul>
-          )
-        }
-        return (
-          <p key={index} className={index === 0 ? 'first-letter:text-5xl first-letter:font-semibold first-letter:text-black first-letter:mr-3 first-letter:float-left' : ''}>
-            {block}
-          </p>
-        )
-      })}
-    </>
+    <div className="blog-content text-base leading-relaxed text-[#444748]">
+      <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
+    </div>
   )
 }
