@@ -5,8 +5,8 @@ export default function OpenSourceRoute() {
   return (
     <>
       <Seo
-        title="Kora Open Source — Self-hosted business app engine"
-        description="Explore Kora's open-source app engine for self-hosted business software, REST APIs, workflows, permissions, SDKs, and SQL databases."
+        title="Kora Open Source — Self-hosted engine for business workflows"
+        description="Explore Kora's open-source engine for self-hosted business software, records, APIs, workflows, permissions, SDKs, and SQL databases."
         path="/open-source"
         jsonLd={[
           {

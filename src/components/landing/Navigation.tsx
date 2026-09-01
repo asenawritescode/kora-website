@@ -94,7 +94,7 @@ export function Navigation() {
             to="/onboard"
             className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono whitespace-nowrap"
           >
-            Start free
+            Start onboarding
           </Link>
         </div>
 
@@ -158,7 +158,7 @@ export function Navigation() {
               to="/onboard"
               className="block w-full text-center bg-black text-white text-sm font-medium px-4 py-3 rounded-sm mt-3 font-mono"
             >
-              Start free
+              Start onboarding
             </Link>
           </div>
         </div>

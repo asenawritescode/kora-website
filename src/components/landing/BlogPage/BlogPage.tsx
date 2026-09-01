@@ -42,7 +42,7 @@ export default function BlogPage() {
           Guides, comparisons, and open-source notes
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Practical articles for teams evaluating custom business apps, open-source ownership, AI builders, and Kora architecture.
+          Practical articles for teams evaluating custom business apps, workflow design, open-source ownership, and Kora architecture.
         </p>
       </header>
 

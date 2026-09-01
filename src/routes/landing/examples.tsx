@@ -5,7 +5,7 @@ export default function ExamplesRoute() {
   return (
     <>
       <Seo
-        title="Kora Templates — Start from a business app template"
+        title="Kora Templates — Start from a business workflow template"
         description="Explore Kora templates for CRM, inventory, fieldwork, invoicing, helpdesk, property management, retail, and more."
         path="/examples"
         jsonLd={{

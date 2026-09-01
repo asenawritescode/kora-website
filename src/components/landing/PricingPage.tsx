@@ -3,14 +3,14 @@ import { Link } from '@tanstack/react-router'
 
 const PLANS = [
   {
-    name: 'Free Workspace',
-    price: 'Free forever',
-    features: ['1 workspace', 'Up to 5 doctypes', 'Community support'],
+    name: 'Starter Workspace',
+    price: 'Free to begin',
+    features: ['1 workspace', 'Template starting point', 'Email support'],
   },
   {
     name: 'Managed Cloud',
     price: 'From $20/month',
-    features: ['Unlimited doctypes', 'Team access', 'Email support'],
+    features: ['Hosted workspaces', 'Team access', 'Operational support'],
   },
   {
     name: 'Private Instance',
@@ -28,10 +28,10 @@ export default function PricingPage() {
           Pricing
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Simple plans for building and running business apps.
+          Simple plans for starting, hosting, and owning your workspace.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Start free. Upgrade when you're ready.
+          Start free, move to managed cloud when you want help, or self-host when you need full control.
         </p>
       </header>
 
@@ -55,7 +55,7 @@ export default function PricingPage() {
       <section className="bg-white border border-[#e5e5e5] p-8 rounded-sm">
         <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-6">What every plan includes</h2>
         <div className="grid md:grid-cols-3 gap-3 text-sm text-[#444748]">
-          {['Forms', 'Database', 'Workflows', 'Users and roles', 'API', 'AI builder'].map((item) => (
+          {['Forms', 'Records', 'Workflows', 'Users and roles', 'API', 'AI builder'].map((item) => (
             <div key={item} className="border border-[#e5e5e5] rounded-sm px-4 py-3">{item}</div>
           ))}
         </div>
@@ -65,7 +65,7 @@ export default function PricingPage() {
         <div className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
           <Users className="h-6 w-6 text-[#FF6B35] mb-4" />
           <h3 className="text-lg font-semibold text-black mb-2">Sales-friendly</h3>
-          <p className="text-sm text-[#444748]">Start free and move to a managed plan when the workspace matters.</p>
+          <p className="text-sm text-[#444748]">Start free and move to managed support when the workspace matters.</p>
         </div>
         <div className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
           <Layers3 className="h-6 w-6 text-[#FF6B35] mb-4" />

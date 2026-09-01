@@ -92,10 +92,10 @@ export default function OnboardPage() {
             <BadgeCheck className="h-8 w-8 text-[#10B981]" />
           </div>
           <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-4">
-            Your app is ready
+            Your workspace is ready
           </h2>
           <p className="text-base text-[#5d5f5f] mb-8">
-            Your app has been set up. You can open it now and start using it.
+            Your workspace has been set up. You can open it now and start using it.
           </p>
           <a
             href={success}
@@ -119,7 +119,7 @@ export default function OnboardPage() {
           <div className="md:col-span-3 space-y-8">
             <div>
               <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[56px] md:leading-[64px] font-bold text-black mb-4 tracking-[-0.03em]">
-                Create your app.
+                Create your workspace.
               </h1>
               <p className="text-lg text-[#5d5f5f] max-w-lg">
                 This creates a real workspace you can open immediately. No credit card required.
@@ -180,7 +180,7 @@ export default function OnboardPage() {
                 </li>
                 <li className="flex items-start gap-2">
                   <span className="text-[#10B981] mt-0.5 font-mono">3.</span>
-                  You can add app details, records, and users later.
+                  You can add records, users, and workflow details later.
                 </li>
               </ul>
             </div>

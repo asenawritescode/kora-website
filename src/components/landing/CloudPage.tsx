@@ -2,15 +2,15 @@ import { ArrowRight, Cloud, Database, Mail, ShieldCheck, Workflow } from 'lucide
 import { Link } from '@tanstack/react-router'
 
 const STEPS = [
-  { title: 'Submit workspace', description: 'Choose a site name, create your admin account, and tell Kora what you want to build.' },
-  { title: 'Provision app', description: 'Kora Cloud prepares the workspace, database, users, and starting app structure.' },
-  { title: 'Open workspace', description: 'Launch the workspace and start adding records, users, and workflow details.' },
-  { title: 'Run your team', description: 'Keep improving the app as your business process becomes clearer.' },
+  { title: 'Submit workspace', description: 'Choose a site name, create your admin account, and tell Kora what the team does.' },
+  { title: 'Provision app', description: 'Kora Cloud prepares the workspace, database, users, and first workflow structure.' },
+  { title: 'Open workspace', description: 'Launch the workspace and start capturing records right away.' },
+  { title: 'Run your team', description: 'Keep improving the workflow as your process becomes clearer.' },
 ]
 
 const BENEFITS = [
   { icon: Database, title: 'Hosted workspaces', description: 'Start with a live workspace instead of setting up servers first.' },
-  { icon: Workflow, title: 'Workspace provisioning', description: 'Create the app, database, admin account, and runtime path from onboarding.' },
+  { icon: Workflow, title: 'Workspace provisioning', description: 'Create the app, database, admin account, and first workflow from onboarding.' },
   { icon: Mail, title: 'Operational support', description: 'Use managed cloud when your team wants help running the software.' },
   { icon: ShieldCheck, title: 'Ownership path remains open', description: 'Keep the open-source engine and self-hosting path available.' },
 ]
@@ -27,7 +27,7 @@ export default function CloudPage() {
           Managed Kora for teams that want to go live fast.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Hosted workspaces, onboarding, provisioning, and operational support for teams that want a working business app without setting up infrastructure first.
+          Hosted workspaces, onboarding, provisioning, and support for teams that want a working business app without setting up infrastructure first.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
@@ -54,11 +54,11 @@ export default function CloudPage() {
 
       <section className="space-y-6">
         <div className="max-w-2xl">
-          <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
+            <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
             What managed cloud handles
           </h2>
           <p className="text-lg leading-7 text-[#5d5f5f]">
-            Kora Cloud handles the operational work around hosted workspaces so your team can focus on the business process.
+            Kora Cloud handles the setup and support around hosted workspaces so your team can focus on the business process.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-4">

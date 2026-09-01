@@ -5,8 +5,8 @@ export default function AIBuilderRoute() {
   return (
     <>
       <Seo
-        title="Kora AI Builder — Describe your workflow and create an app"
-        description="Use plain English to create app structure for business workflows, forms, data models, permissions, and approvals."
+        title="Kora AI Builder — Describe the work and create the app"
+        description="Use plain English to create app structure for business workflows, forms, records, permissions, and approvals."
         path="/ai-builder"
         jsonLd={{
           '@context': 'https://schema.org',

@@ -3,23 +3,23 @@ import { Scale, Server, Database, GitBranch } from 'lucide-react'
 const TRUST_ITEMS = [
   {
     icon: Scale,
-    title: 'AGPL-3.0',
-    description: 'Free for commercial use, forever.',
+    title: 'Open source',
+    description: 'Inspect, modify, and run Kora on your own terms.',
   },
   {
     icon: Server,
     title: 'Self-Host Anywhere',
-    description: 'Deploy to AWS, GCP, or your own metal.',
+    description: 'Deploy to AWS, GCP, or your own infrastructure.',
   },
   {
     icon: Database,
     title: 'Direct SQL Access',
-    description: 'No proprietary formats. MySQL or LibSQL — your choice.',
+    description: 'No proprietary format. Your data stays in SQL.',
   },
   {
     icon: GitBranch,
-    title: 'Git-Ops Ready',
-    description: 'Manage your schema as code in version control.',
+    title: 'Git-friendly',
+    description: 'Keep schema and app changes in version control.',
   },
 ]
 
@@ -28,10 +28,10 @@ export function BuiltForOwnership() {
     <section className="bg-[#f1edec] py-[120px]">
       <div className="max-w-[960px] mx-auto px-6 text-center">
         <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-6 md:mb-8 tracking-[-0.02em] md:tracking-[-0.03em]">
-          Built for Ownership
+          Built for ownership
         </h2>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-[120px]">
-          We believe you should own your infrastructure. Kora is designed for maximum portability and developer control.
+          Kora is designed so teams can start fast without giving up control of their app, data, or deployment path.
         </p>
         <div className="grid md:grid-cols-4 gap-6">
           {TRUST_ITEMS.map((item) => (

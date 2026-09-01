@@ -5,8 +5,8 @@ export default function HomeRoute() {
   return (
     <>
       <Seo
-        title="Kora — Get a custom business app. No coding."
-        description="Describe your work and Kora builds it — forms, database, workflows. 9 templates to start from. No credit card required."
+        title="Kora — Turn requests into a working app"
+        description="Describe the work your team already does and Kora turns it into records, forms, workflows, and a live workspace. Start free."
         path="/"
         jsonLd={[
           {
@@ -22,8 +22,8 @@ export default function HomeRoute() {
             '@context': 'https://schema.org',
             '@type': 'FAQPage',
             mainEntity: [
-              { '@type': 'Question', name: 'What is Kora?', acceptedAnswer: { '@type': 'Answer', text: 'Kora is a platform for creating custom business apps from plain English workflows.' } },
-              { '@type': 'Question', name: 'What can I build with Kora?', acceptedAnswer: { '@type': 'Answer', text: 'Teams can build CRM, inventory, fieldwork, invoicing, helpdesk, property management, and other internal business apps.' } },
+              { '@type': 'Question', name: 'What is Kora?', acceptedAnswer: { '@type': 'Answer', text: 'Kora is a platform for turning everyday business requests into records, workflows, and a working app.' } },
+              { '@type': 'Question', name: 'What can I build with Kora?', acceptedAnswer: { '@type': 'Answer', text: 'Teams can build CRMs, internal tools, client portals, intake systems, approvals, and other operational workspaces.' } },
               { '@type': 'Question', name: 'Can I self-host Kora?', acceptedAnswer: { '@type': 'Answer', text: 'Yes. Kora has an open-source engine and a managed cloud option.' } },
             ],
           },

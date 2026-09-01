@@ -2,27 +2,27 @@ import { ArrowRight, MessageSquareText, Sparkles, Workflow, Table2 } from 'lucid
 import { Link } from '@tanstack/react-router'
 
 const EXAMPLES = [
-  'Prompt: Create a CRM for our sales team',
-  'Output: Customers, deals, activities, and pipelines',
+  'Prompt: Track client requests for our team',
+  'Output: Intake form, status board, and follow-up workflow',
   'Prompt: Add approvals for purchase requests',
-  'Output: Request, approval, and status workflow',
+  'Output: Request, approval, and status flow',
 ]
 
 const CAPABILITIES = [
   {
     icon: Workflow,
     title: 'Workflows',
-    description: 'Describe approvals, state changes, and handoffs in plain English.',
+    description: 'Describe approvals, handoffs, and next steps in plain English.',
   },
   {
     icon: Table2,
-    title: 'Data model',
-    description: 'Generate tables, fields, and relationships from business language.',
+    title: 'Records',
+    description: 'Turn business language into the records your team actually uses.',
   },
   {
     icon: Sparkles,
-    title: 'Admin UI',
-    description: 'Create forms, lists, and dashboards from the same description.',
+    title: 'Workspace UI',
+    description: 'Create forms, lists, and dashboards from the same request.',
   },
 ]
 
@@ -33,17 +33,16 @@ export function AISection() {
         <div className="md:col-span-2">
           <div className="inline-flex items-center gap-2 text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono mb-4">
             <MessageSquareText className="h-3.5 w-3.5" />
-            AI Builder
+            AI workspace builder
           </div>
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
-            Tell it what you need.<br />Watch it build.
+            Say what the team needs.<br />Get a working workspace.
           </h2>
           <p className="text-lg leading-7 text-[#444748] mb-6">
-            "Track our sales team deals." "Add stock alerts when we run low."
-            Just say what you want — Kora builds the screens, database, everything.
+            "Track client requests." "Add approvals for purchases." Just describe the work and Kora builds the structure around it.
           </p>
           <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
-            Try the builder
+            Start from a template
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>

@@ -1,29 +1,29 @@
 const PROBLEMS = [
   {
     title: 'Spreadsheets',
-    subtitle: '"Someone deleted the formula again"',
+    subtitle: '"The sheet is not the system."',
     items: [
-      'One wrong edit breaks everything',
-      'No way to control who sees what',
-      'Can\'t connect to anything else',
+      'One wrong edit breaks the record',
+      'Permissions are hard to manage',
+      'The work never becomes a workflow',
     ],
   },
   {
     title: 'Ready-made apps',
-    subtitle: '"It almost fits, but not quite"',
+    subtitle: '"We keep changing our process to fit the tool."',
     items: [
-      'You bend your process to fit the tool',
-      'Per-person pricing adds up fast',
-      'Your data lives on their servers',
+      'Your process bends to the product',
+      'Per-user pricing gets expensive',
+      'Your data sits in someone else\'s system',
     ],
   },
   {
     title: 'Custom software',
-    subtitle: '"They quoted us months and a fortune"',
+    subtitle: '"We still need something now."',
     items: [
-      'Takes months, not days',
-      'One change costs extra',
-      'Need a developer on speed dial',
+      'Takes months to launch',
+      'Each change adds more work',
+      'You depend on developers for every update',
     ],
   },
 ]
@@ -33,10 +33,10 @@ export function ProblemSection() {
     <section className="max-w-[960px] mx-auto px-6 py-[120px]">
       <div className="text-center mb-20">
         <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold mb-4 tracking-[-0.02em] md:tracking-[-0.03em]">
-          What you're using now. And why it slows you down.
+          What teams use now. And why it slows the work down.
         </h2>
         <p className="text-lg text-[#5d5f5f] max-w-xl mx-auto">
-          When the work is real, spreadsheets break, generic apps bend your process, and custom builds take too long.
+          When the work is real, spreadsheets break, generic apps force compromises, and custom builds take too long.
         </p>
       </div>
 
@@ -72,7 +72,7 @@ export function ProblemSection() {
       </div>
 
       <p className="text-center text-sm text-[#5d5f5f] mt-12 font-mono">
-        Kora is the middle ground. Start in minutes. Change anything. No developer needed.
+        Kora is the practical middle ground. Start in minutes, change the workflow, and keep ownership.
       </p>
     </section>
   )

@@ -5,8 +5,8 @@ export default function CloudRoute() {
   return (
     <>
       <Seo
-        title="Kora Cloud — Managed business app workspaces"
-        description="Managed Kora workspaces for teams that want to go live fast without setting up infrastructure first."
+        title="Kora Cloud — Managed workspaces for business apps"
+        description="Managed Kora workspaces for teams that want to capture records, route requests, and run workflows without setup work first."
         path="/cloud"
         jsonLd={{
           '@context': 'https://schema.org',

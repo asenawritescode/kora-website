@@ -27,10 +27,10 @@ export default function OpenSourcePage() {
           Open Source
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Open-source app engine for custom business software.
+          Open-source engine for records, workflows, and business apps.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Kora gives technical teams a self-hostable engine for databases, APIs, admin UI, workflows, permissions, and extensions.
+          Kora gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
           <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
@@ -66,9 +66,9 @@ export default function OpenSourcePage() {
       <section>
         <div className="max-w-2xl mb-8">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
-            Developer capabilities
-          </h2>
-          <p className="text-lg leading-7 text-[#5d5f5f]">
+          Developer capabilities
+        </h2>
+        <p className="text-lg leading-7 text-[#5d5f5f]">
             The technical details live here, where developers and technical buyers can evaluate the engine properly.
           </p>
         </div>

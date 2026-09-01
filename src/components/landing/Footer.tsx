@@ -25,7 +25,7 @@ export function Footer() {
             Kora
           </span>
           <p className="text-xs text-[#5d5f5f] mt-auto font-mono">
-            Built for ownership.
+            Records, workflows, and ownership.
           </p>
         </div>
 
