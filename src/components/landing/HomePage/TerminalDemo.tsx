@@ -26,7 +26,7 @@ export function TerminalDemo() {
 
         <div className="pt-4 border-t border-code-border">
           <span className="text-code-muted">$ </span>
-          <span className="text-accent">open</span>
+          <span className="text-code-accent">open</span>
           <span className="text-code-ink"> http://localhost:8000/console</span>
         </div>
 

@@ -19,22 +19,22 @@ export default function CloudPage() {
   return (
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
       <header className="pt-8 space-y-4">
-        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
+        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
           <Cloud className="h-3.5 w-3.5" />
           {BRAND} Cloud
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
           Managed {BRAND} for teams that do not want to run their own server.
         </h1>
-        <p className="text-lg leading-7 text-[#444748] max-w-2xl">
+        <p className="text-lg leading-7 text-on-surface-variant max-w-2xl">
           Hosted workspaces with onboarding and provisioning, so you do not set up infrastructure first.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
+          <Link to="/onboard" className="inline-flex items-center gap-2 bg-accent text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors font-mono">
             Start onboarding
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/pricing" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
+          <Link to="/pricing" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
             View pricing
           </Link>
         </div>
@@ -42,12 +42,12 @@ export default function CloudPage() {
 
       <section className="grid md:grid-cols-2 gap-4">
         {STEPS.map((step, index) => (
-          <div key={step.title} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-            <div className="text-[10px] font-medium text-[#FF6B35] uppercase tracking-wider font-mono mb-3">
+          <div key={step.title} className="bg-white border border-outline-variant p-6 rounded-sm">
+            <div className="text-[10px] font-medium text-accent uppercase tracking-wider font-mono mb-3">
               Step {index + 1}
             </div>
             <h2 className="text-2xl font-semibold text-black mb-2">{step.title}</h2>
-            <p className="text-sm text-[#5d5f5f]">{step.description}</p>
+            <p className="text-sm text-muted">{step.description}</p>
           </div>
         ))}
       </section>
@@ -57,16 +57,16 @@ export default function CloudPage() {
             <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
             What managed cloud handles
           </h2>
-          <p className="text-lg leading-7 text-[#5d5f5f]">
+          <p className="text-lg leading-7 text-muted">
             {BRAND} Cloud handles the setup of hosted workspaces so your team can focus on the business process.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
           {BENEFITS.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="bg-[#f1edec] border border-[#e5e5e5] p-6 rounded-sm">
-              <Icon className="h-6 w-6 text-[#FF6B35] mb-4" />
+            <div key={title} className="bg-surface-container border border-outline-variant p-6 rounded-sm">
+              <Icon className="h-6 w-6 text-accent mb-4" />
               <h3 className="text-lg font-semibold text-black mb-2">{title}</h3>
-              <p className="text-sm text-[#444748]">{description}</p>
+              <p className="text-sm text-on-surface-variant">{description}</p>
             </div>
           ))}
         </div>

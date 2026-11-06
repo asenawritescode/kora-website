@@ -7,9 +7,10 @@
     "validate:claims": "bun scripts/check-claims.ts",
     "validate:links": "bun scripts/check-links.ts",
     "validate:contrast": "bun scripts/contrast.ts",
+    "validate:tokens": "bun scripts/check-tokens.ts",
     "validate:seo": "bun scripts/check-seo.ts",
     "og:image": "bun scripts/generate-og-image.ts",
-    "build": "bun run validate:claims && bun run validate:links && bun run validate:contrast && tsc -b && vite build && bun run validate:seo",
+    "build": "bun run validate:claims && bun run validate:links && bun run validate:contrast && bun run validate:tokens && tsc -b && vite build && bun run validate:seo",
     "preview": "vite preview",
     "test": "bun test"
   },
