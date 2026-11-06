@@ -1,5 +1,6 @@
 import { Maximize2, Minimize2, X } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { BRAND } from '@/lib/brand'
 
 export function WorkspacePreview() {
   const [open, setOpen] = useState(false)
@@ -24,11 +25,11 @@ export function WorkspacePreview() {
         type="button"
         onClick={() => setOpen(true)}
         className="group relative block max-w-5xl mx-auto overflow-hidden rounded-sm border border-[#333] bg-black shadow-2xl text-left"
-        aria-label="Open larger Kora workspace preview"
+        aria-label={`Open larger ${BRAND} workspace preview`}
       >
         <img
           src="/workspace-preview.png"
-          alt="Kora workspace dashboard showing modules, workspace search, and task cards"
+          alt={`${BRAND} workspace dashboard showing modules, workspace search, and task cards`}
           className="block w-full h-auto transition-transform duration-300 group-hover:scale-[1.01]"
         />
         <span className="absolute right-3 bottom-3 inline-flex items-center gap-2 rounded-sm bg-black/80 px-3 py-2 text-[10px] font-medium text-white uppercase tracking-wider font-mono opacity-95 transition-opacity group-hover:opacity-100">
@@ -42,7 +43,7 @@ export function WorkspacePreview() {
           className="fixed inset-0 z-[100] bg-black/95 p-4 md:p-8"
           role="dialog"
           aria-modal="true"
-          aria-label="Kora workspace image viewer"
+          aria-label={`${BRAND} workspace image viewer`}
         >
           <button
             type="button"
@@ -68,7 +69,7 @@ export function WorkspacePreview() {
             <div className={`flex min-h-full ${zoomed ? 'items-start justify-start pt-16' : 'items-center justify-center'}`}>
               <img
                 src="/workspace-preview.png"
-                alt="Kora workspace dashboard showing modules, workspace search, and task cards"
+                alt={`${BRAND} workspace dashboard showing modules, workspace search, and task cards`}
                 className={`h-auto rounded-sm border border-[#333] ${
                   zoomed
                     ? 'max-w-none w-[1200px] md:w-[1800px]'

@@ -1,5 +1,6 @@
 import { ArrowRight, BadgeCheck, CreditCard } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import { BRAND } from '@/lib/brand'
 
 const PLANS = [
   {
@@ -58,7 +59,7 @@ export default function PricingPage() {
 
       <section className="flex flex-wrap items-center gap-3">
         <Link to="/cloud" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
-          View Kora Cloud
+          View {BRAND} Cloud
           <ArrowRight className="h-4 w-4" />
         </Link>
         <Link to="/onboard" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">

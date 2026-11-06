@@ -7,6 +7,7 @@ import { ExtensibilitySection } from './ExtensibilitySection'
 import { SdkSection } from './SdkSection'
 import { CliCommandsSection } from './CliCommandsSection'
 import { DeploymentSection } from './DeploymentSection'
+import { BRAND } from '@/lib/brand'
 
 export default function DocsPage() {
   return (
@@ -24,7 +25,7 @@ export default function DocsPage() {
           Documentation
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-xl">
-          Technical documentation for building, extending, deploying, and self-hosting Kora.
+          Technical documentation for building, extending, deploying, and self-hosting {BRAND}.
         </p>
         <div className="flex flex-wrap gap-3 mt-6">
           <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono">

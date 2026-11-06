@@ -5,6 +5,7 @@ import { Link } from '@tanstack/react-router'
 import { ArrowRight, Database, FileText, KeyRound, Plug, Workflow } from 'lucide-react'
 import { useTemplates } from '@/lib/use-templates'
 import { PreviewLabel, TemplateEmpty, TemplateError, TemplateSkeleton } from '@/components/landing/ExamplesPage/TemplateStatus'
+import { BRAND } from '@/lib/brand'
 
 const CREATED = [
   { icon: FileText, title: 'Forms', description: 'Clean screens for capturing the records your team already works with.' },
@@ -77,12 +78,12 @@ export default function HomePage() {
               Start hosted. Keep ownership.
             </h2>
             <p className="text-lg leading-7 text-[#444748]">
-              Use Kora Cloud when you want a workspace quickly. Explore open source when your team wants the technical details.
+              Use {BRAND} Cloud when you want a workspace quickly. Explore open source when your team wants the technical details.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
             <Link to="/onboard" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
-              <h3 className="text-2xl font-semibold text-black mb-2">Start on Kora Cloud</h3>
+              <h3 className="text-2xl font-semibold text-black mb-2">Start on {BRAND} Cloud</h3>
               <p className="text-sm text-[#5d5f5f] mb-4">Create a workspace, invite your team, and start shaping your app today.</p>
               <span className="text-xs font-medium text-[#FF6B35] font-mono">Start free →</span>
             </Link>

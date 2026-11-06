@@ -1,0 +1,44 @@
+import { expect, test } from 'bun:test'
+import { readFileSync } from 'node:fs'
+import { join } from 'node:path'
+import { legacyNameLines } from './brand-rules'
+import { BRAND, BRAND_BY_PUBLISHER, PUBLISHER } from '../src/lib/brand'
+
+const root = join(import.meta.dir, '..')
+
+test.each([
+  ['<p>Kora is open source</p>', [1]],
+  ['<p>Kora Cloud</p>', [1]],
+  ["title: 'Kora — Pricing'", [1]],
+  ['docker run smitdockerhub/kora', []],
+  ['KORA_DB_TYPE=mysql', []],
+  ['https://kora.mradiafrica.com', []],
+  ['KoraClient', []],
+  ['Kora-Signature: t=1', []],
+  ['Kigae by Senumi', []],
+])('legacy name check: %s', (text, expected) => {
+  expect(legacyNameLines(text)).toEqual(expected)
+})
+
+test('claims-ok on the same or previous line allows the legacy name', () => {
+  expect(legacyNameLines('Kora // claims-ok: quoted partner name')).toEqual([])
+  expect(legacyNameLines('// claims-ok: quoted partner name\nKora')).toEqual([])
+  expect(legacyNameLines('// claims-ok: x\n\nKora')).toEqual([3])
+})
+
+test('brand constants', () => {
+  expect(BRAND).toBe('Kigae')
+  expect(PUBLISHER).toBe('Senumi')
+  expect(BRAND_BY_PUBLISHER).toBe('Kigae by Senumi')
+})
+
+test('the static HTML shell uses the brand constant value', () => {
+  const html = readFileSync(join(root, 'index.html'), 'utf8')
+  expect(html).toContain(`<title>${BRAND} `)
+  expect(html).toContain(`og:title" content="${BRAND} `)
+})
+
+test('the claims script passes on the tree', () => {
+  const ok = Bun.spawnSync(['bun', join(root, 'scripts/check-claims.ts')])
+  expect(ok.exitCode).toBe(0)
+})

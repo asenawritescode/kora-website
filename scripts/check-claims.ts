@@ -3,6 +3,7 @@
 // A line is allowed only if it carries `claims-ok:` with a link to evidence.
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
+import { legacyNameLines } from './brand-rules'
 
 const root = join(import.meta.dir, '..')
 
@@ -45,6 +46,17 @@ for (const file of walk(join(root, 'src'))) {
       if (ban.pattern.test(line)) hits.push(`src/${rel}:${i + 1}: ${ban.pattern} (${ban.why})\n    ${line.trim()}`)
     }
   })
+}
+
+// The old product name, in src/ and the static HTML shell.
+const brandFiles = [...walk(join(root, 'src')), join(root, 'index.html')]
+for (const file of brandFiles) {
+  if (/\.test\.tsx?$/.test(file) || file.includes('__fixtures__')) continue
+  const text = readFileSync(file, 'utf8')
+  const lines = text.split('\n')
+  for (const n of legacyNameLines(text)) {
+    hits.push(`${relative(root, file)}:${n}: legacy product name "Kora" (use BRAND from src/lib/brand.ts, or add claims-ok: <reason>)\n    ${lines[n - 1].trim()}`)
+  }
 }
 
 if (hits.length) {
