@@ -1,4 +1,5 @@
 import { HeroSection } from './HeroSection'
+import { ModulePicker } from './ModulePicker'
 import { ProblemSection } from './ProblemSection'
 import { FinalCTA } from './FinalCTA'
 import { Link } from '@tanstack/react-router'
@@ -20,6 +21,7 @@ export default function HomePage() {
   return (
     <>
       <HeroSection />
+      <ModulePicker />
       <section className="max-w-[960px] mx-auto px-6 py-[120px]">
         <div className="max-w-2xl mb-12">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">

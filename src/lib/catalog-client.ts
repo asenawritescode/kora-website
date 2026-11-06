@@ -4,6 +4,7 @@
 export type Availability = 'available' | 'preview'
 
 export interface CatalogComponent {
+  id?: string
   name: string
   summary: string
   selection: string
@@ -57,6 +58,7 @@ function parseComponent(raw: unknown): CatalogComponent | null {
   const level = levelOf(raw.availability)
   if (!name || level === 'hidden') return null
   return {
+    id: text(raw.release_id) || undefined,
     name,
     summary: text(raw.summary),
     selection: text(raw.selection) || 'required',

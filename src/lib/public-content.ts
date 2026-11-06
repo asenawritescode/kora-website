@@ -42,15 +42,20 @@ type CmsBlogPost = {
   heroImage?: string
 }
 
-let templatesCache: Promise<Template[]> | null = null
+let catalogCache: Promise<CatalogTemplate[]> | null = null
 let blogPostsCache: Promise<Article[]> | null = null
 let blogPostCache = new Map<string, Promise<Article | null>>()
 
 // Templates come from the Cloud catalog. A failed load is not cached, so a retry refetches.
+// One request serves the template shelf and the module picker.
+export function getCatalogTemplates(): Promise<CatalogTemplate[]> {
+  catalogCache ??= fetchTemplates()
+  catalogCache.catch(() => { catalogCache = null })
+  return catalogCache
+}
+
 export function getPublicTemplates(): Promise<Template[]> {
-  templatesCache ??= fetchTemplates().then((items) => items.map(toTemplate))
-  templatesCache.catch(() => { templatesCache = null })
-  return templatesCache
+  return getCatalogTemplates().then((items) => items.map(toTemplate))
 }
 
 export function getPublicBlogPosts(): Promise<Article[]> {
