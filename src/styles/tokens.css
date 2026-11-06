@@ -1,11 +1,14 @@
 /* The only place colours are defined: components use the utilities these
-   generate (text-ink, bg-paper, text-accent ...), never a hex value. After
-   editing, run `bun run validate:contrast`: it reads the colours and the
-   `pair:` lines below and fails when a text pair is under WCAG AA.
-   Format: pair: <fg> on <bg> [min <ratio>]. Default 4.5; `min 3` for rings, icons.
+   generate (text-ink, bg-paper, text-accent, bg-night ...), never a hex value.
+   DESIGN.md explains each colour and where it may be used. After editing, run
+   `bun run validate:contrast`: it reads the colours and the `pair:` lines
+   below and fails when a text pair is under WCAG AA.
+   Format: pair: <fg> on <bg> [min <ratio>]. Default 4.5; `min 3` for rings, icons, line art.
 
+   Day surfaces (paper, sand, white)
    pair: ink on paper
    pair: ink on surface-container
+   pair: ink on white
    pair: black on paper
    pair: black on surface-container
    pair: on-surface-variant on paper
@@ -13,11 +16,31 @@
    pair: muted on paper
    pair: muted on surface-container
    pair: muted on white
+   pair: muted on accent-tint
+   pair: ink on accent-tint
    pair: accent on paper
    pair: accent on white
+   pair: accent-strong on accent-tint
    pair: white on accent
    pair: white on accent-strong
    pair: white on black
+   pair: white on ink
+   pair: ink on gold
+
+   Night surfaces (the skyline band, footer)
+   pair: night-ink on night
+   pair: night-muted on night
+   pair: night-ink on night-raised
+   pair: night-muted on night-raised
+   pair: accent-on-night on night
+   pair: accent-on-night on night-raised
+   pair: night on accent-on-night
+   pair: gold on night
+   pair: gold on night-raised
+   pair: night on gold
+   pair: accent on night min 3
+
+   Code panels
    pair: code-ink on code
    pair: code-accent on code
    pair: accent on accent-tint
@@ -30,16 +53,31 @@
 @theme static {
   --color-white: #ffffff;
   --color-black: #000000;
-  --color-paper: #fdf8f8;
-  --color-surface-container: #f1edec;
-  --color-ink: #1c1b1b;
-  --color-on-surface-variant: #444748;
-  --color-muted: #5d5f5f;
-  --color-outline-variant: #e5e5e5;
-  /* Brand accent: DESIGN.md placeholder until the new palette lands. */
+
+  /* Day: warm paper, sand panels, near-black ink. */
+  --color-paper: #f7f3ec;
+  --color-surface-container: #ede6da;
+  --color-ink: #16130f;
+  --color-on-surface-variant: #3f3a33;
+  --color-muted: #5c554c;
+  /* Rules and dividers only, never text. */
+  --color-outline-variant: #d9d0c2;
+
+  /* Red ochre: the one action colour on day surfaces. */
   --color-accent: #c84018;
-  --color-accent-strong: #a8350f;
-  --color-accent-tint: #fff3ec;
+  --color-accent-strong: #a3360f;
+  --color-accent-tint: #fef3ed;
+
+  /* Night: the skyline band and footer. */
+  --color-night: #12161b;
+  --color-night-raised: #1c2128;
+  --color-night-ink: #f4efe6;
+  --color-night-muted: #b4ada3;
+  /* Red ochre lifted for text and actions on night. */
+  --color-accent-on-night: #f08a5d;
+  /* Savanna gold: the skyline line and small highlights; ink text on gold. */
+  --color-gold: #e3a13a;
+
   /* Dark code panels. */
   --color-code: #0a0a0a;
   --color-code-ink: #e5e5e5;
