@@ -1,8 +1,5 @@
 import { useEffect } from 'react'
-
-const DEFAULT_SITE_URL = 'https://kora.mradiafrica.com'
-
-type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue }
+import { OG_IMAGE_ALT, OG_IMAGE_PATH, siteUrlFrom } from '@/lib/seo-routes'
 
 type SeoProps = {
   title: string
@@ -10,12 +7,12 @@ type SeoProps = {
   path?: string
   canonical?: string
   noindex?: boolean
-  jsonLd?: JsonValue | JsonValue[]
+  jsonLd?: object | object[]
   image?: string
 }
 
 function getSiteUrl() {
-  return (import.meta.env.VITE_KORA_SITE_URL as string | undefined)?.replace(/\/$/, '') || DEFAULT_SITE_URL
+  return siteUrlFrom(import.meta.env.VITE_KORA_SITE_URL as string | undefined)
 }
 
 function resolveUrl(siteUrl: string, value?: string) {
@@ -48,7 +45,7 @@ function upsertLink(rel: string, href: string) {
   el.href = href
 }
 
-function upsertJsonLd(id: string, data?: JsonValue | JsonValue[]) {
+function upsertJsonLd(id: string, data?: object | object[]) {
   const existing = document.head.querySelector<HTMLScriptElement>(`script[data-seo-id="${id}"]`)
   if (!data) {
     existing?.remove()
@@ -65,7 +62,7 @@ function removeMeta(selector: string) {
   document.head.querySelector<HTMLMetaElement>(selector)?.remove()
 }
 
-export function Seo({ title, description, path, canonical, noindex, jsonLd, image }: SeoProps) {
+export function Seo({ title, description, path, canonical, noindex, jsonLd, image = OG_IMAGE_PATH }: SeoProps) {
   useEffect(() => {
     const siteUrl = getSiteUrl()
     const url = canonical || (path ? `${siteUrl}${path.startsWith('/') ? path : `/${path}`}` : siteUrl)
@@ -79,7 +76,7 @@ export function Seo({ title, description, path, canonical, noindex, jsonLd, imag
     upsertMeta('meta[property="og:type"]', { property: 'og:type', content: path?.startsWith('/blog/') ? 'article' : 'website' })
     if (imageUrl) {
       upsertMeta('meta[property="og:image"]', { property: 'og:image', content: imageUrl })
-      upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: title })
+      upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: image === OG_IMAGE_PATH ? OG_IMAGE_ALT : title })
     } else {
       removeMeta('meta[property="og:image"]')
       removeMeta('meta[property="og:image:alt"]')
@@ -92,7 +89,8 @@ export function Seo({ title, description, path, canonical, noindex, jsonLd, imag
     } else {
       removeMeta('meta[name="twitter:image"]')
     }
-    upsertLink('canonical', url)
+    if (noindex) document.head.querySelector('link[rel="canonical"]')?.remove()
+    else upsertLink('canonical', url)
 
     if (noindex) {
       upsertMeta('meta[name="robots"]', { name: 'robots', content: 'noindex,nofollow' })

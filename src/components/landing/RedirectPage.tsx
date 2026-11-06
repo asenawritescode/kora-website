@@ -1,4 +1,5 @@
 import { Navigate } from '@tanstack/react-router'
+import { BRAND } from '@/lib/brand'
 import { Seo } from './Seo'
 
 // Shown for a moment when a removed URL is opened inside the app. nginx answers
@@ -6,7 +7,7 @@ import { Seo } from './Seo'
 export default function RedirectPage({ to }: { to: string }) {
   return (
     <>
-      <Seo title="Kora" description="This page has moved." noindex />
+      <Seo title={BRAND} description="This page has moved." noindex />
       <Navigate to={to} replace />
     </>
   )
