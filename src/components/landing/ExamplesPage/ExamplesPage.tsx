@@ -32,7 +32,7 @@ export default function ExamplesPage() {
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-4 tracking-[-0.03em] md:tracking-[-0.04em]">
           Templates
         </h1>
-        <p className="text-lg leading-7 text-[#5d5f5f] max-w-2xl mx-auto">
+        <p className="text-lg leading-7 text-muted max-w-2xl mx-auto">
           Starting points for your shop. Each one lists what it includes before you sign up.
         </p>
       </div>
@@ -58,7 +58,7 @@ export default function ExamplesPage() {
               ))}
             </div>
           ) : (
-            <p className="text-sm text-[#5d5f5f]">No templates match the current filters.</p>
+            <p className="text-sm text-muted">No templates match the current filters.</p>
           )}
         </>
       )}

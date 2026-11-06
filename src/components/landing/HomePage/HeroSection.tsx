@@ -9,20 +9,20 @@ export function HeroSection() {
         Turn requests into a working app.<br />Keep records, workflows, and approvals together.
       </h1>
       <div className="mb-6">
-        <span className="inline-block text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
+        <span className="inline-block text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
         Build from business language
         </span>
       </div>
-      <p className="text-lg leading-7 text-[#444748] max-w-xl mx-auto mb-2">
+      <p className="text-lg leading-7 text-on-surface-variant max-w-xl mx-auto mb-2">
         Open-source software for keeping records, workflows, and approvals in one place.
       </p>
-      <p className="text-sm text-[#8E8E8E] max-w-xl mx-auto mb-8">
+      <p className="text-sm text-muted max-w-xl mx-auto mb-8">
         Start from a template or from a blank workspace. No credit card required.
       </p>
 
       {/* CTAs */}
       <div className="flex justify-center items-center gap-4 mb-8">
-        <Link to="/onboard" className="bg-[#FF6B35] text-white text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-[#E55B25] transition-colors font-mono">
+        <Link to="/onboard" className="bg-accent text-white text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-accent-strong transition-colors font-mono">
           Start onboarding
           <ArrowRight className="h-4 w-4" />
         </Link>
@@ -33,7 +33,7 @@ export function HeroSection() {
       </div>
 
       {/* Trust signals */}
-      <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#5d5f5f] mb-16 md:mb-[120px] flex-wrap font-mono">
+      <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-muted mb-16 md:mb-[120px] flex-wrap font-mono">
         <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>No credit card</span></div>
         <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source (AGPL-3.0)</span></div>
         <div className="flex items-center gap-2"><Cloud className="h-4 w-4" /><span>Managed cloud</span></div>
