@@ -5,8 +5,8 @@ export default function OnboardRoute() {
   return (
     <>
       <Seo
-        title="Create your Kora workspace"
-        description="Create a real Kora workspace with an admin account, forms, database, workflows, API, and AI assistance."
+        title="Set up your shop on Kigae Cloud"
+        description="Create a Kigae Cloud account to set up your shop. Kigae records cash sales and stock."
         path="/onboard"
       />
       <OnboardPage />
