@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import type { Template } from './data'
 import { PreviewLabel } from './TemplateStatus'
 
@@ -29,9 +30,9 @@ export function TemplateCard({ template }: { template: Template }) {
             </li>
           ))}
         </ul>
-        <a href={`/onboard?template=${template.slug}`} className="inline-block mt-4 text-sm font-semibold text-accent">
-          Start with this →
-        </a>
+        <Link to="/templates/$slug" params={{ slug: template.slug }} className="mt-2 inline-flex min-h-12 items-center text-sm font-semibold text-accent underline underline-offset-4">
+          See what {template.name} includes
+        </Link>
       </div>
     </div>
   )

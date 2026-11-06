@@ -1,6 +1,6 @@
 import type { Template } from '@/components/landing/ExamplesPage/data'
 import type { Article } from '@/components/landing/BlogPage/data'
-import { fetchTemplates, type CatalogTemplate } from '@/lib/catalog-client'
+import { fetchTemplate, fetchTemplates, type CatalogTemplate, type CatalogTemplateDetail } from '@/lib/catalog-client'
 import { BRAND } from '@/lib/brand'
 
 const publicContentBaseURL = (
@@ -52,6 +52,18 @@ export function getCatalogTemplates(): Promise<CatalogTemplate[]> {
   catalogCache ??= fetchTemplates()
   catalogCache.catch(() => { catalogCache = null })
   return catalogCache
+}
+
+// One template page's data. Failures are not cached, so a retry refetches.
+const templateCache = new Map<string, Promise<CatalogTemplateDetail>>()
+export function getCatalogTemplate(slug: string): Promise<CatalogTemplateDetail> {
+  let request = templateCache.get(slug)
+  if (!request) {
+    request = fetchTemplate(slug)
+    templateCache.set(slug, request)
+    request.catch(() => templateCache.delete(slug))
+  }
+  return request
 }
 
 export function getPublicTemplates(): Promise<Template[]> {

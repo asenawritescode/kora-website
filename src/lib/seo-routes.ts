@@ -73,7 +73,7 @@ export const ROUTE_SEO: RouteSeo[] = [
   {
     path: '/onboard',
     title: `Set up your shop on ${BRAND} Cloud`,
-    description: `Create a ${BRAND} Cloud account to set up your shop. ${BRAND} records cash sales and stock.`,
+    description: `Create a ${BRAND} Cloud account to set up your shop. ${BRAND} records sales and stock.`,
     sitemap: true,
   },
   {

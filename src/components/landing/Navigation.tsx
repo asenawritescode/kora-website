@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
-import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { SignupLink } from '@/components/landing/SignupLink'
 import { BRAND } from '@/lib/brand'
 
 export function Navigation() {
@@ -19,7 +20,7 @@ export function Navigation() {
       <nav aria-label="Primary" className="max-w-[1200px] mx-auto px-4 sm:px-6 flex justify-between items-center h-[72px] gap-4">
         {/* Logo + Desktop Links */}
         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-          <Link to="/" className="font-display inline-flex min-h-11 items-center text-[26px] leading-[1] font-[800] text-ink tracking-[-0.03em] shrink-0">
+          <Link to="/" className="font-display inline-flex min-h-12 items-center text-[26px] leading-[1] font-[800] text-ink tracking-[-0.03em] shrink-0">
             {BRAND}
           </Link>
           <div className="hidden lg:flex items-center gap-1 xl:gap-2 min-w-0">
@@ -31,7 +32,7 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`inline-flex min-h-11 items-center text-sm font-medium px-3 transition-colors whitespace-nowrap ${
+                  className={`inline-flex min-h-12 items-center text-sm font-medium px-3 transition-colors whitespace-nowrap ${
                     isActive
                       ? 'text-ink underline decoration-accent decoration-2 underline-offset-[8px]'
                       : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
@@ -42,7 +43,7 @@ export function Navigation() {
               )
             })}
             <details className="relative">
-              <summary className="inline-flex min-h-11 items-center list-none cursor-pointer text-sm font-medium px-3 transition-colors whitespace-nowrap text-on-surface-variant hover:text-ink">
+              <summary className="inline-flex min-h-12 items-center list-none cursor-pointer text-sm font-medium px-3 transition-colors whitespace-nowrap text-on-surface-variant hover:text-ink">
                 Explore
               </summary>
               <div className="absolute left-0 mt-2 w-44 border border-outline-variant bg-paper py-2 z-20 shadow-[0_15px_38px_color-mix(in_srgb,var(--color-ink)_12%,transparent)]">
@@ -50,7 +51,7 @@ export function Navigation() {
                   <Link
                     key={link.label}
                     to={link.href}
-                    className={`flex min-h-11 items-center px-3 text-sm transition-colors ${
+                    className={`flex min-h-12 items-center px-3 text-sm transition-colors ${
                       currentPath.startsWith(link.href)
                         ? 'text-ink underline decoration-accent decoration-2 underline-offset-[8px]'
                         : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
@@ -66,17 +67,12 @@ export function Navigation() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center shrink-0">
-          <Link
-            to={CTA_LINK.href}
-            className="inline-flex min-h-11 items-center bg-accent text-white text-[15px] font-semibold px-5 hover:bg-accent-strong transition-colors whitespace-nowrap"
-          >
-            {CTA_LINK.label}
-          </Link>
+          <SignupLink className="inline-flex min-h-12 items-center bg-accent text-white text-[15px] font-semibold px-5 hover:bg-accent-strong transition-colors whitespace-nowrap" />
         </div>
 
         {/* Mobile hamburger — animated */}
         <button
-          className="lg:hidden group inline-flex min-h-11 min-w-11 items-center justify-center -mr-2 shrink-0"
+          className="lg:hidden group inline-flex min-h-12 min-w-12 items-center justify-center -mr-2 shrink-0"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -130,12 +126,7 @@ export function Navigation() {
                 </Link>
               )
             })}
-            <Link
-              to={CTA_LINK.href}
-              className="block w-full text-center bg-accent text-white text-sm font-medium px-4 py-3 mt-3 hover:bg-accent-strong"
-            >
-              {CTA_LINK.label}
-            </Link>
+            <SignupLink className="flex min-h-12 w-full items-center justify-center bg-accent text-white text-[15px] font-semibold px-4 mt-3 hover:bg-accent-strong" />
           </div>
         </div>
       )}

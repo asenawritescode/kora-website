@@ -1,3 +1,5 @@
+import { cloudSignupBase } from '@/lib/cloud-signup'
+
 const box = 'bg-white border border-outline-variant rounded-sm p-6 text-sm text-muted'
 const btn = 'text-sm font-semibold text-black underline underline-offset-4'
 
@@ -20,7 +22,7 @@ export function TemplateError({ onRetry }: { onRetry: () => void }) {
   return (
     <div className={box} role="alert">
       <p className="mb-3">We could not load templates.</p>
-      <button type="button" onClick={onRetry} className={btn}>Try again</button>
+      <button type="button" onClick={onRetry} className={`${btn} min-h-12`}>Try again</button>
     </div>
   )
 }
@@ -29,7 +31,7 @@ export function TemplateEmpty() {
   return (
     <div className={box}>
       <p className="mb-3">No templates are published yet.</p>
-      <a href="/onboard" className={btn}>Set up a blank workspace</a>
+      <a href={cloudSignupBase()} className={`${btn} inline-flex min-h-12 items-center`}>Set up a blank workspace</a>
     </div>
   )
 }

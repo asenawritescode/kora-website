@@ -39,6 +39,7 @@ function withLayout(loadLayout: () => Promise<{ default: ComponentType<{ childre
 
 const HomePage = inMarketing(() => import('@/routes/landing/home'))
 const ExamplesPage = inMarketing(() => import('@/routes/landing/examples'))
+const TemplateDetailPage = inMarketing(() => import('@/routes/landing/template-detail'))
 const OnboardPage = inMarketing(() => import('@/routes/landing/onboard'))
 const CloudPage = inMarketing(() => import('@/routes/landing/cloud'))
 const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
@@ -101,6 +102,12 @@ const examplesRoute = createRoute({
   component: ExamplesPage,
 })
 
+const templateDetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/templates/$slug',
+  component: TemplateDetailPage,
+})
+
 const docsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/docs',
@@ -127,6 +134,7 @@ const routeTree = rootRoute.addChildren([
   openSourceRoute,
   homeRoute,
   examplesRoute,
+  templateDetailRoute,
   docsRoute,
   blogRoute,
   blogPostRoute,

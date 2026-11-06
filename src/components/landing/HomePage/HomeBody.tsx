@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { BRAND } from '@/lib/brand'
-import { CTA_LINK } from '@/lib/site-links'
+import { SignupLink } from '@/components/landing/SignupLink'
 import { PRICE_LINE } from '@/lib/pilot'
 
 // Below the picker: what works today (real captures), how setup goes, where it
@@ -9,10 +9,10 @@ import { PRICE_LINE } from '@/lib/pilot'
 
 const h2 = 'font-display text-[clamp(32px,3.6vw,52px)] font-[740] leading-[1.02] tracking-[-0.025em] text-ink [text-wrap:balance]'
 const wrap = 'max-w-[1200px] mx-auto px-4 sm:px-6 py-[clamp(48px,6vw,88px)]'
-const textLink = 'inline-flex min-h-11 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-accent hover:decoration-2'
+const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-accent hover:decoration-2'
 
 const TODAY = [
-  ['Cash sales at the counter', 'Each sale gets a number, a total in KES and the till session it was rung up in.'],
+  ['Sales at the counter', 'Each sale gets a number, a total in KES and the till session it was rung up in. Cash is taken at the till; mobile-money payments are recorded by hand.'],
   ['Stock that moves with each sale', 'Every item has a count for each location and a reorder level, so low stock shows up.'],
   ['An owner dashboard', "Today's totals, recent sales, payments by method and items running low."],
   ['Your team, with set access', 'Invite staff and choose what each person can see and change.'],
@@ -32,7 +32,7 @@ export function HomeBody() {
           <div className="lg:col-span-5">
             <h2 id="today-title" className={h2}>What you get today</h2>
             <p className="mt-6 text-[16px] leading-[1.5] text-on-surface-variant">
-              Not supported yet: card and M-Pesa payments, receipt printers and eTIMS. During the pilot, {BRAND} records cash sales.
+              M-Pesa payments can be recorded by hand against a till or paybill number, but {BRAND} is not connected to M-Pesa. Card payments, receipt printers and eTIMS are not supported yet.
             </p>
           </div>
           <dl className="lg:col-span-7 border-t border-ink lg:mt-3">
@@ -64,7 +64,7 @@ export function HomeBody() {
             />
           </div>
           {/* Screens are real Studio captures of the Sell register. Retake both when the register changes. */}
-          <figcaption className="mt-3 text-[14px] text-muted">The register, on a tablet and on a phone. Taking cash is the only payment the pilot supports today.</figcaption>
+          <figcaption className="mt-3 text-[14px] text-muted">The register, on a tablet and on a phone.</figcaption>
         </figure>
       </section>
 
@@ -109,12 +109,7 @@ export function HomeBody() {
             </h2>
             <p className="mt-5 text-[16px] text-muted">{PRICE_LINE}</p>
           </div>
-          <Link
-            to={CTA_LINK.href}
-            className="inline-flex min-h-12 shrink-0 items-center self-start bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px md:self-auto"
-          >
-            {CTA_LINK.label}
-          </Link>
+          <SignupLink className="inline-flex min-h-12 shrink-0 items-center self-start bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px md:self-auto" />
         </div>
       </section>
     </>
