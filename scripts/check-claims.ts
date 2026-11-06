@@ -23,9 +23,8 @@ const BANNED: Ban[] = [
   { pattern: /Get a working workspace/, why: 'Signup gives a blank workspace' },
   { pattern: /Email support|Operational support|Priority support|Custom domain/, why: 'No support service or custom-domain feature is documented' },
   { pattern: /private (managed )?instance/i, why: 'No private instance offer exists' },
-  // Covered by #3 (onboarding page); remove the exception when that lands.
-  { pattern: /Your data lives in your own database/, why: 'Cloud hosts the data', exceptFiles: ['components/landing/OnboardPage.tsx'] },
-  { pattern: /open immediately/, why: 'The workspace opens after email confirmation', exceptFiles: ['components/landing/OnboardPage.tsx'] },
+  { pattern: /Your data lives in your own database/, why: 'Cloud hosts the data' },
+  { pattern: /open immediately/, why: 'The workspace opens after email confirmation' },
 ]
 
 // Pages that #12 deletes outright. Their copy is not edited here.
