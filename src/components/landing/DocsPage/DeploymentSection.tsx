@@ -70,7 +70,7 @@ export function DeploymentSection() {
       <h3 className="font-bold text-black mb-3">Database Options</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className="bg-[#FAFAFA] border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">MySQL 8.0 / MariaDB</h4>
+          <h4 className="font-bold text-black text-sm mb-1">MySQL 8.0</h4>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
             Each site gets its own database. Complete isolation. Best for multi-tenant production.
           </p>

@@ -1,9 +1,8 @@
 import { HeroSection } from './HeroSection'
-import { AISection } from './AISection'
 import { ProblemSection } from './ProblemSection'
 import { FinalCTA } from './FinalCTA'
 import { Link } from '@tanstack/react-router'
-import { ArrowRight, Bot, Database, FileText, KeyRound, Plug, Workflow } from 'lucide-react'
+import { ArrowRight, Database, FileText, KeyRound, Plug, Workflow } from 'lucide-react'
 import { useTemplates } from '@/lib/use-templates'
 import { PreviewLabel, TemplateEmpty, TemplateError, TemplateSkeleton } from '@/components/landing/ExamplesPage/TemplateStatus'
 
@@ -13,14 +12,6 @@ const CREATED = [
   { icon: Workflow, title: 'Workflows', description: 'Approvals, handoffs, and statuses that match how work moves.' },
   { icon: KeyRound, title: 'Users & Roles', description: 'Invite your team and control who can see or change each record.' },
   { icon: Plug, title: 'API', description: 'Connect other tools when the app becomes part of your wider workflow.' },
-  { icon: Bot, title: 'AI Assistant', description: 'Use plain English to create structures and work with records faster.' },
-]
-
-const STEPS = [
-  'Describe your workflow',
-  'Kora builds the app',
-  'Customize with AI',
-  'Invite your team',
 ]
 
 export default function HomePage() {
@@ -31,10 +22,10 @@ export default function HomePage() {
       <section className="max-w-[960px] mx-auto px-6 py-[120px]">
         <div className="max-w-2xl mb-12">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
-            What Kora creates for you
+            What is in every workspace
           </h2>
           <p className="text-lg leading-7 text-[#444748]">
-            Start with the workflow in your head. Kora turns it into the pieces a real business app needs.
+            Each workspace comes with the same building blocks. You shape them to fit your business.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
@@ -43,19 +34,6 @@ export default function HomePage() {
               <Icon className="h-6 w-6 text-[#FF6B35] mb-4" />
               <h3 className="text-lg font-semibold text-black mb-2">{title}</h3>
               <p className="text-sm text-[#5d5f5f]">{description}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-      <AISection />
-      <section className="max-w-[960px] mx-auto px-6 py-[120px]">
-        <div className="grid md:grid-cols-4 gap-4">
-          {STEPS.map((step, index) => (
-            <div key={step} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-              <div className="text-[10px] font-medium text-[#FF6B35] uppercase tracking-wider font-mono mb-3">
-                Step {index + 1}
-              </div>
-              <h3 className="text-2xl font-semibold text-black">{step}</h3>
             </div>
           ))}
         </div>

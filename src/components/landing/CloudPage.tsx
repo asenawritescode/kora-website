@@ -1,17 +1,16 @@
-import { ArrowRight, Cloud, Database, Mail, ShieldCheck, Workflow } from 'lucide-react'
+import { ArrowRight, Cloud, Database, ShieldCheck, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 
 const STEPS = [
-  { title: 'Submit workspace', description: 'Choose a site name, create your admin account, and tell Kora what the team does.' },
-  { title: 'Provision app', description: 'Kora Cloud prepares the workspace, database, users, and first workflow structure.' },
-  { title: 'Open workspace', description: 'Launch the workspace and start capturing records right away.' },
-  { title: 'Run your team', description: 'Keep improving the workflow as your process becomes clearer.' },
+  { title: 'Submit workspace', description: 'Choose a site name, create your admin account, and and confirm your email.' },
+  { title: 'Provision app', description: 'Kora Cloud prepares the workspace, database, and users.' },
+  { title: 'Open workspace', description: 'After email confirmation, open the workspace and start capturing records.' },
+  { title: 'Run your team', description: 'Add users and change the workflow as your process becomes clearer.' },
 ]
 
 const BENEFITS = [
   { icon: Database, title: 'Hosted workspaces', description: 'Start with a live workspace instead of setting up servers first.' },
-  { icon: Workflow, title: 'Workspace provisioning', description: 'Create the app, database, admin account, and first workflow from onboarding.' },
-  { icon: Mail, title: 'Operational support', description: 'Use managed cloud when your team wants help running the software.' },
+  { icon: Workflow, title: 'Workspace provisioning', description: 'Create the database and admin account from onboarding.' },
   { icon: ShieldCheck, title: 'Ownership path remains open', description: 'Keep the open-source engine and self-hosting path available.' },
 ]
 
@@ -24,10 +23,10 @@ export default function CloudPage() {
           Kora Cloud
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Managed Kora for teams that want to go live fast.
+          Managed Kora for teams that do not want to run their own server.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Hosted workspaces, onboarding, provisioning, and support for teams that want a working business app without setting up infrastructure first.
+          Hosted workspaces with onboarding and provisioning, so you do not set up infrastructure first.
         </p>
         <div className="flex flex-wrap gap-3">
           <Link to="/onboard" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
@@ -58,7 +57,7 @@ export default function CloudPage() {
             What managed cloud handles
           </h2>
           <p className="text-lg leading-7 text-[#5d5f5f]">
-            Kora Cloud handles the setup and support around hosted workspaces so your team can focus on the business process.
+            Kora Cloud handles the setup of hosted workspaces so your team can focus on the business process.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-4">
@@ -69,21 +68,6 @@ export default function CloudPage() {
               <p className="text-sm text-[#444748]">{description}</p>
             </div>
           ))}
-        </div>
-      </section>
-
-      <section className="bg-black text-white p-8 rounded-sm">
-        <div className="max-w-2xl">
-          <h2 className="text-[30px] leading-[38px] font-semibold mb-4">
-            Cloud plus private managed instance
-          </h2>
-          <p className="text-[#c6c6c7] mb-6">
-            Use shared cloud for trials and small teams. Use a private managed instance when a customer or agency client needs a dedicated runtime.
-          </p>
-          <Link to="/pricing" className="inline-flex items-center gap-2 bg-white text-black text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#e5e5e5] transition-colors font-mono">
-            View pricing
-            <ArrowRight className="h-4 w-4" />
-          </Link>
         </div>
       </section>
     </div>

@@ -14,7 +14,7 @@ export function QuickStartSection() {
         Quick Start
       </h2>
       <p className="text-base text-[#5d5f5f] mb-6 leading-relaxed">
-        You&apos;re two minutes away from a running application. Pull the Docker
+        To run the application, pull the Docker
         image, set a few environment variables, and open your browser. That&apos;s it.
       </p>
 

@@ -5,8 +5,8 @@ export default function PricingRoute() {
   return (
     <>
       <Seo
-        title="Kora Pricing — Free workspace, managed cloud, private instances"
-        description="Start free with a starter workspace. Upgrade to managed cloud from $20/month or request a private instance."
+        title="Kora Pricing — Free workspace and self-hosting"
+        description="Start with a free starter workspace on Kora Cloud, or self-host the open-source engine. Managed cloud pricing is not announced yet."
         path="/pricing"
         jsonLd={{
           '@context': 'https://schema.org',
@@ -14,9 +14,7 @@ export default function PricingRoute() {
           name: 'Kora',
           applicationCategory: 'BusinessApplication',
           offers: [
-            { '@type': 'Offer', name: 'Free Workspace', price: '0', priceCurrency: 'USD' },
-            { '@type': 'Offer', name: 'Managed Cloud' },
-            { '@type': 'Offer', name: 'Private Instance' },
+            { '@type': 'Offer', name: 'Free Workspace', price: '0', priceCurrency: 'KES' },
           ],
         }}
       />

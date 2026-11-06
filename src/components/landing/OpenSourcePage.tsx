@@ -8,12 +8,12 @@ const CAPABILITIES = [
   { icon: Workflow, title: 'Workflows', description: 'Model approvals, state changes, and business actions from configuration.' },
   { icon: KeyRound, title: 'Permissions', description: 'Control access by role, record type, and workspace boundary.' },
   { icon: GitBranch, title: 'Extensions', description: 'Add scripts, hooks, webhooks, and custom API methods where the app needs code.' },
-  { icon: Database, title: 'SQL Databases', description: 'Run on MySQL, MariaDB, or LibSQL without proprietary data formats.' },
+  { icon: Database, title: 'SQL Databases', description: 'Run on MySQL or LibSQL without proprietary data formats.' },
 ]
 
 const FAQS = [
   ['Is Kora open source?', 'Yes. Kora is AGPL-3.0 and can be reviewed, modified, and self-hosted.'],
-  ['Can Kora be self-hosted?', 'Yes. Kora ships as a single Go binary and can run with MySQL, MariaDB, or LibSQL.'],
+  ['Can Kora be self-hosted?', 'Yes. Kora ships as a single Go binary and can run with MySQL or LibSQL.'],
   ['Does Kora include an API?', 'Yes. Kora creates REST API routes and Swagger documentation for workspace data.'],
   ['Can teams start hosted and move later?', 'Yes. Kora Cloud is the fastest start, while the open-source engine keeps the self-hosted path available.'],
 ]
@@ -50,8 +50,8 @@ export default function OpenSourcePage() {
         <div className="grid md:grid-cols-4 gap-6">
           {[
             ['AGPL-3.0', 'Free to inspect, modify, and run.'],
-            ['Self-host anywhere', 'Deploy on cloud VMs, private infrastructure, or local hardware.'],
-            ['Direct SQL access', 'Your data lives in MySQL, MariaDB, or LibSQL.'],
+            ['Self-host', 'Runs on any Linux server with Docker.'],
+            ['Direct SQL access', 'Your data lives in MySQL or LibSQL.'],
             ['Single binary', 'Go backend with embedded UI for simpler operations.'],
           ].map(([title, description]) => (
             <div key={title} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
@@ -86,7 +86,7 @@ export default function OpenSourcePage() {
       <section className="grid md:grid-cols-2 gap-4">
         <Link to="/cloud" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Use managed cloud</h2>
-          <p className="text-sm text-[#5d5f5f] mb-4">Start faster with hosted workspaces, provisioning, and operational support.</p>
+          <p className="text-sm text-[#5d5f5f] mb-4">Start with a hosted workspace instead of running your own server.</p>
           <span className="text-xs font-medium text-[#FF6B35] font-mono">View Kora Cloud →</span>
         </Link>
         <Link to="/docs" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">

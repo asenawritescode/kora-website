@@ -7,9 +7,6 @@ export function FinalCTA() {
       <a href="/onboard" className="inline-block bg-black text-white text-xs font-medium px-8 py-4 rounded-sm hover:bg-[#313030] transition-colors" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
         Start onboarding
       </a>
-      <p className="text-xs text-[#8E8E8E] mt-4">
-        Start free. Keep your data. Cancel anytime.
-      </p>
     </section>
   )
 }

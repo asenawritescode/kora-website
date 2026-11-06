@@ -33,7 +33,7 @@ export default function ExamplesPage() {
           Templates
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-2xl mx-auto">
-          Ready-made starting points. See what each one includes before you begin.
+          Starting points for your shop. Each one lists what it includes before you sign up.
         </p>
       </div>
 

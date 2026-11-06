@@ -46,11 +46,7 @@ export function Footer() {
         {/* Sponsor + Copyright */}
         <div className="md:col-span-3 mt-8 pt-8 border-t border-outline-variant flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
           <p className="text-xs text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-            Sponsored by{' '}
-            <a href="https://mradiafrica.com" className="text-black hover:underline" target="_blank" rel="noopener noreferrer">
-              Mradi Africa
-            </a>
-            {' '}— infrastructure &amp; development
+            Kigae by Senumi
           </p>
           <p className="text-xs text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
             &copy; 2026 Kora. Built for ownership.
