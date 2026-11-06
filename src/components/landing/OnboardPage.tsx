@@ -1,286 +1,42 @@
-import { useMemo, useState, useEffect, type FormEvent } from 'react'
-import { BadgeCheck, Server, Database, Terminal } from 'lucide-react'
-import { getPublicTemplates } from '@/lib/public-content'
+import { useMemo } from 'react'
+import { buildSignInUrl, buildSignupUrl, cloudSignupBase, readSelection } from '@/lib/cloud-signup'
 
-const onboardAPIBaseURL = (
-  import.meta.env.VITE_KORA_ONBOARD_API_BASE_URL as string | undefined
-  || 'https://cloud.kora.mradiafrica.com'
-).replace(/\/$/, '')
-const workspaceBaseURL = (import.meta.env.VITE_KORA_APP_BASE_URL as string | undefined)?.replace(/\/$/, '') || 'https://app.kora.mradiafrica.com'
-
-const TRUST_SIGNALS = [
-  { icon: BadgeCheck, label: 'AGPL-3.0 open source' },
-  { icon: Server, label: 'Self-hosted' },
-  { icon: Database, label: 'MySQL or LibSQL' },
-  { icon: Terminal, label: 'Single 30MB binary' },
-]
-
+// Signup and identity are owned by Kigae Cloud. This page only hands the visitor
+// over and carries their template selection in the URL.
 export default function OnboardPage() {
-  const [hostname, setHostname] = useState('')
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
-  const [templates, setTemplates] = useState<{ slug: string; label: string }[]>([])
-  const [templatesLoading, setTemplatesLoading] = useState(true)
-  const initialTemplate = useMemo(() => {
-    if (typeof window === 'undefined') return ''
-    return new URLSearchParams(window.location.search).get('template') || ''
-  }, [])
-  const [selectedTemplate, setSelectedTemplate] = useState(initialTemplate)
-
-  // Fetch templates dynamically from the shared public-content helper.
-  useEffect(() => {
-    let alive = true
-    setTemplatesLoading(true)
-    getPublicTemplates()
-      .then((items) => {
-        if (alive) {
-          setTemplates(items.map((t) => ({ slug: t.slug, label: t.name })))
-        }
-      })
-      .catch(() => {
-        // Templates unavailable — chips stay empty, form still works.
-      })
-      .finally(() => {
-        if (alive) setTemplatesLoading(false)
-      })
-    return () => { alive = false }
-  }, [])
-
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
-
-    try {
-      const res = await fetch(`${onboardAPIBaseURL}/api/cloud/onboard`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          site_name: hostname,
-          admin_email: email,
-          admin_password: password,
-          template: selectedTemplate || undefined,
-        }),
-      })
-
-      const data = await res.json()
-
-      if (!res.ok) {
-        setError(typeof data.error === 'string' ? data.error : data.error?.message || 'Something went wrong. Please try again.')
-        return
-      }
-
-      const engineURL = typeof data?.site?.engine_url === 'string' && data.site.engine_url.length > 0
-        ? data.site.engine_url.replace(/\/$/, '')
-        : `${workspaceBaseURL}/s/${hostname}`
-      setSuccess(`${engineURL}/workspace`)
-    } catch {
-      setError('Network error. Please check your connection and try again.')
-    } finally {
-      setLoading(false)
+  const { signupHref, signInHref } = useMemo(() => {
+    const base = cloudSignupBase()
+    const search = typeof window === 'undefined' ? '' : window.location.search
+    return {
+      signupHref: buildSignupUrl(base, readSelection(search)),
+      signInHref: buildSignInUrl(base),
     }
-  }
-
-  if (success) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center px-4">
-        <div className="text-center max-w-md">
-          <div className="w-16 h-16 rounded-full bg-[#10B981]/10 flex items-center justify-center mx-auto mb-6">
-            <BadgeCheck className="h-8 w-8 text-[#10B981]" />
-          </div>
-          <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-4">
-            Your workspace is ready
-          </h2>
-          <p className="text-base text-[#5d5f5f] mb-8">
-            Your workspace has been set up. You can open it now and start using it.
-          </p>
-          <a
-            href={success}
-            className="inline-block bg-[#FF6B35] text-white text-sm font-medium px-8 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono"
-          >
-            Open your workspace →
-          </a>
-          <p className="text-xs text-[#5d5f5f] mt-6 font-mono">
-            For builders: the database, admin UI, API, and AI tools are ready in the workspace.
-          </p>
-        </div>
-      </div>
-    )
-  }
+  }, [])
 
   return (
-    <div className="min-h-[70vh] py-16 md:py-24 px-4 sm:px-6">
-      <div className="max-w-[960px] mx-auto">
-        <div className="grid md:grid-cols-5 gap-12 md:gap-16">
-          {/* Left: Marketing content */}
-          <div className="md:col-span-3 space-y-8">
-            <div>
-              <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[56px] md:leading-[64px] font-bold text-black mb-4 tracking-[-0.03em]">
-                Create your workspace.
-              </h1>
-              <p className="text-lg text-[#5d5f5f] max-w-lg">
-                This creates a real workspace you can open immediately. No credit card required.
-              </p>
-            </div>
-
-            {/* Template gallery */}
-            <div>
-              <h3 className="text-sm font-semibold text-black mb-3 font-mono uppercase tracking-wider">
-                What are you building?
-              </h3>
-              {templatesLoading ? (
-                <div className="flex flex-wrap gap-2">
-                  {[0, 1, 2, 3, 4, 5, 6, 7].map((i) => (
-                    <div key={i} className="h-7 w-28 bg-[#f1edec] rounded-sm animate-pulse" />
-                  ))}
-                </div>
-              ) : templates.length > 0 ? (
-                <>
-                  <div className="flex flex-wrap gap-2">
-                    {templates.map((t) => (
-                      <button
-                        key={t.slug}
-                        type="button"
-                        onClick={() => setSelectedTemplate(t.slug)}
-                        className={`text-xs font-medium bg-[#FAFAFA] border rounded-sm px-3 py-1.5 hover:border-black hover:text-black transition-colors font-mono ${
-                          selectedTemplate === t.slug ? 'border-[#FF6B35] text-black' : 'border-outline-variant text-[#5d5f5f]'
-                        }`}
-                      >
-                        {t.label}
-                      </button>
-                    ))}
-                  </div>
-                  <p className="text-xs text-[#5d5f5f] mt-2 font-mono">
-                    Pick one or start from scratch. Template selection helps us understand your starting point.
-                  </p>
-                </>
-              ) : (
-                <p className="text-xs text-[#c4c7c7] font-mono">
-                  Template catalog is currently unavailable.
-                </p>
-              )}
-            </div>
-
-            {/* What happens next */}
-            <div>
-              <h3 className="text-sm font-semibold text-black mb-3 font-mono uppercase tracking-wider">
-                What happens next
-              </h3>
-              <ul className="space-y-2 text-sm text-[#5d5f5f]">
-                <li className="flex items-start gap-2">
-                  <span className="text-[#10B981] mt-0.5 font-mono">1.</span>
-                  We create your admin account and workspace.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#10B981] mt-0.5 font-mono">2.</span>
-                  You get a workspace you can open right away.
-                </li>
-                <li className="flex items-start gap-2">
-                  <span className="text-[#10B981] mt-0.5 font-mono">3.</span>
-                  You can add records, users, and workflow details later.
-                </li>
-              </ul>
-            </div>
-
-            {/* Trust signals */}
-            <div className="grid grid-cols-2 gap-3">
-              {TRUST_SIGNALS.map(({ icon: Icon, label }) => (
-                <div key={label} className="flex items-center gap-2 text-xs text-[#5d5f5f] font-mono">
-                  <Icon className="h-3.5 w-3.5 text-[#c4c7c7]" />
-                  <span>{label}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right: Form */}
-          <div className="md:col-span-2">
-            <div className="bg-white border border-outline-variant rounded-sm p-6 md:p-8 sticky top-24">
-              <h3 className="text-lg font-semibold text-black mb-6">
-                Create your workspace
-              </h3>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="block text-xs font-medium text-black mb-1.5 font-mono" htmlFor="hostname">
-                    Site name
-                  </label>
-                  <div className="flex items-center border border-outline-variant rounded-sm focus-within:border-black transition-colors">
-                    <input
-                      id="hostname"
-                      type="text"
-                      required
-                      minLength={3}
-                      maxLength={50}
-                      pattern="[a-z0-9-]+"
-                      placeholder="mybusiness"
-                      value={hostname}
-                      onChange={(e) => setHostname(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
-                      className="flex-1 px-3 py-2.5 text-sm text-black bg-transparent outline-none font-mono"
-                    />
-                    <span className="pr-3 text-xs text-[#c4c7c7] font-mono">.local</span>
-                  </div>
-                  <p className="text-[10px] text-[#c4c7c7] mt-1 font-mono">
-                    Lowercase letters, numbers, and hyphens only.
-                  </p>
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-black mb-1.5 font-mono" htmlFor="email">
-                    Admin email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    placeholder="you@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm text-black border border-outline-variant rounded-sm bg-transparent outline-none focus:border-black transition-colors font-mono"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-medium text-black mb-1.5 font-mono" htmlFor="password">
-                    Password
-                  </label>
-                  <input
-                    id="password"
-                    type="password"
-                    required
-                    minLength={8}
-                    placeholder="Minimum 8 characters"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full px-3 py-2.5 text-sm text-black border border-outline-variant rounded-sm bg-transparent outline-none focus:border-black transition-colors font-mono"
-                  />
-                </div>
-
-                {error && (
-                  <div className="text-xs text-[#DC2626] bg-[#DC2626]/5 border border-[#DC2626]/20 rounded-sm p-3 font-mono">
-                    {error}
-                  </div>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-[#FF6B35] text-white text-sm font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-mono"
-                >
-                  {loading ? 'Creating your app...' : 'Create my app →'}
-                </button>
-              </form>
-
-              <p className="text-[10px] text-[#c4c7c7] mt-4 leading-relaxed font-mono">
-                By creating an app you agree to our Terms.
-                Your data lives in your own database.
-              </p>
-            </div>
-          </div>
+    <div className="py-12 md:py-24 px-4 sm:px-6">
+      <div className="max-w-[640px] mx-auto">
+        <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-bold text-black mb-4 tracking-[-0.03em]">
+          Set up your shop on Kigae Cloud
+        </h1>
+        <p className="text-lg text-[#444748] mb-8">
+          You will create an account with your name, email and business name. We send you an email to confirm it, and then you can sign in to your workspace.
+        </p>
+        <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-10">
+          <a
+            href={signupHref}
+            className="inline-block text-center bg-[#FF6B35] text-white text-sm font-medium px-8 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono"
+          >
+            Continue to sign up
+          </a>
+          <p className="text-sm text-[#444748]">
+            Already have a workspace?{' '}
+            <a href={signInHref} className="text-black underline underline-offset-2 hover:no-underline">Sign in</a>
+          </p>
         </div>
+        <p className="text-sm text-[#444748]">
+          Kigae is in a pilot with a small number of shops. It records cash sales and stock. Card, M-Pesa and receipt printing are not available yet.
+        </p>
       </div>
     </div>
   )
