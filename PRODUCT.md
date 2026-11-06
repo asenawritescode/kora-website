@@ -62,14 +62,14 @@ system may be replaced while retaining those recognizable colors.
 Use Kigae as the customer-facing and open-source project name; identify the
 sponsor as Senumi. Use Kigae Engine when prose needs to distinguish the
 self-hosted runtime from Kigae Cloud. Preserve legacy Kora spellings in
-technical examples when they are required for compatibility. See the shared
-[brand architecture](../kora/docs/brand-architecture.md).
+technical examples when they are required for compatibility. The shared brand
+architecture document in the product repository sets these naming rules.
 
 ## Evidence on Hand
 
 - Product behavior and copy in this repository.
 - Kigae website review guidance and the product website and onboarding research
-  library in `/home/asena/projects/kora/docs/design/`.
+  library (kept in the product repository's design documents).
 - The live local Kigae Cloud public catalog and the published Small Business
   Sales & Stock template.
 - The website review guide contains three transcript summaries and a 20-video
