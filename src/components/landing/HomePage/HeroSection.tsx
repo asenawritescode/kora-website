@@ -1,5 +1,4 @@
-import { Link } from '@tanstack/react-router'
-import { CTA_LINK } from '@/lib/site-links'
+import { SignupLink } from '@/components/landing/SignupLink'
 import { NairobiSkyline } from '@/components/landing/NairobiSkyline'
 
 // First screen: who it is for and what it does, one action, the real product,
@@ -21,15 +20,10 @@ export function HeroSection() {
             Shop software for small businesses. Each sale you record comes off your stock count, and the owner dashboard shows what sold and what is running low.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
-            <Link
-              to={CTA_LINK.href}
-              className="inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px"
-            >
-              {CTA_LINK.label}
-            </Link>
+            <SignupLink className="inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px" />
             <a
               href="#modules"
-              className="inline-flex min-h-11 items-center text-[15px] font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color,text-decoration-thickness] hover:decoration-accent hover:decoration-2"
+              className="inline-flex min-h-12 items-center text-[15px] font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color,text-decoration-thickness] hover:decoration-accent hover:decoration-2"
             >
               Choose your modules
             </a>

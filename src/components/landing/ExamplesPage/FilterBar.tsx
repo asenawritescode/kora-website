@@ -33,7 +33,7 @@ export function FilterBar({ categories, activeCategory, onCategoryChange, search
       <div className="flex relative w-full md:w-auto">
         <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted h-3.5 w-3.5" />
         <input
-          className="pl-10 pr-4 py-2 bg-transparent border border-outline-variant text-sm text-black focus:border-black placeholder-muted transition-colors w-full md:w-64 min-h-11"
+          className="pl-10 pr-4 py-2 bg-transparent border border-outline-variant text-sm text-black focus:border-black placeholder-muted transition-colors w-full md:w-64 min-h-12"
           aria-label="Search templates"
           placeholder="Search templates..."
           type="text"

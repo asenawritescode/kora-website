@@ -15,8 +15,7 @@ test('has no USD amount, tier, per-seat number, "from" price or support claim', 
 
 test('lists what is not supported yet and links to signup and the self-hosting docs', () => {
   for (const item of ['M-Pesa', 'Receipt printers', 'eTIMS']) expect(source).toContain(item)
-  expect(source).toContain('to="/onboard"')
-  expect(source).toContain('Set up your shop')
+  expect(source).toContain('<SignupLink')
   expect(source).toContain('to="/docs"')
 })
 

@@ -1,14 +1,15 @@
 import { Link } from '@tanstack/react-router'
+import { SignupLink } from '@/components/landing/SignupLink'
 import { BRAND } from '@/lib/brand'
 
 const INCLUDED = [
   `A ${BRAND} Cloud workspace for your shop`,
   'Point of sale and inventory, from the Retail POS template',
-  'Cash sales',
+  'Cash sales, and M-Pesa payments recorded by hand against a till or paybill number',
   'An owner dashboard',
 ]
 
-const NOT_YET = ['Card or M-Pesa payments', 'Receipt printers', 'eTIMS tax receipts']
+const NOT_YET = ['Card payments', 'A connection to M-Pesa (payments are recorded by hand)', 'Receipt printers', 'eTIMS tax receipts']
 
 function RuledList({ items, muted = false }: { items: string[]; muted?: boolean }) {
   return (
@@ -60,9 +61,7 @@ export default function PricingPage() {
         </p>
       </section>
 
-      <Link to="/onboard" className="inline-flex items-center h-[47px] px-[19px] bg-accent text-white text-[13px] font-semibold hover:bg-accent-strong transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-accent">
-        Set up your shop
-      </Link>
+      <SignupLink className="inline-flex items-center min-h-12 px-[22px] bg-accent text-white text-[15px] font-semibold hover:bg-accent-strong transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-accent" />
     </div>
   )
 }

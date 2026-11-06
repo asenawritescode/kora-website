@@ -26,6 +26,15 @@ const BANNED: Ban[] = [
   { pattern: /private (managed )?instance/i, why: 'No private instance offer exists' },
   { pattern: /Your data lives in your own database/, why: 'Cloud hosts the data' },
   { pattern: /open immediately/, why: 'The workspace opens after email confirmation' },
+  // Signup (kora-cloud#39): a business type and modules are chosen first; no site name; no generated workflow.
+  { pattern: /site name/i, why: 'Cloud signup no longer asks for a site name' },
+  { pattern: /first workflow|workflow structure/i, why: 'Self-service signup generates no workflow' },
+  { pattern: /Start onboarding|Submit workspace|Provision app/, why: 'Old Cloud page steps; use SIGNUP_STEPS from src/lib/signup-steps.ts' },
+  // Payments (kora-website#1): M-Pesa is recorded by hand, never connected; card, printers and eTIMS are not supported.
+  { pattern: /Not supported yet: card and M-Pesa/i, why: 'M-Pesa payments can be recorded by hand; say that Kigae is not connected to M-Pesa' },
+  { pattern: /only payment the pilot supports|records cash sales\b/i, why: 'Manual mobile-money recording works; cash is not the only payment' },
+  { pattern: /Card, M-Pesa and receipt printing are not available/i, why: 'M-Pesa can be recorded by hand; name card, receipt printers and eTIMS instead' },
+  { pattern: /(connects?|integrat\w+) (with|to) M-Pesa|M-Pesa (integration|payments? (are|is) (supported|accepted))/i, why: 'Kigae is not connected to M-Pesa' },
 ]
 
 function* walk(dir: string): Generator<string> {

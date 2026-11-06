@@ -1,13 +1,14 @@
 import { Link } from '@tanstack/react-router'
-import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { SignupLink } from '@/components/landing/SignupLink'
 import { BRAND, BRAND_BY_PUBLISHER } from '@/lib/brand'
 
 const FOOTER_LINKS = {
-  Product: [...PRIMARY_LINKS, CTA_LINK],
+  Product: PRIMARY_LINKS,
   Explore: EXPLORE_LINKS,
 }
 
-const link = 'inline-flex min-h-11 items-center w-fit text-[15px] text-night-muted underline-offset-[6px] transition-colors duration-150 hover:text-night-ink hover:underline'
+const link = 'inline-flex min-h-12 items-center w-fit text-[15px] text-night-muted underline-offset-[6px] transition-colors duration-150 hover:text-night-ink hover:underline'
 
 export function Footer() {
   return (
@@ -25,6 +26,7 @@ export function Footer() {
             {links.map((l) => (
               <Link key={l.label} to={l.href} className={link}>{l.label}</Link>
             ))}
+            {category === 'Product' && <SignupLink className={link} />}
           </nav>
         ))}
         <div className="col-span-2 md:col-span-12 pt-6 border-t border-night-raised flex flex-col sm:flex-row justify-between gap-3 text-[14px] text-night-muted">

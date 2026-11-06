@@ -297,14 +297,24 @@ with it. It is a ruled list of rows, not a grid of cards.
   Inventory, because each sale takes the items off the stock count." The
   dependency comes from the catalog's `requires`; the reason text is kept in
   `src/lib/module-picker.ts`.
-- **Preview** (the catalog has not marked it available): selectable, with a
-  "Preview" label (mono 11 px, 1 px ink outline).
+- **Preview** (the catalog has not marked it available, or it needs a part
+  that is not): not selectable. The checkbox is disabled (1.5 px muted
+  outline on sand), the name is muted, and the row carries a "Preview" label
+  (mono 11 px, 1 px ink outline) and a 14 px note saying why it cannot be
+  chosen yet. Every part of a preview template is preview.
 - **On the roadmap:** not a checkbox. Muted text on sand, label "On the
   roadmap", `aria-disabled`. Never a date, never "coming soon".
 - **Selection summary:** beside the list (below it on phones), one line naming what is chosen,
   then the price line in Body: "Free during the pilot. Pricing will be
   announced before the pilot ends." Then the primary button, which carries
-  `?template=` to Cloud signup.
+  the choice to Cloud signup as `?template=<slug>&optional=<release ids,
+  comma separated>` (`src/lib/cloud-signup.ts`; format documented in
+  kora-cloud `docs/signup-link-format.md`). The choice is held in one store
+  (`src/lib/signup-choice.ts`), so every "Set up your shop" button on the site
+  (header, hero, closing action, footer, Cloud, Pricing) carries the same
+  link, and the template page edits the same choice. The optional ids are the
+  optional parts ticked plus the optional parts they need; parts a template
+  installs anyway are never listed. Nothing chosen: the plain signup link.
 - **Focus:** the 3 px ochre ring sits on the whole row (`:focus-within`).
   Space toggles, Tab moves between rows.
 - **States from the catalog:** loading (rows shown as quiet sand bars with
