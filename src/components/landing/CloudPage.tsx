@@ -1,9 +1,10 @@
 import { ArrowRight, Cloud, Database, ShieldCheck, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
+import { BRAND } from '@/lib/brand'
 
 const STEPS = [
   { title: 'Submit workspace', description: 'Choose a site name, create your admin account, and and confirm your email.' },
-  { title: 'Provision app', description: 'Kora Cloud prepares the workspace, database, and users.' },
+  { title: 'Provision app', description: `${BRAND} Cloud prepares the workspace, database, and users.` },
   { title: 'Open workspace', description: 'After email confirmation, open the workspace and start capturing records.' },
   { title: 'Run your team', description: 'Add users and change the workflow as your process becomes clearer.' },
 ]
@@ -20,10 +21,10 @@ export default function CloudPage() {
       <header className="pt-8 space-y-4">
         <div className="inline-flex items-center gap-2 text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
           <Cloud className="h-3.5 w-3.5" />
-          Kora Cloud
+          {BRAND} Cloud
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Managed Kora for teams that do not want to run their own server.
+          Managed {BRAND} for teams that do not want to run their own server.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
           Hosted workspaces with onboarding and provisioning, so you do not set up infrastructure first.
@@ -57,7 +58,7 @@ export default function CloudPage() {
             What managed cloud handles
           </h2>
           <p className="text-lg leading-7 text-[#5d5f5f]">
-            Kora Cloud handles the setup of hosted workspaces so your team can focus on the business process.
+            {BRAND} Cloud handles the setup of hosted workspaces so your team can focus on the business process.
           </p>
         </div>
         <div className="grid md:grid-cols-2 gap-4">

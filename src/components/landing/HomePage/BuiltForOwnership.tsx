@@ -1,10 +1,11 @@
 import { Scale, Server, Database, GitBranch } from 'lucide-react'
+import { BRAND } from '@/lib/brand'
 
 const TRUST_ITEMS = [
   {
     icon: Scale,
     title: 'Open source',
-    description: 'Inspect, modify, and run Kora on your own terms.',
+    description: `Inspect, modify, and run ${BRAND} on your own terms.`,
   },
   {
     icon: Server,
@@ -31,7 +32,7 @@ export function BuiltForOwnership() {
           Built for ownership
         </h2>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl mx-auto mb-[120px]">
-          Kora is designed so teams can start fast without giving up control of their app, data, or deployment path.
+          {BRAND} is designed so teams can start fast without giving up control of their app, data, or deployment path.
         </p>
         <div className="grid md:grid-cols-4 gap-6">
           {TRUST_ITEMS.map((item) => (

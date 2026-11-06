@@ -1,3 +1,4 @@
+import { BRAND } from '@/lib/brand'
 export function CoreConceptsSection() {
   return (
     <section className="mb-24" id="core-concepts">
@@ -5,7 +6,7 @@ export function CoreConceptsSection() {
         Core Concepts
       </h2>
       <p className="text-base text-[#5d5f5f] mb-8 leading-relaxed">
-        Kora uses a few key ideas to turn configuration into running applications.
+        {BRAND} uses a few key ideas to turn configuration into running applications.
         Understanding these will help you build faster — whether you write YAML or
         describe your business to the AI.
       </p>
@@ -16,7 +17,7 @@ export function CoreConceptsSection() {
           <h3 className="font-bold text-black mb-2">DocTypes</h3>
           <p className="text-sm text-[#5d5f5f] mb-3 leading-relaxed">
             A DocType is your data model. &quot;Customer,&quot; &quot;Invoice,&quot; &quot;Inventory Item&quot; — each
-            one is a DocType. Define the fields you need, and Kora creates the database table,
+            one is a DocType. Define the fields you need, and {BRAND} creates the database table,
             REST API, and React forms. Activate it and start creating documents immediately.
           </p>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
@@ -148,7 +149,7 @@ export function CoreConceptsSection() {
           <h3 className="font-bold text-black mb-2">Sites</h3>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
             A Site is an isolated workspace with its own database, users, doctypes, and
-            analytics. One Kora instance can host dozens of sites. Access via hostname
+            analytics. One {BRAND} instance can host dozens of sites. Access via hostname
             (<code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black">mybusiness.local</code>)
             or path (<code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black">/s/mybusiness/workspace</code>).
             Sites can be hot-added and removed without restarting the server.

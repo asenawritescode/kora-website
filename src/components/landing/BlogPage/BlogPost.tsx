@@ -6,6 +6,7 @@ import remarkGfm from 'remark-gfm'
 import { Seo } from '@/components/landing/Seo'
 import { fetchPublicBlogPost } from '@/lib/public-content'
 import type { Article } from './data'
+import { BRAND } from '@/lib/brand'
 
 interface BlogPostProps {
   slug: string
@@ -37,8 +38,8 @@ export default function BlogPost({ slug }: BlogPostProps) {
     return (
       <>
         <Seo
-          title="Loading article — Kora Blog"
-          description="Loading the latest article from Kora CMS."
+          title={`Loading article — ${BRAND} Blog`}
+          description={`Loading the latest article from ${BRAND} CMS.`}
           path={`/blog/${slug}`}
           noindex
         />
@@ -53,7 +54,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
     return (
       <>
         <Seo
-          title="Article unavailable — Kora Blog"
+          title={`Article unavailable — ${BRAND} Blog`}
           description="This article is not currently available."
           path={`/blog/${slug}`}
           noindex
@@ -74,7 +75,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
     readTime: cmsPost.readTime,
     description: cmsPost.description,
     body: cmsPost.body,
-    authorName: cmsPost.authorName || 'Kora Team',
+    authorName: cmsPost.authorName || `${BRAND} Team`,
     seoTitle: cmsPost.seoTitle || cmsPost.title,
     seoDescription: cmsPost.seoDescription || cmsPost.description,
   }
@@ -82,7 +83,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
   return (
     <>
       <Seo
-        title={`${post.seoTitle} — Kora Blog`}
+        title={`${post.seoTitle} — ${BRAND} Blog`}
         description={post.seoDescription}
         path={`/blog/${slug}`}
         image={cmsPost.heroImage || cmsPost.ogImage}
@@ -110,7 +111,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
             </div>
             <div>
               <div className="text-xs text-black font-mono">{post.authorName}</div>
-              <div className="text-xs text-[#5d5f5f] font-mono">Kora</div>
+              <div className="text-xs text-[#5d5f5f] font-mono">{BRAND}</div>
             </div>
           </div>
         </header>

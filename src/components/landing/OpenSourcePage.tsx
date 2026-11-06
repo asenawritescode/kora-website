@@ -1,6 +1,7 @@
 import { ArrowRight, Code2, Database, FileCode2, GitBranch, KeyRound, Scale, Server, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { TerminalDemo } from './HomePage/TerminalDemo'
+import { BRAND } from '@/lib/brand'
 
 const CAPABILITIES = [
   { icon: FileCode2, title: 'REST API + Swagger', description: 'Every workspace exposes documented endpoints for integrations and custom clients.' },
@@ -12,10 +13,10 @@ const CAPABILITIES = [
 ]
 
 const FAQS = [
-  ['Is Kora open source?', 'Yes. Kora is AGPL-3.0 and can be reviewed, modified, and self-hosted.'],
-  ['Can Kora be self-hosted?', 'Yes. Kora ships as a single Go binary and can run with MySQL or LibSQL.'],
-  ['Does Kora include an API?', 'Yes. Kora creates REST API routes and Swagger documentation for workspace data.'],
-  ['Can teams start hosted and move later?', 'Yes. Kora Cloud is the fastest start, while the open-source engine keeps the self-hosted path available.'],
+  [`Is ${BRAND} open source?`, `Yes. ${BRAND} is AGPL-3.0 and can be reviewed, modified, and self-hosted.`],
+  [`Can ${BRAND} be self-hosted?`, `Yes. ${BRAND} ships as a single Go binary and can run with MySQL or LibSQL.`],
+  [`Does ${BRAND} include an API?`, `Yes. ${BRAND} creates REST API routes and Swagger documentation for workspace data.`],
+  ['Can teams start hosted and move later?', `Yes. ${BRAND} Cloud is the fastest start, while the open-source engine keeps the self-hosted path available.`],
 ]
 
 export default function OpenSourcePage() {
@@ -30,7 +31,7 @@ export default function OpenSourcePage() {
           Open-source engine for records, workflows, and business apps.
         </h1>
         <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          Kora gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
+          {BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
           <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
@@ -87,7 +88,7 @@ export default function OpenSourcePage() {
         <Link to="/cloud" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Use managed cloud</h2>
           <p className="text-sm text-[#5d5f5f] mb-4">Start with a hosted workspace instead of running your own server.</p>
-          <span className="text-xs font-medium text-[#FF6B35] font-mono">View Kora Cloud →</span>
+          <span className="text-xs font-medium text-[#FF6B35] font-mono">View {BRAND} Cloud →</span>
         </Link>
         <Link to="/docs" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Self-host the engine</h2>
@@ -99,7 +100,7 @@ export default function OpenSourcePage() {
       <section>
         <div className="max-w-2xl mb-8">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
-            Run Kora from a single binary
+            Run {BRAND} from a single binary
           </h2>
           <p className="text-lg leading-7 text-[#5d5f5f]">
             The deployment details belong here for developers evaluating the open-source engine.
