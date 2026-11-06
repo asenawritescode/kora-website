@@ -8,8 +8,8 @@ const TRUST_ITEMS = [
   },
   {
     icon: Server,
-    title: 'Self-Host Anywhere',
-    description: 'Deploy to AWS, GCP, or your own infrastructure.',
+    title: 'Self-host',
+    description: 'Runs on any Linux server with Docker.',
   },
   {
     icon: Database,
