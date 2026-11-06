@@ -55,7 +55,8 @@ Context).
 7. **Tell people what happens when something goes wrong.**
    Setup must keep the visitor's choices and input through loading, network
    failure and retry (`PRODUCT.md`, Operating Context and Product Principles).
-   Error and retry messages should say that the choices are kept.
+   Error and retry copy should not contradict that. Only say choices are
+   kept where the product really keeps them.
 
 ## What these sources do not say
 
