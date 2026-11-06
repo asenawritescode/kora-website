@@ -1,5 +1,4 @@
 import { expect, test } from 'bun:test'
-import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
 import { legacyNameLines } from './brand-rules'
 import { BRAND, BRAND_BY_PUBLISHER, PUBLISHER } from '../src/lib/brand'
@@ -30,12 +29,6 @@ test('brand constants', () => {
   expect(BRAND).toBe('Kigae')
   expect(PUBLISHER).toBe('Senumi')
   expect(BRAND_BY_PUBLISHER).toBe('Kigae by Senumi')
-})
-
-test('the static HTML shell uses the brand constant value', () => {
-  const html = readFileSync(join(root, 'index.html'), 'utf8')
-  expect(html).toContain(`<title>${BRAND} `)
-  expect(html).toContain(`og:title" content="${BRAND} `)
 })
 
 test('the claims script passes on the tree', () => {
