@@ -2,36 +2,51 @@
 name: Kigae Public Website
 description: A modular workbench for finding business tools and shaping a workspace.
 colors:
-  primary: "#C84018"
-  ink: "#171716"
-  paper: "#f8f7f4"
-  white: "#fff"
-  muted: "#62615e"
-  rule: "#dedbd5"
-  dark-surface: "#1b1b19"
-  warm-surface: "#ebe8e1"
+  paper: "#f7f3ec"
+  sand: "#ede6da"
+  white: "#ffffff"
+  ink: "#16130f"
+  ink-soft: "#3f3a33"
+  muted: "#5c554c"
+  rule: "#d9d0c2"
+  ochre: "#c84018"
+  ochre-strong: "#a3360f"
+  ochre-tint: "#fef3ed"
+  night: "#12161b"
+  night-raised: "#1c2128"
+  night-ink: "#f4efe6"
+  night-muted: "#b4ada3"
+  ochre-on-night: "#f08a5d"
+  gold: "#e3a13a"
 typography:
   display:
-    fontFamily: "Geist Variable, sans-serif"
-    fontSize: "clamp(54px, 6.5vw, 86px)"
-    fontWeight: 690
-    lineHeight: 0.99
-    letterSpacing: "-0.075em"
+    fontFamily: "Archivo Variable, sans-serif"
+    fontSize: "clamp(44px, 6vw, 88px)"
+    fontWeight: 780
+    fontStretch: "112%"
+    lineHeight: 0.96
+    letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Geist Variable, sans-serif"
-    fontSize: "clamp(36px, 4.5vw, 57px)"
-    fontWeight: 640
-    lineHeight: 1.08
-    letterSpacing: "-0.06em"
+    fontFamily: "Archivo Variable, sans-serif"
+    fontSize: "clamp(32px, 4vw, 56px)"
+    fontWeight: 740
+    fontStretch: "112%"
+    lineHeight: 1.02
+    letterSpacing: "-0.025em"
+  title:
+    fontFamily: "Archivo Variable, sans-serif"
+    fontSize: "clamp(20px, 2vw, 26px)"
+    fontWeight: 680
+    lineHeight: 1.15
   body:
     fontFamily: "Geist Variable, sans-serif"
-    fontSize: "15px"
+    fontSize: "16px"
     fontWeight: 400
-    lineHeight: 1.7
+    lineHeight: 1.6
   label:
     fontFamily: "Geist Mono Variable, monospace"
-    fontSize: "10px"
-    fontWeight: 400
+    fontSize: "11px"
+    fontWeight: 500
     letterSpacing: "0.08em"
 rounded:
   mark: "1px"
@@ -106,36 +121,85 @@ The visual language pairs confident, tightly tracked sans-serif headlines with p
 
 **Not-canonized defect:** Eyebrow/kicker metadata labels remain in some home, catalog, and detail content; they are page-level drift, not a system rule.
 
-## Colors
+## Colours
 
-The palette is built around Kigae orange, near-black ink, warm off-white paper, and quiet warm-gray rules.
+All colours live in `src/styles/tokens.css` and nowhere else. Components use
+the generated utilities (`bg-paper`, `text-accent`, `bg-night` ...). The build
+runs `validate:contrast`, which checks every pair listed in that file.
 
-### Primary
-- **Kigae Orange**: The recognizable brand accent for primary actions, active states, links, progress, and selected illustration details.
+| Name | Token | Hex | Use |
+|---|---|---|---|
+| Morning paper | `paper` | `#f7f3ec` | Page background |
+| Sand | `surface-container` | `#ede6da` | Panels that set a section apart |
+| White | `white` | `#ffffff` | Module rows, product frames |
+| Ink | `ink` | `#16130f` | Text, headings, dark buttons |
+| Ink soft | `on-surface-variant` | `#3f3a33` | Lead paragraphs |
+| Muted | `muted` | `#5c554c` | Secondary text and notes |
+| Rule | `outline-variant` | `#d9d0c2` | Dividers only, never text |
+| Red ochre | `accent` | `#c84018` | Primary buttons, links, selected state, focus ring |
+| Ochre strong | `accent-strong` | `#a3360f` | Primary hover; ochre text on the tint |
+| Ochre tint | `accent-tint` | `#fef3ed` | Selected module row |
+| Night ink | `night` | `#12161b` | Skyline band, footer |
+| Night raised | `night-raised` | `#1c2128` | Panels inside night sections |
+| Night text | `night-ink` | `#f4efe6` | Text on night |
+| Night muted | `night-muted` | `#b4ada3` | Secondary text on night |
+| Ochre on night | `accent-on-night` | `#f08a5d` | Links and the button on night |
+| Savanna gold | `gold` | `#e3a13a` | Skyline line, text selection, small highlights on night |
 
-### Neutral
-- **Workbench Ink**: Main text and the dark panels that anchor the modular illustration and featured template shelf.
-- **Warm Paper**: The page canvas and mobile navigation background.
-- **White**: Content surfaces, template cards, and inverse text on orange or ink.
-- **Quiet Gray**: Supporting copy and secondary metadata.
-- **Warm Rule**: Fine dividers and grid lines across sections and lists.
-- **Deep Work Surface**: A slightly lifted dark tone for featured content sections.
-- **Warm Panel**: Catalog and detail hero panels that set apart template discovery content.
+Contrast (WCAG 2.x, from `bun run validate:contrast`):
+
+| Pair | Ratio | Pair | Ratio |
+|---|---|---|---|
+| ink on paper | 16.74 | night-ink on night | 15.86 |
+| ink-soft on paper | 10.18 | night-muted on night | 8.17 |
+| muted on paper | 6.64 | night-muted on night-raised | 7.28 |
+| muted on sand | 5.92 | ochre-on-night on night | 7.35 |
+| muted on ochre tint | 6.74 | night on ochre-on-night (button) | 7.35 |
+| ochre on paper | 4.52 | gold on night | 8.15 |
+| ochre on white | 5.00 | ink on gold | 8.31 |
+| white on ochre (button) | 5.00 | ochre ring on night | 3.63 (non-text, min 3) |
+| white on ochre strong | 6.79 | ochre strong on ochre tint | 6.23 |
+
+**Why these colours.** PRODUCT.md keeps Kigae's orange and black, so red
+ochre `#c84018` (the existing DESIGN.md accent, AA with white) and ink stay.
+Red ochre is also the colour of murram roads, so it reads as local without a
+flag. The new part is the night: a deep blue-black taken from a Nairobi
+evening, with the skyline in savanna gold. Warm paper replaces the cold
+white.
+
+**Decided against:** Kenya-flag green, red and black together on anything;
+safari browns and khaki; animal prints and shield motifs; jacaranda violet.
+The jacaranda is very Nairobi, but purple is the colour most often seen in
+generic AI-made pages, and a second accent would compete with ochre for
+"this is the action". Gradients of any kind are out.
+
+**Rules.** One ochre action per view. Gold never carries body text on paper
+(it fails there); on night it may set a short line or a highlight. Text on a
+coloured surface uses that surface's text token, never grey.
 
 ## Typography
 
-**Display Font:** Geist Variable (sans-serif fallback)
-**Body Font:** Geist Variable (sans-serif fallback)
-**Label/Mono Font:** Geist Mono Variable (monospace fallback)
+- **Display and headings:** Archivo Variable at `font-stretch: 112%` (class
+  `font-display`), weights 680 to 780. Archivo is a grotesque with a wide
+  stance that holds up at 88 px and still reads at 20 px. Latin and latin-ext
+  subsets only.
+- **Body and controls:** Geist Variable, 16 px, line height 1.6, measure up to
+  68 characters.
+- **Labels:** Geist Mono 11 px, uppercase, 0.08em tracking, for states and
+  indices inside components ("Preview", "On the roadmap"). Never as an eyebrow
+  above a heading, never as the reading voice.
 
-**Character:** Geist's compact shapes and negative tracking make large headlines direct and distinctive. The mono face is reserved for small indices and technical metadata, keeping the main reading voice clear.
+| Role | Size | Weight | Line height | Tracking |
+|---|---|---|---|---|
+| Display (one per page, the h1) | clamp(44px, 6vw, 88px) | 780 | 0.96 | -0.03em |
+| Headline (h2) | clamp(32px, 4vw, 56px) | 740 | 1.02 | -0.025em |
+| Title (h3, module names) | clamp(20px, 2vw, 26px) | 680 | 1.15 | -0.01em |
+| Lead | 18-20px | 400 | 1.5 | 0 |
+| Body | 16px | 400 | 1.6 | 0 |
+| Small | 14px | 400 | 1.5 | 0 |
+| Label | 11px mono | 500 | 1.2 | 0.08em |
 
-### Hierarchy
-- **Display** (690, clamp 54–86px, 0.99 line-height): The home and catalog hero statement.
-- **Headline** (640, clamp 36–57px, 1.08 line-height): Section headings and workbench explanations.
-- **Title** (600–650, commonly 17–28px, close tracking): Card titles, panel headings, and component names.
-- **Body** (400, commonly 13–16px, 1.6–1.8 line-height): Descriptions and explanatory copy; long-form article body is constrained to 680px.
-- **Label** (400, 9–11px, 0.04–0.13em tracking, often uppercase): Counts, progress, categories, and small navigation metadata.
+At 390 px the h1 fits in four lines or fewer.
 
 ## Layout
 
