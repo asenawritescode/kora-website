@@ -32,7 +32,7 @@ const SECTIONS = [
 
 export function DocsSidebar() {
   return (
-    <aside className="hidden md:block w-64 shrink-0 border-r border-outline-variant pt-8 pr-8 overflow-y-auto h-[calc(100vh-64px)] sticky top-16">
+    <aside className="hidden md:block w-64 shrink-0 border-r border-outline-variant pt-8 pr-8 overflow-y-auto h-[calc(100vh-72px)] sticky top-[72px]">
       <nav className="space-y-6">
         {SECTIONS.map((section) => (
           <div key={section.title}>
