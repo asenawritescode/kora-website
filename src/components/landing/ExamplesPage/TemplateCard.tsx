@@ -1,4 +1,5 @@
 import type { Template } from './data'
+import { PreviewLabel } from './TemplateStatus'
 
 export function TemplateCard({ template }: { template: Template }) {
   return (
@@ -13,6 +14,7 @@ export function TemplateCard({ template }: { template: Template }) {
       <h3 className="text-[24px] leading-tight font-semibold text-black mb-2">
         {template.name}
       </h3>
+      {template.availability === 'preview' && <div className="mb-3"><PreviewLabel /></div>}
       <p className="text-base text-[#5d5f5f] mb-4 flex-grow">
         {template.description}
       </p>

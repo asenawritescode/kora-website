@@ -1,5 +1,6 @@
 import type { Template } from '@/components/landing/ExamplesPage/data'
 import type { Article } from '@/components/landing/BlogPage/data'
+import { fetchTemplates, type CatalogTemplate } from '@/lib/catalog-client'
 
 const publicContentBaseURL = (
   import.meta.env.VITE_KORA_PUBLIC_CMS_BASE_URL as string | undefined
@@ -14,23 +15,6 @@ const publicContentSiteName = (
 type CmsListResponse<T = any> = {
   data?: T[]
   items?: T[]
-}
-
-type CmsTemplate = {
-  slug?: string
-  name?: string
-  template_name?: string
-  templateName?: string
-  description?: string
-  category?: string
-  features?: string[] | string
-  features_json?: string[] | string
-  featuresJson?: string[] | string
-  tags?: string[] | string
-  heroLabel?: string
-  hero_label?: string
-  sort_order?: number | string
-  sortOrder?: number | string
 }
 
 type CmsBlogPost = {
@@ -61,14 +45,28 @@ let templatesCache: Promise<Template[]> | null = null
 let blogPostsCache: Promise<Article[]> | null = null
 let blogPostCache = new Map<string, Promise<Article | null>>()
 
+// Templates come from the Cloud catalog. A failed load is not cached, so a retry refetches.
 export function getPublicTemplates(): Promise<Template[]> {
-  templatesCache ??= fetchPublicTemplates()
+  templatesCache ??= fetchTemplates().then((items) => items.map(toTemplate))
+  templatesCache.catch(() => { templatesCache = null })
   return templatesCache
 }
 
 export function getPublicBlogPosts(): Promise<Article[]> {
   blogPostsCache ??= fetchPublicBlogPosts()
+  blogPostsCache.catch(() => { blogPostsCache = null })
   return blogPostsCache
+}
+
+function toTemplate(item: CatalogTemplate): Template {
+  return {
+    slug: item.slug,
+    name: item.name,
+    description: item.summary,
+    category: item.category,
+    availability: item.availability,
+    features: item.components.map((c) => (c.selection === 'optional' ? `${c.name} (optional)` : c.name)),
+  }
 }
 
 export async function fetchPublicBlogPost(slug: string): Promise<Article | null> {
@@ -83,11 +81,6 @@ export async function fetchPublicBlogPost(slug: string): Promise<Article | null>
     })
   blogPostCache.set(trimmed, request)
   return request
-}
-
-async function fetchPublicTemplates(): Promise<Template[]> {
-  const payload = await fetchCmsList<CmsTemplate>('/api/public/resource/Template?limit=100')
-  return payload.map(normalizeTemplate).filter((template): template is Template => Boolean(template.slug && template.name))
 }
 
 async function fetchPublicBlogPosts(): Promise<Article[]> {
@@ -120,19 +113,6 @@ async function fetchCms(path: string): Promise<Response> {
   })
 }
 
-function normalizeTemplate(item: CmsTemplate): Template {
-  return {
-    slug: String(item.slug || '').trim(),
-    name: String(item.template_name || item.templateName || item.name || '').trim(),
-    description: String(item.description || '').trim(),
-    category: String(item.category || 'Operations').trim() || 'Operations',
-    features: normalizeStringList(item.features || item.features_json || item.featuresJson),
-    tags: normalizeOptionalStringList(item.tags),
-    heroLabel: normalizeOptionalString(item.hero_label || item.heroLabel),
-    sortOrder: normalizeOptionalNumber(item.sort_order || item.sortOrder),
-  }
-}
-
 function normalizeBlogPost(item: CmsBlogPost): Article {
   const publishedAt = String(item.published_at || item.publishedAt || '').trim()
   const body = String(item.body || '').trim()
@@ -161,20 +141,6 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
   }
 }
 
-function normalizeStringList(value: string[] | string | undefined): string[] {
-  if (!value) return []
-  if (Array.isArray(value)) return value.map((item) => String(item).trim()).filter(Boolean)
-  return value
-    .split(',')
-    .map((item) => item.trim())
-    .filter(Boolean)
-}
-
-function normalizeOptionalStringList(value: string[] | string | undefined): string[] | undefined {
-  const items = normalizeStringList(value)
-  return items.length ? items : undefined
-}
-
 function normalizeOptionalString(value: string | undefined): string | undefined {
   const normalized = String(value || '').trim()
   return normalized || undefined
@@ -195,12 +161,6 @@ function encodePath(path: string): string {
     .split('/')
     .map((segment) => encodeURIComponent(segment))
     .join('/')
-}
-
-function normalizeOptionalNumber(value: number | string | undefined): number | undefined {
-  if (value === undefined || value === null || value === '') return undefined
-  const normalized = typeof value === 'number' ? value : Number(value)
-  return Number.isFinite(normalized) ? normalized : undefined
 }
 
 function estimateReadTime(text: string): string {

@@ -8,6 +8,7 @@ export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [loadError, setLoadError] = useState(false)
+  const [attempt, setAttempt] = useState(0)
   const heroArticle = articles[0]
   const gridArticles = articles.slice(1)
 
@@ -28,7 +29,7 @@ export default function BlogPage() {
     return () => {
       alive = false
     }
-  }, [])
+  }, [attempt])
 
   return (
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
@@ -46,14 +47,13 @@ export default function BlogPage() {
         </p>
       </header>
 
-      {loadError && (
-        <div className="bg-white border border-[#e5e5e5] rounded-sm p-4 text-sm text-[#5d5f5f]">
-          Showing local articles while the public content catalog is unavailable.
-        </div>
-      )}
-
       {isLoading ? (
         <BlogLoadingState />
+      ) : loadError ? (
+        <div className="bg-white border border-[#e5e5e5] rounded-sm p-6 text-sm text-[#5d5f5f]" role="alert">
+          <p className="mb-3">We could not load articles.</p>
+          <button type="button" onClick={() => setAttempt((n) => n + 1)} className="text-xs font-medium text-black underline underline-offset-4 font-mono">Try again</button>
+        </div>
       ) : heroArticle ? (
         <>
           <HeroPost article={heroArticle} />
@@ -61,7 +61,7 @@ export default function BlogPage() {
         </>
       ) : (
         <div className="bg-white border border-[#e5e5e5] rounded-sm p-6 text-sm text-[#5d5f5f]">
-          No published articles are available yet.
+          No articles are published yet.
         </div>
       )}
     </div>
