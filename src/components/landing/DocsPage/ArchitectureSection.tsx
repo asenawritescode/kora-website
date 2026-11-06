@@ -1,3 +1,4 @@
+import { BRAND } from '@/lib/brand'
 export function ArchitectureSection() {
   return (
     <section className="mb-24" id="architecture">
@@ -5,7 +6,7 @@ export function ArchitectureSection() {
         Architecture
       </h2>
       <p className="text-base text-[#5d5f5f] mb-6 leading-relaxed">
-        Kora is a single Go binary — about 30MB — with a React admin UI embedded inside.
+        {BRAND} is a single Go binary — about 30MB — with a React admin UI embedded inside.
         It talks directly to MySQL or LibSQL. No Redis, no message queue, no external
         services. Deploy anywhere.
       </p>

@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
 import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { BRAND } from '@/lib/brand'
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -30,7 +31,7 @@ export function Navigation() {
         {/* Logo + Desktop Links */}
         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
           <Link to="/" className="text-[22px] sm:text-[28px] leading-[1] font-semibold text-black tracking-tight shrink-0">
-            Kora
+            {BRAND}
           </Link>
           <div className="hidden lg:flex items-center gap-1 xl:gap-2 min-w-0">
             {PRIMARY_LINKS.map((link) => {

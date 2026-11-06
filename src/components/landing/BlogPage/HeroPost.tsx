@@ -1,6 +1,7 @@
 import { Link } from '@tanstack/react-router'
 import { User } from 'lucide-react'
 import type { Article } from './data'
+import { BRAND } from '@/lib/brand'
 
 export function HeroPost({ article }: { article: Article }) {
   const heroImage = article.heroImage || article.ogImage
@@ -42,7 +43,7 @@ export function HeroPost({ article }: { article: Article }) {
             <User className="h-4 w-4 text-[#5d5f5f]" />
           </div>
           <div className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
-            By {article.authorName || 'Kora Team'}
+            By {article.authorName || `${BRAND} Team`}
           </div>
           <div className="ml-auto text-black group-hover:translate-x-2 transition-transform duration-300">
             <ArrowRight />
