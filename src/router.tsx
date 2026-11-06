@@ -1,92 +1,125 @@
+import { lazy, Suspense, type ComponentType } from 'react'
 import { createRouter, createRoute, createRootRoute } from '@tanstack/react-router'
 import MarketingLayout from '@/components/landing/MarketingLayout'
-import DocsLayout from '@/components/landing/DocsLayout'
-import BlogLayout from '@/components/landing/BlogLayout'
-import HomePage from '@/routes/landing/home'
-import ExamplesPage from '@/routes/landing/examples'
-import DocsPage from '@/routes/landing/docs'
-import BlogPage from '@/routes/landing/blog'
-import BlogPostPage from '@/routes/landing/blog-post'
-import OnboardPage from '@/routes/landing/onboard'
-import CloudPage from '@/routes/landing/cloud'
-import BenefitsPage from '@/routes/landing/benefits'
-import AIBuilderPage from '@/routes/landing/ai-builder'
-import PricingPage from '@/routes/landing/pricing'
-import OpenSourcePage from '@/routes/landing/open-source'
-import NotFound from '@/components/landing/NotFound'
+
+type Loader = () => Promise<{ default: ComponentType }>
+
+// Route-level code splitting: every page body is its own chunk, fetched when
+// the route is first visited. Layouts shared by most pages (MarketingLayout)
+// stay in the entry chunk so navigation and footer paint immediately.
+// Docs and blog layouts load together with their page in a single request.
+const fallback = <div className="min-h-[60vh]" aria-hidden="true" />
+
+function page(load: Loader) {
+  const Page = lazy(load)
+  return () => (
+    <Suspense fallback={fallback}>
+      <Page />
+    </Suspense>
+  )
+}
+
+function inMarketing(load: Loader) {
+  const Page = page(load)
+  return () => (
+    <MarketingLayout>
+      <Page />
+    </MarketingLayout>
+  )
+}
+
+function withLayout(loadLayout: () => Promise<{ default: ComponentType<{ children: React.ReactNode }> }>, load: Loader) {
+  return page(async () => {
+    const [{ default: Layout }, { default: Body }] = await Promise.all([loadLayout(), load()])
+    return { default: () => <Layout><Body /></Layout> }
+  })
+}
+
+const HomePage = inMarketing(() => import('@/routes/landing/home'))
+const ExamplesPage = inMarketing(() => import('@/routes/landing/examples'))
+const OnboardPage = inMarketing(() => import('@/routes/landing/onboard'))
+const CloudPage = inMarketing(() => import('@/routes/landing/cloud'))
+const BenefitsPage = inMarketing(() => import('@/routes/landing/benefits'))
+const AIBuilderPage = inMarketing(() => import('@/routes/landing/ai-builder'))
+const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
+const OpenSourcePage = inMarketing(() => import('@/routes/landing/open-source'))
+const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
+const DocsPage = withLayout(() => import('@/components/landing/DocsLayout'), () => import('@/routes/landing/docs'))
+const BlogPage = withLayout(() => import('@/components/landing/BlogLayout'), () => import('@/routes/landing/blog'))
+const BlogPostPage = withLayout(() => import('@/components/landing/BlogLayout'), () => import('@/routes/landing/blog-post'))
 
 const rootRoute = createRootRoute()
 
 const onboardRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/onboard',
-  component: () => <MarketingLayout><OnboardPage /></MarketingLayout>,
+  component: OnboardPage,
 })
 
 const cloudRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/cloud',
-  component: () => <MarketingLayout><CloudPage /></MarketingLayout>,
+  component: CloudPage,
 })
 
 const benefitsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/benefits',
-  component: () => <MarketingLayout><BenefitsPage /></MarketingLayout>,
+  component: BenefitsPage,
 })
 
 const aiBuilderRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/ai-builder',
-  component: () => <MarketingLayout><AIBuilderPage /></MarketingLayout>,
+  component: AIBuilderPage,
 })
 
 const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/pricing',
-  component: () => <MarketingLayout><PricingPage /></MarketingLayout>,
+  component: PricingPage,
 })
 
 const openSourceRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/open-source',
-  component: () => <MarketingLayout><OpenSourcePage /></MarketingLayout>,
+  component: OpenSourcePage,
 })
 
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '$',
-  component: () => <MarketingLayout><NotFound /></MarketingLayout>,
+  component: NotFoundPage,
 })
 
 const homeRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/',
-  component: () => <MarketingLayout><HomePage /></MarketingLayout>,
+  component: HomePage,
 })
 
 const examplesRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/examples',
-  component: () => <MarketingLayout><ExamplesPage /></MarketingLayout>,
+  component: ExamplesPage,
 })
 
 const docsRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/docs',
-  component: () => <DocsLayout><DocsPage /></DocsLayout>,
+  component: DocsPage,
 })
 
 const blogRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/blog',
-  component: () => <BlogLayout><BlogPage /></BlogLayout>,
+  component: BlogPage,
 })
 
 const blogPostRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/blog/$slug',
-  component: () => <BlogLayout><BlogPostPage /></BlogLayout>,
+  component: BlogPostPage,
 })
 
 const routeTree = rootRoute.addChildren([
