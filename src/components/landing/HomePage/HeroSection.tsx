@@ -1,54 +1,62 @@
 import { Link } from '@tanstack/react-router'
-import { BadgeCheck, Cloud, Scale } from 'lucide-react'
-import { WorkspacePreview } from './WorkspacePreview'
+import { CTA_LINK } from '@/lib/site-links'
+import { NairobiSkyline } from '@/components/landing/NairobiSkyline'
 
+// First screen: who it is for and what it does, one action, the real product,
+// and the skyline as the horizon. Copy rules: PRODUCT.md and
+// docs/african-b2b-copywriting-principles.md. Every verb here was checked in a
+// real pilot workspace: a sale writes a stock issue and the balance drops.
 export function HeroSection() {
   return (
-    <section className="max-w-[960px] mx-auto px-4 sm:px-6 py-20 md:py-[120px] text-center">
-      <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black mb-3 tracking-[-0.03em] md:tracking-[-0.04em]">
-        Turn requests into a working app.<br />Keep records, workflows, and approvals together.
-      </h1>
-      <div className="mb-6">
-        <span className="inline-block text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
-        Build from business language
-        </span>
+    <section aria-labelledby="hero-title" className="bg-paper">
+      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-10 pb-10 md:pt-14 md:pb-14 grid gap-10 lg:grid-cols-12 lg:items-center">
+        <div className="lg:col-span-7">
+          <h1
+            id="hero-title"
+            className="font-display text-ink text-[clamp(44px,5vw,72px)] leading-[0.96] font-[780] tracking-[-0.03em] [text-wrap:balance]"
+          >
+            Record every sale. Know what stock is left.
+          </h1>
+          <p className="mt-6 max-w-[36rem] text-[18px] md:text-[20px] leading-[1.5] text-on-surface-variant">
+            Shop software for small businesses. Each sale you record comes off your stock count, and the owner dashboard shows what sold and what is running low.
+          </p>
+          <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-4">
+            <Link
+              to={CTA_LINK.href}
+              className="inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px"
+            >
+              {CTA_LINK.label}
+            </Link>
+            <a
+              href="#modules"
+              className="inline-flex min-h-11 items-center text-[15px] font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color,text-decoration-thickness] hover:decoration-accent hover:decoration-2"
+            >
+              Choose your modules
+            </a>
+          </div>
+          <p className="mt-5 text-[14px] text-muted">Free during the pilot. Works in the browser on a phone or a computer.</p>
+        </div>
+        <div className="hidden lg:block lg:col-span-5">
+          <img
+            src="/studio-owner-dashboard.webp"
+            width={1200}
+            height={700}
+            fetchPriority="high"
+            alt="The Kigae owner dashboard in a pilot shop: items such as maize flour, sugar and cooking oil with their barcodes and prices in KES."
+            className="block w-full h-auto border border-outline-variant bg-white"
+          />
+        </div>
       </div>
-      <p className="text-lg leading-7 text-on-surface-variant max-w-xl mx-auto mb-2">
-        Open-source software for keeping records, workflows, and approvals in one place.
-      </p>
-      <p className="text-sm text-muted max-w-xl mx-auto mb-8">
-        Start from a template or from a blank workspace. No credit card required.
-      </p>
-
-      {/* CTAs */}
-      <div className="flex justify-center items-center gap-4 mb-8">
-        <Link to="/onboard" className="bg-accent text-white text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-accent-strong transition-colors font-mono">
-          Start onboarding
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-        <Link to="/examples" className="bg-transparent text-black border border-outline-variant text-xs font-medium px-8 py-3 rounded-sm flex items-center gap-2 hover:bg-gray-50 transition-colors font-mono">
-          See templates
-          <ArrowRight className="h-4 w-4" />
-        </Link>
+      <div className="bg-night text-night-ink">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 pt-6 md:pt-8">
+          <p className="font-display text-[clamp(22px,2.4vw,32px)] leading-[1.1] font-[720] tracking-[-0.02em]">
+            From Nairobi to the world
+          </p>
+        </div>
+        <div className="relative h-[clamp(140px,15vw,220px)] overflow-hidden text-gold">
+          <NairobiSkyline className="skyline-draw absolute inset-0 h-full w-full" />
+        </div>
       </div>
-
-      {/* Trust signals */}
-      <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-muted mb-16 md:mb-[120px] flex-wrap font-mono">
-        <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>No credit card</span></div>
-        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source (AGPL-3.0)</span></div>
-        <div className="flex items-center gap-2"><Cloud className="h-4 w-4" /><span>Managed cloud</span></div>
-      </div>
-
-      <WorkspacePreview />
     </section>
-  )
-}
-
-// Small helper to avoid extra file for a one-line icon wrapper
-function ArrowRight({ className }: { className?: string }) {
-  return (
-    <svg className={className} width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M5 12h14M12 5l7 7-7 7" />
-    </svg>
   )
 }

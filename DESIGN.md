@@ -1,6 +1,6 @@
 ---
 name: Kigae Public Website
-description: A modular workbench for finding business tools and shaping a workspace.
+description: Shop software from Nairobi. Pick the modules you need; they work together.
 colors:
   paper: "#f7f3ec"
   sand: "#ede6da"
@@ -49,77 +49,66 @@ typography:
     fontWeight: 500
     letterSpacing: "0.08em"
 rounded:
-  mark: "1px"
-  circle: "50%"
+  none: "0"
 spacing:
+  xs: "4px"
   sm: "8px"
   md: "16px"
   lg: "24px"
   xl: "40px"
+  2xl: "64px"
+  section: "clamp(64px, 9vw, 128px)"
 components:
   button-primary:
-    backgroundColor: "{colors.primary}"
+    backgroundColor: "{colors.ochre}"
     textColor: "{colors.white}"
-    typography: "13px / 650 Geist Variable"
-    padding: "0 19px"
-    height: "47px"
-  button-light:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    typography: "13px / 650 Geist Variable"
-    padding: "0 18px"
+    typography: "15px / 600 Geist Variable"
+    padding: "0 22px"
     height: "48px"
-  filter-chip:
-    backgroundColor: "transparent"
-    textColor: "#53524e"
-    typography: "11px Geist Variable"
-    rounded: "0"
-    padding: "0 14px"
-    height: "44px"
-  template-card:
+  button-on-night:
+    backgroundColor: "{colors.ochre-on-night}"
+    textColor: "{colors.night}"
+    typography: "15px / 600 Geist Variable"
+    padding: "0 22px"
+    height: "48px"
+  text-action:
+    textColor: "{colors.ink}"
+    typography: "15px / 600 Geist Variable, underlined"
+  module-row:
     backgroundColor: "{colors.white}"
     textColor: "{colors.ink}"
-    typography: "Geist Variable"
     rounded: "0"
-    padding: "22px"
-  input-search:
-    backgroundColor: "transparent"
-    textColor: "{colors.ink}"
-    typography: "12px Geist Variable"
-    padding: "0 11px"
-    height: "44px"
-  input-workflow:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    typography: "13px / 1.5 Geist Variable"
-    rounded: "0"
-    padding: "12px 13px"
-    height: "63px"
+    padding: "18px 20px"
   navigation-main:
     backgroundColor: "{colors.paper}"
     textColor: "{colors.ink}"
-    typography: "13px / 550 Geist Variable"
-    padding: "0 24px"
-    height: "76px"
+    typography: "14px / 550 Geist Variable"
+    height: "72px"
 ---
 
 # Design System: Kigae Public Website
 
 ## Overview
 
-**Creative North Star: “Modular workbench”**
+**Creative North Star: "From Nairobi to the world."**
 
-Kigae's public site keeps its orange and black identity while helping small business owners understand the software and get started. The home page says what the software helps with (tracking sales and stock), then points visitors to templates they can inspect before setup. Cloud and self-hosted choices remain available for visitors who need them.
+Kigae is shop software built in Nairobi. The site sells one idea, the same one
+Odoo, Zoho One and ERPNext sell: pick the modules your business needs, and they
+work together in one workspace. It sells it the way a Nairobi business would:
+plainly, with the real product on screen, and without numbers it cannot back.
 
-The visual language pairs confident, tightly tracked sans-serif headlines with practical rows, shelves, and grids. Warm paper surfaces keep reading areas calm; dark sections give template collections contrast. Orange marks the brand, selected actions, and active progress. Most interface edges stay square and borders organize content instead of ornamental card shadows. The home hero stays focused on its message and next step without an abstract software diagram.
+The look is bold and warm by day, deep by night. Warm paper and near-black ink
+carry the reading. Red ochre marks every action. A night band holds a one-line
+drawing of the Nairobi skyline in savanna gold, with the owner's line "From
+Nairobi to the world". Headings are a semi-expanded heavy grotesque (Archivo);
+reading text is Geist. Edges are square. Structure comes from rules, rows and
+type size, not from cards and shadows.
 
-**Key Characteristics:**
-- Plain descriptions of everyday business tasks lead the public journey.
-- Templates show what the software can help a business do before signup.
-- Orange signals Kigae and meaningful actions against warm paper and ink.
-- Square, ruled structures give the site a practical workbench feel.
-
-**Not-canonized defect:** Eyebrow/kicker metadata labels remain in some home, catalog, and detail content; they are page-level drift, not a system rule.
+**Key characteristics**
+- A business task first, in plain words; the real product next to it.
+- One action colour (red ochre) and one highlight (savanna gold, night only).
+- Square, ruled rows and shelves. No card grids of icon + title + line.
+- Every claim on the page is something the product does today.
 
 ## Colours
 
@@ -244,53 +233,41 @@ At 390 px the h1 fits in four lines or fewer.
 - When a building is corrected, keep the silhouettes simple: the outline
   must read at 140 px tall.
 
-## Layout
+## Layout and spacing
 
-The desktop system uses centered content frames around 1160–1240px wide, with generous side padding and clear section breaks. The home page gives its headline, explanation, and template action room to breathe. Template discovery uses a three-column ruled grid at wide widths; it steps to two columns below 900px and one column on narrow screens. Marketing feature grids and step lists likewise collapse to a single column on mobile. Navigation becomes a compact expandable menu below 680px. The spacing rhythm repeatedly uses 8px, 16px, 24px, and 40px steps, with larger section spacing where content needs a pause.
+- Content frame 1200 px, side gutter 24 px (16 px at 390). Every section
+  shares the same left and right edges.
+- Spacing steps: 4, 8, 16, 24, 40, 64 px. Section padding
+  `clamp(64px, 9vw, 128px)`.
+- A section has one heading, then its content. No section repeats the rhythm
+  of the one before it: a row list, then a product frame, then a three-step
+  strip, then a night band.
+- Grids: 12 columns at 1440, collapse to one column under 768. No horizontal
+  scroll at any width.
 
-## Elevation & Depth
+## Shape and depth
 
-Depth is mostly structural: warm and dark tonal surfaces, thin rules, and deliberate spacing distinguish regions. The catalog's template cards use an inset orange top edge on hover; the navigation popover has a diffuse shadow to separate it from the page. Skeleton loading uses a restrained opacity pulse, with animation disabled for reduced-motion preferences.
-
-### Shadow Vocabulary
-- **Navigation popover** (`0 15px 38px rgb(23 23 22 / .12)`): separates the open Explore menu from the sticky header and page.
-- **Template hover edge** (`inset 0 3px 0` in Kigae Orange): state cue on a template card, not a resting card shadow.
-
-## Shapes
-
-The interface is predominantly square-cornered: cards, panels, controls, and buttons rely on their edges and rules for structure. The four-piece Kigae mark has a minimal 1px corner; onboarding progress nodes alone use circular geometry. Do not infer a rounded-card system from legacy rich-text content styles.
+- Radius 0 everywhere. Corners are square, including buttons, inputs and
+  checkboxes.
+- Depth is tone and rule: paper, sand, white, night. No resting shadows. A
+  product capture sits in a 1 px rule frame with no shadow and no device
+  chrome.
+- Focus: 3 px ochre outline, 3 px offset, on every interactive element, on
+  day and on night (3.63:1 against night).
 
 ## Components
 
 ### Buttons
-- **Character:** Confident, compact actions with clear color contrast and a small directional icon where present.
-- **Shape:** Square corners (0px); the brand mark's own tiles use a subtle 1px corner.
-- **Primary:** Orange fill, white text, 13px semibold label, 47px minimum height, and 19px horizontal padding.
-- **Hover / Focus:** Primary buttons shift to a slightly brighter orange and rise 1px on hover; keyboard focus uses the shared 3px orange outline with 3px offset.
-- **Secondary / light:** White fill and ink text; on hover, the surface gains a faint warm tint.
-- **Text action:** Underlined or clean text links use ink by default and turn orange on hover.
-
-### Chips
-- **Style:** Filter chips are transparent with a fine warm-gray border and square corners.
-- **State:** The selected chip switches to ink fill with white text; hover darkens the border and text.
-
-### Cards / Containers
-- **Corner Style:** Square, with no card radius.
-- **Background:** White for template cards and composition panels; warm paper or warm panel for guide and hero surfaces; ink for featured work areas.
-- **Shadow Strategy:** Flat at rest. The template card hover adds an inset orange top rule.
-- **Border:** Fine warm-gray grid lines divide cards into a connected shelf.
-- **Internal Padding:** 22px for template cards; detail composition panel uses 24–27px.
-
-### Inputs / Fields
-- **Style:** Search is a transparent, bottom-ruled field; the business-needs text area is white with a fine gray border and square corners.
-- **Focus:** Search underline turns orange. The business-needs field shifts its border orange and adds a 1px orange inner ring.
-- **Disabled:** The business-needs field takes a muted warm-gray background; disabled submit action lowers opacity.
+- **Primary:** ochre fill, white 15 px semibold label, 48 px tall, square.
+  Hover: ochre strong. One per view.
+- **On night:** ochre-on-night fill, night text.
+- **Text action:** ink, underlined, arrow optional. Turns ochre on hover.
 
 ### Navigation
-- **Style:** Sticky warm-paper header with a fine lower rule and 76px desktop height. Brand lockup pairs a geometric four-tile mark with a bold Kigae wordmark.
-- **Typography:** Compact 13px medium links; primary paths are visible while Docs, Cloud, and Open source sit under Explore.
-- **States:** Current and hovered links use ink. The primary template action is orange.
-- **Mobile:** At 680px and below, links collapse behind a 42px menu control; the expanded links become a ruled vertical list.
+- Paper header, 72 px, fine lower rule, fixed at the top. Wordmark in Archivo. Primary
+  links visible; Cloud, Open source, Docs and Blog under Explore. One ochre
+  action at the right. Below 1024 px the links fold behind a 44 px menu
+  button into a ruled list.
 
 ### Template Discovery Card
 Template cards are flat white blocks in a ruled catalog grid. A small category, orange mark, tight title, short description, and included-items list show what the template is for. Hover adds a thin inset orange top edge and a faint warm surface shift.

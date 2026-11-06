@@ -8,7 +8,7 @@ export default function MarketingLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen flex flex-col bg-paper text-ink antialiased" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
       <SkipLink />
       <Navigation />
-      <main id="main" tabIndex={-1} className="focus:outline-none flex-grow pt-20 md:pt-24">
+      <main id="main" tabIndex={-1} className="focus:outline-none flex-grow pt-[72px]">
         {children}
       </main>
       <Footer />
