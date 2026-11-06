@@ -1,4 +1,4 @@
-import { ArrowRight, Code2, Database, FileCode2, GitBranch, KeyRound, Scale, Server, Workflow } from 'lucide-react'
+import { ArrowRight, Code2, Database, FileCode2, GitBranch, KeyRound, Server, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { TerminalDemo } from './HomePage/TerminalDemo'
 import { BRAND } from '@/lib/brand'
@@ -23,10 +23,6 @@ export default function OpenSourcePage() {
   return (
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
       <header className="pt-8 space-y-4">
-        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
-          <Scale className="h-3.5 w-3.5" />
-          Open Source
-        </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
           Open-source engine for records, workflows, and business apps.
         </h1>
@@ -34,11 +30,11 @@ export default function OpenSourcePage() {
           {BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
-          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-accent text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors font-mono">
+          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors">
             View GitHub
             <ArrowRight className="h-4 w-4" />
           </a>
-          <Link to="/docs" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
+          <Link to="/docs" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-sm font-semibold px-6 py-3 rounded-sm hover:border-black transition-colors">
             Read docs
           </Link>
         </div>
@@ -57,7 +53,7 @@ export default function OpenSourcePage() {
           ].map(([title, description]) => (
             <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
               <Server className="h-6 w-6 text-accent mb-4" />
-              <h3 className="text-sm font-semibold text-black mb-2 font-mono uppercase">{title}</h3>
+              <h3 className="text-sm font-semibold text-black mb-2">{title}</h3>
               <p className="text-sm text-muted">{description}</p>
             </div>
           ))}
@@ -88,12 +84,12 @@ export default function OpenSourcePage() {
         <Link to="/cloud" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Use managed cloud</h2>
           <p className="text-sm text-muted mb-4">Start with a hosted workspace instead of running your own server.</p>
-          <span className="text-xs font-medium text-accent font-mono">View {BRAND} Cloud →</span>
+          <span className="text-sm font-semibold text-accent">View {BRAND} Cloud →</span>
         </Link>
         <Link to="/docs" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Self-host the engine</h2>
           <p className="text-sm text-muted mb-4">Review setup, configuration, deployment, APIs, SDKs, and extension points.</p>
-          <span className="text-xs font-medium text-accent font-mono">Read docs →</span>
+          <span className="text-sm font-semibold text-accent">Read docs →</span>
         </Link>
       </section>
 

@@ -14,7 +14,7 @@ export function ArchitectureSection() {
       {/* Request flow */}
       <div className="bg-paper border border-outline-variant rounded-sm p-5 mb-6 overflow-x-auto">
         <h3 className="font-bold text-black text-sm mb-3">Request Flow</h3>
-        <div className="flex items-center gap-1.5 text-[11px] mb-3 flex-wrap" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <div className="font-mono flex items-center gap-1.5 text-[11px] mb-3 flex-wrap">
           <span className="text-muted">Request</span>
           <span className="text-muted">→</span>
           <span className="px-1.5 py-0.5 bg-white border border-outline-variant rounded-sm">Recovery</span>
@@ -27,7 +27,7 @@ export function ArchitectureSection() {
           <span className="text-muted">→</span>
           <span className="text-muted">API / SPA / Console</span>
         </div>
-        <p className="text-xs text-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <p className="text-xs text-muted">
           The SiteRouter maps incoming hostnames to sites. Each site gets its own database,
           users, and configuration — all in-process, no orchestration.
         </p>

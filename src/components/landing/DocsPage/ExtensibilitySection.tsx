@@ -47,7 +47,7 @@ return { doc: order };`}
             Scripts hook into 8 ORM lifecycle events. Synchronous events can reject operations.
             Async events fire-and-forget for side effects.
           </p>
-          <div className="grid grid-cols-2 gap-2 text-xs font-mono">
+          <div className="grid grid-cols-2 gap-2 text-xs">
             {[
               ['before_insert', 'sync — can reject'],
               ['after_insert', 'async — side effects'],

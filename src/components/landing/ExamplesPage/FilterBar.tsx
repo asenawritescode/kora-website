@@ -22,7 +22,7 @@ export function FilterBar({ categories, activeCategory, onCategoryChange, search
                 ? 'bg-black text-white border-black'
                 : 'bg-transparent text-muted border-outline-variant hover:border-black'
             }`}
-            style={{ fontFamily: "'Geist Mono Variable', monospace" }}
+           
           >
             {cat}
           </button>

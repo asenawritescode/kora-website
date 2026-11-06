@@ -36,7 +36,7 @@ export default function BlogPage() {
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
       {/* Page Header */}
       <header className="space-y-4 pt-8">
-        <div className="flex items-center gap-2 text-sm text-muted uppercase tracking-[0.15em]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <div className="flex items-center gap-2 text-sm text-muted">
           <span className="w-8 h-[1px] bg-outline-variant" />
           <span>Guides & Notes</span>
         </div>
@@ -53,7 +53,7 @@ export default function BlogPage() {
       ) : loadError ? (
         <div className="bg-white border border-outline-variant rounded-sm p-6 text-sm text-muted" role="alert">
           <p className="mb-3">We could not load articles.</p>
-          <button type="button" onClick={() => setAttempt((n) => n + 1)} className="text-xs font-medium text-black underline underline-offset-4 font-mono">Try again</button>
+          <button type="button" onClick={() => setAttempt((n) => n + 1)} className="text-sm font-semibold text-black underline underline-offset-4">Try again</button>
         </div>
       ) : heroArticle ? (
         <>

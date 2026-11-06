@@ -91,11 +91,11 @@ export default function BlogPost({ slug }: BlogPostProps) {
       <ArticleShell>
         <header className="mb-[120px] max-w-3xl">
           <div className="flex items-center gap-4 mb-8">
-            <span className="text-xs font-medium text-accent-strong bg-accent/10 px-2 py-1 rounded-sm uppercase tracking-wider font-mono">
+            <span className="text-sm font-semibold text-accent-strong bg-accent/10 px-2 py-1 rounded-sm">
               {post.category}
             </span>
-            <span className="text-xs text-muted font-mono">{post.date}</span>
-            <span className="text-xs text-muted flex items-center gap-1 font-mono">
+            <span className="text-xs text-muted">{post.date}</span>
+            <span className="text-xs text-muted flex items-center gap-1">
               <Clock className="h-3 w-3" /> {post.readTime}
             </span>
           </div>
@@ -110,8 +110,8 @@ export default function BlogPost({ slug }: BlogPostProps) {
               <User className="h-5 w-5 text-muted" />
             </div>
             <div>
-              <div className="text-xs text-black font-mono">{post.authorName}</div>
-              <div className="text-xs text-muted font-mono">{BRAND}</div>
+              <div className="text-xs text-black">{post.authorName}</div>
+              <div className="text-xs text-muted">{BRAND}</div>
             </div>
           </div>
         </header>
@@ -150,7 +150,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
 function ArticleShell({ children }: { children: ReactNode }) {
   return (
     <article className="max-w-[960px] mx-auto px-6 pb-[120px]">
-      <Link to="/blog" className="inline-flex items-center gap-2 text-xs text-muted hover:text-black transition-colors mb-8 font-mono">
+      <Link to="/blog" className="inline-flex items-center gap-2 text-xs text-muted hover:text-black transition-colors mb-8">
         <ArrowLeft className="h-3.5 w-3.5" /> Back to Blog
       </Link>
       {children}

@@ -20,9 +20,9 @@ export function QuickStartSection() {
 
       <div className="bg-code rounded-sm overflow-hidden mb-4">
         <div className="flex items-center justify-between px-4 py-2 bg-code-rule border-b border-outline-variant/30">
-          <span className="text-xs text-code-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>terminal</span>
+          <span className="font-mono text-xs text-code-muted">terminal</span>
         </div>
-        <pre className="p-4 text-xs text-code-ink overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <pre className="font-mono p-4 text-xs text-code-ink overflow-x-auto leading-relaxed">
           <code>{DOCKER_CMD}</code>
         </pre>
       </div>
@@ -36,7 +36,7 @@ export function QuickStartSection() {
 
       <h3 className="font-bold text-black mb-3">Prefer to build from source?</h3>
       <div className="bg-code rounded-sm overflow-hidden mb-4">
-        <pre className="p-4 text-xs text-code-ink overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <pre className="font-mono p-4 text-xs text-code-ink overflow-x-auto leading-relaxed">
           <code>{`git clone https://github.com/asenawritescode/kora.git
 cd kora
 docker compose up -d mysql

@@ -6,7 +6,7 @@ export function TemplateCard({ template }: { template: Template }) {
     <div className="bg-white border border-outline-variant rounded-sm p-8 hover:border-black transition-colors group flex flex-col h-full">
       {/* Initial badge */}
       <div className="bg-surface-container p-3 rounded-sm w-10 h-10 mb-4 group-hover:bg-accent group-hover:text-white transition-colors flex items-center justify-center">
-        <span className="text-sm font-semibold text-black group-hover:text-white" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <span className="text-sm font-semibold text-black group-hover:text-white">
           {template.name.charAt(0)}
         </span>
       </div>
@@ -23,13 +23,13 @@ export function TemplateCard({ template }: { template: Template }) {
       <div className="border-t border-outline-variant pt-2 mt-auto">
         <ul className="space-y-2">
           {template.features.map((feature) => (
-            <li key={feature} className="flex items-center text-muted text-sm" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+            <li key={feature} className="flex items-center text-muted text-sm">
               <span className="mr-2 text-muted">—</span>
               {feature}
             </li>
           ))}
         </ul>
-        <a href={`/onboard?template=${template.slug}`} className="inline-block mt-4 text-xs font-medium text-accent font-mono">
+        <a href={`/onboard?template=${template.slug}`} className="inline-block mt-4 text-sm font-semibold text-accent">
           Start with this →
         </a>
       </div>

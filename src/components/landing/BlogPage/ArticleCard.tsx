@@ -20,7 +20,7 @@ export function ArticleCard({ article }: { article: Article }) {
       </div>
 
       <div className="p-6 flex flex-col flex-grow gap-4">
-        <div className="flex items-center gap-2 text-sm text-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <div className="flex items-center gap-2 text-sm text-muted">
           <span className="text-accent">■</span> {article.category}
         </div>
         <h4 className="text-[24px] leading-tight font-semibold text-black">
@@ -29,7 +29,7 @@ export function ArticleCard({ article }: { article: Article }) {
         <p className="text-base text-on-surface-variant flex-grow line-clamp-2">
           {article.description}
         </p>
-        <div className="text-xs text-muted pt-4 flex justify-between items-center" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <div className="text-xs text-muted pt-4 flex justify-between items-center">
           <span>{article.readTime}</span>
           <span className="group-hover:text-black transition-colors">↗</span>
         </div>
