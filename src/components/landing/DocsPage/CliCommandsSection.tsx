@@ -26,7 +26,7 @@ export function CliCommandsSection() {
       <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
         CLI Commands
       </h2>
-      <p className="text-base text-[#5d5f5f] mb-6 leading-relaxed">
+      <p className="text-base text-muted mb-6 leading-relaxed">
         {BRAND} ships as a single binary. Everything you can do in the admin UI, you can
         also do from the command line.
       </p>
@@ -40,7 +40,7 @@ export function CliCommandsSection() {
                 <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
                   <code className="text-black text-xs">{c.cmd}</code>
                 </td>
-                <td className="py-2 text-[#5d5f5f]">{c.desc}</td>
+                <td className="py-2 text-muted">{c.desc}</td>
               </tr>
             ))}
           </tbody>
@@ -56,7 +56,7 @@ export function CliCommandsSection() {
                 <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
                   <code className="text-black text-xs">{c.cmd}</code>
                 </td>
-                <td className="py-2 text-[#5d5f5f]">{c.desc}</td>
+                <td className="py-2 text-muted">{c.desc}</td>
               </tr>
             ))}
           </tbody>

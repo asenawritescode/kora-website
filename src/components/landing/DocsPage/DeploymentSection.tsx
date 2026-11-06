@@ -22,14 +22,14 @@ export function DeploymentSection() {
       <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
         Deployment
       </h2>
-      <p className="text-base text-[#5d5f5f] mb-6 leading-relaxed">
+      <p className="text-base text-muted mb-6 leading-relaxed">
         A single 30MB binary. Deploy on a Raspberry Pi behind a shop counter, on a
         cloud VM serving hundreds of users, or pull the Docker image. Everything
         configured through environment variables — no config files to manage.
       </p>
 
       <h3 className="font-bold text-black mb-3">Environment Variables</h3>
-      <p className="text-sm text-[#5d5f5f] mb-4">
+      <p className="text-sm text-muted mb-4">
         All configuration is via environment variables. No YAML config files needed
         for the server itself.
       </p>
@@ -48,10 +48,10 @@ export function DeploymentSection() {
                 <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
                   <code className="text-black text-xs">{v.var}</code>
                 </td>
-                <td className="py-2 pr-2 text-[#5d5f5f] text-xs" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+                <td className="py-2 pr-2 text-muted text-xs" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
                   {v.default}
                 </td>
-                <td className="py-2 text-[#5d5f5f] text-sm">{v.desc}</td>
+                <td className="py-2 text-muted text-sm">{v.desc}</td>
               </tr>
             ))}
           </tbody>
@@ -59,7 +59,7 @@ export function DeploymentSection() {
       </div>
 
       <h3 className="font-bold text-black mb-3">Docker</h3>
-      <p className="text-sm text-[#5d5f5f] mb-4">
+      <p className="text-sm text-muted mb-4">
         Official image:{' '}
         <a href="https://hub.docker.com/r/smitdockerhub/kora" className="text-black hover:underline" target="_blank" rel="noopener noreferrer">
           smitdockerhub/kora
@@ -69,36 +69,36 @@ export function DeploymentSection() {
 
       <h3 className="font-bold text-black mb-3">Database Options</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="bg-[#FAFAFA] border border-outline-variant rounded-sm p-4">
+        <div className="bg-paper border border-outline-variant rounded-sm p-4">
           <h4 className="font-bold text-black text-sm mb-1">MySQL 8.0</h4>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             Each site gets its own database. Complete isolation. Best for multi-tenant production.
           </p>
         </div>
-        <div className="bg-[#FAFAFA] border border-outline-variant rounded-sm p-4">
+        <div className="bg-paper border border-outline-variant rounded-sm p-4">
           <h4 className="font-bold text-black text-sm mb-1">LibSQL (SQLite)</h4>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             Single database, site-specific tables. Great for edge deployments or single-server setups.
           </p>
         </div>
       </div>
 
       <h3 className="font-bold text-black mt-8 mb-3">Self-Service Onboarding</h3>
-      <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">
+      <p className="text-sm text-muted mb-4 leading-relaxed">
         Users can create their own sites at{' '}
-        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">/onboard</code>
+        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">/onboard</code>
         {' '}— no admin intervention needed. Each site gets its own database, admin user,
         and workspace. Rate limited to 3 creations per hour per IP. On success, users
         are redirected to their new workspace. Superadmins can monitor all sites from
         the console at{' '}
-        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">/console</code>.
+        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">/console</code>.
       </p>
 
       <h3 className="font-bold text-black mt-8 mb-3">Shared AI Keys</h3>
-      <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">
+      <p className="text-sm text-muted mb-4 leading-relaxed">
         Superadmins can set a global AI provider key so new users get AI chat immediately
         — no per-site configuration needed. Set{' '}
-        <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black font-mono">KORA_SHARED_AI_ENABLED=true</code>
+        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">KORA_SHARED_AI_ENABLED=true</code>
         {' '}and one of the shared key env vars. Site-specific keys always take priority.
         Disable at any time by removing the env var.
       </p>

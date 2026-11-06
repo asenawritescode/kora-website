@@ -38,20 +38,20 @@ export function YamlConfigSection() {
       <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
         YAML Configuration
       </h2>
-      <p className="text-base text-[#5d5f5f] mb-4 leading-relaxed">
+      <p className="text-base text-muted mb-4 leading-relaxed">
         Define your data model in YAML. {BRAND} reads it and generates the database table,
         REST API, React forms, and analytics — automatically.
       </p>
-      <p className="text-sm text-[#5d5f5f] mb-6 leading-relaxed">
+      <p className="text-sm text-muted mb-6 leading-relaxed">
         <strong>Not comfortable writing YAML?</strong> Use the AI Chat instead. Describe
         your business in plain English and {BRAND} creates validated doctype drafts for you.
         Review them, activate when ready — no YAML required.
       </p>
-      <div className="bg-[#0A0A0A] rounded-sm border border-outline-variant overflow-hidden">
-        <div className="flex items-center px-4 py-2 bg-[#1A1A1A] border-b border-outline-variant/30">
-          <span className="text-xs text-[#5d5f5f]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
+      <div className="bg-code rounded-sm border border-outline-variant overflow-hidden">
+        <div className="flex items-center px-4 py-2 bg-code-rule border-b border-outline-variant/30">
+          <span className="text-xs text-code-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
         </div>
-        <pre className="p-4 text-sm text-[#E5E5E5] overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <pre className="p-4 text-sm text-code-ink overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
           <code>
             {YAML_EXAMPLE.split('\n').map((line, i) => {
               const keyMatch = line.match(/^(\s*)([a-zA-Z_-]+):/)
@@ -61,7 +61,7 @@ export function YamlConfigSection() {
                 const rest = line.slice(keyMatch[0].length)
                 return (
                   <span key={i}>
-                    {indent}<span className="text-[#FF6B35]">{key}:</span>{rest}{'\n'}
+                    {indent}<span className="text-code-accent">{key}:</span>{rest}{'\n'}
                   </span>
                 )
               }
@@ -70,7 +70,7 @@ export function YamlConfigSection() {
           </code>
         </pre>
       </div>
-      <p className="text-xs text-[#5d5f5f] mt-3" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+      <p className="text-xs text-muted mt-3" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
         This creates a full CRUD app at <code className="text-black">/workspace/Customer</code> —
         list view, form, search, and filters. Ready in seconds.
       </p>

@@ -19,7 +19,12 @@
    pair: white on accent-strong
    pair: white on black
    pair: code-ink on code
-   pair: accent on code min 3
+   pair: code-accent on code
+   pair: accent on accent-tint
+   pair: code-muted on code
+   pair: code-muted on code-rule
+   pair: success on code
+   pair: white on success-strong
 */
 @theme static {
   --color-white: #ffffff;
@@ -38,4 +43,11 @@
   --color-code: #0a0a0a;
   --color-code-ink: #e5e5e5;
   --color-code-rule: #202020;
+  --color-code-border: #333333;
+  --color-code-muted: #c6c6c7;
+  --color-code-accent: #ff6b35;
+  /* Status: success on dark panels, success-strong behind white text, danger for dots. */
+  --color-success: #10b981;
+  --color-success-strong: #15803d;
+  --color-danger: #dc2626;
 }
