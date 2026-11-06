@@ -57,7 +57,7 @@ spacing:
   lg: "24px"
   xl: "40px"
   2xl: "64px"
-  section: "clamp(64px, 9vw, 128px)"
+  section: "clamp(48px, 6vw, 88px)"
 components:
   button-primary:
     backgroundColor: "{colors.ochre}"
@@ -238,7 +238,7 @@ At 390 px the h1 fits in four lines or fewer.
 - Content frame 1200 px, side gutter 24 px (16 px at 390). Every section
   shares the same left and right edges.
 - Spacing steps: 4, 8, 16, 24, 40, 64 px. Section padding
-  `clamp(64px, 9vw, 128px)`.
+  `clamp(48px, 6vw, 88px)`.
 - A section has one heading, then its content. No section repeats the rhythm
   of the one before it: a row list, then a product frame, then a three-step
   strip, then a night band.
@@ -308,19 +308,16 @@ with it. It is a ruled list of rows, not a grid of cards.
   module list." with "Try again"), empty ("No modules are published yet.").
   Only modules in the Cloud catalog can be chosen.
 
-### Template Discovery Card
-Template cards are flat white blocks in a ruled catalog grid. A small category, orange mark, tight title, short description, and included-items list show what the template is for. Hover adds a thin inset orange top edge and a faint warm surface shift.
+## Do and don't
 
-## Do's and Don'ts
+**Do**
+- Name the buyer and the task in the h1. Put the real product next to it.
+- Say "not supported yet" where a buyer would expect a feature (M-Pesa, card,
+  receipt printer, eTIMS).
+- Keep the roadmap visibly separate from what can be installed today.
 
-### Do:
-- **Do** keep Kigae orange as the focused accent against ink and warm paper.
-- **Do** explain a business task before presenting technical details.
-- **Do** use rules, shelves, rows, and grids to show how tools or choices relate.
-- **Do** preserve visible template contents and a clear review-before-activation step.
-- **Do** keep surfaces square-cornered and mostly flat, using depth for actual overlays and interaction states.
-
-### Don't:
-- **Don't** imply a workspace or template is live before customer review and approval.
-- **Don't** turn soft card shadows or rounded-card geometry into default surface styling.
-- **Don't** use mono metadata as the main reading voice; reserve it for compact labels and indices.
+**Don't**
+- Invent customers, logos, quotes, counts or prices.
+- Use eyebrows above headings, pill labels, icon chips or three-up icon cards.
+- Use gradients, glass, blobs, glows or drop shadows on resting surfaces.
+- Repeat "From Nairobi to the world" as filler.

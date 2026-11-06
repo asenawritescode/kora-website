@@ -74,7 +74,7 @@ export function ModulePicker() {
 
   return (
     <section id="modules" aria-labelledby="modules-title" className="bg-paper border-t border-outline-variant">
-      <div className="mx-auto grid max-w-[1200px] gap-10 lg:gap-y-8 px-4 py-[clamp(64px,9vw,128px)] sm:px-6 lg:grid-cols-12">
+      <div className="mx-auto grid max-w-[1200px] gap-10 lg:gap-y-8 px-4 py-[clamp(48px,6vw,88px)] sm:px-6 lg:grid-cols-12">
         <div className="lg:col-span-6">
           <h2 id="modules-title" className="font-display text-[clamp(32px,3.6vw,52px)] font-[740] leading-[1.02] tracking-[-0.025em] text-ink [text-wrap:balance]">
             Pick the modules your shop needs. They work together.
