@@ -38,9 +38,9 @@ export function BuiltForOwnership() {
           {TRUST_ITEMS.map((item) => (
             <div key={item.title} className="p-6">
               <item.icon className="h-10 w-10 text-[#FF6B35] mb-4 mx-auto" />
-              <h4 className="text-xs font-medium uppercase mb-2" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+              <h3 className="text-xs font-medium uppercase mb-2" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
                 {item.title}
-              </h4>
+              </h3>
               <p className="text-base text-[#444748]">{item.description}</p>
             </div>
           ))}

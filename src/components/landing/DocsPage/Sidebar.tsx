@@ -36,9 +36,9 @@ export function DocsSidebar() {
       <nav className="space-y-6">
         {SECTIONS.map((section) => (
           <div key={section.title}>
-            <h3 className="text-[10px] font-medium text-[#5d5f5f] uppercase mb-2 tracking-[0.15em]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+            <p className="text-[10px] font-medium text-[#5d5f5f] uppercase mb-2 tracking-[0.15em]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
               {section.title}
-            </h3>
+            </p>
             <ul className="space-y-0.5">
               {section.links.map((link) => (
                 <li key={link.label}>

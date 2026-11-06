@@ -1,12 +1,14 @@
 import type { ReactNode } from 'react'
 import { Navigation } from './Navigation'
+import { SkipLink } from './SkipLink'
 import { Footer } from './Footer'
 
 export default function MarketingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-[#fdf8f8] text-[#1c1b1b] antialiased" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
+    <div className="min-h-screen flex flex-col bg-paper text-ink antialiased" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
+      <SkipLink />
       <Navigation />
-      <main className="flex-grow pt-20 md:pt-24">
+      <main id="main" tabIndex={-1} className="focus:outline-none flex-grow pt-20 md:pt-24">
         {children}
       </main>
       <Footer />

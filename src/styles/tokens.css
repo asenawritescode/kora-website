@@ -1,0 +1,41 @@
+/* The only place colours are defined: components use the utilities these
+   generate (text-ink, bg-paper, text-accent ...), never a hex value. After
+   editing, run `bun run validate:contrast`: it reads the colours and the
+   `pair:` lines below and fails when a text pair is under WCAG AA.
+   Format: pair: <fg> on <bg> [min <ratio>]. Default 4.5; `min 3` for rings, icons.
+
+   pair: ink on paper
+   pair: ink on surface-container
+   pair: black on paper
+   pair: black on surface-container
+   pair: on-surface-variant on paper
+   pair: on-surface-variant on surface-container
+   pair: muted on paper
+   pair: muted on surface-container
+   pair: muted on white
+   pair: accent on paper
+   pair: accent on white
+   pair: white on accent
+   pair: white on accent-strong
+   pair: white on black
+   pair: code-ink on code
+   pair: accent on code min 3
+*/
+@theme static {
+  --color-white: #ffffff;
+  --color-black: #000000;
+  --color-paper: #fdf8f8;
+  --color-surface-container: #f1edec;
+  --color-ink: #1c1b1b;
+  --color-on-surface-variant: #444748;
+  --color-muted: #5d5f5f;
+  --color-outline-variant: #e5e5e5;
+  /* Brand accent: DESIGN.md placeholder until the new palette lands. */
+  --color-accent: #c84018;
+  --color-accent-strong: #a8350f;
+  --color-accent-tint: #fff3ec;
+  /* Dark code panels. */
+  --color-code: #0a0a0a;
+  --color-code-ink: #e5e5e5;
+  --color-code-rule: #202020;
+}
