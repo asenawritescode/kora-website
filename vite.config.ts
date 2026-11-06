@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 import path from 'path'
 import type { Plugin } from 'vite'
+import { seoHead } from './scripts/seo-head'
 
 // Regression guard: fail the build when a single JS chunk grows past the budget,
 // so a heavy dependency cannot silently land back in the entry chunk.
@@ -30,7 +31,7 @@ const devCloud = process.env.KORA_DEV_CLOUD_URL
 
 export default defineConfig({
   server: devCloud ? { proxy: { '/api/public/catalog': devCloud } } : undefined,
-  plugins: [react(), tailwindcss(), chunkBudget()],
+  plugins: [react(), tailwindcss(), seoHead(), chunkBudget()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),

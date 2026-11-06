@@ -1,14 +1,11 @@
 import DocsPage from '@/components/landing/DocsPage/DocsPage'
 import { Seo } from '@/components/landing/Seo'
+import { seoFor } from '@/lib/seo-routes'
 
 export default function DocsRoute() {
   return (
     <>
-      <Seo
-        title="Kora Docs — API, deployment, and self-hosting"
-        description="Read the technical documentation for building, extending, deploying, and self-hosting Kora."
-        path="/docs"
-      />
+      <Seo {...seoFor('/docs')} />
       <DocsPage />
     </>
   )
