@@ -13,7 +13,7 @@ export function ArchitectureSection() {
 
       {/* Request flow */}
       <div className="bg-[#FAFAFA] border border-outline-variant rounded-sm p-5 mb-6 overflow-x-auto">
-        <h4 className="font-bold text-black text-sm mb-3">Request Flow</h4>
+        <h3 className="font-bold text-black text-sm mb-3">Request Flow</h3>
         <div className="flex items-center gap-1.5 text-[11px] mb-3 flex-wrap" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
           <span className="text-[#5d5f5f]">Request</span>
           <span className="text-[#c4c7c7]">→</span>
@@ -35,7 +35,7 @@ export function ArchitectureSection() {
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">Config Engine</h4>
+          <h3 className="font-bold text-black text-sm mb-1">Config Engine</h3>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
             DocTypes, workflows, and permissions defined in YAML. The engine reads config
             and generates database tables, APIs, and UI at runtime. No code generation —
@@ -43,14 +43,14 @@ export function ArchitectureSection() {
           </p>
         </div>
         <div className="border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">Multi-Site</h4>
+          <h3 className="font-bold text-black text-sm mb-1">Multi-Site</h3>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
             Host-based or path-based routing. Hot-add sites without restarting.
             Per-site databases and analytics pipelines. Built for agencies and MSPs.
           </p>
         </div>
         <div className="border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">SQL Dialect</h4>
+          <h3 className="font-bold text-black text-sm mb-1">SQL Dialect</h3>
           <p className="text-sm text-[#5d5f5f] leading-relaxed">
             MySQL and LibSQL from the same codebase. All SQL goes through a dialect
             abstraction layer. PostgreSQL on the roadmap.

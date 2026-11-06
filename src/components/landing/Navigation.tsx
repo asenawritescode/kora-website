@@ -22,15 +22,15 @@ export function Navigation() {
   const currentPath = location.pathname
 
   return (
-    <nav
+    <header
       className={`fixed top-0 w-full z-50 border-b border-outline-variant transition-all duration-200 ${
         scrolled ? 'bg-white/80 backdrop-blur-md' : 'bg-white/90 backdrop-blur-md'
       }`}
     >
-      <div className="max-w-[1120px] mx-auto px-4 sm:px-6 flex justify-between items-center h-16 gap-4">
+      <nav aria-label="Primary" className="max-w-[1120px] mx-auto px-4 sm:px-6 flex justify-between items-center h-16 gap-4">
         {/* Logo + Desktop Links */}
         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-          <Link to="/" className="text-[22px] sm:text-[28px] leading-[1] font-semibold text-black tracking-tight shrink-0">
+          <Link to="/" className="inline-flex min-h-11 items-center text-[22px] sm:text-[28px] leading-[1] font-semibold text-black tracking-tight shrink-0">
             {BRAND}
           </Link>
           <div className="hidden lg:flex items-center gap-1 xl:gap-2 min-w-0">
@@ -42,10 +42,10 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`text-[11px] xl:text-xs font-medium uppercase tracking-[0.12em] px-2.5 py-2 rounded-sm transition-colors font-mono whitespace-nowrap ${
+                  className={`inline-flex min-h-11 items-center text-sm font-medium px-3 transition-colors whitespace-nowrap ${
                     isActive
-                      ? 'text-black bg-[#f1edec]'
-                      : 'text-[#5d5f5f] hover:text-black hover:bg-gray-100'
+                      ? 'text-black bg-surface-container'
+                      : 'text-muted hover:text-black hover:bg-surface-container'
                   }`}
                 >
                   {link.label}
@@ -53,18 +53,18 @@ export function Navigation() {
               )
             })}
             <details className="relative">
-              <summary className="list-none cursor-pointer text-[11px] xl:text-xs font-medium uppercase tracking-[0.12em] px-2.5 py-2 rounded-sm transition-colors font-mono whitespace-nowrap text-[#5d5f5f] hover:text-black hover:bg-gray-100">
+              <summary className="inline-flex min-h-11 items-center list-none cursor-pointer text-sm font-medium px-3 transition-colors whitespace-nowrap text-muted hover:text-black hover:bg-surface-container">
                 Explore
               </summary>
-              <div className="absolute left-0 mt-2 w-44 rounded-sm border border-[#e5e5e5] bg-white shadow-sm py-2 z-20">
+              <div className="absolute left-0 mt-2 w-44 border border-outline-variant bg-white py-2 z-20">
                 {EXPLORE_LINKS.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}
-                    className={`block px-3 py-2 text-sm transition-colors ${
+                    className={`flex min-h-11 items-center px-3 text-sm transition-colors ${
                       currentPath.startsWith(link.href)
-                        ? 'text-black bg-[#f1edec]'
-                        : 'text-[#5d5f5f] hover:text-black hover:bg-gray-50'
+                        ? 'text-black bg-surface-container'
+                        : 'text-muted hover:text-black hover:bg-surface-container'
                     }`}
                   >
                     {link.label}
@@ -79,7 +79,7 @@ export function Navigation() {
         <div className="hidden lg:flex items-center shrink-0">
           <Link
             to={CTA_LINK.href}
-            className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono whitespace-nowrap"
+            className="inline-flex min-h-11 items-center bg-accent text-white text-sm font-medium px-5 hover:bg-accent-strong transition-colors whitespace-nowrap"
           >
             {CTA_LINK.label}
           </Link>
@@ -87,7 +87,7 @@ export function Navigation() {
 
         {/* Mobile hamburger — animated */}
         <button
-          className="lg:hidden group p-2 -mr-2 shrink-0"
+          className="lg:hidden group inline-flex min-h-11 min-w-11 items-center justify-center -mr-2 shrink-0"
           onClick={() => setMobileOpen((prev) => !prev)}
           aria-expanded={mobileOpen}
           aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -117,7 +117,7 @@ export function Navigation() {
             />
           </svg>
         </button>
-      </div>
+      </nav>
 
       {/* Mobile menu */}
       {mobileOpen && (
@@ -131,10 +131,10 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   to={link.href}
-                  className={`block text-sm font-medium px-3 py-3 rounded-sm transition-colors ${
+                  className={`block text-sm font-medium px-3 py-3 transition-colors ${
                     isActive
-                      ? 'text-black bg-gray-100'
-                      : 'text-[#5d5f5f] hover:text-black hover:bg-gray-50'
+                      ? 'text-black bg-surface-container'
+                      : 'text-muted hover:text-black hover:bg-surface-container'
                   }`}
                 >
                   {link.label}
@@ -143,13 +143,13 @@ export function Navigation() {
             })}
             <Link
               to={CTA_LINK.href}
-              className="block w-full text-center bg-black text-white text-sm font-medium px-4 py-3 rounded-sm mt-3 font-mono"
+              className="block w-full text-center bg-accent text-white text-sm font-medium px-4 py-3 mt-3 hover:bg-accent-strong"
             >
               {CTA_LINK.label}
             </Link>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   )
 }
