@@ -204,11 +204,14 @@ At 390 px the h1 fits in four lines or fewer.
 
 ## Imagery
 
-- Real Kigae Studio captures only, taken from a real workspace at real sizes
-  (1440x900 and 390x844), saved as WebP with explicit width and height. No
-  device mock-ups, no drawn dashboards, no shadows.
-- Do not show screens that are not built. When the register (checkout)
-  screen ships, add it; until then the site says nothing about it.
+- Real Kigae Studio captures only, taken from a real workspace and saved as
+  WebP with explicit width and height, each under 120 KB. Today: the owner
+  dashboard in the hero, and the Sell register on a tablet (1280x800, cropped
+  to the register) and a phone (390x844 at 2x) in "What you get today". No
+  device mock-ups, no drawn dashboards, no shadows; a 1 px rule is the frame.
+- Captures show no personal data (real names, emails, tokens) and, where it
+  shows, a plausible shop name. Retake them when the screen changes.
+- Do not show screens that are not built.
 - No stock photography, no illustrated people, no icons as decoration, no
   emoji.
 

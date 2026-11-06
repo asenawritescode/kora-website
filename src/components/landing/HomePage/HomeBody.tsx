@@ -28,40 +28,44 @@ export function HomeBody() {
   return (
     <>
       <section aria-labelledby="today-title" className="border-t border-outline-variant">
-        <div className={`${wrap} grid gap-10 lg:grid-cols-12`}>
+        <div className={`${wrap} grid gap-10 pb-10! lg:grid-cols-12`}>
           <div className="lg:col-span-5">
             <h2 id="today-title" className={h2}>What you get today</h2>
-            <dl className="mt-8 border-t border-ink">
-              {TODAY.map(([term, detail]) => (
-                <div key={term} className="border-b border-outline-variant py-4">
-                  <dt className="text-[17px] font-semibold text-ink">{term}</dt>
-                  <dd className="mt-1 text-[16px] leading-[1.5] text-muted">{detail}</dd>
-                </div>
-              ))}
-            </dl>
             <p className="mt-6 text-[16px] leading-[1.5] text-on-surface-variant">
               Not supported yet: card and M-Pesa payments, receipt printers and eTIMS. During the pilot, {BRAND} records cash sales.
             </p>
           </div>
-          <div className="lg:col-span-7 grid sm:grid-cols-[1fr_auto] items-start gap-4 sm:gap-6 lg:pt-3">
+          <dl className="lg:col-span-7 border-t border-ink lg:mt-3">
+            {TODAY.map(([term, detail]) => (
+              <div key={term} className="border-b border-outline-variant py-4">
+                <dt className="text-[17px] font-semibold text-ink">{term}</dt>
+                <dd className="mt-1 text-[16px] leading-[1.5] text-muted">{detail}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+        <figure className="mx-auto max-w-[1200px] px-4 sm:px-6 pb-[clamp(48px,6vw,88px)]">
+          <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_auto]">
             <img
-              src="/studio-sale-list.webp"
-              width={1200}
-              height={700}
+              src="/studio-register-tablet.webp"
+              width={1030}
+              height={720}
               loading="lazy"
-              alt="The sale list in a pilot workspace: numbered sales, each marked paid, with the register, the total in KES and the time."
+              alt="The register on a tablet in a pilot shop: items with prices in KES on the left, and on the right a cart with two loaves of bread and a 2L cola, a total of KES 527.00 and a Charge button."
               className="hidden sm:block w-full h-auto border border-outline-variant bg-white"
             />
             <img
-              src="/studio-sale-list-phone.webp"
+              src="/studio-register-phone.webp"
               width={390}
-              height={750}
+              height={844}
               loading="lazy"
-              alt="The same sale list on a phone, one sale per block with its total and status."
-              className="block w-[62%] sm:w-[clamp(120px,16vw,190px)] h-auto border border-outline-variant bg-white"
+              alt="The same register on a phone: the open till, a barcode search, item prices in KES and a bar showing 3 items, KES 527.00 and Charge."
+              className="block w-full max-w-[390px] sm:max-w-[290px] mx-auto sm:mx-0 lg:w-[clamp(240px,24vw,290px)] h-auto border border-outline-variant bg-white"
             />
           </div>
-        </div>
+          {/* Screens are real Studio captures of the Sell register. Retake both when the register changes. */}
+          <figcaption className="mt-3 text-[14px] text-muted">The register, on a tablet and on a phone. Taking cash is the only payment the pilot supports today.</figcaption>
+        </figure>
       </section>
 
       <section aria-labelledby="how-title" className="bg-surface-container">
