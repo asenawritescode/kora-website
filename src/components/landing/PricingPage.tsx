@@ -1,71 +1,68 @@
-import { ArrowRight, BadgeCheck, CreditCard } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { BRAND } from '@/lib/brand'
 
-const PLANS = [
-  {
-    name: 'Starter Workspace',
-    price: 'Free to begin',
-    features: ['1 workspace', 'Template starting point'],
-  },
-  {
-    name: 'Managed Cloud',
-    price: 'Price not announced yet',
-    features: ['Hosted workspaces', 'Team access'],
-  },
+const INCLUDED = [
+  `A ${BRAND} Cloud workspace for your shop`,
+  'Point of sale and inventory, from the Retail POS template',
+  'Cash sales',
+  'An owner dashboard',
 ]
+
+const NOT_YET = ['Card or M-Pesa payments', 'Receipt printers', 'eTIMS tax receipts']
+
+function RuledList({ items, muted = false }: { items: string[]; muted?: boolean }) {
+  return (
+    <ul className="border-t border-[#dedbd5]">
+      {items.map((item) => (
+        <li key={item} className={`border-b border-[#dedbd5] py-3 text-base ${muted ? 'text-[#62615e]' : 'text-[#171716]'}`}>
+          {item}
+        </li>
+      ))}
+    </ul>
+  )
+}
 
 export default function PricingPage() {
   return (
-    <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
+    <div className="max-w-[720px] mx-auto px-6 pb-[96px] space-y-12">
       <header className="pt-8 space-y-4">
-        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
-          <CreditCard className="h-3.5 w-3.5" />
-          Pricing
-        </div>
-        <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
-          Start free, or run the open-source engine yourself.
-        </h1>
-        <p className="text-lg leading-7 text-[#444748] max-w-2xl">
-          The starter workspace is free. Managed cloud pricing has not been decided yet.
-        </p>
+        <h1 className="text-[40px] leading-[44px] sm:text-[56px] sm:leading-[58px] font-bold text-[#171716] tracking-[-0.04em]">Pricing</h1>
+        <p className="text-lg leading-7 text-[#171716]">Free during the pilot. Pricing will be announced before the pilot ends.</p>
+        <p className="text-base leading-7 text-[#62615e]">When there is a price, it will be shown in KES.</p>
       </header>
 
-      <section className="grid md:grid-cols-2 gap-4">
-        {PLANS.map((plan) => (
-          <div key={plan.name} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-            <h2 className="text-2xl font-semibold text-black mb-2">{plan.name}</h2>
-            <div className="text-sm text-[#5d5f5f] mb-4">{plan.price}</div>
-            <ul className="space-y-3 text-sm text-[#444748]">
-              {plan.features.map((feature) => (
-                <li key={feature} className="flex items-start gap-2">
-                  <BadgeCheck className="h-4 w-4 text-[#10B981] mt-0.5 shrink-0" />
-                  <span>{feature}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold text-[#171716] tracking-[-0.02em]">What the pilot includes</h2>
+        <RuledList items={INCLUDED} />
       </section>
 
-      <section className="bg-white border border-[#e5e5e5] p-8 rounded-sm">
-        <h2 className="text-[32px] leading-[40px] font-semibold text-black mb-6">What every plan includes</h2>
-        <div className="grid md:grid-cols-3 gap-3 text-sm text-[#444748]">
-          {['Forms', 'Records', 'Workflows', 'Users and roles', 'API'].map((item) => (
-            <div key={item} className="border border-[#e5e5e5] rounded-sm px-4 py-3">{item}</div>
-          ))}
-        </div>
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold text-[#171716] tracking-[-0.02em]">Not supported yet</h2>
+        <RuledList items={NOT_YET} muted />
       </section>
 
-      <section className="flex flex-wrap items-center gap-3">
-        <Link to="/cloud" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
-          View {BRAND} Cloud
-          <ArrowRight className="h-4 w-4" />
-        </Link>
-        <Link to="/onboard" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
-          Start onboarding
-        </Link>
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold text-[#171716] tracking-[-0.02em]">Run it yourself</h2>
+        <p className="text-base leading-7 text-[#171716]">
+          {BRAND} Engine is open source (AGPL-3.0). You can run it on your own server for free.{' '}
+          <Link to="/docs" className="underline underline-offset-4 hover:text-[#C84018]">Read the self-hosting guide</Link>.
+        </p>
       </section>
+
+      <section className="space-y-3">
+        <h2 className="text-2xl font-semibold text-[#171716] tracking-[-0.02em]">Questions about the pilot</h2>
+        <p className="text-base leading-7 text-[#171716]">
+          Ask on GitHub:{' '}
+          <a href="https://github.com/asenawritescode/kora/issues" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-[#C84018]">
+            open an issue
+          </a>
+          .
+        </p>
+      </section>
+
+      <Link to="/onboard" className="inline-flex items-center h-[47px] px-[19px] bg-[#C84018] text-white text-[13px] font-semibold hover:bg-[#B03614] transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-[#C84018]">
+        Set up your shop
+      </Link>
     </div>
   )
 }
