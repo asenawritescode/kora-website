@@ -3,6 +3,7 @@ import { Link, useLocation } from '@tanstack/react-router'
 import { EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { BRAND } from '@/lib/brand'
+import { HeaderSkyline } from '@/components/landing/HeaderSkyline'
 
 export function Navigation() {
   const [mobileOpen, setMobileOpen] = useState(false)
@@ -17,7 +18,9 @@ export function Navigation() {
 
   return (
     <header className="fixed top-0 w-full z-50 border-b border-outline-variant bg-paper">
-      <nav aria-label="Primary" className="max-w-[1200px] mx-auto px-4 sm:px-6 flex justify-between items-center h-[72px] gap-4">
+      {/* The skyline sits on the lower rule, under the link text and behind the action button. */}
+      <HeaderSkyline className="absolute inset-x-0 top-[58px] h-[14px] md:top-[54px] md:h-[18px]" />
+      <nav aria-label="Primary" className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 flex justify-between items-center h-[72px] gap-4">
         {/* Logo + Desktop Links */}
         <div className="flex items-center gap-4 sm:gap-6 min-w-0">
           <Link to="/" className="font-display inline-flex min-h-12 items-center text-[26px] leading-[1] font-[800] text-ink tracking-[-0.03em] shrink-0">
