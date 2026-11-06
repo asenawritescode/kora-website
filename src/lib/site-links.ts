@@ -1,0 +1,17 @@
+// Single source for the header and footer links. Every href must match a route
+// in src/router.tsx; scripts/check-links.ts enforces that during the build.
+export type SiteLink = { label: string; href: string }
+
+export const PRIMARY_LINKS: SiteLink[] = [
+  { label: 'Templates', href: '/examples' },
+  { label: 'Pricing', href: '/pricing' },
+]
+
+export const EXPLORE_LINKS: SiteLink[] = [
+  { label: 'Cloud', href: '/cloud' },
+  { label: 'Open source', href: '/open-source' },
+  { label: 'Docs', href: '/docs' },
+  { label: 'Blog', href: '/blog' },
+]
+
+export const CTA_LINK: SiteLink = { label: 'Set up your shop', href: '/onboard' }

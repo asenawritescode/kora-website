@@ -1,20 +1,6 @@
 import { useState, useEffect } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
-
-const PRIMARY_LINKS = [
-  { label: 'Product', href: '/' },
-  { label: 'Templates', href: '/examples' },
-  { label: 'Cloud', href: '/cloud' },
-  { label: 'Pricing', href: '/pricing' },
-  { label: 'Open Source', href: '/open-source' },
-]
-
-const SECONDARY_LINKS = [
-  { label: 'AI Builder', href: '/ai-builder' },
-  { label: 'Benefits', href: '/benefits' },
-  { label: 'Docs', href: '/docs' },
-  { label: 'Blog', href: '/blog' },
-]
+import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
 
 export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
@@ -67,10 +53,10 @@ export function Navigation() {
             })}
             <details className="relative">
               <summary className="list-none cursor-pointer text-[11px] xl:text-xs font-medium uppercase tracking-[0.12em] px-2.5 py-2 rounded-sm transition-colors font-mono whitespace-nowrap text-[#5d5f5f] hover:text-black hover:bg-gray-100">
-                More
+                Explore
               </summary>
               <div className="absolute left-0 mt-2 w-44 rounded-sm border border-[#e5e5e5] bg-white shadow-sm py-2 z-20">
-                {SECONDARY_LINKS.map((link) => (
+                {EXPLORE_LINKS.map((link) => (
                   <Link
                     key={link.label}
                     to={link.href}
@@ -91,10 +77,10 @@ export function Navigation() {
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center shrink-0">
           <Link
-            to="/onboard"
+            to={CTA_LINK.href}
             className="bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono whitespace-nowrap"
           >
-            Start onboarding
+            {CTA_LINK.label}
           </Link>
         </div>
 
@@ -136,7 +122,7 @@ export function Navigation() {
       {mobileOpen && (
         <div className="lg:hidden border-t border-outline-variant bg-white">
           <div className="px-4 py-4 space-y-1">
-            {[...PRIMARY_LINKS, ...SECONDARY_LINKS].map((link) => {
+            {[...PRIMARY_LINKS, ...EXPLORE_LINKS].map((link) => {
               const isActive = link.href === '/'
                 ? currentPath === '/'
                 : currentPath.startsWith(link.href)
@@ -155,10 +141,10 @@ export function Navigation() {
               )
             })}
             <Link
-              to="/onboard"
+              to={CTA_LINK.href}
               className="block w-full text-center bg-black text-white text-sm font-medium px-4 py-3 rounded-sm mt-3 font-mono"
             >
-              Start onboarding
+              {CTA_LINK.label}
             </Link>
           </div>
         </div>
