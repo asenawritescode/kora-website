@@ -39,7 +39,7 @@ export default function ExamplesPage() {
     })
   }, [activeCategory, search, templates])
 
-  const preferredPopular = ['b2b-crm', 'fieldwork', 'kiosk-pos']
+  const preferredPopular: string[] = []
   const popular = templates
     .slice()
     .sort((a, b) => (a.sortOrder ?? Number.MAX_SAFE_INTEGER) - (b.sortOrder ?? Number.MAX_SAFE_INTEGER))
@@ -55,7 +55,7 @@ export default function ExamplesPage() {
           Industry Templates
         </h1>
         <p className="text-lg leading-7 text-[#5d5f5f] max-w-2xl mx-auto">
-          Start from a business app template for CRM, inventory, fieldwork, invoicing, helpdesk, property management, and more.
+          Starting points for your shop. Each one lists what it includes before you sign up.
         </p>
       </div>
 

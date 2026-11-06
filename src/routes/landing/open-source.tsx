@@ -30,7 +30,7 @@ export default function OpenSourceRoute() {
               {
                 '@type': 'Question',
                 name: 'Can Kora be self-hosted?',
-                acceptedAnswer: { '@type': 'Answer', text: 'Yes. Kora ships as a single Go binary and can run with MySQL, MariaDB, or LibSQL.' },
+                acceptedAnswer: { '@type': 'Answer', text: 'Yes. Kora ships as a single Go binary and can run with MySQL or LibSQL.' },
               },
             ],
           },

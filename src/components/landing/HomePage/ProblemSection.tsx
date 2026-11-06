@@ -72,7 +72,7 @@ export function ProblemSection() {
       </div>
 
       <p className="text-center text-sm text-[#5d5f5f] mt-12 font-mono">
-        Kora is the practical middle ground. Start in minutes, change the workflow, and keep ownership.
+        Kora is the practical middle ground: change the workflow yourself and keep ownership.
       </p>
     </section>
   )

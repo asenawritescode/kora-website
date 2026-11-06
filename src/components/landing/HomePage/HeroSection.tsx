@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { BadgeCheck, Cloud, Database, Scale } from 'lucide-react'
+import { BadgeCheck, Cloud, Scale } from 'lucide-react'
 import { WorkspacePreview } from './WorkspacePreview'
 
 export function HeroSection() {
@@ -14,10 +14,10 @@ export function HeroSection() {
         </span>
       </div>
       <p className="text-lg leading-7 text-[#444748] max-w-xl mx-auto mb-2">
-        Describe the work your team already does. Kora turns it into forms, records, approvals, and a live workspace.
+        Open-source software for keeping records, workflows, and approvals in one place.
       </p>
       <p className="text-sm text-[#8E8E8E] max-w-xl mx-auto mb-8">
-        Start from a template or build from scratch. No credit card required.
+        Start from a template or from a blank workspace. No credit card required.
       </p>
 
       {/* CTAs */}
@@ -35,9 +35,8 @@ export function HeroSection() {
       {/* Trust signals */}
       <div className="flex justify-center gap-4 sm:gap-6 text-[11px] sm:text-xs text-[#5d5f5f] mb-16 md:mb-[120px] flex-wrap font-mono">
         <div className="flex items-center gap-2"><BadgeCheck className="h-4 w-4" /><span>No credit card</span></div>
-        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source</span></div>
+        <div className="flex items-center gap-2"><Scale className="h-4 w-4" /><span>Open source (AGPL-3.0)</span></div>
         <div className="flex items-center gap-2"><Cloud className="h-4 w-4" /><span>Managed cloud</span></div>
-        <div className="flex items-center gap-2"><Database className="h-4 w-4" /><span>Your data stays with you</span></div>
       </div>
 
       <WorkspacePreview />
