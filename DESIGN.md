@@ -269,6 +269,12 @@ At 390 px the h1 fits in four lines or fewer.
   action at the right. Below 1024 px the links fold behind a 44 px menu
   button into a ruled list.
 
+### Footer
+- Night surface. Large Archivo wordmark, one plain line, two link columns
+  with small mono headings, then "Kigae by Senumi" from `src/lib/brand.ts`.
+  Links in night-muted, night text and an underline on hover. No sponsor badges, no social icons
+  without accounts behind them.
+
 ### Module picker (home page; also the rules for Cloud signup, kora-cloud#39)
 
 The picker explains how choosing works: pick a module, and what it needs comes
