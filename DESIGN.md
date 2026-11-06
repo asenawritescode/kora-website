@@ -269,6 +269,39 @@ At 390 px the h1 fits in four lines or fewer.
   action at the right. Below 1024 px the links fold behind a 44 px menu
   button into a ruled list.
 
+### Module picker (home page; also the rules for Cloud signup, kora-cloud#39)
+
+The picker explains how choosing works: pick a module, and what it needs comes
+with it. It is a ruled list of rows, not a grid of cards.
+
+- **Row:** white, 1 px rule between rows, 18-20 px padding. Left: a 22 px
+  square checkbox. Then the module name (Title), one-line summary (Body,
+  muted), and a state label on the right (Label).
+- **Available, not chosen:** checkbox 1.5 px ink outline, empty.
+- **Chosen:** row background ochre tint, checkbox filled ochre with a white
+  tick, name in ink. The change is instant.
+- **Included because another module needs it:** checkbox filled ink with a
+  white tick and not clickable while the module that needs it is chosen.
+  Under the summary, a dependency note in 14 px ink soft that names both
+  modules and says why, for example "Included: Point of Sale needs
+  Inventory, because each sale takes the items off the stock count." The
+  dependency comes from the catalog's `requires`; the reason text is kept in
+  `src/lib/module-picker.ts`.
+- **Preview** (the catalog has not marked it available): selectable, with a
+  "Preview" label (mono 11 px, 1 px ink outline).
+- **On the roadmap:** not a checkbox. Muted text on sand, label "On the
+  roadmap", `aria-disabled`. Never a date, never "coming soon".
+- **Selection summary:** beside the list (below it on phones), one line naming what is chosen,
+  then the price line in Body: "Free during the pilot. Pricing will be
+  announced before the pilot ends." Then the primary button, which carries
+  `?template=` to Cloud signup.
+- **Focus:** the 3 px ochre ring sits on the whole row (`:focus-within`).
+  Space toggles, Tab moves between rows.
+- **States from the catalog:** loading (rows shown as quiet sand bars with
+  "Loading modules" for screen readers), error ("We could not load the
+  module list." with "Try again"), empty ("No modules are published yet.").
+  Only modules in the Cloud catalog can be chosen.
+
 ### Template Discovery Card
 Template cards are flat white blocks in a ruled catalog grid. A small category, orange mark, tight title, short description, and included-items list show what the template is for. Hover adds a thin inset orange top edge and a faint warm surface shift.
 
