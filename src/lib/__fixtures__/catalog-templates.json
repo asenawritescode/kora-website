@@ -1,0 +1,23 @@
+{
+  "data": {
+    "items": [
+      {
+        "package_id": "retail-pos", "release_id": "retail-pos-1.0.3", "slug": "retail-pos",
+        "name": "Retail POS", "summary": "Sell at the counter and keep stock counts right.",
+        "availability": "preview",
+        "components": [
+          { "release_id": "pos-1.0.3", "name": "Point of Sale", "summary": "Rings up sales", "selection": "required", "availability": "preview", "price": { "amount": 0 } },
+          { "release_id": "inventory-1.0.3", "name": "Inventory", "summary": "Tracks stock", "selection": "required", "availability": "available" },
+          { "release_id": "reports-1.0.0", "name": "Reports", "selection": "optional", "availability": "preview", "requires": ["Point of Sale"] }
+        ],
+        "version": "1.0.3", "updated_at": "2026-11-06T00:02:44Z"
+      },
+      { "slug": "stock-count", "name": "Stock Count", "summary": "Count shelves.", "category": "Retail", "availability": "available", "components": [] },
+      { "slug": "legacy", "name": "No availability field", "summary": "Older Cloud build." },
+      { "slug": "secret", "name": "Hidden", "availability": "hidden" },
+      { "name": "No slug", "availability": "available" },
+      "not an object"
+    ],
+    "next_cursor": null
+  }
+}

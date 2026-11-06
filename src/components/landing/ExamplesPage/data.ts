@@ -1,10 +1,10 @@
+import type { Availability } from '@/lib/catalog-client'
+
 export interface Template {
   slug: string
   name: string
   description: string
-  category: string
+  category?: string
+  availability: Availability
   features: string[]
-  tags?: string[]
-  heroLabel?: string
-  sortOrder?: number
 }

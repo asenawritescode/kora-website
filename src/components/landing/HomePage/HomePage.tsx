@@ -3,8 +3,8 @@ import { ProblemSection } from './ProblemSection'
 import { FinalCTA } from './FinalCTA'
 import { Link } from '@tanstack/react-router'
 import { ArrowRight, Database, FileText, KeyRound, Plug, Workflow } from 'lucide-react'
-import { getPublicTemplates } from '@/lib/public-content'
-import { useEffect, useState } from 'react'
+import { useTemplates } from '@/lib/use-templates'
+import { PreviewLabel, TemplateEmpty, TemplateError, TemplateSkeleton } from '@/components/landing/ExamplesPage/TemplateStatus'
 
 const CREATED = [
   { icon: FileText, title: 'Forms', description: 'Clean screens for capturing the records your team already works with.' },
@@ -15,22 +15,7 @@ const CREATED = [
 ]
 
 export default function HomePage() {
-  const [homeTemplates, setHomeTemplates] = useState<{ slug: string; name: string; description: string }[]>([])
-  const [homeTemplatesLoading, setHomeTemplatesLoading] = useState(true)
-
-  useEffect(() => {
-    let alive = true
-    setHomeTemplatesLoading(true)
-    getPublicTemplates()
-      .then((items) => {
-        if (alive) setHomeTemplates(items.slice(0, 6))
-      })
-      .catch(() => {})
-      .finally(() => {
-        if (alive) setHomeTemplatesLoading(false)
-      })
-    return () => { alive = false }
-  }, [])
+  const templates = useTemplates()
   return (
     <>
       <HeroSection />
@@ -68,30 +53,21 @@ export default function HomePage() {
             <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="grid md:grid-cols-3 gap-4">
-          {homeTemplatesLoading ? (
-            [0, 1, 2, 3, 4, 5].map((i) => (
-              <div key={i} className="bg-white border border-[#e5e5e5] p-6 rounded-sm space-y-3">
-                <div className="h-7 w-2/3 bg-[#f1edec] rounded-sm animate-pulse" />
-                <div className="h-4 w-full bg-[#f1edec] rounded-sm animate-pulse" />
-              </div>
-            ))
-          ) : homeTemplates.length > 0 ? (
-            homeTemplates.map((t) => (
+        {templates.status === 'loading' && <TemplateSkeleton count={3} className="grid md:grid-cols-3 gap-4" />}
+        {templates.status === 'error' && <TemplateError onRetry={templates.retry} />}
+        {templates.status === 'ready' && templates.templates.length === 0 && <TemplateEmpty />}
+        {templates.status === 'ready' && templates.templates.length > 0 && (
+          <div className="grid md:grid-cols-3 gap-4">
+            {templates.templates.slice(0, 6).map((t) => (
               <a key={t.slug} href={`/onboard?template=${t.slug}`} className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
                 <h3 className="text-2xl font-semibold text-black mb-2">{t.name}</h3>
-                <p className="text-sm text-[#5d5f5f]">{t.description || 'Start with this workspace pattern and customize it for your operations.'}</p>
+                {t.availability === 'preview' && <div className="mb-3"><PreviewLabel /></div>}
+                <p className="text-sm text-[#5d5f5f]">{t.description}</p>
+                {t.features.length > 0 && <p className="text-xs text-[#5d5f5f] font-mono mt-4">{t.features.join(', ')}</p>}
               </a>
-            ))
-          ) : (
-            <div className="md:col-span-3 bg-white border border-[#e5e5e5] rounded-sm p-8 text-center">
-              <p className="text-sm text-[#5d5f5f] mb-4">Template catalog is temporarily unavailable.</p>
-              <a href="/onboard" className="text-xs font-medium text-[#FF6B35] hover:underline font-mono">
-                Start from scratch →
-              </a>
-            </div>
-          )}
-        </div>
+            ))}
+          </div>
+        )}
       </section>
       <ProblemSection />
       <section className="bg-[#f1edec] py-[120px]">
