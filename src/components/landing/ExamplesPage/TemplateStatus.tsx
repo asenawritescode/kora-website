@@ -1,4 +1,4 @@
-const box = 'bg-white border border-[#e5e5e5] rounded-sm p-6 text-sm text-[#5d5f5f]'
+const box = 'bg-white border border-outline-variant rounded-sm p-6 text-sm text-muted'
 const btn = 'text-xs font-medium text-black underline underline-offset-4 font-mono'
 
 export function TemplateSkeleton({ count, className }: { count: number; className: string }) {
@@ -6,10 +6,10 @@ export function TemplateSkeleton({ count, className }: { count: number; classNam
     <div className={className} role="status" aria-busy="true">
       <span className="sr-only">Loading templates</span>
       {Array.from({ length: count }, (_, i) => (
-        <div key={i} className="bg-white border border-[#e5e5e5] rounded-sm p-6 space-y-4" aria-hidden="true">
-          <div className="h-7 w-2/3 bg-[#f1edec]" />
-          <div className="h-4 w-full bg-[#f1edec]" />
-          <div className="h-4 w-5/6 bg-[#f1edec]" />
+        <div key={i} className="bg-white border border-outline-variant rounded-sm p-6 space-y-4" aria-hidden="true">
+          <div className="h-7 w-2/3 bg-surface-container" />
+          <div className="h-4 w-full bg-surface-container" />
+          <div className="h-4 w-5/6 bg-surface-container" />
         </div>
       ))}
     </div>
@@ -36,7 +36,7 @@ export function TemplateEmpty() {
 
 export function PreviewLabel() {
   return (
-    <span className="inline-block border border-[#5d5f5f] rounded-sm px-2 py-0.5 text-[10px] uppercase tracking-wider text-[#5d5f5f] font-mono">
+    <span className="inline-block border border-muted rounded-sm px-2 py-0.5 text-[10px] uppercase tracking-wider text-muted font-mono">
       Preview
     </span>
   )

@@ -20,7 +20,7 @@ export function FilterBar({ categories, activeCategory, onCategoryChange, search
             className={`text-xs font-medium px-4 py-2 rounded-sm transition-colors border ${
               cat === activeCategory
                 ? 'bg-black text-white border-black'
-                : 'bg-transparent text-[#5d5f5f] border-outline-variant hover:border-black'
+                : 'bg-transparent text-muted border-outline-variant hover:border-black'
             }`}
             style={{ fontFamily: "'Geist Mono Variable', monospace" }}
           >
@@ -31,7 +31,7 @@ export function FilterBar({ categories, activeCategory, onCategoryChange, search
 
       {/* Search */}
       <div className="flex relative w-full md:w-auto">
-        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#5d5f5f] h-3.5 w-3.5" />
+        <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted h-3.5 w-3.5" />
         <input
           className="pl-10 pr-4 py-2 bg-transparent border border-outline-variant text-sm text-black focus:border-black placeholder-muted transition-colors w-full md:w-64 min-h-11"
           aria-label="Search templates"

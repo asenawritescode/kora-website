@@ -24,7 +24,7 @@ export function WorkspacePreview() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="group relative block max-w-5xl mx-auto overflow-hidden rounded-sm border border-[#333] bg-black shadow-2xl text-left"
+        className="group relative block max-w-5xl mx-auto overflow-hidden rounded-sm border border-code-border bg-black shadow-2xl text-left"
         aria-label={`Open larger ${BRAND} workspace preview`}
       >
         <img
@@ -51,7 +51,7 @@ export function WorkspacePreview() {
               setOpen(false)
               setZoomed(false)
             }}
-            className="fixed right-4 top-4 z-[101] inline-flex h-10 w-10 items-center justify-center rounded-sm border border-[#333] bg-black text-white hover:bg-[#313030] transition-colors"
+            className="fixed right-4 top-4 z-[101] inline-flex h-10 w-10 items-center justify-center rounded-sm border border-code-border bg-black text-white hover:bg-ink transition-colors"
             aria-label="Close image viewer"
           >
             <X className="h-5 w-5" />
@@ -59,7 +59,7 @@ export function WorkspacePreview() {
           <button
             type="button"
             onClick={() => setZoomed((current) => !current)}
-            className="fixed left-4 top-4 z-[101] inline-flex items-center gap-2 rounded-sm border border-[#333] bg-black px-4 py-3 text-xs font-medium text-white hover:bg-[#313030] transition-colors font-mono"
+            className="fixed left-4 top-4 z-[101] inline-flex items-center gap-2 rounded-sm border border-code-border bg-black px-4 py-3 text-xs font-medium text-white hover:bg-ink transition-colors font-mono"
             aria-label={zoomed ? 'Fit image to screen' : 'Zoom image'}
           >
             {zoomed ? <Minimize2 className="h-4 w-4" /> : <Maximize2 className="h-4 w-4" />}
@@ -70,7 +70,7 @@ export function WorkspacePreview() {
               <img
                 src="/workspace-preview.png"
                 alt={`${BRAND} workspace dashboard showing modules, workspace search, and task cards`}
-                className={`h-auto rounded-sm border border-[#333] ${
+                className={`h-auto rounded-sm border border-code-border ${
                   zoomed
                     ? 'max-w-none w-[1200px] md:w-[1800px]'
                     : 'max-h-[calc(100vh-5rem)] w-full max-w-[1800px] object-contain'

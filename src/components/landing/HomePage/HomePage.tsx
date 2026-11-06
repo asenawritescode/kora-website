@@ -25,16 +25,16 @@ export default function HomePage() {
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
             What is in every workspace
           </h2>
-          <p className="text-lg leading-7 text-[#444748]">
+          <p className="text-lg leading-7 text-on-surface-variant">
             Each workspace comes with the same building blocks. You shape them to fit your business.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {CREATED.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-              <Icon className="h-6 w-6 text-[#FF6B35] mb-4" />
+            <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
+              <Icon className="h-6 w-6 text-accent mb-4" />
               <h3 className="text-lg font-semibold text-black mb-2">{title}</h3>
-              <p className="text-sm text-[#5d5f5f]">{description}</p>
+              <p className="text-sm text-muted">{description}</p>
             </div>
           ))}
         </div>
@@ -45,11 +45,11 @@ export default function HomePage() {
             <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
               What you can build
             </h2>
-            <p className="text-lg leading-7 text-[#444748]">
+            <p className="text-lg leading-7 text-on-surface-variant">
               Start from a familiar business system, then shape it around how your team actually works.
             </p>
           </div>
-          <Link to="/examples" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
+          <Link to="/examples" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
             View templates
             <ArrowRight className="h-4 w-4" />
           </Link>
@@ -60,37 +60,37 @@ export default function HomePage() {
         {templates.status === 'ready' && templates.templates.length > 0 && (
           <div className="grid md:grid-cols-3 gap-4">
             {templates.templates.slice(0, 6).map((t) => (
-              <a key={t.slug} href={`/onboard?template=${t.slug}`} className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+              <a key={t.slug} href={`/onboard?template=${t.slug}`} className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
                 <h3 className="text-2xl font-semibold text-black mb-2">{t.name}</h3>
                 {t.availability === 'preview' && <div className="mb-3"><PreviewLabel /></div>}
-                <p className="text-sm text-[#5d5f5f]">{t.description}</p>
-                {t.features.length > 0 && <p className="text-xs text-[#5d5f5f] font-mono mt-4">{t.features.join(', ')}</p>}
+                <p className="text-sm text-muted">{t.description}</p>
+                {t.features.length > 0 && <p className="text-xs text-muted font-mono mt-4">{t.features.join(', ')}</p>}
               </a>
             ))}
           </div>
         )}
       </section>
       <ProblemSection />
-      <section className="bg-[#f1edec] py-[120px]">
+      <section className="bg-surface-container py-[120px]">
         <div className="max-w-[960px] mx-auto px-6">
           <div className="max-w-2xl mb-12">
             <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold tracking-[-0.02em] md:tracking-[-0.03em] mb-4">
               Start hosted. Keep ownership.
             </h2>
-            <p className="text-lg leading-7 text-[#444748]">
+            <p className="text-lg leading-7 text-on-surface-variant">
               Use {BRAND} Cloud when you want a workspace quickly. Explore open source when your team wants the technical details.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-4">
-            <Link to="/onboard" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+            <Link to="/onboard" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
               <h3 className="text-2xl font-semibold text-black mb-2">Start on {BRAND} Cloud</h3>
-              <p className="text-sm text-[#5d5f5f] mb-4">Create a workspace, invite your team, and start shaping your app today.</p>
-              <span className="text-xs font-medium text-[#FF6B35] font-mono">Start free →</span>
+              <p className="text-sm text-muted mb-4">Create a workspace, invite your team, and start shaping your app today.</p>
+              <span className="text-xs font-medium text-accent font-mono">Start free →</span>
             </Link>
-            <Link to="/open-source" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+            <Link to="/open-source" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
               <h3 className="text-2xl font-semibold text-black mb-2">Explore Open Source</h3>
-              <p className="text-sm text-[#5d5f5f] mb-4">Review the engine, deployment model, API, SDKs, and self-hosting path.</p>
-              <span className="text-xs font-medium text-[#FF6B35] font-mono">View technical details →</span>
+              <p className="text-sm text-muted mb-4">Review the engine, deployment model, API, SDKs, and self-hosting path.</p>
+              <span className="text-xs font-medium text-accent font-mono">View technical details →</span>
             </Link>
           </div>
         </div>
