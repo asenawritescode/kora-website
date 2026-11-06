@@ -5,7 +5,7 @@ export function CoreConceptsSection() {
       <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
         Core Concepts
       </h2>
-      <p className="text-base text-[#5d5f5f] mb-8 leading-relaxed">
+      <p className="text-base text-muted mb-8 leading-relaxed">
         {BRAND} uses a few key ideas to turn configuration into running applications.
         Understanding these will help you build faster — whether you write YAML or
         describe your business to the AI.
@@ -15,12 +15,12 @@ export function CoreConceptsSection() {
       <div className="space-y-8">
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-2">DocTypes</h3>
-          <p className="text-sm text-[#5d5f5f] mb-3 leading-relaxed">
+          <p className="text-sm text-muted mb-3 leading-relaxed">
             A DocType is your data model. &quot;Customer,&quot; &quot;Invoice,&quot; &quot;Inventory Item&quot; — each
             one is a DocType. Define the fields you need, and {BRAND} creates the database table,
             REST API, and React forms. Activate it and start creating documents immediately.
           </p>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             <strong>How to create one:</strong> Use the AI Chat to describe your business
             (&quot;I need to track products and stock levels&quot;), or write YAML directly in the
             admin panel. Every AI-created doctype starts as a Draft — review and activate
@@ -31,7 +31,7 @@ export function CoreConceptsSection() {
         {/* Fields */}
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-3">Fields</h3>
-          <p className="text-sm text-[#5d5f5f] mb-4 leading-relaxed">
+          <p className="text-sm text-muted mb-4 leading-relaxed">
             Fields define the columns in your doctype. Each field has a type, label, and
             optional properties like required, unique, or computed.
           </p>
@@ -46,7 +46,7 @@ export function CoreConceptsSection() {
                   <th className="py-2 font-medium text-black text-xs uppercase tracking-wider font-mono">Example</th>
                 </tr>
               </thead>
-              <tbody className="text-[#5d5f5f]">
+              <tbody className="text-muted">
                 {[
                   ['Data', 'Short text, names, emails, SKUs', 'customer_name, email, sku'],
                   ['Text', 'Long descriptions, notes, addresses', 'description, shipping_address'],
@@ -84,7 +84,7 @@ export function CoreConceptsSection() {
                   <th className="py-2 font-medium text-black text-xs uppercase tracking-wider font-mono">What it does</th>
                 </tr>
               </thead>
-              <tbody className="text-[#5d5f5f]">
+              <tbody className="text-muted">
                 {[
                   ['reqd', 'Required — cannot be left empty when saving'],
                   ['unique', 'Must be unique across all documents of this doctype'],
@@ -109,7 +109,7 @@ export function CoreConceptsSection() {
         {/* Documents */}
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-2">Documents</h3>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             A Document is one record — one customer, one sale, one expense. Every document
             gets system columns automatically: name (ID), owner, creation date, modified date,
             and doc_status. Documents live as rows in your database. You can query them
@@ -120,11 +120,11 @@ export function CoreConceptsSection() {
         {/* Workflows */}
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-2">Workflows</h3>
-          <p className="text-sm text-[#5d5f5f] mb-3 leading-relaxed">
+          <p className="text-sm text-muted mb-3 leading-relaxed">
             Submittable doctypes can have workflows — state machines that control document
             lifecycle. Define states and transitions in YAML. The engine enforces the rules.
           </p>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             <strong>Example:</strong> An Invoice workflow might have states Draft → Submitted →
             Approved → Paid. Each transition defines who can move it (by role) and what
             conditions must be met. A cashier can submit, a manager can approve, and
@@ -135,10 +135,10 @@ export function CoreConceptsSection() {
         {/* Permissions */}
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-2">Permissions</h3>
-          <p className="text-sm text-[#5d5f5f] mb-3 leading-relaxed">
+          <p className="text-sm text-muted mb-3 leading-relaxed">
             Role-based access control. Each role gets 10 permissions per doctype: Read,
             Write, Create, Delete, Submit, Cancel, Amend, Export, Import, Report. The{' '}
-            <code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black">if_owner</code> flag
+            <code className="text-xs bg-surface-container px-1 rounded-sm text-black">if_owner</code> flag
             scopes permissions to documents the user created. The Administrator role
             bypasses all checks.
           </p>
@@ -147,11 +147,11 @@ export function CoreConceptsSection() {
         {/* Sites */}
         <div className="border border-outline-variant rounded-sm p-5">
           <h3 className="font-bold text-black mb-2">Sites</h3>
-          <p className="text-sm text-[#5d5f5f] leading-relaxed">
+          <p className="text-sm text-muted leading-relaxed">
             A Site is an isolated workspace with its own database, users, doctypes, and
             analytics. One {BRAND} instance can host dozens of sites. Access via hostname
-            (<code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black">mybusiness.local</code>)
-            or path (<code className="text-xs bg-[#f1edec] px-1 rounded-sm text-black">/s/mybusiness/workspace</code>).
+            (<code className="text-xs bg-surface-container px-1 rounded-sm text-black">mybusiness.local</code>)
+            or path (<code className="text-xs bg-surface-container px-1 rounded-sm text-black">/s/mybusiness/workspace</code>).
             Sites can be hot-added and removed without restarting the server.
           </p>
         </div>

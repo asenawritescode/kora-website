@@ -36,7 +36,7 @@ export function DocsSidebar() {
       <nav className="space-y-6">
         {SECTIONS.map((section) => (
           <div key={section.title}>
-            <p className="text-[10px] font-medium text-[#5d5f5f] uppercase mb-2 tracking-[0.15em]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+            <p className="text-[10px] font-medium text-muted uppercase mb-2 tracking-[0.15em]" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
               {section.title}
             </p>
             <ul className="space-y-0.5">
@@ -44,7 +44,7 @@ export function DocsSidebar() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="block px-2 py-1.5 text-sm rounded-sm text-[#5d5f5f] hover:text-black hover:bg-gray-50 transition-colors"
+                    className="block px-2 py-1.5 text-sm rounded-sm text-muted hover:text-black hover:bg-gray-50 transition-colors"
                   >
                     {link.label}
                   </a>
