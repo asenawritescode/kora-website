@@ -27,12 +27,6 @@ const BANNED: Ban[] = [
   { pattern: /open immediately/, why: 'The workspace opens after email confirmation' },
 ]
 
-// Pages that #12 deletes outright. Their copy is not edited here.
-const PENDING_REMOVAL = [
-  'components/landing/AIBuilderPage.tsx',
-  'routes/landing/ai-builder.tsx',
-]
-
 function* walk(dir: string): Generator<string> {
   for (const name of readdirSync(dir)) {
     const p = join(dir, name)
@@ -44,7 +38,6 @@ function* walk(dir: string): Generator<string> {
 const hits: string[] = []
 for (const file of walk(join(root, 'src'))) {
   const rel = relative(join(root, 'src'), file)
-  if (PENDING_REMOVAL.includes(rel)) continue
   readFileSync(file, 'utf8').split('\n').forEach((line, i) => {
     if (line.includes('claims-ok:')) return
     for (const ban of BANNED) {

@@ -1,6 +1,8 @@
 import { lazy, Suspense, type ComponentType } from 'react'
 import { createRouter, createRoute, createRootRoute } from '@tanstack/react-router'
 import MarketingLayout from '@/components/landing/MarketingLayout'
+import RedirectPage from '@/components/landing/RedirectPage'
+import redirects from '../redirects.json'
 
 type Loader = () => Promise<{ default: ComponentType }>
 
@@ -39,8 +41,6 @@ const HomePage = inMarketing(() => import('@/routes/landing/home'))
 const ExamplesPage = inMarketing(() => import('@/routes/landing/examples'))
 const OnboardPage = inMarketing(() => import('@/routes/landing/onboard'))
 const CloudPage = inMarketing(() => import('@/routes/landing/cloud'))
-const BenefitsPage = inMarketing(() => import('@/routes/landing/benefits'))
-const AIBuilderPage = inMarketing(() => import('@/routes/landing/ai-builder'))
 const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
 const OpenSourcePage = inMarketing(() => import('@/routes/landing/open-source'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
@@ -62,18 +62,6 @@ const cloudRoute = createRoute({
   component: CloudPage,
 })
 
-const benefitsRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/benefits',
-  component: BenefitsPage,
-})
-
-const aiBuilderRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/ai-builder',
-  component: AIBuilderPage,
-})
-
 const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/pricing',
@@ -85,6 +73,15 @@ const openSourceRoute = createRoute({
   path: '/open-source',
   component: OpenSourcePage,
 })
+
+// Pages that were removed. Same table as the 301s in nginx.conf; a test keeps them equal.
+const redirectRoutes = Object.entries(redirects).map(([from, to]) =>
+  createRoute({
+    getParentRoute: () => rootRoute,
+    path: from,
+    component: () => <RedirectPage to={to} />,
+  }),
+)
 
 const notFoundRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -125,8 +122,7 @@ const blogPostRoute = createRoute({
 const routeTree = rootRoute.addChildren([
   onboardRoute,
   cloudRoute,
-  benefitsRoute,
-  aiBuilderRoute,
+  ...redirectRoutes,
   pricingRoute,
   openSourceRoute,
   homeRoute,

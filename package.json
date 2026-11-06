@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "vite",
     "validate:claims": "bun scripts/check-claims.ts",
-    "build": "bun run validate:claims && tsc -b && vite build",
+    "validate:links": "bun scripts/check-links.ts",
+    "build": "bun run validate:claims && bun run validate:links && tsc -b && vite build",
     "preview": "vite preview",
     "test": "bun test"
   },

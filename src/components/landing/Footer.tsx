@@ -1,19 +1,9 @@
 import { Link } from '@tanstack/react-router'
+import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
 
 const FOOTER_LINKS = {
-  Product: [
-    { label: 'Product', href: '/' },
-    { label: 'Templates', href: '/examples' },
-    { label: 'Docs', href: '/docs' },
-    { label: 'Blog', href: '/blog' },
-  ],
-  Platform: [
-    { label: 'Cloud', href: '/cloud' },
-    { label: 'Pricing', href: '/pricing' },
-    { label: 'Open Source', href: '/open-source' },
-    { label: 'AI Builder', href: '/ai-builder' },
-    { label: 'Benefits', href: '/benefits' },
-  ],
+  Product: [...PRIMARY_LINKS, CTA_LINK],
+  Explore: EXPLORE_LINKS,
 }
 
 export function Footer() {
