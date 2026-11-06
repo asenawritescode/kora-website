@@ -23,28 +23,28 @@ export default function OpenSourcePage() {
   return (
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
       <header className="pt-8 space-y-4">
-        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-[#FF6B35] bg-[#FF6B35]/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
+        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
           <Scale className="h-3.5 w-3.5" />
           Open Source
         </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
           Open-source engine for records, workflows, and business apps.
         </h1>
-        <p className="text-lg leading-7 text-[#444748] max-w-2xl">
+        <p className="text-lg leading-7 text-on-surface-variant max-w-2xl">
           {BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
-          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-[#FF6B35] text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-[#E55B25] transition-colors font-mono">
+          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-accent text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors font-mono">
             View GitHub
             <ArrowRight className="h-4 w-4" />
           </a>
-          <Link to="/docs" className="inline-flex items-center gap-2 bg-white text-black border border-[#e5e5e5] text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
+          <Link to="/docs" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
             Read docs
           </Link>
         </div>
       </header>
 
-      <section className="bg-[#f1edec] p-8 rounded-sm">
+      <section className="bg-surface-container p-8 rounded-sm">
         <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-6">
           Built for ownership
         </h2>
@@ -55,10 +55,10 @@ export default function OpenSourcePage() {
             ['Direct SQL access', 'Your data lives in MySQL or LibSQL.'],
             ['Single binary', 'Go backend with embedded UI for simpler operations.'],
           ].map(([title, description]) => (
-            <div key={title} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-              <Server className="h-6 w-6 text-[#FF6B35] mb-4" />
+            <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
+              <Server className="h-6 w-6 text-accent mb-4" />
               <h3 className="text-sm font-semibold text-black mb-2 font-mono uppercase">{title}</h3>
-              <p className="text-sm text-[#5d5f5f]">{description}</p>
+              <p className="text-sm text-muted">{description}</p>
             </div>
           ))}
         </div>
@@ -69,31 +69,31 @@ export default function OpenSourcePage() {
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
           Developer capabilities
         </h2>
-        <p className="text-lg leading-7 text-[#5d5f5f]">
+        <p className="text-lg leading-7 text-muted">
             The technical details live here, where developers and technical buyers can evaluate the engine properly.
           </p>
         </div>
         <div className="grid md:grid-cols-3 gap-4">
           {CAPABILITIES.map(({ icon: Icon, title, description }) => (
-            <div key={title} className="bg-white border border-[#e5e5e5] p-6 rounded-sm">
-              <Icon className="h-6 w-6 text-[#FF6B35] mb-4" />
+            <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
+              <Icon className="h-6 w-6 text-accent mb-4" />
               <h3 className="text-lg font-semibold text-black mb-2">{title}</h3>
-              <p className="text-sm text-[#5d5f5f]">{description}</p>
+              <p className="text-sm text-muted">{description}</p>
             </div>
           ))}
         </div>
       </section>
 
       <section className="grid md:grid-cols-2 gap-4">
-        <Link to="/cloud" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+        <Link to="/cloud" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Use managed cloud</h2>
-          <p className="text-sm text-[#5d5f5f] mb-4">Start with a hosted workspace instead of running your own server.</p>
-          <span className="text-xs font-medium text-[#FF6B35] font-mono">View {BRAND} Cloud →</span>
+          <p className="text-sm text-muted mb-4">Start with a hosted workspace instead of running your own server.</p>
+          <span className="text-xs font-medium text-accent font-mono">View {BRAND} Cloud →</span>
         </Link>
-        <Link to="/docs" className="bg-white border border-[#e5e5e5] p-6 rounded-sm hover:border-black transition-colors">
+        <Link to="/docs" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Self-host the engine</h2>
-          <p className="text-sm text-[#5d5f5f] mb-4">Review setup, configuration, deployment, APIs, SDKs, and extension points.</p>
-          <span className="text-xs font-medium text-[#FF6B35] font-mono">Read docs →</span>
+          <p className="text-sm text-muted mb-4">Review setup, configuration, deployment, APIs, SDKs, and extension points.</p>
+          <span className="text-xs font-medium text-accent font-mono">Read docs →</span>
         </Link>
       </section>
 
@@ -102,7 +102,7 @@ export default function OpenSourcePage() {
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
             Run {BRAND} from a single binary
           </h2>
-          <p className="text-lg leading-7 text-[#5d5f5f]">
+          <p className="text-lg leading-7 text-muted">
             The deployment details belong here for developers evaluating the open-source engine.
           </p>
         </div>
@@ -115,7 +115,7 @@ export default function OpenSourcePage() {
           {FAQS.map(([q, a]) => (
             <div key={q}>
               <h3 className="text-lg font-semibold mb-2">{q}</h3>
-              <p className="text-[#c6c6c7] text-sm leading-6">{a}</p>
+              <p className="text-code-muted text-sm leading-6">{a}</p>
             </div>
           ))}
         </div>
