@@ -201,6 +201,49 @@ coloured surface uses that surface's text token, never grey.
 
 At 390 px the h1 fits in four lines or fewer.
 
+## Motion
+
+- Hover and press: 150-200 ms, `cubic-bezier(0.22, 1, 0.36, 1)`. Primary
+  buttons darken to ochre strong; links thicken their underline.
+- One authored moment: the skyline draws itself once on first view (about
+  1.8 s, buildings slightly staggered). Nothing else animates on scroll. No
+  fade-ins, parallax or carousels.
+- `prefers-reduced-motion: reduce`: the skyline is shown complete with no
+  drawing, and every transition is cut to 0.01 ms (global rule in
+  `index.css`).
+
+## Imagery
+
+- Real Kigae Studio captures only, taken from a real workspace at real sizes
+  (1440x900 and 390x844), saved as WebP with explicit width and height. No
+  device mock-ups, no drawn dashboards, no shadows.
+- Do not show screens that are not built. When the register (checkout)
+  screen ships, add it; until then the site says nothing about it.
+- No stock photography, no illustrated people, no icons as decoration, no
+  emoji.
+
+## The Nairobi skyline
+
+- An original line drawing (`src/components/landing/NairobiSkyline.tsx`),
+  hand-built in SVG. Not traced from any photograph or artwork.
+- One colour (`gold` on night; `ink` if it ever sits on paper), one stroke
+  of about 1.2 px on screen at every width (the width steps with the band
+  size in `index.css`), no fills except the band colour used to hide lines
+  behind a building.
+- Buildings shown, left to right: Britam Tower, Anniversary Towers, Teleposta
+  Towers, Times Tower, the KICC tower with its crown and the conical
+  amphitheatre roof beside it. Low unnamed rooftops fill the rest. One flat
+  acacia at the right edge nods to Nairobi National Park. The sky stays empty:
+  no sun, birds, clouds or stars.
+- Sits as the horizon at the bottom of the first screen, full width at 1440,
+  cropped from both sides around KICC at 390 (`preserveAspectRatio="xMidYMax
+  slice"`).
+- Appears once per page, with the line "From Nairobi to the world" in that
+  exact wording, once. The drawing is decorative (`aria-hidden`); the line is
+  real text.
+- When a building is corrected, keep the silhouettes simple: the outline
+  must read at 140 px tall.
+
 ## Layout
 
 The desktop system uses centered content frames around 1160–1240px wide, with generous side padding and clear section breaks. The home page gives its headline, explanation, and template action room to breathe. Template discovery uses a three-column ruled grid at wide widths; it steps to two columns below 900px and one column on narrow screens. Marketing feature grids and step lists likewise collapse to a single column on mobile. Navigation becomes a compact expandable menu below 680px. The spacing rhythm repeatedly uses 8px, 16px, 24px, and 40px steps, with larger section spacing where content needs a pause.
