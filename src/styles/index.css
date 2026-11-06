@@ -290,3 +290,47 @@ section[id] {
   from { stroke-dashoffset: 1; }
   to { stroke-dashoffset: 0; }
 }
+
+/* Header skyline (HeaderSkyline.tsx, DESIGN.md "The Nairobi skyline").
+   An 18 px band (14 px under 768 px) along the bottom of the navigation,
+   below the link text and behind the action button. Two stacked layers: the
+   Ngong Hills ridge, faint, and the city in ink soft. The stroke stays about
+   1 px on screen in both sizes. Motion, only with no reduced-motion
+   preference:
+   - draw-in: every line draws once, 0.9 s each, ease-out, started left to
+     right across the visible width over 0.7 s (about 1.6 s in all);
+   - windows: eight lit windows (six on phones) fade in and out in turn,
+     opacity only, from 2.2 s on, each on its own 11-17 s cycle;
+   - parallax: transform on the two layers, set from script (a few px).
+   [data-motion] is set by the script: paused holds every animation (tab
+   hidden or band off screen), static is the reduced-motion state. */
+.hsky-band { overflow: hidden; }
+.hsky, .hsky-layer { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hsky-layer { overflow: visible; will-change: transform; }
+.hsky-ridge { color: var(--color-muted); opacity: 0.6; }
+.hsky-city { color: var(--color-on-surface-variant); }
+.hsky-full { stroke-width: 1; --x0: 576; --xw: 768; }
+.hsky-compact { stroke-width: 1.3; --x0: 728; --xw: 463; }
+@media (min-width: 480px) { .hsky-compact { --x0: 560; --xw: 800; } }
+@media (min-width: 1280px) { .hsky-full { --x0: 320; --xw: 1280; } }
+@media (min-width: 1600px) { .hsky-full { --x0: 160; --xw: 1600; } }
+@media (min-width: 1920px) { .hsky-full { --x0: 0; --xw: 1920; } }
+.hsky-window { fill: var(--color-accent); stroke: none; opacity: 0; }
+@media (prefers-reduced-motion: no-preference) {
+  .hsky path {
+    stroke-dasharray: 1;
+    animation: skyline-draw 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: clamp(0s, calc((var(--x, 0) - var(--x0)) / var(--xw) * 0.7s), 0.7s);
+  }
+  .hsky-window {
+    animation: hsky-window calc(11s + var(--w, 0) * 0.85s) ease-in-out infinite;
+    animation-delay: calc(2.2s + var(--w, 0) * 1.7s);
+  }
+  .hsky-band[data-motion="paused"] * { animation-play-state: paused; }
+}
+.hsky-band[data-motion="static"] * { animation: none; }
+@keyframes hsky-window {
+  0%, 100% { opacity: 0; }
+  12%, 42% { opacity: 0.85; }
+  56% { opacity: 0; }
+}

@@ -196,11 +196,16 @@ At 390 px the h1 fits in four lines or fewer.
 - Hover and press: 150-200 ms, `cubic-bezier(0.22, 1, 0.36, 1)`. Primary
   buttons darken to ochre strong; links thicken their underline.
 - One authored moment: the skyline draws itself once on first view (about
-  1.8 s, buildings slightly staggered). Nothing else animates on scroll. No
-  fade-ins, parallax or carousels.
-- `prefers-reduced-motion: reduce`: the skyline is shown complete with no
-  drawing, and every transition is cut to 0.01 ms (global rule in
-  `index.css`).
+  1.8 s, buildings slightly staggered). No fade-ins or carousels.
+- The header skyline (below) is the one exception that keeps moving, and it
+  stays calm: it draws in left to right once (each line 0.9 s, ease-out,
+  started across 0.7 s, about 1.6 s in all), then a few windows light up and
+  dim in turn (opacity only, 11-17 s cycles), and its ridge and city drift up
+  to 2 px and 6 px apart on scroll (transform only). It pauses when the tab
+  is hidden or the band is off screen.
+- `prefers-reduced-motion: reduce`: both skylines are shown complete and
+  still (no drawing, no windows, no parallax), and every transition is cut to
+  0.01 ms (global rule in `index.css`).
 
 ## Imagery
 
@@ -231,11 +236,30 @@ At 390 px the h1 fits in four lines or fewer.
 - Sits as the horizon at the bottom of the first screen, full width at 1440,
   cropped from both sides around KICC at 390 (`preserveAspectRatio="xMidYMax
   slice"`).
-- Appears once per page, with the line "From Nairobi to the world" in that
-  exact wording, once. The drawing is decorative (`aria-hidden`); the line is
+- The full drawing appears once per page (the home page), with the line
+  "From Nairobi to the world" in that exact wording, once. The drawing is decorative (`aria-hidden`); the line is
   real text.
 - When a building is corrected, keep the silhouettes simple: the outline
   must read at 140 px tall.
+
+### The header skyline
+
+- A compact companion drawing (`src/components/landing/HeaderSkyline.tsx`),
+  also original line art, in an 18 px band (14 px under 768 px) that sits on
+  the header's lower rule, under the link text and behind the action button.
+  It never overlaps link text and the header stays 72 px.
+- Left to right: Upper Hill (Britam Tower, Anniversary Towers), the Uhuru
+  Park trees, Teleposta Towers, Times Tower, the two Nation Centre towers,
+  the I&M towers, KICC with its flared crown and helipad drum, the cone roof
+  of the plenary hall, the Nyayo grounds trees, then the Ngong Hills ridge
+  with its four knuckles and one flat acacia. Low unnamed rooftops fill the
+  wide screens. Phones get the simpler band: the city core, the ridge and the
+  acacia, no rooftop fill and no Upper Hill.
+- City lines in ink soft, the ridge in muted at 60% so it reads as distance,
+  about 1 px on screen. The lit windows are 2 px ochre squares; they are the
+  only colour in the band. Buildings are filled with paper to hide the ridge.
+- Decorative only: `aria-hidden`, `role="presentation"`, nothing focusable,
+  `pointer-events: none`.
 
 ## Layout and spacing
 
@@ -268,7 +292,7 @@ At 390 px the h1 fits in four lines or fewer.
 - **Text action:** ink, underlined, arrow optional. Turns ochre on hover.
 
 ### Navigation
-- Paper header, 72 px, fine lower rule, fixed at the top. Wordmark in Archivo. Primary
+- Paper header, 72 px, fine lower rule with the header skyline standing on it, fixed at the top. Wordmark in Archivo. Primary
   links visible; Cloud, Open source, Docs and Blog under Explore. One ochre
   action at the right. Below 1024 px the links fold behind a 44 px menu
   button into a ruled list.
