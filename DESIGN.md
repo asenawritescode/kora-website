@@ -169,7 +169,8 @@ coloured surface uses that surface's text token, never grey.
 ## Typography
 
 - **Display and headings:** Archivo Variable at `font-stretch: 112%` (class
-  `font-display`), weights 680 to 780. Archivo is a grotesque with a wide
+  `font-display`; every `h1` and `h2` gets it from the base layer in
+  `index.css`), weights 680 to 780. Archivo is a grotesque with a wide
   stance that holds up at 88 px and still reads at 20 px. Latin and latin-ext
   subsets only.
 - **Body and controls:** Geist Variable, 16 px, line height 1.6, measure up to

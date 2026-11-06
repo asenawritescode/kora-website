@@ -24,10 +24,10 @@ export function HeroPost({ article }: { article: Article }) {
       <div className="md:w-2/5 p-8 md:p-10 flex flex-col justify-between gap-8 bg-white">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-medium bg-surface-container text-black px-2 py-1 rounded-sm uppercase tracking-wider" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+            <span className="text-xs font-medium bg-surface-container text-black px-2 py-1 rounded-sm">
               {article.category}
             </span>
-            <span className="text-sm text-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+            <span className="text-sm text-muted">
               {formatDate(article.publishedAt)}
             </span>
           </div>
@@ -42,7 +42,7 @@ export function HeroPost({ article }: { article: Article }) {
           <div className="w-8 h-8 rounded-full bg-outline-variant border border-outline flex items-center justify-center overflow-hidden">
             <User className="h-4 w-4 text-muted" />
           </div>
-          <div className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+          <div className="text-sm text-black">
             By {article.authorName || `${BRAND} Team`}
           </div>
           <div className="ml-auto text-black group-hover:translate-x-2 transition-transform duration-300">

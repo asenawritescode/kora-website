@@ -1,4 +1,4 @@
-import { ArrowRight, Cloud, Database, ShieldCheck, Workflow } from 'lucide-react'
+import { ArrowRight, Database, ShieldCheck, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { BRAND } from '@/lib/brand'
 
@@ -19,10 +19,6 @@ export default function CloudPage() {
   return (
     <div className="max-w-[960px] mx-auto px-6 pb-[120px] space-y-[120px]">
       <header className="pt-8 space-y-4">
-        <div className="inline-flex items-center gap-2 text-[10px] font-medium text-accent-strong bg-accent/10 px-2.5 py-1 rounded-full uppercase tracking-wider font-mono">
-          <Cloud className="h-3.5 w-3.5" />
-          {BRAND} Cloud
-        </div>
         <h1 className="text-[40px] leading-[48px] sm:text-[56px] sm:leading-[64px] md:text-[72px] md:leading-[80px] font-bold text-black tracking-[-0.03em] md:tracking-[-0.04em]">
           Managed {BRAND} for teams that do not want to run their own server.
         </h1>
@@ -30,11 +26,11 @@ export default function CloudPage() {
           Hosted workspaces with onboarding and provisioning, so you do not set up infrastructure first.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Link to="/onboard" className="inline-flex items-center gap-2 bg-accent text-white text-xs font-medium px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors font-mono">
+          <Link to="/onboard" className="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors">
             Start onboarding
             <ArrowRight className="h-4 w-4" />
           </Link>
-          <Link to="/pricing" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-6 py-3 rounded-sm hover:border-black transition-colors font-mono">
+          <Link to="/pricing" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-sm font-semibold px-6 py-3 rounded-sm hover:border-black transition-colors">
             View pricing
           </Link>
         </div>
@@ -43,7 +39,7 @@ export default function CloudPage() {
       <section className="grid md:grid-cols-2 gap-4">
         {STEPS.map((step, index) => (
           <div key={step.title} className="bg-white border border-outline-variant p-6 rounded-sm">
-            <div className="text-[10px] font-medium text-accent uppercase tracking-wider font-mono mb-3">
+            <div className="text-[11px] font-medium text-accent uppercase tracking-wider font-mono mb-3">
               Step {index + 1}
             </div>
             <h2 className="text-2xl font-semibold text-black mb-2">{step.title}</h2>

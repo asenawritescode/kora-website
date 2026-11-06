@@ -9,7 +9,7 @@ export function ArticleGrid({ articles }: { articles: Article[] }) {
         <a
           href="#"
           className="text-xs font-medium text-black hover:underline flex items-center gap-1 uppercase tracking-[0.15em]"
-          style={{ fontFamily: "'Geist Mono Variable', monospace" }}
+         
         >
           View All <ArrowRight />
         </a>

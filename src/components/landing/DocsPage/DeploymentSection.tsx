@@ -37,18 +37,18 @@ export function DeploymentSection() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-outline-variant text-left">
-              <th className="py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>Variable</th>
-              <th className="py-2 pr-2 font-medium text-black text-[11px] uppercase tracking-wider" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>Default</th>
-              <th className="py-2 font-medium text-black text-[11px] uppercase tracking-wider" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>Description</th>
+              <th className="font-mono py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider">Variable</th>
+              <th className="font-mono py-2 pr-2 font-medium text-black text-[11px] uppercase tracking-wider">Default</th>
+              <th className="font-mono py-2 font-medium text-black text-[11px] uppercase tracking-wider">Description</th>
             </tr>
           </thead>
           <tbody>
             {ENV_VARS.map((v) => (
               <tr key={v.var} className="border-b border-outline-variant/30">
-                <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+                <td className="font-mono py-2 pr-4">
                   <code className="text-black text-xs">{v.var}</code>
                 </td>
-                <td className="py-2 pr-2 text-muted text-xs" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+                <td className="font-mono py-2 pr-2 text-muted text-xs">
                   {v.default}
                 </td>
                 <td className="py-2 text-muted text-sm">{v.desc}</td>

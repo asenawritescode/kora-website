@@ -95,7 +95,11 @@ a { text-underline-offset: 0.2em; }
 ::selection { background: var(--color-gold); color: var(--color-ink); }
 html { accent-color: var(--color-accent); }
 
-/* Headings: Archivo, semi-expanded. The type scale lives in DESIGN.md. */
+/* Headings: Archivo, semi-expanded. The type scale lives in DESIGN.md.
+   Page and section headings (h1, h2) use it everywhere; h3 and below stay Geist. */
+@layer base {
+  h1, h2 { font-family: var(--font-display); font-stretch: 112%; }
+}
 .font-display { font-family: var(--font-display); font-stretch: 112%; }
 
 .skip-link {

@@ -49,9 +49,9 @@ export function YamlConfigSection() {
       </p>
       <div className="bg-code rounded-sm border border-outline-variant overflow-hidden">
         <div className="flex items-center px-4 py-2 bg-code-rule border-b border-outline-variant/30">
-          <span className="text-xs text-code-muted" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>customer.yaml</span>
+          <span className="font-mono text-xs text-code-muted">customer.yaml</span>
         </div>
-        <pre className="p-4 text-sm text-code-ink overflow-x-auto leading-relaxed" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+        <pre className="font-mono p-4 text-sm text-code-ink overflow-x-auto leading-relaxed">
           <code>
             {YAML_EXAMPLE.split('\n').map((line, i) => {
               const keyMatch = line.match(/^(\s*)([a-zA-Z_-]+):/)
@@ -70,7 +70,7 @@ export function YamlConfigSection() {
           </code>
         </pre>
       </div>
-      <p className="text-xs text-muted mt-3" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+      <p className="text-xs text-muted mt-3">
         This creates a full CRUD app at <code className="text-black">/workspace/Customer</code> —
         list view, form, search, and filters. Ready in seconds.
       </p>

@@ -13,7 +13,7 @@ export default function DocsPage() {
   return (
     <>
       {/* Breadcrumbs */}
-      <div className="flex items-center gap-2 text-xs text-muted mb-8" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+      <div className="flex items-center gap-2 text-xs text-muted mb-8">
         <span>Docs</span>
         <span className="text-sm">›</span>
         <span className="text-black">Getting Started</span>
@@ -28,10 +28,10 @@ export default function DocsPage() {
           Technical documentation for building, extending, deploying, and self-hosting {BRAND}.
         </p>
         <div className="flex flex-wrap gap-3 mt-6">
-          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white text-xs font-medium px-4 py-2 rounded-sm hover:opacity-90 transition-opacity font-mono">
+          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-black text-white text-sm font-semibold px-4 py-2 rounded-sm hover:opacity-90 transition-opacity">
             GitHub
           </a>
-          <a href="/open-source" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-xs font-medium px-4 py-2 rounded-sm hover:border-black transition-colors font-mono">
+          <a href="/open-source" className="inline-flex items-center gap-2 bg-white text-black border border-outline-variant text-sm font-semibold px-4 py-2 rounded-sm hover:border-black transition-colors">
             Open Source
           </a>
         </div>

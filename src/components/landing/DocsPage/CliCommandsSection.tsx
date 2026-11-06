@@ -37,7 +37,7 @@ export function CliCommandsSection() {
           <tbody>
             {COMMANDS.map((c) => (
               <tr key={c.cmd} className="border-b border-outline-variant/30">
-                <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+                <td className="font-mono py-2 pr-4">
                   <code className="text-black text-xs">{c.cmd}</code>
                 </td>
                 <td className="py-2 text-muted">{c.desc}</td>
@@ -53,7 +53,7 @@ export function CliCommandsSection() {
           <tbody>
             {BUILD_COMMANDS.map((c) => (
               <tr key={c.cmd} className="border-b border-outline-variant/30">
-                <td className="py-2 pr-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+                <td className="font-mono py-2 pr-4">
                   <code className="text-black text-xs">{c.cmd}</code>
                 </td>
                 <td className="py-2 text-muted">{c.desc}</td>

@@ -41,9 +41,9 @@ export function CoreConceptsSection() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant text-left">
-                  <th className="py-2 pr-4 font-medium text-black text-xs uppercase tracking-wider font-mono">Type</th>
-                  <th className="py-2 pr-4 font-medium text-black text-xs uppercase tracking-wider font-mono">Use when</th>
-                  <th className="py-2 font-medium text-black text-xs uppercase tracking-wider font-mono">Example</th>
+                  <th className="py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider font-mono">Type</th>
+                  <th className="py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider font-mono">Use when</th>
+                  <th className="py-2 font-medium text-black text-[11px] uppercase tracking-wider font-mono">Example</th>
                 </tr>
               </thead>
               <tbody className="text-muted">
@@ -80,8 +80,8 @@ export function CoreConceptsSection() {
             <table className="w-full text-sm">
               <thead>
                 <tr className="border-b border-outline-variant text-left">
-                  <th className="py-2 pr-4 font-medium text-black text-xs uppercase tracking-wider font-mono">Property</th>
-                  <th className="py-2 font-medium text-black text-xs uppercase tracking-wider font-mono">What it does</th>
+                  <th className="py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider font-mono">Property</th>
+                  <th className="py-2 font-medium text-black text-[11px] uppercase tracking-wider font-mono">What it does</th>
                 </tr>
               </thead>
               <tbody className="text-muted">

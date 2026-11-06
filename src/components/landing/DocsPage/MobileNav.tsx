@@ -10,7 +10,7 @@ const LINKS = [
 
 export function DocsMobileNav() {
   return (
-    <div className="md:hidden sticky top-[72px] z-40 bg-paper/95 backdrop-blur-sm border-b border-outline-variant">
+    <div className="md:hidden sticky top-[72px] mt-[72px] z-40 bg-paper/95 backdrop-blur-sm border-b border-outline-variant">
       <div className="flex overflow-x-auto gap-1 px-4 py-2">
         {LINKS.map((link) => (
           <a

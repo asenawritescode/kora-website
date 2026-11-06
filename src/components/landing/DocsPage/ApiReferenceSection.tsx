@@ -16,8 +16,8 @@ export function ApiReferenceSection() {
       <div className="space-y-3">
         <div className="border border-outline-variant rounded-sm overflow-hidden">
           <div className="flex items-center gap-3 p-3 bg-surface-container border-b border-outline-variant">
-            <span className="px-2 py-0.5 bg-success-strong text-white rounded-sm text-[10px] font-bold uppercase" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>GET</span>
-            <code className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>/api/resource/Customer</code>
+            <span className="font-mono px-2 py-0.5 bg-success-strong text-white rounded-sm text-[11px] font-bold uppercase">GET</span>
+            <code className="font-mono text-sm text-black">/api/resource/Customer</code>
           </div>
           <div className="p-4 bg-paper">
             <p className="text-sm text-muted mb-3">List documents. Paginate, filter, sort — all via query params.</p>
@@ -30,7 +30,7 @@ export function ApiReferenceSection() {
                 { param: 'filters', desc: 'Filter by field values (JSON)' },
               ].map((p) => (
                 <div key={p.param} className="flex items-start gap-3 text-sm">
-                  <code className="w-20 shrink-0 text-black text-xs pt-0.5" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>{p.param}</code>
+                  <code className="font-mono w-20 shrink-0 text-black text-xs pt-0.5">{p.param}</code>
                   <span className="text-muted">{p.desc}</span>
                 </div>
               ))}
@@ -40,8 +40,8 @@ export function ApiReferenceSection() {
 
         <div className="border border-outline-variant rounded-sm overflow-hidden">
           <div className="flex items-center gap-3 p-3 bg-surface-container border-b border-outline-variant">
-            <span className="px-2 py-0.5 bg-accent text-white rounded-sm text-[10px] font-bold uppercase" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>POST</span>
-            <code className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>/api/resource/Customer</code>
+            <span className="font-mono px-2 py-0.5 bg-accent text-white rounded-sm text-[11px] font-bold uppercase">POST</span>
+            <code className="font-mono text-sm text-black">/api/resource/Customer</code>
           </div>
           <div className="p-4 bg-paper">
             <p className="text-sm text-muted">Create a document. Send a JSON body with field values. Auto-generates document names.</p>
@@ -50,8 +50,8 @@ export function ApiReferenceSection() {
 
         <div className="border border-outline-variant rounded-sm overflow-hidden">
           <div className="flex items-center gap-3 p-3 bg-surface-container border-b border-outline-variant">
-            <span className="px-2 py-0.5 bg-success-strong text-white rounded-sm text-[10px] font-bold uppercase" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>GET</span>
-            <code className="text-sm text-black" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>/api/resource/Customer/:name</code>
+            <span className="font-mono px-2 py-0.5 bg-success-strong text-white rounded-sm text-[11px] font-bold uppercase">GET</span>
+            <code className="font-mono text-sm text-black">/api/resource/Customer/:name</code>
           </div>
           <div className="p-4 bg-paper">
             <p className="text-sm text-muted">Get a single document by its name (ULID or auto-generated ID).</p>
@@ -59,7 +59,7 @@ export function ApiReferenceSection() {
         </div>
       </div>
 
-      <p className="text-xs text-muted mt-4" style={{ fontFamily: "'Geist Mono Variable', monospace" }}>
+      <p className="text-xs text-muted mt-4">
         Response envelope:{' '}
         <code className="text-black">{'{"data": ..., "meta": {"doctype": "...", "total": N}}'}</code>
       </p>
