@@ -70,7 +70,7 @@ export default function ModulesPage() {
                 <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm leading-[1.45]">
                   <dt className="font-bold text-ink-3">Needs</dt><dd>{m.needs}</dd>
                   {m.missing && (<><dt className="font-bold text-amber-ink">Missing</dt><dd className="text-amber-ink">{m.missing}</dd></>)}
-                  <dt className="font-bold text-ink-3">Screens</dt><dd className="text-ink-3">No screenshots yet</dd>
+                  {m.status !== 'available' && (<><dt className="font-bold text-ink-3">Screens</dt><dd className="text-ink-3">No screenshots yet</dd></>)}
                 </dl>
                 <div className="mt-auto flex flex-col gap-2 pt-1.5">
                   {m.status === 'available' ? (
@@ -98,10 +98,9 @@ export default function ModulesPage() {
               <Link to="/roadmap" className="inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>
               <ul className={CARD}>
                 {planned.map((m, i) => (
-                  <li key={m.id} className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
-                    <h3 className="text-[1.0625rem]">{m.name}</h3>
-                    <StatusBadge status={m.status} />
-                    <p className="col-span-2 text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
+                  <li key={m.id} className={`flex flex-col gap-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
+                    <h3 className="text-[1.0625rem]">{m.name} <StatusBadge status={m.status} quiet /></h3>
+                    <p className="text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
                   </li>
                 ))}
               </ul>
