@@ -27,7 +27,7 @@ export default function ContactPage() {
     setValues((v) => ({ ...v, [key]: e.target.value }))
     setErrors((er) => ({ ...er, [key]: undefined }))
   }
-  const border = (key: keyof ContactErrors) => (errors[key] ? 'border-2 border-red' : 'border border-line-control')
+  const border = (key: keyof ContactErrors) => (errors[key] ? 'border border-red shadow-[inset_0_0_0_1px_var(--color-red)]' : 'border border-line-control')
   const aria = (key: keyof ContactErrors) => ({ 'aria-invalid': !!errors[key], 'aria-describedby': errors[key] ? `f-${key}-err` : undefined })
 
   function submit(e: FormEvent) {
