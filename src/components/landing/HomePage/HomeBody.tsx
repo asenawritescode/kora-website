@@ -1,12 +1,13 @@
 import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
+import { BUTTON_PRIMARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 
 // Below the hero: who it is for, before and after, three steps, what works today,
 // the rules, the price and the closing band. Every line is something the pilot
 // does today or is marked as not yet; see the truthfulness table in kora-website#1.
 
-const h2 = 'text-[clamp(1.75rem,3.4vw,2.625rem)] leading-[1.1] tracking-[-0.02em]'
-const button = 'flex min-h-[52px] items-center rounded-md bg-action px-[22px] text-base font-semibold text-paper no-underline'
+const h2 = H2
+const button = BUTTON_PRIMARY
 const card = 'flex flex-col gap-3 rounded-xl border border-line bg-paper p-[clamp(1.5rem,3vw,2.25rem)]'
 
 const SHOP_TYPES = ['Dukas', 'Minimarts', 'Kiosks', 'Hardware stores', 'Boutiques']
@@ -24,29 +25,10 @@ const STEPS = [
   { title: 'Make your first sale', text: 'Add your products, open the till and sell.' },
 ]
 
-type Status = 'available' | 'preview' | 'roadmap'
-const STATUS: Record<Status, { label: string; className: string; icon: string }> = {
-  available: { label: 'Available', className: 'bg-ok-tint text-ok-ink', icon: 'M4.5 10.5l3.5 3.5 7.5-8' },
-  preview: { label: 'Preview', className: 'bg-amber-tint text-amber-ink', icon: 'M10 3a7 7 0 1 1 0 14a7 7 0 1 1 0-14M10 6.5V10l2.5 1.5' },
-  roadmap: { label: 'On the roadmap', className: 'bg-slate-tint text-slate', icon: 'M5 17.5V3h9l-2 3.25L14 9.5H5' },
-}
-
 const TODAY: { title: string; items: [string, Status][] }[] = [
   { title: 'Works today', items: [['Selling at the counter', 'available'], ['Stock that updates with every sale', 'available'], ['Cash sales', 'available'], ['M-Pesa and other mobile money, recorded by hand', 'available']] },
   { title: 'Not yet', items: [['Purchase orders and supplier bills', 'preview'], ['Card payments', 'roadmap'], ['Receipt printers', 'roadmap'], ['KRA eTIMS tax receipts', 'roadmap'], ['AI agents working in your workspace', 'roadmap']] },
 ]
-
-function Badge({ status }: { status: Status }) {
-  const s = STATUS[status]
-  return (
-    <span className={`inline-flex items-center gap-[5px] rounded-full py-[3px] pl-[7px] pr-[9px] text-xs font-semibold ${s.className}`}>
-      <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
-        <path d={s.icon} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-      </svg>
-      {s.label}
-    </span>
-  )
-}
 
 export function HomeBody() {
   return (
@@ -74,9 +56,7 @@ export function HomeBody() {
               <div key={before} role="row" className={`grid grid-cols-2 ${i ? 'border-t border-line-faint' : ''}`}>
                 <span role="cell" className="px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] leading-snug text-ink-3">{before}</span>
                 <span role="cell" className="flex gap-2.5 px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] font-semibold leading-snug">
-                  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" className="mt-0.5 flex-none">
-                    <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
+                  <Tick className="mt-0.5" />
                   {after}
                 </span>
               </div>
@@ -111,7 +91,7 @@ export function HomeBody() {
                 {col.items.map(([text, status]) => (
                   <div key={text} className="flex flex-wrap items-center justify-between gap-2 border-t border-line-faint py-3">
                     <span className="flex-[1_1_200px] text-base leading-snug">{text}</span>
-                    <Badge status={status} />
+                    <StatusBadge status={status} />
                   </div>
                 ))}
               </div>

@@ -5,11 +5,13 @@ export type SiteLink = { label: string; href: string }
 export const HOME_LINK: SiteLink = { label: 'Home', href: '/' }
 
 export const PRIMARY_LINKS: SiteLink[] = [
-  { label: 'Templates', href: '/examples' },
+  { label: 'Modules', href: '/modules' },
+  { label: 'Roadmap', href: '/roadmap' },
   { label: 'Pricing', href: '/pricing' },
 ]
 
 export const EXPLORE_LINKS: SiteLink[] = [
+  { label: 'Templates', href: '/examples' },
   { label: 'Cloud', href: '/cloud' },
   { label: 'Open source', href: '/open-source' },
   { label: 'Docs', href: '/docs' },

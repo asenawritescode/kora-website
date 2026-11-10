@@ -43,6 +43,8 @@ const TemplateDetailPage = inMarketing(() => import('@/routes/landing/template-d
 const OnboardPage = inMarketing(() => import('@/routes/landing/onboard'))
 const CloudPage = inMarketing(() => import('@/routes/landing/cloud'))
 const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
+const ModulesPage = inMarketing(() => import('@/routes/landing/modules'))
+const RoadmapPage = inMarketing(() => import('@/routes/landing/roadmap'))
 const OpenSourcePage = inMarketing(() => import('@/routes/landing/open-source'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
 const DocsPage = withLayout(() => import('@/components/landing/DocsLayout'), () => import('@/routes/landing/docs'))
@@ -67,6 +69,18 @@ const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/pricing',
   component: PricingPage,
+})
+
+const modulesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/modules',
+  component: ModulesPage,
+})
+
+const roadmapRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/roadmap',
+  component: RoadmapPage,
 })
 
 const openSourceRoute = createRoute({
@@ -131,6 +145,8 @@ const routeTree = rootRoute.addChildren([
   cloudRoute,
   ...redirectRoutes,
   pricingRoute,
+  modulesRoute,
+  roadmapRoute,
   openSourceRoute,
   homeRoute,
   examplesRoute,
