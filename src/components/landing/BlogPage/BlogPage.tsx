@@ -3,7 +3,7 @@ import { ArticleGrid } from './ArticleGrid'
 import { useEffect, useState } from 'react'
 import { type Article } from './data'
 import { getPublicBlogPosts } from '@/lib/public-content'
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 
 export default function BlogPage() {
   const [articles, setArticles] = useState<Article[]>([])
@@ -44,7 +44,7 @@ export default function BlogPage() {
           Guides, comparisons, and open-source notes
         </h1>
         <p className="text-lg leading-7 text-on-surface-variant max-w-2xl">
-          Practical articles for teams evaluating custom business apps, workflow design, open-source ownership, and {BRAND} architecture.
+          Practical articles for teams evaluating custom business apps, workflow design, open-source ownership, and {ENGINE_BRAND} architecture.
         </p>
       </header>
 

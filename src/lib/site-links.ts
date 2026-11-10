@@ -2,6 +2,8 @@
 // in src/router.tsx; scripts/check-links.ts enforces that during the build.
 export type SiteLink = { label: string; href: string }
 
+export const HOME_LINK: SiteLink = { label: 'Home', href: '/' }
+
 export const PRIMARY_LINKS: SiteLink[] = [
   { label: 'Templates', href: '/examples' },
   { label: 'Pricing', href: '/pricing' },
@@ -14,4 +16,4 @@ export const EXPLORE_LINKS: SiteLink[] = [
   { label: 'Blog', href: '/blog' },
 ]
 
-export const CTA_LINK: SiteLink = { label: 'Set up your shop', href: '/onboard' }
+export const CTA_LINK: SiteLink = { label: 'Set up my shop', href: '/onboard' }

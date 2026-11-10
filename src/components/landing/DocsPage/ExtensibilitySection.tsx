@@ -1,4 +1,4 @@
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 export function ExtensibilitySection() {
   return (
     <section id="extensibility" className="mb-16 scroll-mt-20">
@@ -7,7 +7,7 @@ export function ExtensibilitySection() {
           Extensibility &amp; Plugin System
         </h2>
         <p className="text-sm text-muted">
-          Extend {BRAND} with JavaScript, webhooks, custom API endpoints, and workflow automation.
+          Extend {ENGINE_BRAND} with JavaScript, webhooks, custom API endpoints, and workflow automation.
         </p>
       </div>
 
@@ -16,7 +16,7 @@ export function ExtensibilitySection() {
         <div>
           <h3 className="text-base font-semibold text-black mb-2">JavaScript Script Engine</h3>
           <p className="text-sm text-muted mb-2">
-            Write scripts in JavaScript (ES5.1+) that run on {BRAND}'s embedded goja runtime.
+            Write scripts in JavaScript (ES5.1+) that run on {ENGINE_BRAND}'s embedded goja runtime.
             15 prewarmed VMs, 128MB memory limit, 5-second timeout. Scripts can read and write
             documents, call external APIs, and access encrypted secrets.
           </p>

@@ -1,7 +1,7 @@
 import { ArrowRight, Code2, Database, FileCode2, GitBranch, KeyRound, Server, Workflow } from 'lucide-react'
 import { Link } from '@tanstack/react-router'
 import { TerminalDemo } from './HomePage/TerminalDemo'
-import { BRAND } from '@/lib/brand'
+import { BRAND, ENGINE_BRAND } from '@/lib/brand'
 
 const CAPABILITIES = [
   { icon: FileCode2, title: 'REST API + Swagger', description: 'Every workspace exposes documented endpoints for integrations and custom clients.' },
@@ -13,10 +13,10 @@ const CAPABILITIES = [
 ]
 
 const FAQS = [
-  [`Is ${BRAND} open source?`, `Yes. ${BRAND} is AGPL-3.0 and can be reviewed, modified, and self-hosted.`],
-  [`Can ${BRAND} be self-hosted?`, `Yes. ${BRAND} ships as a single Go binary and can run with MySQL or LibSQL.`],
-  [`Does ${BRAND} include an API?`, `Yes. ${BRAND} creates REST API routes and Swagger documentation for workspace data.`],
-  ['Can teams start hosted and move later?', `Yes. ${BRAND} Cloud is the fastest start, while the open-source engine keeps the self-hosted path available.`],
+  [`Is ${ENGINE_BRAND} open source?`, `Yes. ${ENGINE_BRAND} is AGPL-3.0 and can be reviewed, modified, and self-hosted.`],
+  [`Can ${ENGINE_BRAND} be self-hosted?`, `Yes. ${ENGINE_BRAND} ships as a single Go binary and can run with MySQL or LibSQL.`],
+  [`Does ${ENGINE_BRAND} include an API?`, `Yes. ${ENGINE_BRAND} creates REST API routes and Swagger documentation for workspace data.`],
+  ['Can teams start hosted and move later?', `Yes. ${ENGINE_BRAND} Cloud is the fastest start, while the open-source engine keeps the self-hosted path available.`],
 ]
 
 export default function OpenSourcePage() {
@@ -27,7 +27,7 @@ export default function OpenSourcePage() {
           Open-source engine for records, workflows, and business apps.
         </h1>
         <p className="text-lg leading-7 text-on-surface-variant max-w-2xl">
-          {BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
+          {ENGINE_BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
           <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-action text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-action-busy transition-colors">
@@ -96,7 +96,7 @@ export default function OpenSourcePage() {
       <section>
         <div className="max-w-2xl mb-8">
           <h2 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-semibold text-black tracking-[-0.02em] mb-4">
-            Run {BRAND} from a single binary
+            Run {ENGINE_BRAND} from a single binary
           </h2>
           <p className="text-lg leading-7 text-muted">
             The deployment details belong here for developers evaluating the open-source engine.

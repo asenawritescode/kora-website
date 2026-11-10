@@ -20,10 +20,10 @@ export default function OnboardPage() {
     <div className="py-12 md:py-24 px-4 sm:px-6">
       <div className="max-w-[640px] mx-auto">
         <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-bold text-black mb-4 tracking-[-0.03em]">
-          Set up your shop on Kigae Cloud
+          Set up your shop on Zana Cloud
         </h1>
         <p className="text-lg text-on-surface-variant mb-8">
-          On Kigae Cloud you choose what your business needs, then create an account with your name, email and business name. We send you an email to confirm it, and then you can sign in to your workspace.
+          On Zana Cloud you choose what your business needs, then create an account with your name, email and business name. We send you an email to confirm it, and then you can sign in to your workspace.
         </p>
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-10">
           <a
@@ -38,7 +38,7 @@ export default function OnboardPage() {
           </p>
         </div>
         <p className="text-sm text-on-surface-variant">
-          Kigae is in a pilot with a small number of shops. It records sales and stock. M-Pesa payments can be recorded by hand, but Kigae is not connected to M-Pesa. Card payments, receipt printers and eTIMS are not supported yet.
+          Zana is in a pilot with a small number of shops. It records sales and stock. M-Pesa payments can be recorded by hand, but Kigae is not connected to M-Pesa. Card payments, receipt printers and eTIMS are not supported yet.
         </p>
       </div>
     </div>

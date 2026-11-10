@@ -36,7 +36,7 @@ export function HeroSection() {
             width={1200}
             height={700}
             fetchPriority="high"
-            alt="The Kigae owner dashboard in a pilot shop: items such as maize flour, sugar and cooking oil with their barcodes and prices in KES."
+            alt="The Zana owner dashboard in a pilot shop: items such as maize flour, sugar and cooking oil with their barcodes and prices in KES."
             className="block w-full h-auto border border-outline-variant bg-white"
           />
         </div>

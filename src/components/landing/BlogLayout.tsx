@@ -8,7 +8,7 @@ export default function BlogLayout({ children }: { children: ReactNode }) {
     <div className="min-h-screen flex flex-col bg-paper text-ink antialiased">
       <SkipLink />
       <Navigation />
-      <main id="main" tabIndex={-1} className="focus:outline-none flex-grow pt-24">
+      <main id="main" tabIndex={-1} className="focus:outline-none flex-grow">
         {children}
       </main>
       <Footer />

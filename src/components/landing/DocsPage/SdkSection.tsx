@@ -1,4 +1,4 @@
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 export function SdkSection() {
   return (
     <section id="sdks" className="mb-16 scroll-mt-20">
@@ -16,7 +16,7 @@ export function SdkSection() {
         <div>
           <h3 className="text-base font-semibold text-black mb-2">Go SDK</h3>
           <p className="text-sm text-muted mb-2">
-            Zero-dependency Go module for building tooling, the {BRAND} Cloud control plane,
+            Zero-dependency Go module for building tooling, the {ENGINE_BRAND} Cloud control plane,
             and custom providers. Import only the types you need.
           </p>
           <pre className="bg-code text-code-ink rounded-lg p-4 text-xs font-mono overflow-x-auto">
@@ -79,7 +79,7 @@ const invoice = await kora.callMethod('send_invoice', {
         <div>
           <h3 className="text-base font-semibold text-black mb-2">MCP Server</h3>
           <p className="text-sm text-muted">
-            {BRAND} auto-generates Model Context Protocol tools from your doctype definitions.
+            {ENGINE_BRAND} auto-generates Model Context Protocol tools from your doctype definitions.
             Connect Claude Desktop, Cursor, or any MCP-compatible client to query and
             manage your data via natural language.
           </p>

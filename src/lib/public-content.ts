@@ -1,7 +1,7 @@
 import type { Template } from '@/components/landing/ExamplesPage/data'
 import type { Article } from '@/components/landing/BlogPage/data'
 import { fetchTemplate, fetchTemplates, type CatalogTemplate, type CatalogTemplateDetail } from '@/lib/catalog-client'
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 
 const publicContentBaseURL = (
   import.meta.env.VITE_KORA_PUBLIC_CMS_BASE_URL as string | undefined
@@ -151,7 +151,7 @@ function normalizeBlogPost(item: CmsBlogPost): Article {
     readTime: estimateReadTime(body || description),
     body,
     publishedAt,
-    authorName: String(item.author_name || item.authorName || `${BRAND} Team`).trim() || `${BRAND} Team`,
+    authorName: String(item.author_name || item.authorName || `${ENGINE_BRAND} Team`).trim() || `${ENGINE_BRAND} Team`,
     seoTitle: normalizeOptionalString(item.seo_title || item.seoTitle),
     seoDescription: normalizeOptionalString(item.seo_description || item.seoDescription),
     heroImage,

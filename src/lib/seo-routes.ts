@@ -1,7 +1,7 @@
 // Single source for per-route head tags. The client (Seo.tsx) and the build
 // (scripts/seo-head.ts, which writes dist/<route>/index.html) both read this, so
 // crawlers that do not run JavaScript see the same title and description.
-import { BRAND, PUBLISHER } from './brand'
+import { BRAND, ENGINE_BRAND, PUBLISHER } from './brand'
 
 export type JsonLd = Record<string, unknown>
 
@@ -52,18 +52,18 @@ export const ROUTE_SEO: RouteSeo[] = [
   {
     path: '/pricing',
     title: `Pricing — ${BRAND}`,
-    description: `Free during the pilot. Pricing will be announced before the pilot ends. ${BRAND} Engine is open source, and you can run it yourself.`,
+    description: `Free during the pilot. Pricing will be announced before the pilot ends. ${ENGINE_BRAND} Engine is open source, and you can run it yourself.`,
     sitemap: true,
   },
   {
     path: '/open-source',
-    title: `${BRAND} Engine — open source and self-hosted`,
-    description: `${BRAND} Engine is the open-source (AGPL-3.0) engine behind ${BRAND}. Run it on your own server with MySQL or LibSQL, or read the code.`,
+    title: `${ENGINE_BRAND} Engine — open source and self-hosted`,
+    description: `${ENGINE_BRAND} Engine is the open-source (AGPL-3.0) engine behind ${BRAND}. Run it on your own server with MySQL or LibSQL, or read the code.`,
     sitemap: true,
     jsonLd: {
       '@context': 'https://schema.org',
       '@type': 'SoftwareApplication',
-      name: `${BRAND} Engine`,
+      name: `${ENGINE_BRAND} Engine`,
       applicationCategory: 'BusinessApplication',
       operatingSystem: 'Linux, macOS, Windows',
       license: 'https://www.gnu.org/licenses/agpl-3.0.html',
@@ -84,15 +84,15 @@ export const ROUTE_SEO: RouteSeo[] = [
   },
   {
     path: '/docs',
-    title: `${BRAND} docs — API, deployment and self-hosting`,
-    description: `Technical documentation for running, extending and self-hosting ${BRAND} Engine.`,
+    title: `${ENGINE_BRAND} docs — API, deployment and self-hosting`,
+    description: `Technical documentation for running, extending and self-hosting ${ENGINE_BRAND} Engine.`,
     sitemap: true,
   },
   {
     // Posts load from the CMS; until they do, the index has nothing to list, so it is not in the sitemap.
     path: '/blog',
-    title: `${BRAND} blog — guides and technical notes`,
-    description: `Guides and technical notes from the ${BRAND} team.`,
+    title: `${ENGINE_BRAND} blog — guides and technical notes`,
+    description: `Guides and technical notes from the ${ENGINE_BRAND} team.`,
     sitemap: false,
   },
 ]
