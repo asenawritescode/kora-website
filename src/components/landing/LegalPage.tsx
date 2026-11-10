@@ -62,7 +62,7 @@ export default function LegalPage({ doc }: { doc: Doc }) {
           <div className="flex flex-[3_1_460px] flex-col gap-7">
             {d.sections.map(([title, covers], i) => (
               <section key={title} id={`${doc}-${i + 1}`} className="flex flex-col gap-2">
-                <h2 className="text-[1.375rem]">{i + 1}. {title}</h2>
+                <h2 className="text-[1.375rem] leading-snug">{i + 1}. {title}</h2>
                 <p className="text-base leading-[1.6] text-ink-2">{covers}</p>
               </section>
             ))}
