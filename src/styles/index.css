@@ -88,10 +88,12 @@ p { text-wrap: pretty; }
 
 /* Keyboard focus: one visible ring everywhere, an ink outline with a
    cornflower halo, so it shows on paper and on the dark band. */
-:focus-visible {
-  outline: 2px solid var(--color-ink);
-  outline-offset: 2px;
-  box-shadow: 0 0 0 6px var(--color-accent);
+@layer base {
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 6px var(--color-accent);
+  }
 }
 
 a { text-underline-offset: 0.2em; }
@@ -106,13 +108,15 @@ html { scroll-padding-bottom: 96px; }
 
 /* Press and hover (DESIGN.md "Motion"): buttons and button-shaped links dip a
    little when pressed and dim a little on hover. Plain text links are left alone. */
-a, button, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
-button, a[class*="rounded"] {
-  transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
-}
-button:not(:disabled):active, a[class*="rounded"]:active { transform: scale(0.97); }
-@media (hover: hover) and (pointer: fine) {
-  button:not(:disabled):hover, a[class*="rounded"]:hover { filter: brightness(0.94); }
+@layer base {
+  a, button, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+  button, a[class*="rounded"] {
+    transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
+  }
+  button:not(:disabled):active, a[class*="rounded"]:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) {
+    button:not(:disabled):hover, a[class*="rounded"]:hover { filter: brightness(0.94); }
+  }
 }
 
 /* Disclosure rows: a chevron that turns over, since the marker is hidden. */
