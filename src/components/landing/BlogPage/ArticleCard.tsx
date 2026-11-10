@@ -7,7 +7,7 @@ export function ArticleCard({ article }: { article: Article }) {
     <Link to="/blog/$slug" params={{ slug: article.slug }} className="group flex flex-col border border-outline-variant bg-white hover:border-black transition-colors">
       {/* Image */}
       <div className="h-48 border-b border-outline-variant overflow-hidden bg-surface-container relative">
-        <div className="absolute top-0 left-0 w-full h-1 bg-accent z-10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
+        <div className="absolute top-0 left-0 w-full h-1 bg-action z-10 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-500" />
         {heroImage ? (
           <img
             src={heroImage}
@@ -21,7 +21,7 @@ export function ArticleCard({ article }: { article: Article }) {
 
       <div className="p-6 flex flex-col flex-grow gap-4">
         <div className="flex items-center gap-2 text-sm text-muted">
-          <span className="text-accent">■</span> {article.category}
+          <span className="text-action">■</span> {article.category}
         </div>
         <h4 className="text-[24px] leading-tight font-semibold text-black">
           {article.title}

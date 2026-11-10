@@ -46,7 +46,7 @@ export default function PricingPage() {
         <h2 className="text-2xl font-semibold text-ink tracking-[-0.02em]">Run it yourself</h2>
         <p className="text-base leading-7 text-ink">
           {BRAND} Engine is open source (AGPL-3.0). You can run it on your own server for free.{' '}
-          <Link to="/docs" className="underline underline-offset-4 hover:text-accent">Read the self-hosting guide</Link>.
+          <Link to="/docs" className="underline underline-offset-4 hover:text-action">Read the self-hosting guide</Link>.
         </p>
       </section>
 
@@ -54,14 +54,14 @@ export default function PricingPage() {
         <h2 className="text-2xl font-semibold text-ink tracking-[-0.02em]">Questions about the pilot</h2>
         <p className="text-base leading-7 text-ink">
           Ask on GitHub:{' '}
-          <a href="https://github.com/asenawritescode/kora/issues" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-accent">
+          <a href="https://github.com/asenawritescode/kora/issues" target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 hover:text-action">
             open an issue
           </a>
           .
         </p>
       </section>
 
-      <SignupLink className="inline-flex items-center min-h-12 px-[22px] bg-accent text-white text-[15px] font-semibold hover:bg-accent-strong transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-accent" />
+      <SignupLink className="inline-flex items-center min-h-12 px-[22px] bg-action text-white text-[15px] font-semibold hover:bg-action-busy transition-colors focus-visible:outline-[3px] focus-visible:outline-offset-[3px] focus-visible:outline-action" />
     </div>
   )
 }

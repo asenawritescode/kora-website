@@ -9,7 +9,7 @@ import { PRICE_LINE } from '@/lib/pilot'
 
 const h2 = 'font-display text-[clamp(32px,3.6vw,52px)] font-[740] leading-[1.02] tracking-[-0.025em] text-ink [text-wrap:balance]'
 const wrap = 'max-w-[1200px] mx-auto px-4 sm:px-6 py-[clamp(48px,6vw,88px)]'
-const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-accent hover:decoration-2'
+const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-action hover:decoration-2'
 
 const TODAY = [
   ['Sales at the counter', 'Each sale gets a number, a total in KES and the till session it was rung up in. Cash is taken at the till; mobile-money payments are recorded by hand.'],
@@ -73,8 +73,8 @@ export function HomeBody() {
           <h2 id="how-title" className={`${h2} max-w-[18ch]`}>How setting up works</h2>
           <ol className="mt-10 grid gap-10 md:grid-cols-3 md:gap-0">
             {STEPS.map((s, i) => (
-              <li key={s.title} className={`border-t-2 border-ink pt-5 md:pr-8 ${i === 2 ? 'md:border-accent' : ''}`}>
-                <span aria-hidden="true" className={`block font-display text-[clamp(56px,7vw,96px)] font-[780] leading-[0.9] tracking-[-0.04em] ${i === 2 ? 'text-accent' : 'text-ink'}`}>{i + 1}</span>
+              <li key={s.title} className={`border-t-2 border-ink pt-5 md:pr-8 ${i === 2 ? 'md:border-action' : ''}`}>
+                <span aria-hidden="true" className={`block font-display text-[clamp(56px,7vw,96px)] font-[780] leading-[0.9] tracking-[-0.04em] ${i === 2 ? 'text-action' : 'text-ink'}`}>{i + 1}</span>
                 <h3 className="mt-4 font-display text-[clamp(20px,2vw,26px)] font-[680] leading-[1.15] text-ink">{s.title}</h3>
                 <p className="mt-2 max-w-[22rem] text-[16px] leading-[1.6] text-muted">{s.body}</p>
               </li>
@@ -109,7 +109,7 @@ export function HomeBody() {
             </h2>
             <p className="mt-5 text-[16px] text-muted">{PRICE_LINE}</p>
           </div>
-          <SignupLink className="inline-flex min-h-12 shrink-0 items-center self-start bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px md:self-auto" />
+          <SignupLink className="inline-flex min-h-12 shrink-0 items-center self-start bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px md:self-auto" />
         </div>
       </section>
     </>

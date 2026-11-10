@@ -37,7 +37,7 @@ export function Navigation() {
                   to={link.href}
                   className={`inline-flex min-h-12 items-center text-sm font-medium px-3 transition-colors whitespace-nowrap ${
                     isActive
-                      ? 'text-ink underline decoration-accent decoration-2 underline-offset-[8px]'
+                      ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
                       : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
                   }`}
                 >
@@ -56,7 +56,7 @@ export function Navigation() {
                     to={link.href}
                     className={`flex min-h-12 items-center px-3 text-sm transition-colors ${
                       currentPath.startsWith(link.href)
-                        ? 'text-ink underline decoration-accent decoration-2 underline-offset-[8px]'
+                        ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
                         : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
                     }`}
                   >
@@ -70,7 +70,7 @@ export function Navigation() {
 
         {/* Desktop CTA */}
         <div className="hidden lg:flex items-center shrink-0">
-          <SignupLink className="inline-flex min-h-12 items-center bg-accent text-white text-[15px] font-semibold px-5 hover:bg-accent-strong transition-colors whitespace-nowrap" />
+          <SignupLink className="inline-flex min-h-12 items-center bg-action text-white text-[15px] font-semibold px-5 hover:bg-action-busy transition-colors whitespace-nowrap" />
         </div>
 
         {/* Mobile hamburger — animated */}
@@ -121,7 +121,7 @@ export function Navigation() {
                   to={link.href}
                   className={`block text-sm font-medium px-3 py-3 transition-colors ${
                     isActive
-                      ? 'text-ink underline decoration-accent decoration-2 underline-offset-[8px]'
+                      ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
                       : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
                   }`}
                 >
@@ -129,7 +129,7 @@ export function Navigation() {
                 </Link>
               )
             })}
-            <SignupLink className="flex min-h-12 w-full items-center justify-center bg-accent text-white text-[15px] font-semibold px-4 mt-3 hover:bg-accent-strong" />
+            <SignupLink className="flex min-h-12 w-full items-center justify-center bg-action text-white text-[15px] font-semibold px-4 mt-3 hover:bg-action-busy" />
           </div>
         </div>
       )}

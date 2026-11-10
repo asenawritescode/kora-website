@@ -8,16 +8,17 @@ import { join } from 'node:path'
 import { BRAND, PUBLISHER } from '../src/lib/brand'
 
 const root = join(import.meta.dir, '..')
-const font = join(root, 'node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2')
+const fonts = (pkg: string) => join(root, `node_modules/@fontsource-variable/${pkg}/files/${pkg}-latin-wght-normal.woff2`)
 const chrome = process.env.CHROME ?? 'google-chrome'
 
 const html = `<!doctype html><meta charset="utf-8"><style>
-@font-face { font-family: Geist; src: url("file://${font}"); font-weight: 100 900; }
+@font-face { font-family: Inter; src: url("file://${fonts('inter')}"); font-weight: 100 900; }
+@font-face { font-family: Grotesk; src: url("file://${fonts('space-grotesk')}"); font-weight: 100 900; }
 * { margin: 0; box-sizing: border-box; }
-body { width: 1200px; height: 630px; background: #f8f7f4; color: #171716; font-family: Geist, sans-serif; padding: 72px 80px; display: flex; flex-direction: column; justify-content: space-between; }
-.mark { font-size: 40px; font-weight: 690; letter-spacing: -0.04em; border-left: 8px solid #C84018; padding-left: 20px; }
-h1 { font-size: 96px; font-weight: 690; line-height: 1; letter-spacing: -0.06em; max-width: 960px; }
-p { font-size: 30px; color: #62615e; letter-spacing: -0.01em; }
+body { width: 1200px; height: 630px; background: #ffffff; color: #0f0f12; font-family: Inter, sans-serif; padding: 72px 80px; display: flex; flex-direction: column; justify-content: space-between; }
+.mark { font: 700 40px Grotesk, sans-serif; letter-spacing: -0.02em; border-left: 8px solid #6495ed; padding-left: 20px; }
+h1 { font: 700 96px/1.03 Grotesk, sans-serif; letter-spacing: -0.03em; max-width: 960px; }
+p { font-size: 30px; color: #5c5c66; }
 </style>
 <div class="mark">${BRAND}</div>
 <h1>Sales and stock for small shops.</h1>

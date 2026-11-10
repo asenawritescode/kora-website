@@ -37,8 +37,8 @@ function useTemplate(slug: string) {
 
 const label = 'font-mono text-[11px] font-medium uppercase tracking-[0.08em]'
 const h2 = 'font-display text-[clamp(28px,3vw,40px)] font-[740] leading-[1.05] tracking-[-0.025em] text-ink [text-wrap:balance]'
-const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-accent hover:decoration-2'
-const button = 'inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px'
+const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-action hover:decoration-2'
+const button = 'inline-flex min-h-12 items-center bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px'
 
 // What a visitor should know before signing up, from the Cloud catalog alone:
 // who it helps (the summary), what is in it and what is optional, what to bring,
@@ -81,7 +81,7 @@ function Failed({ onRetry }: { onRetry: () => void }) {
     <Frame>
       <div role="alert" className="max-w-[34rem] border border-outline-variant bg-white px-5 py-6 text-[16px] text-on-surface-variant">
         <p>We could not load this template.</p>
-        <button type="button" onClick={onRetry} className="mt-3 min-h-12 font-semibold text-ink underline underline-offset-[6px] hover:decoration-accent hover:decoration-2">Try again</button>
+        <button type="button" onClick={onRetry} className="mt-3 min-h-12 font-semibold text-ink underline underline-offset-[6px] hover:decoration-action hover:decoration-2">Try again</button>
       </div>
     </Frame>
   )

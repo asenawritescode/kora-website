@@ -37,8 +37,8 @@ export function ModuleRow({
   const [nameId, summaryId, noteId] = [`${id}-name`, `${id}-summary`, `${id}-note`]
   const describedBy = [m.summary && summaryId, text && noteId].filter(Boolean).join(' ') || undefined
   return (
-    <li className={`border-b border-outline-variant last:border-b-0 ${chosen ? 'bg-accent-tint' : 'bg-white'}`}>
-      <label className="flex cursor-pointer gap-4 px-5 py-[18px] has-[:disabled]:cursor-default has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-accent has-[:focus-visible]:-outline-offset-3">
+    <li className={`border-b border-outline-variant last:border-b-0 ${chosen ? 'bg-ok-wash' : 'bg-white'}`}>
+      <label className="flex cursor-pointer gap-4 px-5 py-[18px] has-[:disabled]:cursor-default has-[:focus-visible]:outline-3 has-[:focus-visible]:outline-action has-[:focus-visible]:-outline-offset-3">
         <span className="relative mt-1 size-[22px] shrink-0">
           <input
             type="checkbox"
@@ -47,7 +47,7 @@ export function ModuleRow({
             onChange={onToggle}
             aria-labelledby={nameId}
             aria-describedby={describedBy}
-            className="peer size-[22px] appearance-none border-[1.5px] border-ink bg-white checked:border-accent checked:bg-accent disabled:border-muted disabled:bg-surface-container disabled:checked:border-ink disabled:checked:bg-ink focus-visible:outline-none"
+            className="peer size-[22px] appearance-none border-[1.5px] border-ink bg-white checked:border-action checked:bg-action disabled:border-muted disabled:bg-surface-container disabled:checked:border-ink disabled:checked:bg-ink focus-visible:outline-none"
           />
           <Tick />
         </span>

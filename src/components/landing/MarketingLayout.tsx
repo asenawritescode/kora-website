@@ -5,7 +5,7 @@ import { Footer } from './Footer'
 
 export default function MarketingLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-paper text-ink antialiased" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
+    <div className="min-h-screen flex flex-col bg-paper text-ink antialiased">
       <SkipLink />
       <Navigation />
       <main id="main" tabIndex={-1} className="focus:outline-none flex-grow pt-[72px]">
