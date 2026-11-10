@@ -134,6 +134,10 @@ action colour; that is now `action`.
 - Screens show no personal data. Retake them when the product changes, and do
   not show screens that are not built.
 - No stock photography, no illustrated people, no emoji.
+- The one drawing is the Nairobi skyline, the horizon of the Home closing band
+  (`NairobiSkyline.tsx`): a single ink line on the cornflower band, decorative
+  (`aria-hidden`), static, cropped from the sides on a phone. Its stroke width
+  steps with the band height so it stays about 1.2 px on screen.
 
 ## Layout and spacing
 

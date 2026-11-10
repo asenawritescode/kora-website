@@ -1,5 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
+import { NairobiSkyline } from '@/components/landing/NairobiSkyline'
 import { BUTTON_SECONDARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 
 // Below the hero: who it is for, before and after, three steps, what works today,
@@ -144,11 +145,15 @@ export function HomeBody() {
 
 export function ClosingBand() {
   return (
-    <section aria-labelledby="world-title" className="bg-accent px-4 py-[clamp(3.5rem,7vw,6.5rem)] text-on-accent">
-      <div className="mx-auto flex max-w-[1000px] flex-col items-center gap-[18px] text-center">
+    <section aria-labelledby="world-title" className="overflow-hidden bg-accent pt-[clamp(3.5rem,7vw,6.5rem)] text-on-accent">
+      <div className="mx-auto flex max-w-[1000px] flex-col items-center gap-[18px] px-4 text-center">
         <h2 id="world-title" className="text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.02]">From Nairobi to the world</h2>
         <p className="max-w-[560px] text-[1.125rem] leading-[1.55]">Start with your shop today. Add more as Zana grows.</p>
         <SignupLink className="flex min-h-[52px] items-center rounded-md bg-band px-6 text-base font-semibold text-on-band no-underline" />
+      </div>
+      {/* The skyline is the horizon of this band: decorative, the heading above is the text. */}
+      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(120px,15vw,220px)]">
+        <NairobiSkyline className="absolute inset-0 h-full w-full" />
       </div>
     </section>
   )
