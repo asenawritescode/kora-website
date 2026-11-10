@@ -2,11 +2,11 @@ import { ENGINE_BRAND } from '@/lib/brand'
 export function ExtensibilitySection() {
   return (
     <section id="extensibility" className="mb-16 scroll-mt-20">
-      <div className="border-b border-outline-variant pb-4 mb-6">
-        <h2 className="text-[20px] leading-[28px] font-semibold text-black mb-1 tracking-[-0.02em]">
+      <div className="border-b border-line pb-4 mb-6">
+        <h2 className="text-[20px] leading-[28px] font-semibold text-ink mb-1 tracking-[-0.02em]">
           Extensibility &amp; Plugin System
         </h2>
-        <p className="text-sm text-muted">
+        <p className="text-sm text-ink-3">
           Extend {ENGINE_BRAND} with JavaScript, webhooks, custom API endpoints, and workflow automation.
         </p>
       </div>
@@ -14,8 +14,8 @@ export function ExtensibilitySection() {
       <div className="space-y-8">
         {/* Script Engine */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">JavaScript Script Engine</h3>
-          <p className="text-sm text-muted mb-2">
+          <h3 className="text-base font-semibold text-ink mb-2">JavaScript Script Engine</h3>
+          <p className="text-sm text-ink-3 mb-2">
             Write scripts in JavaScript (ES5.1+) that run on {ENGINE_BRAND}'s embedded goja runtime.
             15 prewarmed VMs, 128MB memory limit, 5-second timeout. Scripts can read and write
             documents, call external APIs, and access encrypted secrets.
@@ -42,8 +42,8 @@ return { doc: order };`}
 
         {/* Event Hooks */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Event Hooks</h3>
-          <p className="text-sm text-muted mb-2">
+          <h3 className="text-base font-semibold text-ink mb-2">Event Hooks</h3>
+          <p className="text-sm text-ink-3 mb-2">
             Scripts hook into 8 ORM lifecycle events. Synchronous events can reject operations.
             Async events fire-and-forget for side effects.
           </p>
@@ -58,9 +58,9 @@ return { doc: order };`}
               ['validate', 'sync — custom validation'],
               ['computed', 'sync — compute field values'],
             ].map(([event, desc]) => (
-              <div key={event} className="bg-surface-container rounded px-3 py-1.5 flex justify-between">
-                <span className="text-black">{event}</span>
-                <span className="text-muted">{desc}</span>
+              <div key={event} className="bg-surface-2 rounded px-3 py-1.5 flex justify-between">
+                <span className="text-ink">{event}</span>
+                <span className="text-ink-3">{desc}</span>
               </div>
             ))}
           </div>
@@ -68,8 +68,8 @@ return { doc: order };`}
 
         {/* Webhook Extensions */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Webhook Extensions</h3>
-          <p className="text-sm text-muted mb-2">
+          <h3 className="text-base font-semibold text-ink mb-2">Webhook Extensions</h3>
+          <p className="text-sm text-ink-3 mb-2">
             Register webhook endpoints that receive document events. HMAC-SHA256 signed
             with Stripe-compatible headers. Automatic retry with exponential backoff.
             Auto-disables after 15 consecutive failures.
@@ -92,9 +92,9 @@ Kora-Signature: t=1719000000,v1=a1b2c3d4e5f6...
 
         {/* Custom API Methods */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Custom API Methods</h3>
-          <p className="text-sm text-muted">
-            Define custom endpoints at <code className="bg-gray-100 px-1 rounded text-xs">/api/method/:name</code> backed by scripts.
+          <h3 className="text-base font-semibold text-ink mb-2">Custom API Methods</h3>
+          <p className="text-sm text-ink-3">
+            Define custom endpoints at <code className="bg-surface-2 px-1 rounded text-xs">/api/method/:name</code> backed by scripts.
             Authenticate with Bearer tokens or session cookies. Use for webhooks, integrations,
             or custom business logic that other services call into.
           </p>
@@ -102,29 +102,29 @@ Kora-Signature: t=1719000000,v1=a1b2c3d4e5f6...
 
         {/* Workflow Actions */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Workflow Actions</h3>
-          <p className="text-sm text-muted">
-            Attach scripts or webhooks to workflow transitions. <code className="bg-gray-100 px-1 rounded text-xs">on_transition</code>,
-            <code className="bg-gray-100 px-1 rounded text-xs">on_success</code>, and <code className="bg-gray-100 px-1 rounded text-xs">on_failure</code> triggers
+          <h3 className="text-base font-semibold text-ink mb-2">Workflow Actions</h3>
+          <p className="text-sm text-ink-3">
+            Attach scripts or webhooks to workflow transitions. <code className="bg-surface-2 px-1 rounded text-xs">on_transition</code>,
+            <code className="bg-surface-2 px-1 rounded text-xs">on_success</code>, and <code className="bg-surface-2 px-1 rounded text-xs">on_failure</code> triggers
             execute when documents change state. Automate notifications, integrations, and audit trails.
           </p>
         </div>
 
         {/* Computed Fields */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Computed Fields</h3>
-          <p className="text-sm text-muted">
-            Expression-based (<code className="bg-gray-100 px-1 rounded text-xs">quantity * unit_price</code>) or
-            script-based (<code className="bg-gray-100 px-1 rounded text-xs">@script:calculate_tax</code>).
-            Dependency-ordered evaluation with support for <code className="bg-gray-100 px-1 rounded text-xs">SUM()</code>,
-            <code className="bg-gray-100 px-1 rounded text-xs">ROUND()</code>, and arithmetic.
+          <h3 className="text-base font-semibold text-ink mb-2">Computed Fields</h3>
+          <p className="text-sm text-ink-3">
+            Expression-based (<code className="bg-surface-2 px-1 rounded text-xs">quantity * unit_price</code>) or
+            script-based (<code className="bg-surface-2 px-1 rounded text-xs">@script:calculate_tax</code>).
+            Dependency-ordered evaluation with support for <code className="bg-surface-2 px-1 rounded text-xs">SUM()</code>,
+            <code className="bg-surface-2 px-1 rounded text-xs">ROUND()</code>, and arithmetic.
           </p>
         </div>
 
         {/* Scheduled Scripts */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Scheduled Scripts</h3>
-          <p className="text-sm text-muted">
+          <h3 className="text-base font-semibold text-ink mb-2">Scheduled Scripts</h3>
+          <p className="text-sm text-ink-3">
             Run scripts on cron schedules. Use for daily reports, data cleanup, periodic syncs.
             Managed through the built-in scheduler alongside doctype alerts and email reports.
           </p>

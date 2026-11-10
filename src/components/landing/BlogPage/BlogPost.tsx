@@ -60,7 +60,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
           noindex
         />
         <ArticleShell>
-          <div className="max-w-2xl mx-auto rounded-sm border border-outline-variant bg-white p-6 text-sm text-muted">
+          <div className="max-w-2xl mx-auto rounded-sm border border-line bg-paper p-6 text-sm text-ink-3">
             This article is not currently available.
           </div>
         </ArticleShell>
@@ -94,29 +94,29 @@ export default function BlogPost({ slug }: BlogPostProps) {
             <span className="text-sm font-semibold text-action-busy bg-action/10 px-2 py-1 rounded-sm">
               {post.category}
             </span>
-            <span className="text-xs text-muted">{post.date}</span>
-            <span className="text-xs text-muted flex items-center gap-1">
+            <span className="text-xs text-ink-3">{post.date}</span>
+            <span className="text-xs text-ink-3 flex items-center gap-1">
               <Clock className="h-3 w-3" /> {post.readTime}
             </span>
           </div>
-          <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold text-black mb-8 tracking-[-0.02em] md:tracking-[-0.03em]">
+          <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] md:text-[48px] md:leading-[56px] font-semibold text-ink mb-8 tracking-[-0.02em] md:tracking-[-0.03em]">
             {post.title}
           </h1>
-          <p className="text-lg leading-7 text-on-surface-variant max-w-2xl">
+          <p className="text-lg leading-7 text-ink-2 max-w-2xl">
             {post.description}
           </p>
           <div className="mt-8 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center border border-outline-variant">
-              <User className="h-5 w-5 text-muted" />
+            <div className="w-10 h-10 rounded-full bg-surface-2 flex items-center justify-center border border-line">
+              <User className="h-5 w-5 text-ink-3" />
             </div>
             <div>
-              <div className="text-xs text-black">{post.authorName}</div>
-              <div className="text-xs text-muted">{ENGINE_BRAND}</div>
+              <div className="text-xs text-ink">{post.authorName}</div>
+              <div className="text-xs text-ink-3">{ENGINE_BRAND}</div>
             </div>
           </div>
         </header>
 
-        <div className="mb-[120px] w-full aspect-[21/9] bg-black rounded-xl overflow-hidden border border-outline-variant relative">
+        <div className="mb-[120px] w-full aspect-[21/9] bg-ink rounded-xl overflow-hidden border border-line relative">
           {cmsPost.heroImage || cmsPost.ogImage ? (
             <img
               src={cmsPost.heroImage || cmsPost.ogImage}
@@ -150,7 +150,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
 function ArticleShell({ children }: { children: ReactNode }) {
   return (
     <article className="max-w-[960px] mx-auto px-6 pb-[120px]">
-      <Link to="/blog" className="inline-flex items-center gap-2 text-xs text-muted hover:text-black transition-colors mb-8">
+      <Link to="/blog" className="inline-flex items-center gap-2 text-xs text-ink-3 hover:text-ink transition-colors mb-8">
         <ArrowLeft className="h-3.5 w-3.5" /> Back to Blog
       </Link>
       {children}
@@ -163,23 +163,23 @@ function ArticleLoadingState() {
     <>
       <header className="mb-[120px] max-w-3xl space-y-8">
         <div className="flex items-center gap-4">
-          <div className="h-6 w-24 bg-surface-container" />
-          <div className="h-4 w-28 bg-surface-container" />
+          <div className="h-6 w-24 bg-surface-2" />
+          <div className="h-4 w-28 bg-surface-2" />
         </div>
         <div className="space-y-3">
-          <div className="h-10 w-full bg-surface-container" />
-          <div className="h-10 w-4/5 bg-surface-container" />
+          <div className="h-10 w-full bg-surface-2" />
+          <div className="h-10 w-4/5 bg-surface-2" />
         </div>
         <div className="space-y-2 max-w-2xl">
-          <div className="h-5 w-full bg-surface-container" />
-          <div className="h-5 w-5/6 bg-surface-container" />
+          <div className="h-5 w-full bg-surface-2" />
+          <div className="h-5 w-5/6 bg-surface-2" />
         </div>
       </header>
-      <div className="mb-[120px] w-full aspect-[21/9] bg-surface-container rounded-xl border border-outline-variant" />
+      <div className="mb-[120px] w-full aspect-[21/9] bg-surface-2 rounded-xl border border-line" />
       <div className="max-w-2xl mx-auto space-y-3">
-        <div className="h-4 w-full bg-surface-container" />
-        <div className="h-4 w-11/12 bg-surface-container" />
-        <div className="h-4 w-5/6 bg-surface-container" />
+        <div className="h-4 w-full bg-surface-2" />
+        <div className="h-4 w-11/12 bg-surface-2" />
+        <div className="h-4 w-5/6 bg-surface-2" />
       </div>
     </>
   )
@@ -194,7 +194,7 @@ function formatPublishedDate(value?: string) {
 
 function CmsBody({ body }: { body: string }) {
   return (
-    <div className="blog-content text-base leading-relaxed text-on-surface-variant">
+    <div className="blog-content text-base leading-relaxed text-ink-2">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{body}</ReactMarkdown>
     </div>
   )

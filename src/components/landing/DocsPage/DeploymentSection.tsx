@@ -19,86 +19,86 @@ const ENV_VARS = [
 export function DeploymentSection() {
   return (
     <section className="mb-24" id="deployment">
-      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
+      <h2 className="text-[30px] leading-[38px] font-semibold text-ink mb-3">
         Deployment
       </h2>
-      <p className="text-base text-muted mb-6 leading-relaxed">
+      <p className="text-base text-ink-3 mb-6 leading-relaxed">
         A single 30MB binary. Deploy on a Raspberry Pi behind a shop counter, on a
         cloud VM serving hundreds of users, or pull the Docker image. Everything
         configured through environment variables — no config files to manage.
       </p>
 
-      <h3 className="font-bold text-black mb-3">Environment Variables</h3>
-      <p className="text-sm text-muted mb-4">
+      <h3 className="font-bold text-ink mb-3">Environment Variables</h3>
+      <p className="text-sm text-ink-3 mb-4">
         All configuration is via environment variables. No YAML config files needed
         for the server itself.
       </p>
       <div className="overflow-x-auto mb-8">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-outline-variant text-left">
-              <th className="font-mono py-2 pr-4 font-medium text-black text-[11px] uppercase tracking-wider">Variable</th>
-              <th className="font-mono py-2 pr-2 font-medium text-black text-[11px] uppercase tracking-wider">Default</th>
-              <th className="font-mono py-2 font-medium text-black text-[11px] uppercase tracking-wider">Description</th>
+            <tr className="border-b border-line text-left">
+              <th className="font-mono py-2 pr-4 font-medium text-ink text-[11px] uppercase tracking-wider">Variable</th>
+              <th className="font-mono py-2 pr-2 font-medium text-ink text-[11px] uppercase tracking-wider">Default</th>
+              <th className="font-mono py-2 font-medium text-ink text-[11px] uppercase tracking-wider">Description</th>
             </tr>
           </thead>
           <tbody>
             {ENV_VARS.map((v) => (
-              <tr key={v.var} className="border-b border-outline-variant/30">
+              <tr key={v.var} className="border-b border-line/30">
                 <td className="font-mono py-2 pr-4">
-                  <code className="text-black text-xs">{v.var}</code>
+                  <code className="text-ink text-xs">{v.var}</code>
                 </td>
-                <td className="font-mono py-2 pr-2 text-muted text-xs">
+                <td className="font-mono py-2 pr-2 text-ink-3 text-xs">
                   {v.default}
                 </td>
-                <td className="py-2 text-muted text-sm">{v.desc}</td>
+                <td className="py-2 text-ink-3 text-sm">{v.desc}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <h3 className="font-bold text-black mb-3">Docker</h3>
-      <p className="text-sm text-muted mb-4">
+      <h3 className="font-bold text-ink mb-3">Docker</h3>
+      <p className="text-sm text-ink-3 mb-4">
         Official image:{' '}
-        <a href="https://hub.docker.com/r/smitdockerhub/kora" className="text-black hover:underline" target="_blank" rel="noopener noreferrer">
+        <a href="https://hub.docker.com/r/smitdockerhub/kora" className="text-ink hover:underline" target="_blank" rel="noopener noreferrer">
           smitdockerhub/kora
         </a>
         . Pure Go, no CGO, ~30MB compressed. Supports MySQL and LibSQL.
       </p>
 
-      <h3 className="font-bold text-black mb-3">Database Options</h3>
+      <h3 className="font-bold text-ink mb-3">Database Options</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-        <div className="bg-paper border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">MySQL 8.0</h4>
-          <p className="text-sm text-muted leading-relaxed">
+        <div className="bg-paper border border-line rounded-sm p-4">
+          <h4 className="font-bold text-ink text-sm mb-1">MySQL 8.0</h4>
+          <p className="text-sm text-ink-3 leading-relaxed">
             Each site gets its own database. Complete isolation. Best for multi-tenant production.
           </p>
         </div>
-        <div className="bg-paper border border-outline-variant rounded-sm p-4">
-          <h4 className="font-bold text-black text-sm mb-1">LibSQL (SQLite)</h4>
-          <p className="text-sm text-muted leading-relaxed">
+        <div className="bg-paper border border-line rounded-sm p-4">
+          <h4 className="font-bold text-ink text-sm mb-1">LibSQL (SQLite)</h4>
+          <p className="text-sm text-ink-3 leading-relaxed">
             Single database, site-specific tables. Great for edge deployments or single-server setups.
           </p>
         </div>
       </div>
 
-      <h3 className="font-bold text-black mt-8 mb-3">Self-Service Onboarding</h3>
-      <p className="text-sm text-muted mb-4 leading-relaxed">
+      <h3 className="font-bold text-ink mt-8 mb-3">Self-Service Onboarding</h3>
+      <p className="text-sm text-ink-3 mb-4 leading-relaxed">
         Users can create their own sites at{' '}
-        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">/onboard</code>
+        <code className="text-xs bg-surface-2 px-1 rounded-sm text-ink font-mono">/onboard</code>
         {' '}— no admin intervention needed. Each site gets its own database, admin user,
         and workspace. Rate limited to 3 creations per hour per IP. On success, users
         are redirected to their new workspace. Superadmins can monitor all sites from
         the console at{' '}
-        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">/console</code>.
+        <code className="text-xs bg-surface-2 px-1 rounded-sm text-ink font-mono">/console</code>.
       </p>
 
-      <h3 className="font-bold text-black mt-8 mb-3">Shared AI Keys</h3>
-      <p className="text-sm text-muted mb-4 leading-relaxed">
+      <h3 className="font-bold text-ink mt-8 mb-3">Shared AI Keys</h3>
+      <p className="text-sm text-ink-3 mb-4 leading-relaxed">
         Superadmins can set a global AI provider key so new users get AI chat immediately
         — no per-site configuration needed. Set{' '}
-        <code className="text-xs bg-surface-container px-1 rounded-sm text-black font-mono">KORA_SHARED_AI_ENABLED=true</code>
+        <code className="text-xs bg-surface-2 px-1 rounded-sm text-ink font-mono">KORA_SHARED_AI_ENABLED=true</code>
         {' '}and one of the shared key env vars. Site-specific keys always take priority.
         Disable at any time by removing the env var.
       </p>

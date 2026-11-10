@@ -23,40 +23,40 @@ const BUILD_COMMANDS = [
 export function CliCommandsSection() {
   return (
     <section className="mb-24" id="cli-commands">
-      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
+      <h2 className="text-[30px] leading-[38px] font-semibold text-ink mb-3">
         CLI Commands
       </h2>
-      <p className="text-base text-muted mb-6 leading-relaxed">
+      <p className="text-base text-ink-3 mb-6 leading-relaxed">
         {ENGINE_BRAND} ships as a single binary. Everything you can do in the admin UI, you can
         also do from the command line.
       </p>
 
-      <h3 className="font-bold text-black mb-3">Runtime Commands</h3>
+      <h3 className="font-bold text-ink mb-3">Runtime Commands</h3>
       <div className="overflow-x-auto mb-8">
         <table className="w-full text-sm">
           <tbody>
             {COMMANDS.map((c) => (
-              <tr key={c.cmd} className="border-b border-outline-variant/30">
+              <tr key={c.cmd} className="border-b border-line/30">
                 <td className="font-mono py-2 pr-4">
-                  <code className="text-black text-xs">{c.cmd}</code>
+                  <code className="text-ink text-xs">{c.cmd}</code>
                 </td>
-                <td className="py-2 text-muted">{c.desc}</td>
+                <td className="py-2 text-ink-3">{c.desc}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
 
-      <h3 className="font-bold text-black mb-3">Build Commands</h3>
+      <h3 className="font-bold text-ink mb-3">Build Commands</h3>
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <tbody>
             {BUILD_COMMANDS.map((c) => (
-              <tr key={c.cmd} className="border-b border-outline-variant/30">
+              <tr key={c.cmd} className="border-b border-line/30">
                 <td className="font-mono py-2 pr-4">
-                  <code className="text-black text-xs">{c.cmd}</code>
+                  <code className="text-ink text-xs">{c.cmd}</code>
                 </td>
-                <td className="py-2 text-muted">{c.desc}</td>
+                <td className="py-2 text-ink-3">{c.desc}</td>
               </tr>
             ))}
           </tbody>

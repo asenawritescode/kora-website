@@ -2,11 +2,11 @@ import { ENGINE_BRAND } from '@/lib/brand'
 export function SdkSection() {
   return (
     <section id="sdks" className="mb-16 scroll-mt-20">
-      <div className="border-b border-outline-variant pb-4 mb-6">
-        <h2 className="text-[20px] leading-[28px] font-semibold text-black mb-1 tracking-[-0.02em]">
+      <div className="border-b border-line pb-4 mb-6">
+        <h2 className="text-[20px] leading-[28px] font-semibold text-ink mb-1 tracking-[-0.02em]">
           SDKs &amp; Tools
         </h2>
-        <p className="text-sm text-muted">
+        <p className="text-sm text-ink-3">
           Build tooling and extensions with first-class Go and TypeScript SDKs.
         </p>
       </div>
@@ -14,8 +14,8 @@ export function SdkSection() {
       <div className="space-y-8">
         {/* Go SDK */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">Go SDK</h3>
-          <p className="text-sm text-muted mb-2">
+          <h3 className="text-base font-semibold text-ink mb-2">Go SDK</h3>
+          <p className="text-sm text-ink-3 mb-2">
             Zero-dependency Go module for building tooling, the {ENGINE_BRAND} Cloud control plane,
             and custom providers. Import only the types you need.
           </p>
@@ -42,8 +42,8 @@ runner.Execute(ctx, sdk.ExecuteRequest{
 
         {/* TypeScript SDK */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">TypeScript SDK</h3>
-          <p className="text-sm text-muted mb-2">
+          <h3 className="text-base font-semibold text-ink mb-2">TypeScript SDK</h3>
+          <p className="text-sm text-ink-3 mb-2">
             Typed client for extension authors. Manage scripts, extensions, and custom API methods
             from your Node.js or Bun applications.
           </p>
@@ -77,8 +77,8 @@ const invoice = await kora.callMethod('send_invoice', {
 
         {/* MCP Server */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">MCP Server</h3>
-          <p className="text-sm text-muted">
+          <h3 className="text-base font-semibold text-ink mb-2">MCP Server</h3>
+          <p className="text-sm text-ink-3">
             {ENGINE_BRAND} auto-generates Model Context Protocol tools from your doctype definitions.
             Connect Claude Desktop, Cursor, or any MCP-compatible client to query and
             manage your data via natural language.
@@ -93,11 +93,11 @@ const invoice = await kora.callMethod('send_invoice', {
 
         {/* API Versioning */}
         <div>
-          <h3 className="text-base font-semibold text-black mb-2">API Versioning</h3>
-          <p className="text-sm text-muted">
-            All REST endpoints are available under both <code className="bg-gray-100 px-1 rounded text-xs">/api/v1/</code>
-            (canonical) and <code className="bg-gray-100 px-1 rounded text-xs">/api/</code> prefixes for backward compatibility.
-            Swagger UI at <code className="bg-gray-100 px-1 rounded text-xs">/api/v1/swagger-ui</code>.
+          <h3 className="text-base font-semibold text-ink mb-2">API Versioning</h3>
+          <p className="text-sm text-ink-3">
+            All REST endpoints are available under both <code className="bg-surface-2 px-1 rounded text-xs">/api/v1/</code>
+            (canonical) and <code className="bg-surface-2 px-1 rounded text-xs">/api/</code> prefixes for backward compatibility.
+            Swagger UI at <code className="bg-surface-2 px-1 rounded text-xs">/api/v1/swagger-ui</code>.
           </p>
         </div>
       </div>

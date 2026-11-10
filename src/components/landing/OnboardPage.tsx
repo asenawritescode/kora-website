@@ -19,25 +19,25 @@ export default function OnboardPage() {
   return (
     <div className="py-12 md:py-24 px-4 sm:px-6">
       <div className="max-w-[640px] mx-auto">
-        <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-bold text-black mb-4 tracking-[-0.03em]">
+        <h1 className="text-[32px] leading-[40px] sm:text-[40px] sm:leading-[48px] font-bold text-ink mb-4 tracking-[-0.03em]">
           Set up your shop on Zana Cloud
         </h1>
-        <p className="text-lg text-on-surface-variant mb-8">
+        <p className="text-lg text-ink-2 mb-8">
           On Zana Cloud you choose what your business needs, then create an account with your name, email and business name. We send you an email to confirm it, and then you can sign in to your workspace.
         </p>
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-10">
           <a
             href={signupHref}
-            className="inline-flex min-h-12 items-center justify-center bg-action text-white text-sm font-medium px-8 py-3 hover:bg-action-busy transition-colors"
+            className="inline-flex min-h-12 items-center justify-center bg-action text-paper text-sm font-medium px-8 py-3 hover:bg-action-busy transition-colors"
           >
             Continue to sign up
           </a>
-          <p className="text-sm text-on-surface-variant">
+          <p className="text-sm text-ink-2">
             Already have a workspace?{' '}
-            <a href={signInHref} className="inline-flex min-h-12 items-center text-black underline underline-offset-2 hover:no-underline">Sign in</a>
+            <a href={signInHref} className="inline-flex min-h-12 items-center text-ink underline underline-offset-2 hover:no-underline">Sign in</a>
           </p>
         </div>
-        <p className="text-sm text-on-surface-variant">
+        <p className="text-sm text-ink-2">
           Zana is in a pilot with a small number of shops. It records sales and stock. M-Pesa payments can be recorded by hand, but Kigae is not connected to M-Pesa. Card payments, receipt printers and eTIMS are not supported yet.
         </p>
       </div>

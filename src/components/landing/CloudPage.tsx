@@ -15,11 +15,11 @@ export default function CloudPage() {
           <h1 className="font-display text-ink text-[clamp(44px,6vw,88px)] leading-[0.96] font-[780] tracking-[-0.03em]">
             {BRAND} Cloud
           </h1>
-          <p className="mt-6 max-w-[30rem] text-[18px] md:text-[20px] leading-[1.5] text-on-surface-variant">
+          <p className="mt-6 max-w-[30rem] text-[18px] md:text-[20px] leading-[1.5] text-ink-2">
             We host your workspace and keep it updated, so you only need a browser.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2">
-            <SignupLink className="inline-flex min-h-12 items-center bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px" />
+            <SignupLink className="inline-flex min-h-12 items-center bg-action px-[22px] text-[15px] font-semibold text-paper transition-colors duration-150 hover:bg-action-busy active:translate-y-px" />
             <Link to="/pricing" className={textLink}>Pricing</Link>
           </div>
         </header>
@@ -30,16 +30,16 @@ export default function CloudPage() {
           </h2>
           <ol className="mt-8 border-t border-ink">
             {SIGNUP_STEPS.map((step, i) => (
-              <li key={step.title} className="grid grid-cols-[3rem_1fr] gap-x-2 border-b border-outline-variant py-5">
+              <li key={step.title} className="grid grid-cols-[3rem_1fr] gap-x-2 border-b border-line py-5">
                 <span aria-hidden="true" className="font-display text-[32px] font-[780] leading-[1] tracking-[-0.03em] text-ink">{i + 1}</span>
                 <div>
                   <h3 className="font-display text-[clamp(20px,2vw,26px)] font-[680] leading-[1.15] text-ink">{step.title}</h3>
-                  <p className="mt-1 text-[16px] leading-[1.6] text-muted">{step.body}</p>
+                  <p className="mt-1 text-[16px] leading-[1.6] text-ink-3">{step.body}</p>
                 </div>
               </li>
             ))}
           </ol>
-          <p className="mt-6 text-[16px] leading-[1.6] text-muted">
+          <p className="mt-6 text-[16px] leading-[1.6] text-ink-3">
             Prefer your own server? {ENGINE_BRAND} Engine is open source.{' '}
             <Link to="/open-source" className="font-semibold text-ink underline underline-offset-[6px] hover:decoration-action hover:decoration-2">Run it yourself</Link>.
           </p>

@@ -32,11 +32,11 @@ const SECTIONS = [
 
 export function DocsSidebar() {
   return (
-    <aside className="hidden md:block w-64 shrink-0 border-r border-outline-variant pt-8 pr-8 overflow-y-auto h-screen sticky top-0">
+    <aside className="hidden md:block w-64 shrink-0 border-r border-line pt-8 pr-8 overflow-y-auto h-screen sticky top-0">
       <nav className="space-y-6">
         {SECTIONS.map((section) => (
           <div key={section.title}>
-            <p className="font-mono text-[11px] font-medium text-muted uppercase mb-2 tracking-[0.15em]">
+            <p className="font-mono text-[11px] font-medium text-ink-3 uppercase mb-2 tracking-[0.15em]">
               {section.title}
             </p>
             <ul className="space-y-0.5">
@@ -44,7 +44,7 @@ export function DocsSidebar() {
                 <li key={link.label}>
                   <a
                     href={link.href}
-                    className="block px-2 py-1.5 text-sm rounded-sm text-muted hover:text-black hover:bg-gray-50 transition-colors"
+                    className="block px-2 py-1.5 text-sm rounded-sm text-ink-3 hover:text-ink hover:bg-surface-2 transition-colors"
                   >
                     {link.label}
                   </a>

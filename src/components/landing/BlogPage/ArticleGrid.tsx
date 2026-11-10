@@ -4,11 +4,11 @@ import type { Article } from './data'
 export function ArticleGrid({ articles }: { articles: Article[] }) {
   return (
     <section>
-      <div className="flex items-center justify-between mb-8 border-b border-outline-variant pb-4">
-        <h3 className="text-[30px] leading-[38px] font-semibold text-black">Latest Technical Posts</h3>
+      <div className="flex items-center justify-between mb-8 border-b border-line pb-4">
+        <h3 className="text-[30px] leading-[38px] font-semibold text-ink">Latest Technical Posts</h3>
         <a
           href="#"
-          className="text-xs font-medium text-black hover:underline flex items-center gap-1 uppercase tracking-[0.15em]"
+          className="text-xs font-medium text-ink hover:underline flex items-center gap-1 uppercase tracking-[0.15em]"
          
         >
           View All <ArrowRight />
