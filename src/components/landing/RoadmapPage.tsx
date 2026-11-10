@@ -1,20 +1,23 @@
 import { SignupLink } from '@/components/landing/SignupLink'
 import { CARD, H1, StatusBadge } from '@/components/landing/ui'
-import { LANES, type Lane } from '@/lib/modules-content'
+import type { Lane } from '@/lib/modules-content'
+import { useModules } from '@/lib/use-modules'
 
 const RAIL: Record<Lane['status'], string> = { available: 'border-action text-action', preview: 'border-amber-ink text-amber-ink', roadmap: 'border-line-strong text-ink-3' }
 
 // What works now, what is being built and what is planned. No dates, no email
 // capture: there is no endpoint to send roadmap updates yet.
 export default function RoadmapPage() {
+  const { lanes: LANES, source } = useModules()
   return (
-    <div className="flex-1 bg-surface">
+    <div className="flex-1 bg-surface" data-modules-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <div className="flex max-w-[560px] flex-col gap-2.5">
           <h1 className={H1}>Roadmap</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">What works now, what’s being built and what’s planned. Order may change. No dates promised.</p>
         </div>
 
+        {source === 'fallback' && <p role="alert" className="text-[0.9375rem] text-amber-ink">Live status could not be loaded, so this is the last published roadmap. Try again shortly.</p>}
         <ol aria-label="Roadmap stages" className="grid items-start gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
           {LANES.map((lane) => (
             <li key={lane.title} className="flex min-w-0 flex-col gap-3">

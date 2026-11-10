@@ -21,6 +21,28 @@ export interface CatalogTemplate {
   components: CatalogComponent[]
 }
 
+// A module the catalog lists, reduced to what the Modules and Roadmap pages read.
+export interface CatalogModule {
+  slug: string
+  name: string
+  availability: Availability
+}
+
+// One roadmap entry from Cloud. It never carries availability: that is the attested
+// level of the catalog module named by releaseSlug.
+export type RoadmapHorizon = 'building' | 'next' | 'later'
+export interface RoadmapEntry {
+  slug: string
+  kind: 'module' | 'feature'
+  name: string
+  summary: string
+  horizon: RoadmapHorizon
+  requires: string[]
+  limitations: string[]
+  releaseSlug?: string
+  sort: number
+}
+
 export type Fetcher = (input: string, init?: RequestInit) => Promise<Response>
 
 export type CatalogErrorKind = 'network' | 'http' | 'invalid'
@@ -90,6 +112,65 @@ export function parseTemplates(payload: unknown): CatalogTemplate[] {
   if (!Array.isArray(items)) throw new CatalogError('invalid', 'catalog response has no data.items list')
   return items.map(parseTemplate).filter((t): t is CatalogTemplate => t !== null)
 }
+
+const strings = (v: unknown) => (Array.isArray(v) ? v.map(text).filter(Boolean) : [])
+const HORIZONS: RoadmapHorizon[] = ['building', 'next', 'later']
+
+function listItems(payload: unknown, what: string): unknown[] {
+  const items = isObject(payload) && isObject(payload.data) ? payload.data.items : undefined
+  if (!Array.isArray(items)) throw new CatalogError('invalid', `${what} response has no data.items list`)
+  return items
+}
+
+export function parseCatalogModules(payload: unknown): CatalogModule[] {
+  return listItems(payload, 'modules').flatMap((raw) => {
+    if (!isObject(raw)) return []
+    const level = levelOf(raw.availability)
+    const slug = text(raw.slug)
+    const name = text(raw.name)
+    return slug && name && level !== 'hidden' ? [{ slug, name, availability: level }] : []
+  })
+}
+
+// An entry with an unknown horizon or kind is dropped, never guessed.
+export function parseRoadmap(payload: unknown): RoadmapEntry[] {
+  return listItems(payload, 'roadmap').flatMap((raw) => {
+    if (!isObject(raw)) return []
+    const slug = text(raw.slug)
+    const name = text(raw.name)
+    const horizon = HORIZONS.find((h) => h === text(raw.horizon))
+    const kind = text(raw.kind) === 'feature' ? 'feature' : text(raw.kind) === 'module' ? 'module' : undefined
+    if (!slug || !name || !horizon || !kind) return []
+    return [{
+      slug, kind, name, summary: text(raw.summary), horizon,
+      requires: strings(raw.requires), limitations: strings(raw.limitations),
+      releaseSlug: text(raw.release_slug) || undefined,
+      sort: typeof raw.sort === 'number' ? raw.sort : 0,
+    }]
+  })
+}
+
+async function getJSON(path: string, options: { baseURL?: string; signal?: AbortSignal; fetchImpl?: Fetcher }): Promise<unknown> {
+  const { baseURL = catalogBaseURL, signal, fetchImpl = fetch as Fetcher } = options
+  let res: Response
+  try {
+    // no-cache: readiness is a claim, so a reload must not show a status Cloud has since changed.
+    res = await fetchImpl(`${baseURL}/api/public/catalog/v1/${path}`, { headers: { Accept: 'application/json' }, signal, cache: 'no-cache' })
+  } catch (err) {
+    if (signal?.aborted) throw err
+    throw new CatalogError('network', 'could not reach the catalog')
+  }
+  if (!res.ok) throw new CatalogError('http', `catalog request failed: ${res.status}`, res.status)
+  try {
+    return await res.json()
+  } catch {
+    throw new CatalogError('invalid', 'catalog response is not JSON')
+  }
+}
+
+type FetchOptions = { baseURL?: string; signal?: AbortSignal; fetchImpl?: Fetcher }
+export const fetchCatalogModules = async (options: FetchOptions = {}) => parseCatalogModules(await getJSON('modules', options))
+export const fetchRoadmap = async (options: FetchOptions = {}) => parseRoadmap(await getJSON('roadmap', options))
 
 export async function fetchTemplates(
   options: { baseURL?: string; signal?: AbortSignal; fetchImpl?: Fetcher } = {},

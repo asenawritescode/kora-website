@@ -3,16 +3,19 @@ import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, H1, StatusBadge, Tick, type Status } from '@/components/landing/ui'
-import { MODULES, countByStatus } from '@/lib/modules-content'
+import type { ModuleInfo } from '@/lib/modules-content'
+import { useModules } from '@/lib/use-modules'
 import { usePhone } from '@/lib/use-phone'
 
 type Filter = 'all' | Status
 const FILTERS: [Filter, string][] = [['all', 'All'], ['available', 'Available'], ['preview', 'Preview'], ['roadmap', 'On the roadmap']]
 const h2 = 'text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]'
 
-const countFor = (f: Filter) => (f === 'all' ? MODULES.length : countByStatus(f))
+const countByStatus = (modules: ModuleInfo[], status: Status) => modules.filter((m) => m.status === status).length
 
 export default function ModulesPage() {
+  const { modules: MODULES, source } = useModules()
+  const countFor = (f: Filter) => (f === 'all' ? MODULES.length : countByStatus(MODULES, f))
   const [filter, setFilter] = useState<Filter>('all')
   const phone = usePhone()
   // null follows the screen (closed on a phone, open elsewhere) until the visitor toggles it.
@@ -22,12 +25,12 @@ export default function ModulesPage() {
   const planned = shown.filter((m) => m.status === 'roadmap')
 
   return (
-    <div className="flex-1 bg-surface">
+    <div className="flex-1 bg-surface" data-modules-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex max-w-[760px] flex-col gap-2.5">
           <h1 className={H1}>Pick only what your business needs</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">
-            {MODULES.length} modules: {countByStatus('available')} available, {countByStatus('preview')} in preview, {countByStatus('roadmap')} on the roadmap. Pick only what you need.
+            {MODULES.length} modules: {countByStatus(MODULES, 'available')} available, {countByStatus(MODULES, 'preview')} in preview, {countByStatus(MODULES, 'roadmap')} on the roadmap. Pick only what you need.
           </p>
           <div className="mt-1.5 flex flex-wrap items-center gap-x-5 gap-y-3">
             <SignupLink className={BUTTON_PRIMARY} />
@@ -56,6 +59,7 @@ export default function ModulesPage() {
             )
           })}
         </div>
+        {source === 'fallback' && <p role="alert" className="text-[0.9375rem] text-amber-ink">Live status could not be loaded, so this is the last published list. Try again shortly.</p>}
         <p role="status" className="text-[0.9375rem] text-ink-3">Showing {shown.length.toLocaleString('en-US')} of {MODULES.length.toLocaleString('en-US')} modules</p>
 
         {cards.length > 0 && (
