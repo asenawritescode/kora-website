@@ -9,7 +9,7 @@ const RAIL: Record<Lane['status'], string> = { available: 'border-action text-ac
 export default function RoadmapPage() {
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-8 px-4 pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
+      <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <div className="flex max-w-[560px] flex-col gap-2.5">
           <h1 className={H1}>Roadmap</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">What works now, what’s being built and what’s planned. Order may change. No dates promised.</p>
@@ -41,7 +41,7 @@ export default function RoadmapPage() {
           ))}
         </ol>
 
-        <section aria-label="Get started" className="flex flex-wrap items-center justify-between gap-5 rounded-2xl bg-band p-[clamp(1.5rem,4vw,2.75rem)] text-on-band">
+        <section aria-label="Get started" className="flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(1.5rem,4vw,2.75rem)] text-on-band">
           <div className="flex flex-[1_1_360px] flex-col gap-1.5">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Start with what works today</h2>
             <p className="text-base text-on-band-2">Free during the pilot.</p>

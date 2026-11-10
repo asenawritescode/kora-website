@@ -35,7 +35,7 @@ export default function HowAiPage() {
         <div className="mx-auto flex max-w-[1200px] flex-col gap-4">
           <h1 className="max-w-[820px] text-[clamp(2.125rem,4.8vw,3.75rem)] leading-[1.05]">How AI works with your tools</h1>
           <p className="max-w-[680px] text-[1.125rem] leading-[1.55] text-ink-2">People use Zana through screens. AI agents will follow the same rules.</p>
-          <div role="note" className="flex max-w-[720px] gap-3 rounded-2xl bg-slate-tint p-4">
+          <div role="note" className="flex max-w-[720px] gap-3 rounded-xl bg-slate-tint p-4">
             <svg width="22" height="22" viewBox="0 0 20 20" aria-hidden="true" className="flex-none text-slate">
               <path d="M5 17.5V3h9l-2 3.25L14 9.5H5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
@@ -44,7 +44,7 @@ export default function HowAiPage() {
         </div>
       </section>
 
-      <section aria-labelledby="two-ways" className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 py-[clamp(40px,5vw,80px)]">
+      <section aria-labelledby="two-ways" className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 py-[clamp(40px,5vw,80px)]">
         <h2 id="two-ways" className={h2}>Built once, used two ways</h2>
         <div className="flex flex-wrap items-stretch gap-4">
           <div className={`${CARD} flex flex-[1_1_240px] flex-col gap-2 p-5`}>
@@ -57,7 +57,7 @@ export default function HowAiPage() {
             <span className="text-[0.9375rem] leading-normal text-ink-2">Use the same actions, without screens.</span>
             <span className="self-start"><StatusBadge status="roadmap" /></span>
           </div>
-          <div className="flex flex-[2_1_380px] flex-col gap-2.5 rounded-2xl bg-band p-5 text-on-band">
+          <div className="flex flex-[2_1_380px] flex-col gap-2.5 rounded-xl bg-band p-5 text-on-band">
             <strong className="text-[1.125rem]">Both go through the same three things</strong>
             <ol className="text-[0.9375rem] leading-[1.6] text-on-band-2">
               <li>1. The role’s permissions</li>

@@ -33,17 +33,17 @@ export default function IndustryRetailPage() {
       </section>
 
       <section aria-label="What it looks like" className="px-4 pt-[clamp(2rem,5vw,4rem)]">
-        <div className="mx-auto max-w-[880px]"><ProductScreens /></div>
+        <div className="mx-auto max-w-[880px]"><ProductScreens autoplay={false} /></div>
       </section>
 
-      <section aria-labelledby="preset-title" className="mx-auto flex max-w-[1200px] flex-wrap gap-8 px-4 py-[clamp(40px,5vw,72px)]">
+      <section aria-labelledby="preset-title" className="mx-auto flex max-w-[1232px] flex-wrap gap-8 px-4 py-[clamp(40px,5vw,72px)]">
         <div className="flex flex-[2_1_480px] flex-col gap-3">
           <h2 id="preset-title" className={h2}>Modules in this preset</h2>
           <p className="text-base text-ink-2">Ready modules come ticked. The rest are coming.</p>
           {modules.map((m) => {
             const on = m.status === 'available'
             return (
-              <div key={m.id} className={`flex flex-wrap items-center gap-x-3.5 gap-y-2 rounded-2xl border border-line px-4 py-3.5 ${on ? 'bg-ok-wash' : 'bg-paper'}`}>
+              <div key={m.id} className={`flex flex-wrap items-center gap-x-3.5 gap-y-2 rounded-xl border border-line px-4 py-3.5 ${on ? 'bg-ok-wash' : 'bg-paper'}`}>
                 <span aria-hidden="true" className={`flex size-7 flex-none items-center justify-center rounded-lg border-2 text-paper ${on ? 'border-action bg-action' : 'border-line-strong bg-paper'}`}>
                   {on && <Tick className="size-4" />}
                 </span>
@@ -58,7 +58,7 @@ export default function IndustryRetailPage() {
         </div>
         <div className="flex flex-[1_1_300px] flex-col gap-3">
           <h2 className={h2}>Your words</h2>
-          <div className="overflow-hidden rounded-2xl border border-line">
+          <div className="overflow-hidden rounded-xl border border-line">
             <table className="w-full border-collapse text-[0.9375rem]">
               <thead>
                 <tr className="bg-surface">
@@ -99,7 +99,7 @@ export default function IndustryRetailPage() {
       </section>
 
       <section aria-label="Get started" className="px-4 py-[clamp(40px,5vw,72px)]">
-        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-5 rounded-2xl bg-accent p-[clamp(24px,4vw,44px)] text-on-accent">
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-5 rounded-xl bg-accent p-[clamp(24px,4vw,44px)] text-on-accent">
           <div className="flex flex-[1_1_360px] flex-col gap-1.5">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)]">Open your till this week</h2>
             <p className="text-base">Free during the pilot. Change modules anytime.</p>

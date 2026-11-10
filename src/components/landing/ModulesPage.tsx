@@ -19,7 +19,7 @@ export default function ModulesPage() {
 
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-6 px-4 pb-[clamp(48px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
+      <div className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 pb-[clamp(48px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex max-w-[760px] flex-col gap-2.5">
           <h1 className={H1}>Pick only what your business needs</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">
@@ -31,9 +31,9 @@ export default function ModulesPage() {
           </div>
         </div>
 
-        <section aria-labelledby="mod-today" className={`${CARD} flex flex-col items-center gap-3 px-4 py-[clamp(1.25rem,3vw,2rem)]`}>
+        <section aria-labelledby="mod-today" className="flex flex-col items-center gap-3 py-2">
           <h2 id="mod-today" className={`${h2} text-center`}>The two Available modules, as they look today</h2>
-          <div className="w-full max-w-[880px]"><ProductScreens variant="modules" /></div>
+          <div className="w-full max-w-[880px]"><ProductScreens variant="modules" autoplay={false} /></div>
         </section>
 
         <div role="group" aria-label="Filter by state" className="flex flex-wrap gap-2">
@@ -68,7 +68,7 @@ export default function ModulesPage() {
                 </dl>
                 <div className="mt-auto flex flex-col gap-2 pt-1.5">
                   {m.status === 'available' ? (
-                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md bg-action text-[0.9375rem] font-semibold text-paper no-underline">Choose {m.short}</Link>
+                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">Choose {m.short}</Link>
                   ) : (
                     <Link to="/roadmap" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">See the roadmap</Link>
                   )}
@@ -97,7 +97,7 @@ export default function ModulesPage() {
           </section>
         )}
 
-        <section aria-label="Get started" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-2xl bg-band p-[clamp(24px,4vw,44px)] text-on-band">
+        <section aria-label="Get started" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(24px,4vw,44px)] text-on-band">
           <div className="flex flex-[1_1_360px] flex-col gap-2">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Start with what works today</h2>
             <p className="text-base leading-normal text-on-band-2">Sales and point of sale includes Inventory and stock.</p>

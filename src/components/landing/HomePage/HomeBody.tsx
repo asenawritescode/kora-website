@@ -1,13 +1,12 @@
 import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
-import { BUTTON_PRIMARY, BUTTON_SECONDARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
+import { BUTTON_SECONDARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 
 // Below the hero: who it is for, before and after, three steps, what works today,
 // the rules, the price and the closing band. Every line is something the pilot
 // does today or is marked as not yet; see the truthfulness table in kora-website#1.
 
 const h2 = H2
-const button = BUTTON_PRIMARY
 const card = 'flex flex-col gap-3 rounded-xl border border-line bg-paper p-[clamp(1.5rem,3vw,2.25rem)]'
 
 const SHOP_TYPES = ['Dukas', 'Minimarts', 'Kiosks', 'Hardware stores', 'Boutiques']
@@ -48,7 +47,7 @@ export function HomeBody() {
       <section aria-labelledby="swap-title" className="bg-surface px-4 py-[clamp(3rem,6vw,5.5rem)]">
         <div className="mx-auto flex max-w-[1000px] flex-col gap-6">
           <h2 id="swap-title" className={`${h2} text-center`}>From the notebook to your phone</h2>
-          <div role="table" aria-label="Before and with Zana" className="overflow-hidden rounded-2xl border border-line bg-paper">
+          <div role="table" aria-label="Before and with Zana" className="overflow-hidden rounded-xl border border-line bg-paper">
             <div role="row" className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] border-b border-line bg-surface-2 sm:grid-cols-2">
               <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink-3 sm:px-5">Before</span>
               <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink sm:px-5">With Zana</span>
@@ -78,7 +77,7 @@ export function HomeBody() {
               </li>
             ))}
           </ol>
-          <SignupLink className={`${button} self-start`} />
+          <SignupLink className={`${BUTTON_SECONDARY} self-start`} />
         </div>
       </section>
 
@@ -87,7 +86,7 @@ export function HomeBody() {
           <h2 id="today-title" className={`${h2} max-w-[720px]`}>What works today, and what doesn’t</h2>
           <div className="flex flex-wrap gap-5">
             {TODAY.map((col) => (
-              <div key={col.title} className="flex flex-[1_1_340px] flex-col gap-1 rounded-2xl border border-line bg-paper p-[22px]">
+              <div key={col.title} className="flex flex-[1_1_340px] flex-col gap-1 rounded-xl border border-line bg-paper p-[22px]">
                 <h3 className="mb-2 text-[1.1875rem]">{col.title}</h3>
                 {col.items.map(([text, status]) => (
                   <div key={text} className="flex flex-wrap items-center justify-between gap-2 border-t border-line-faint py-3">
