@@ -109,7 +109,7 @@ export default function ModulesPage() {
           </details>
         )}
 
-        <section aria-label="Get started" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(24px,4vw,44px)] text-on-band">
+        <section aria-label="Get started" className="on-band mt-6 flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(24px,4vw,44px)] text-on-band">
           <div className="flex flex-[1_1_360px] flex-col gap-2">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Start with what works today</h2>
             <p className="text-base leading-normal text-on-band-2">Sales and point of sale includes Inventory and stock.</p>
