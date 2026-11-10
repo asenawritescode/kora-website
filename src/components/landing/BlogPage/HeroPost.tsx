@@ -6,9 +6,9 @@ import { ENGINE_BRAND } from '@/lib/brand'
 export function HeroPost({ article }: { article: Article }) {
   const heroImage = article.heroImage || article.ogImage
   return (
-    <Link to="/blog/$slug" params={{ slug: article.slug }} className="group border border-outline-variant bg-white overflow-hidden flex flex-col md:flex-row hover:border-black transition-colors duration-300">
+    <Link to="/blog/$slug" params={{ slug: article.slug }} className="group border border-line bg-paper overflow-hidden flex flex-col md:flex-row hover:border-ink transition-colors duration-300">
       {/* Image */}
-      <div className="md:w-3/5 border-b md:border-b-0 md:border-r border-outline-variant bg-surface-container overflow-hidden h-[300px] md:h-auto">
+      <div className="md:w-3/5 border-b md:border-b-0 md:border-r border-line bg-surface-2 overflow-hidden h-[300px] md:h-auto">
         {heroImage ? (
           <img
             src={heroImage}
@@ -21,31 +21,31 @@ export function HeroPost({ article }: { article: Article }) {
       </div>
 
       {/* Content */}
-      <div className="md:w-2/5 p-8 md:p-10 flex flex-col justify-between gap-8 bg-white">
+      <div className="md:w-2/5 p-8 md:p-10 flex flex-col justify-between gap-8 bg-paper">
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            <span className="text-xs font-medium bg-surface-container text-black px-2 py-1 rounded-sm">
+            <span className="text-xs font-medium bg-surface-2 text-ink px-2 py-1 rounded-sm">
               {article.category}
             </span>
-            <span className="text-sm text-muted">
+            <span className="text-sm text-ink-3">
               {formatDate(article.publishedAt)}
             </span>
           </div>
-          <h2 className="text-[28px] leading-[36px] sm:text-[36px] sm:leading-[44px] md:text-[48px] md:leading-[56px] font-semibold text-black group-hover:text-black/80 transition-colors tracking-[-0.02em] md:tracking-[-0.03em]">
+          <h2 className="text-[28px] leading-[36px] sm:text-[36px] sm:leading-[44px] md:text-[48px] md:leading-[56px] font-semibold text-ink group-hover:text-ink/80 transition-colors tracking-[-0.02em] md:tracking-[-0.03em]">
             {article.title}
           </h2>
-          <p className="text-base text-on-surface-variant line-clamp-3">
+          <p className="text-base text-ink-2 line-clamp-3">
             {article.description}
           </p>
         </div>
-        <div className="flex items-center gap-3 pt-4 border-t border-outline-variant">
-          <div className="w-8 h-8 rounded-full bg-outline-variant border border-outline flex items-center justify-center overflow-hidden">
-            <User className="h-4 w-4 text-muted" />
+        <div className="flex items-center gap-3 pt-4 border-t border-line">
+          <div className="w-8 h-8 rounded-full bg-line border border-outline flex items-center justify-center overflow-hidden">
+            <User className="h-4 w-4 text-ink-3" />
           </div>
-          <div className="text-sm text-black">
+          <div className="text-sm text-ink">
             By {article.authorName || `${ENGINE_BRAND} Team`}
           </div>
-          <div className="ml-auto text-black group-hover:translate-x-2 transition-transform duration-300">
+          <div className="ml-auto text-ink group-hover:translate-x-2 transition-transform duration-300">
             <ArrowRight />
           </div>
         </div>

@@ -51,8 +51,7 @@ components:
 
 Source of truth: the "Zana design" page of the ERP landing page canvas
 (Components and Dark mode artboards). Where this file and the canvas differ,
-the canvas wins. The page-level sections below (module picker) still describe the previous Nairobi identity and are replaced
-as each page moves to the canvas design.
+the canvas wins.
 
 ## Overview
 
@@ -180,48 +179,20 @@ action colour; that is now `action`.
   saying what Zana is, two link columns, then "English now, Kiswahili next"
   and the copyright line. Links in `on-band-2`, underlined on hover.
 
-### Module picker (home page; also the rules for Cloud signup, kora-cloud#39)
-
-The picker explains how choosing works: pick a module, and what it needs comes
-with it. It is a ruled list of rows, not a grid of cards.
-
-- **Row:** white, 1 px rule between rows, 18-20 px padding. Left: a 22 px
-  square checkbox. Then the module name (Title), one-line summary (Body,
-  muted), and a state label on the right (Label).
-- **Available, not chosen:** checkbox 1.5 px ink outline, empty.
-- **Chosen:** row background ochre tint, checkbox filled ochre with a white
-  tick, name in ink. The change is instant.
-- **Included because another module needs it:** checkbox filled ink with a
-  white tick and not clickable while the module that needs it is chosen.
-  Under the summary, a dependency note in 14 px ink soft that names both
-  modules and says why, for example "Included: Point of Sale needs
-  Inventory, because each sale takes the items off the stock count." The
-  dependency comes from the catalog's `requires`; the reason text is kept in
-  `src/lib/module-picker.ts`.
-- **Preview** (the catalog has not marked it available, or it needs a part
-  that is not): not selectable. The checkbox is disabled (1.5 px muted
-  outline on sand), the name is muted, and the row carries a "Preview" label
-  (mono 11 px, 1 px ink outline) and a 14 px note saying why it cannot be
-  chosen yet. Every part of a preview template is preview.
-- **On the roadmap:** not a checkbox. Muted text on sand, label "On the
-  roadmap", `aria-disabled`. Never a date, never "coming soon".
-- **Selection summary:** beside the list (below it on phones), one line naming what is chosen,
-  then the price line in Body: "Free during the pilot. Pricing will be
-  announced before the pilot ends." Then the primary button, which carries
-  the choice to Cloud signup as `?template=<slug>&optional=<release ids,
-  comma separated>` (`src/lib/cloud-signup.ts`; format documented in
-  kora-cloud `docs/signup-link-format.md`). The choice is held in one store
-  (`src/lib/signup-choice.ts`), so every "Set up your shop" button on the site
-  (header, hero, closing action, footer, Cloud, Pricing) carries the same
-  link, and the template page edits the same choice. The optional ids are the
-  optional parts ticked plus the optional parts they need; parts a template
-  installs anyway are never listed. Nothing chosen: the plain signup link.
-- **Focus:** the 3 px ochre ring sits on the whole row (`:focus-within`).
-  Space toggles, Tab moves between rows.
-- **States from the catalog:** loading (rows shown as quiet sand bars with
-  "Loading modules" for screen readers), error ("We could not load the
-  module list." with "Try again"), empty ("No modules are published yet.").
-  Only modules in the Cloud catalog can be chosen.
+### Module picker (`/start`)
+- Its own page, not part of the site chrome: logo and "Step 1 of 3", the
+  content, and a sticky bar with the count and "Continue to create account".
+- Screen one asks what kind of business (five radio rows; "Another kind"
+  opens a list of the other starting points or "I'll choose modules myself").
+  Screen two lists the modules Cloud's catalog offers as checkbox rows, ticked
+  from the chosen preset. A module another one needs is ticked, locked and
+  says why ("Included: ... needs ... because ..."). Modules not ready yet sit
+  in a "N more in this setup aren't ready yet" disclosure with their state.
+- The choice is held in `src/lib/signup-choice.ts` and carried to Cloud
+  signup as `?template=<slug>&optional=<release ids>`. Every "Set up my shop"
+  button opens this page; industry cards open it with `?for=<industry>`.
+- Loading shows quiet skeleton rows, an error says "The modules didn't load"
+  with Try again and keeps the choice, and ticking nothing shows an alert.
 
 ## Do and don't
 

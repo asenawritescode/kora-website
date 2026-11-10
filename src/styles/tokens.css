@@ -101,19 +101,6 @@
   --color-lid-edge: #26262e;
   --color-deck: #c4c4cb;
 
-  /* Legacy names, kept so pages not yet moved to the Zana design still render.
-     Each page PR replaces its uses; delete a line when nothing uses it. */
-  --color-surface-container: var(--color-surface-2);
-  --color-on-surface-variant: var(--color-ink-2);
-  --color-muted: var(--color-ink-3);
-  --color-outline-variant: var(--color-line);
-  --color-night: var(--color-band);
-  --color-night-raised: var(--color-band-line);
-  --color-night-ink: var(--color-on-band);
-  --color-night-muted: var(--color-on-band-3);
-  --color-accent-on-night: var(--color-accent);
-  --color-gold: var(--color-accent);
-
   /* Dark code panels. */
   --color-code: #0a0a0a;
   --color-code-ink: #e5e5e5;

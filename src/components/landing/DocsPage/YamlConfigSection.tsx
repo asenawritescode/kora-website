@@ -35,20 +35,20 @@ fields:
 export function YamlConfigSection() {
   return (
     <section className="mb-24" id="yaml-configuration">
-      <h2 className="text-[30px] leading-[38px] font-semibold text-black mb-3">
+      <h2 className="text-[30px] leading-[38px] font-semibold text-ink mb-3">
         YAML Configuration
       </h2>
-      <p className="text-base text-muted mb-4 leading-relaxed">
+      <p className="text-base text-ink-3 mb-4 leading-relaxed">
         Define your data model in YAML. {ENGINE_BRAND} reads it and generates the database table,
         REST API, React forms, and analytics — automatically.
       </p>
-      <p className="text-sm text-muted mb-6 leading-relaxed">
+      <p className="text-sm text-ink-3 mb-6 leading-relaxed">
         <strong>Not comfortable writing YAML?</strong> Use the AI Chat instead. Describe
         your business in plain English and {ENGINE_BRAND} creates validated doctype drafts for you.
         Review them, activate when ready — no YAML required.
       </p>
-      <div className="bg-code rounded-sm border border-outline-variant overflow-hidden">
-        <div className="flex items-center px-4 py-2 bg-code-rule border-b border-outline-variant/30">
+      <div className="bg-code rounded-sm border border-line overflow-hidden">
+        <div className="flex items-center px-4 py-2 bg-code-rule border-b border-line/30">
           <span className="font-mono text-xs text-code-muted">customer.yaml</span>
         </div>
         <pre className="font-mono p-4 text-sm text-code-ink overflow-x-auto leading-relaxed">
@@ -70,8 +70,8 @@ export function YamlConfigSection() {
           </code>
         </pre>
       </div>
-      <p className="text-xs text-muted mt-3">
-        This creates a full CRUD app at <code className="text-black">/workspace/Customer</code> —
+      <p className="text-xs text-ink-3 mt-3">
+        This creates a full CRUD app at <code className="text-ink">/workspace/Customer</code> —
         list view, form, search, and filters. Ready in seconds.
       </p>
     </section>

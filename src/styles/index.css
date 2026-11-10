@@ -189,7 +189,7 @@ section[id] {
 }
 
 .blog-content em {
-  color: var(--color-on-surface-variant);
+  color: var(--color-ink-2);
 }
 
 .blog-content ul,
@@ -212,9 +212,9 @@ section[id] {
 
 .blog-content blockquote {
   border-left: 4px solid var(--color-accent);
-  background: var(--color-accent-tint);
+  background: var(--color-ok-wash);
   padding: 1rem 1.25rem;
-  color: var(--color-on-surface-variant);
+  color: var(--color-ink-2);
   font-style: italic;
 }
 
@@ -224,7 +224,7 @@ section[id] {
 }
 
 .blog-content :not(pre) > code {
-  background: var(--color-surface-container);
+  background: var(--color-surface-2);
   color: var(--color-ink);
   padding: 0.15rem 0.35rem;
   border-radius: 0;
@@ -249,20 +249,20 @@ section[id] {
   border-collapse: collapse;
   overflow: hidden;
   border-radius: 0;
-  border: 1px solid var(--color-outline-variant);
+  border: 1px solid var(--color-line);
   background: var(--color-white);
 }
 
 .blog-content th,
 .blog-content td {
-  border-bottom: 1px solid var(--color-outline-variant);
+  border-bottom: 1px solid var(--color-line);
   padding: 0.75rem 0.85rem;
   text-align: left;
   vertical-align: top;
 }
 
 .blog-content th {
-  background: var(--color-surface-container);
+  background: var(--color-surface-2);
   color: var(--color-ink);
   font-weight: 600;
 }
@@ -273,6 +273,6 @@ section[id] {
 
 .blog-content hr {
   border: 0;
-  border-top: 1px solid var(--color-outline-variant);
+  border-top: 1px solid var(--color-line);
   margin: 2rem 0;
 }
