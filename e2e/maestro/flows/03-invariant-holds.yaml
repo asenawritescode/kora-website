@@ -1,0 +1,10 @@
+# Cloud refuses a claim it cannot back, so the website can never be told "available" by mistake.
+url: ${BASE}
+name: Cloud rejects availability it cannot back
+---
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: reject-bad-attestations
+- openLink: ${BASE}/modules
+- assertVisible: "14 modules: 2 available, 1 in preview, 11 on the roadmap.*"
