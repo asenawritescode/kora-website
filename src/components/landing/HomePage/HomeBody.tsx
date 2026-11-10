@@ -49,14 +49,14 @@ export function HomeBody() {
         <div className="mx-auto flex max-w-[1000px] flex-col gap-6">
           <h2 id="swap-title" className={`${h2} text-center`}>From the notebook to your phone</h2>
           <div role="table" aria-label="Before and with Zana" className="overflow-hidden rounded-2xl border border-line bg-paper">
-            <div role="row" className="grid grid-cols-2 border-b border-line bg-surface-2">
-              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink-3">Before</span>
-              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink">With Zana</span>
+            <div role="row" className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] border-b border-line bg-surface-2 sm:grid-cols-2">
+              <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink-3 sm:px-5">Before</span>
+              <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink sm:px-5">With Zana</span>
             </div>
             {SWAPS.map(([before, after], i) => (
-              <div key={before} role="row" className={`grid grid-cols-2 ${i ? 'border-t border-line-faint' : ''}`}>
-                <span role="cell" className="px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] leading-snug text-ink-3">{before}</span>
-                <span role="cell" className="flex gap-2.5 px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] font-semibold leading-snug">
+              <div key={before} role="row" className={`grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] sm:grid-cols-2 ${i ? 'border-t border-line-faint' : ''}`}>
+                <span role="cell" className="px-4 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] leading-snug text-ink-3 sm:px-5">{before}</span>
+                <span role="cell" className="flex gap-2.5 px-4 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] font-semibold leading-snug sm:px-5">
                   <Tick className="mt-0.5" />
                   {after}
                 </span>

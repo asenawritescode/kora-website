@@ -1,5 +1,5 @@
 import { useRef, useState, type FormEvent } from 'react'
-import { H1 } from '@/components/landing/ui'
+import { H1, Warn } from '@/components/landing/ui'
 import { TOPICS, mailtoHref, supportEmail, validateContact, type ContactErrors, type ContactFields } from '@/lib/contact'
 
 const EMPTY: ContactFields = { name: '', email: '', phone: '', topic: TOPICS[0], message: '' }
@@ -10,7 +10,7 @@ function Field({ id, title, error, children }: { id: string; title: React.ReactN
   return (
     <div className="flex flex-col gap-1.5">
       <label htmlFor={id} className={label}>{title}</label>
-      {error && <span id={`${id}-err`} className="text-sm font-semibold leading-[1.45] text-red">{error}</span>}
+      {error && <span id={`${id}-err`} className="flex gap-1.5 text-sm font-semibold leading-[1.45] text-red"><Warn />{error}</span>}
       {children}
     </div>
   )
@@ -50,7 +50,7 @@ export default function ContactPage() {
           <p className="max-w-[620px] text-[1.125rem] leading-[1.55] text-ink-2">Questions about Zana, the pilot or a problem in your workspace.</p>
           <p className="text-[0.9375rem] text-ink-3">Based in Nairobi, Kenya.</p>
         </div>
-        <div className="flex-[2_1_420px] rounded-2xl border border-line bg-paper p-6">
+        <div className="flex-[2_1_420px] rounded-xl border border-line bg-paper p-4 sm:p-6">
           {!to ? (
             <div className="flex flex-col gap-2.5">
               <h2 className="text-2xl tracking-[-0.02em]">Ask on GitHub</h2>
@@ -71,13 +71,13 @@ export default function ContactPage() {
                 </p>
               )}
               <Field id="f-name" title="Your name" error={errors.name}>
-                <input id="f-name" name="name" autoComplete="name" spellCheck={false} value={values.name} onChange={set('name')} className={`${input} ${border('name')}`} {...aria('name')} />
+                <input id="f-name" name="name" autoComplete="name" spellCheck={false} value={values.name} onChange={set('name')} className={`${input} ${border('name')}`} {...aria('name')} aria-required enterKeyHint="next" />
               </Field>
               <Field id="f-email" title="Email" error={errors.email}>
-                <input id="f-email" name="email" type="email" autoComplete="email" spellCheck={false} value={values.email} onChange={set('email')} className={`${input} ${border('email')}`} {...aria('email')} />
+                <input id="f-email" name="email" type="email" autoComplete="email" spellCheck={false} value={values.email} onChange={set('email')} className={`${input} ${border('email')}`} {...aria('email')} aria-required enterKeyHint="next" />
               </Field>
               <Field id="f-phone" title={<>Phone <span className="font-medium text-ink-3">(optional)</span></>}>
-                <input id="f-phone" name="phone" type="tel" autoComplete="tel" value={values.phone} onChange={set('phone')} className={`${input} border border-line-control`} />
+                <input id="f-phone" name="phone" type="tel" autoComplete="tel" enterKeyHint="next" value={values.phone} onChange={set('phone')} className={`${input} border border-line-control`} />
               </Field>
               <Field id="f-topic" title="Topic">
                 <select id="f-topic" name="topic" value={values.topic} onChange={set('topic')} className={`${input} border border-line-control`}>
@@ -85,7 +85,7 @@ export default function ContactPage() {
                 </select>
               </Field>
               <Field id="f-message" title="Message" error={errors.message}>
-                <textarea id="f-message" name="message" rows={5} value={values.message} onChange={set('message')} className={`min-h-[120px] w-full resize-y rounded-md bg-paper p-3 text-base leading-normal text-ink ${border('message')}`} {...aria('message')} />
+                <textarea id="f-message" name="message" rows={5} value={values.message} onChange={set('message')} className={`min-h-[120px] w-full resize-y rounded-md bg-paper p-3 text-base leading-normal text-ink ${border('message')}`} {...aria('message')} aria-required maxLength={1200} />
               </Field>
               <button type="submit" className="flex min-h-[52px] items-center justify-center rounded-md bg-action text-[1.0625rem] font-semibold text-paper">Send message</button>
             </form>

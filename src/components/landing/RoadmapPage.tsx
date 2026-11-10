@@ -15,10 +15,10 @@ export default function RoadmapPage() {
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">What works now, what’s being built and what’s planned. Order may change. No dates promised.</p>
         </div>
 
-        <ol aria-label="Roadmap stages" className="flex flex-wrap items-start gap-5">
+        <ol aria-label="Roadmap stages" className="grid items-start gap-5 [grid-template-columns:repeat(auto-fit,minmax(min(100%,250px),1fr))]">
           {LANES.map((lane) => (
-            <li key={lane.title} className="flex min-w-0 flex-[1_1_250px] flex-col gap-3">
-              <div className={`flex flex-col gap-2 border-t-[3px] pt-3.5 ${RAIL[lane.status].split(' ')[0]}`}>
+            <li key={lane.title} className="flex min-w-0 flex-col gap-3">
+              <div className={`flex flex-col gap-2 border-t-[3px] pt-3.5 ${(RAIL[lane.status] ?? RAIL.roadmap).split(' ')[0]}`}>
                 <h2 className="text-[1.375rem] tracking-[-0.01em] text-ink">{lane.title}</h2>
                 <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
                   <StatusBadge status={lane.status} />

@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { SkipLink } from '@/components/landing/SkipLink'
-import { H1, StatusBadge, type Status } from '@/components/landing/ui'
+import { H1, StatusBadge, Warn, type Status } from '@/components/landing/ui'
 import { INDUSTRIES, industrySlug, type Industry } from '@/lib/industries-content'
 import { choiceFrom, inclusionNote, modulesFrom, resolve, selectability, toggle } from '@/lib/module-picker'
 import { industryFor, infoFor, notReady, presetKeys } from '@/lib/picker-preset'
@@ -20,13 +20,7 @@ const POPULAR_SLUGS = new Set(POPULAR.map((p) => p[0]))
 const OTHERS = INDUSTRIES.filter((i) => !POPULAR_SLUGS.has(industrySlug(i)))
 const SCRATCH = 'scratch'
 const OTHER = 'other'
-const primary = 'flex min-h-[52px] max-w-[300px] flex-[1_1_200px] items-center justify-center rounded-md bg-action text-base font-semibold text-paper no-underline'
-
-const Warn = () => (
-  <svg width="18" height="18" viewBox="0 0 20 20" aria-hidden="true" className="flex-none">
-    <path d="M10 2.5l8 14H2z M10 8v4 M10 14.5v.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-  </svg>
-)
+const primary = 'flex min-h-[52px] w-full items-center justify-center rounded-md bg-action text-base font-semibold text-paper no-underline sm:w-auto sm:max-w-[300px] sm:flex-[1_1_200px]'
 
 // Two screens, as in the design: what kind of business, then the modules.
 // What can be ticked comes from Cloud's catalog; what is not ready yet comes
@@ -98,8 +92,8 @@ export default function PickerPage() {
               const on = id === OTHER ? showOther : kind === id
               return (
                 <label key={id} className={`flex min-h-16 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 ${on ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
-                  <input type="radio" name="kind" value={id} checked={on} onChange={() => { setKind(id === OTHER ? OTHER : id); setError('') }} className="m-0 size-[22px] accent-action" />
-                  <span className="flex flex-col gap-0.5"><span className="text-[1.0625rem] font-bold">{title}</span><span className="text-sm text-ink-2">{hint}</span></span>
+                  <input type="radio" name="kind" value={id} checked={on} onChange={() => { setKind(id === OTHER ? OTHER : id); setError('') }} className="m-0 size-[22px] flex-none accent-action" />
+                  <span className="flex min-w-0 flex-col gap-0.5"><span className="text-[1.0625rem] font-bold">{title}</span><span className="text-sm text-ink-2">{hint}</span></span>
                 </label>
               )
             })}
@@ -142,7 +136,12 @@ export default function PickerPage() {
             )}
             {state.status === 'ready' && (
               <>
-                {modules.length === 0 && <p className="rounded-2xl border border-line bg-paper p-4 text-base text-ink-2">No modules are published yet.</p>}
+                {modules.length === 0 && (
+                  <div className="flex flex-col items-start gap-1 rounded-2xl border border-line bg-paper p-4 text-base text-ink-2">
+                    <p>No modules are published yet.</p>
+                    <Link to="/contact" className="inline-flex min-h-11 items-center font-semibold text-ink">Contact us</Link>
+                  </div>
+                )}
                 <ul aria-label="Modules you can choose" className="flex flex-col gap-2.5">
                   {modules.filter((m) => selectability(modules, m).ok).map((m) => {
                     const inc = result.included.get(m.key)
@@ -155,9 +154,9 @@ export default function PickerPage() {
                             onChange={() => setChoice(choiceFrom(modules, toggle(modules, choice.keys, m.key)))}
                             className="mt-0.5 size-6 flex-none accent-action"
                           />
-                          <span className="flex flex-col gap-1">
+                          <span className="flex min-w-0 flex-col gap-1">
                             <span className="text-[1.0625rem] font-bold">{m.name}</span>
-                            <span className="text-[0.9375rem] leading-[1.45] text-ink-2">{m.summary || infoFor(m.name)?.desc}</span>
+                            <span className="line-clamp-3 text-[0.9375rem] leading-[1.45] text-ink-2">{m.summary || infoFor(m.name)?.desc}</span>
                             {inc && <span className="text-sm font-semibold leading-[1.45] text-ok-ink">{inclusionNote(inc, m.name)}</span>}
                           </span>
                         </label>
@@ -188,13 +187,13 @@ export default function PickerPage() {
       </main>
 
       <div className="sticky bottom-0 border-t border-line-2 bg-paper shadow-[0_-4px_16px_color-mix(in_srgb,var(--color-ink)_6%,transparent)]">
-        <div className="mx-auto flex max-w-[720px] flex-col gap-2 px-4 py-3">
+        <div className="mx-auto flex max-w-[720px] flex-col gap-2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
           {screen === 'setup' && tried && count === 0 && (
             <p role="alert" className="flex gap-2 text-sm font-semibold text-red"><Warn />Tick at least one module. Most shops start with Sales and point of sale.</p>
           )}
           <div className="flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
             <p className="text-[0.9375rem]">
-              {screen === 'setup' && <strong>{count === 0 ? 'No modules ticked.' : `${count} ${count === 1 ? 'module' : 'modules'}.`}</strong>} <span className="text-ink-3">Free during the pilot.</span>
+              {screen === 'setup' && <strong>{count === 0 ? 'No modules ticked.' : `${count.toLocaleString('en-US')} ${count === 1 ? 'module' : 'modules'}.`}</strong>} <span className="text-ink-3">Free during the pilot.</span>
             </p>
             {screen === 'setup' && count > 0
               ? <a href={signupHref} className={primary}>Continue to create account</a>
