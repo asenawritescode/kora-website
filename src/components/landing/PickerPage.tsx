@@ -156,7 +156,7 @@ export default function PickerPage() {
                           />
                           <span className="flex min-w-0 flex-col gap-1">
                             <span className="text-[1.0625rem] font-bold">{m.name}</span>
-                            <span className="line-clamp-3 text-[0.9375rem] leading-[1.45] text-ink-2">{m.summary || infoFor(m.name)?.desc}</span>
+                            <span className="line-clamp-3 text-base leading-[1.45] text-ink-2">{m.summary || infoFor(m.name)?.desc}</span>
                             {inc && <span className="text-sm font-semibold leading-[1.45] text-ok-ink">{inclusionNote(inc, m.name)}</span>}
                           </span>
                         </label>

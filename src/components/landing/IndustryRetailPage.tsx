@@ -87,11 +87,11 @@ export default function IndustryRetailPage() {
                   <strong className="text-[1.125rem]">{title}</strong>
                 </span>
                 <span className="self-start"><StatusBadge status="available" /></span>
-                <span className="text-[0.9375rem] leading-normal text-ink-2">{text}</span>
+                <span className="text-base leading-normal text-ink-2">{text}</span>
               </li>
             ))}
           </ol>
-          <div className={`${CARD} flex gap-2.5 px-4 py-3.5 text-[0.9375rem] leading-normal`}>
+          <div className={`${CARD} flex gap-2.5 px-4 py-3.5 text-base leading-normal`}>
             <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" className="flex-none text-slate">
               <path d="M10 3a7 7 0 1 1 0 14a7 7 0 1 1 0-14M10 9v5 M10 6.5v.5" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
             </svg>

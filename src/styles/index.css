@@ -118,6 +118,10 @@ html { scroll-padding-top: 7rem; scroll-padding-bottom: 96px; }
     transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
   }
   button:not(:disabled):active, a[class*="rounded"]:active { transform: scale(0.97); }
+  /* A plain text link answers the pointer too: it gets its underline. */
+  @media (hover: hover) and (pointer: fine) {
+    a:not([class*="rounded"]):hover { text-decoration-line: underline; text-underline-offset: 0.2em; }
+  }
   @media (hover: hover) and (pointer: fine) {
     button:not(:disabled):hover, a[class*="rounded"]:hover { filter: brightness(0.94); }
   }

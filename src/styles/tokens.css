@@ -20,11 +20,11 @@
    pair: paper on action
    pair: paper on action-busy
    pair: on-accent on accent
-   pair: ok-ink on ok-tint
+   pair: ok-ink on ok-tint min 7
    pair: ok-ink on ok-wash
-   pair: amber-ink on amber-tint
+   pair: amber-ink on amber-tint min 7
    pair: slate on slate-tint
-   pair: red on paper
+   pair: red on paper min 7
    pair: red-ink on red-tint
    pair: red-ink on red-wash
    pair: line-control on paper min 3
@@ -71,10 +71,10 @@
   --color-ok-wash: #f1f5fe;
   --color-ok-ink: #2a4a8c;
   --color-amber-tint: #fdefd3;
-  --color-amber-ink: #7a4a00;
+  --color-amber-ink: #6b4000;
   --color-slate-tint: #ecece8;
   --color-slate: #45454f;
-  --color-red: #b42318;
+  --color-red: #a11d14;
   --color-red-ink: #8a1c12;
   --color-red-wash: #fff4f2;
   --color-red-tint: #fde7e4;
