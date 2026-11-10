@@ -4,6 +4,7 @@ import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, H1, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 import { MODULES, countByStatus } from '@/lib/modules-content'
+import { usePhone } from '@/lib/use-phone'
 
 type Filter = 'all' | Status
 const FILTERS: [Filter, string][] = [['all', 'All'], ['available', 'Available'], ['preview', 'Preview'], ['roadmap', 'On the roadmap']]
@@ -13,6 +14,9 @@ const countFor = (f: Filter) => (f === 'all' ? MODULES.length : countByStatus(f)
 
 export default function ModulesPage() {
   const [filter, setFilter] = useState<Filter>('all')
+  const phone = usePhone()
+  // null follows the screen (closed on a phone, open elsewhere) until the visitor toggles it.
+  const [plannedOpen, setPlannedOpen] = useState<boolean | null>(null)
   const shown = MODULES.filter((m) => filter === 'all' || m.status === filter)
   const cards = shown.filter((m) => m.status !== 'roadmap')
   const planned = shown.filter((m) => m.status === 'roadmap')
@@ -81,20 +85,28 @@ export default function ModulesPage() {
         )}
 
         {planned.length > 0 && (
-          <section aria-labelledby="rm-title" className="mt-5 flex flex-col gap-2.5">
-            <h2 id="rm-title" className={h2}>Planned next</h2>
-            <p className="mb-1.5 max-w-[680px] text-base leading-normal text-ink-2">No dates promised. Needs to be confirmed. No screenshots yet.</p>
-            <Link to="/roadmap" className="inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>
-            <ul className={CARD}>
-              {planned.map((m, i) => (
-                <li key={m.id} className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
-                  <h3 className="text-[1.0625rem]">{m.name}</h3>
-                  <StatusBadge status={m.status} />
-                  <p className="col-span-2 text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
-                </li>
-              ))}
-            </ul>
-          </section>
+          <details
+            open={plannedOpen ?? !phone}
+            onToggle={(e) => { if (e.currentTarget.open !== (plannedOpen ?? !phone)) setPlannedOpen(e.currentTarget.open) }}
+            className="mt-5"
+          >
+            <summary className="flex min-h-12 cursor-pointer items-center">
+              <h2 id="rm-title" className={h2}>Planned next</h2>
+            </summary>
+            <div className="flex flex-col gap-2.5 pt-2.5">
+              <p className="mb-1.5 max-w-[680px] text-base leading-normal text-ink-2">No dates promised. Needs to be confirmed. No screenshots yet.</p>
+              <Link to="/roadmap" className="inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>
+              <ul className={CARD}>
+                {planned.map((m, i) => (
+                  <li key={m.id} className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
+                    <h3 className="text-[1.0625rem]">{m.name}</h3>
+                    <StatusBadge status={m.status} />
+                    <p className="col-span-2 text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </details>
         )}
 
         <section aria-label="Get started" className="mt-6 flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(24px,4vw,44px)] text-on-band">
