@@ -171,7 +171,7 @@ action colour; that is now `action`.
   and `aria-busy="true"`.
 
 ### Header
-- Two rows on `paper`, 1 px `line` rule below, not fixed. Row one: the Zana
+- Two rows on `paper`, 1 px `line` rule below, sticky at the top of the page (about 100 px on a phone, 113 px on desktop; anchors and the legal contents column clear it). Row one: the Zana
   mark and lowercase wordmark (Space Grotesk 700), "Sign in" (Cloud sign-in)
   and one primary "Set up my shop". Row two: the page links, 48 px targets,
   the current page bold with a 3 px `action` underline, scrolling sideways on

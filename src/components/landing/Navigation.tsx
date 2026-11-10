@@ -27,9 +27,9 @@ export function Navigation() {
   }, [path])
 
   return (
-    <header className="border-b border-line bg-paper text-ink">
+    <header className="sticky top-0 z-40 border-b border-line bg-paper text-ink">
       <div className="mx-auto flex max-w-[1232px] flex-col px-4 pt-2">
-        <div className="flex min-h-14 items-center gap-2">
+        <div className="flex min-h-12 items-center gap-2 sm:min-h-14">
           <Link to="/" aria-label={`${BRAND} home`} className="flex min-h-12 min-w-0 items-center gap-2.5 no-underline">
             <LogoMark />
             <span className="min-w-0 truncate font-display text-[1.4375rem] font-bold lowercase tracking-[-0.02em]">{BRAND}</span>
@@ -51,7 +51,7 @@ export function Navigation() {
                 key={link.label}
                 to={link.href}
                 aria-current={current ? 'page' : undefined}
-                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-base no-underline sm:text-[0.9375rem] focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
+                className={`box-border flex min-h-11 flex-none items-center border-b-[3px] sm:min-h-12 px-2.5 text-base no-underline sm:text-[0.9375rem] focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
                   current ? 'border-action font-bold text-action' : 'border-transparent font-normal text-ink-2'
                 }`}
               >

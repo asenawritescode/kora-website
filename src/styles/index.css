@@ -103,7 +103,7 @@ a { text-underline-offset: 0.2em; }
 html { accent-color: var(--color-action); }
 html, body { overflow-x: clip; }
 html { scrollbar-color: var(--color-line-strong) transparent; }
-html { scroll-padding-bottom: 96px; }
+html { scroll-padding-top: 7rem; scroll-padding-bottom: 96px; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
 /* On a dark band the ink outline would vanish into it, so the ring is drawn in the
