@@ -29,7 +29,7 @@ const BANNED: Ban[] = [
   // Signup (kora-cloud#39): a business type and modules are chosen first; no site name; no generated workflow.
   { pattern: /site name/i, why: 'Cloud signup no longer asks for a site name' },
   { pattern: /first workflow|workflow structure/i, why: 'Self-service signup generates no workflow' },
-  { pattern: /Start onboarding|Submit workspace|Provision app/, why: 'Old Cloud page steps; use SIGNUP_STEPS from src/lib/signup-steps.ts' },
+  { pattern: /Start onboarding|Submit workspace|Provision app/, why: 'Old Cloud page steps; sign-up steps are Cloud\'s own' },
   // Payments (kora-website#1): M-Pesa is recorded by hand, never connected; card, printers and eTIMS are not supported.
   { pattern: /Not supported yet: card and M-Pesa/i, why: 'M-Pesa payments can be recorded by hand; say that Kigae is not connected to M-Pesa' },
   { pattern: /only payment the pilot supports|records cash sales\b/i, why: 'Manual mobile-money recording works; cash is not the only payment' },

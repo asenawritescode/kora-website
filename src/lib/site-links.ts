@@ -12,14 +12,6 @@ export const PRIMARY_LINKS: SiteLink[] = [
   { label: 'Pricing', href: '/pricing' },
 ]
 
-export const EXPLORE_LINKS: SiteLink[] = [
-  { label: 'Templates', href: '/examples' },
-  { label: 'Cloud', href: '/cloud' },
-  { label: 'Open source', href: '/open-source' },
-  { label: 'Docs', href: '/docs' },
-  { label: 'Blog', href: '/blog' },
-]
-
 export const COMPANY_LINKS: SiteLink[] = [
   { label: 'About', href: '/about' },
   { label: 'Contact us', href: '/contact' },

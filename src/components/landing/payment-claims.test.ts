@@ -10,8 +10,3 @@ test('home page says mobile money is recorded by hand and lists what is not avai
   for (const item of ['Card payments', 'Receipt printers', 'KRA eTIMS tax receipts']) expect(home).toContain(`['${item}', 'roadmap']`)
   expect(home).not.toMatch(/(connects?|integrat\w+) (with|to) M-Pesa/i)
 })
-
-test('Cloud page describes the real steps and none of the removed claims', () => {
-  const cloud = read('CloudPage.tsx') + read('../../lib/signup-steps.ts')
-  for (const step of ['Choose what your business needs', 'Create your account', 'Confirm your email', 'Open your workspace']) expect(cloud).toContain(step)
-})

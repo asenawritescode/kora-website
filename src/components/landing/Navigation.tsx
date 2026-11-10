@@ -1,11 +1,11 @@
 import { Link, useLocation } from '@tanstack/react-router'
-import { EXPLORE_LINKS, HOME_LINK, PRIMARY_LINKS } from '@/lib/site-links'
+import { HOME_LINK, PRIMARY_LINKS } from '@/lib/site-links'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { BRAND } from '@/lib/brand'
 import { buildSignInUrl, cloudSignupBase } from '@/lib/cloud-signup'
 
-const NAV_LINKS = [HOME_LINK, ...PRIMARY_LINKS, ...EXPLORE_LINKS]
+const NAV_LINKS = [HOME_LINK, ...PRIMARY_LINKS]
 
 // Two rows, as in the design: the mark and the actions, then the page links in
 // a row that scrolls sideways on a phone.

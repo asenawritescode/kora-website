@@ -43,7 +43,6 @@ export default defineConfig({
         codeSplitting: {
           groups: [
             // Stable, rarely-changing vendor code gets its own long-cached chunks.
-            { name: 'vendor-icons', test: /node_modules[\\/]lucide-react[\\/]/, priority: 10 },
             { name: 'vendor-react', test: /node_modules[\\/](react|react-dom|scheduler)[\\/]/, priority: 20 },
           ],
         },

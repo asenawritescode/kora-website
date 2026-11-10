@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test'
 import { join } from 'node:path'
 import { legacyNameLines } from './brand-rules'
-import { BRAND, BRAND_BY_PUBLISHER, ENGINE_BRAND, PUBLISHER } from '../src/lib/brand'
+import { BRAND, BRAND_BY_PUBLISHER, PUBLISHER } from '../src/lib/brand'
 
 const root = join(import.meta.dir, '..')
 
@@ -27,7 +27,6 @@ test('claims-ok on the same or previous line allows the legacy name', () => {
 
 test('brand constants', () => {
   expect(BRAND).toBe('Zana')
-  expect(ENGINE_BRAND).toBe('Kigae')
   expect(PUBLISHER).toBe('Senumi')
   expect(BRAND_BY_PUBLISHER).toBe('Zana by Senumi')
 })

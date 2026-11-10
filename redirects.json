@@ -1,4 +1,9 @@
 {
   "/benefits": "/",
-  "/ai-builder": "/"
+  "/ai-builder": "/",
+  "/cloud": "/",
+  "/open-source": "/",
+  "/docs": "/",
+  "/blog": "/",
+  "/examples": "/"
 }

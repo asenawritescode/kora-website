@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { COMPANY_LINKS, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { COMPANY_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { BRAND } from '@/lib/brand'
@@ -7,7 +7,6 @@ import { buildSignInUrl, cloudSignupBase } from '@/lib/cloud-signup'
 
 const FOOTER_LINKS = {
   Product: PRIMARY_LINKS,
-  Explore: EXPLORE_LINKS,
   Company: COMPANY_LINKS,
 }
 

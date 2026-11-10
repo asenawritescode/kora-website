@@ -39,10 +39,10 @@ failure, and retry.
 
 ## Capabilities and Constraints
 
-- Public pages include product, template catalog and detail, onboarding,
-  pricing, documentation, blog, Cloud, open-source, and capability pages.
-- Published template metadata comes from Kigae Cloud. Editorial and blog content
-  may use the CMS.
+- Public pages are the ones in the Zana design canvas: home, modules, industries,
+  roadmap, how AI works, pricing, set-up, contact, about and the draft legal
+  outlines. There are no docs, blog, template catalog or open-source pages.
+- Module availability comes from Kigae Cloud's public catalog.
 - Template composition and release identifiers are versioned. The website
   presents public metadata; Cloud owns publication and authoritative selection
   validation.

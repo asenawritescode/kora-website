@@ -1,14 +1,13 @@
 // Writes a real <head> into the built HTML so crawlers and link previews that do
 // not run JavaScript get the right title, description, canonical and share image.
 // dist/index.html is the home page; every other route gets dist/<route>/index.html,
-// 404.html is the noindex page nginx serves with status 404, and 200.html is the
-// shell for routes whose title is only known at runtime (/blog/<slug>).
+// 404.html is the noindex page nginx serves with status 404.
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join, resolve } from 'node:path'
 import type { Plugin } from 'vite'
 import { loadEnv } from 'vite'
 import { BRAND } from '../src/lib/brand'
-import { NOT_FOUND_SEO, OG_IMAGE_ALT, OG_IMAGE_PATH, ROUTE_SEO, SHELL_SEO, siteUrlFrom, type RouteSeo } from '../src/lib/seo-routes'
+import { NOT_FOUND_SEO, OG_IMAGE_ALT, OG_IMAGE_PATH, ROUTE_SEO, siteUrlFrom, type RouteSeo } from '../src/lib/seo-routes'
 
 export const SEO_START = '<!--seo:start-->'
 export const SEO_END = '<!--seo:end-->'
@@ -63,7 +62,6 @@ export function pages(siteUrl: string): { file: string; html: (shell: string) =>
   return [
     ...ROUTE_SEO.map((route) => ({ file: route.path === '/' ? 'index.html' : `${route.path.slice(1)}/index.html`, html: make(route) })),
     { file: '404.html', html: make(NOT_FOUND_SEO) },
-    { file: '200.html', html: make(SHELL_SEO, false) },
   ]
 }
 
