@@ -48,6 +48,7 @@ const RoadmapPage = inMarketing(() => import('@/routes/landing/roadmap'))
 const IndustriesPage = inMarketing(() => import('@/routes/landing/industries'))
 const IndustryRetailPage = inMarketing(() => import('@/routes/landing/industry-retail'))
 const HowAiPage = inMarketing(() => import('@/routes/landing/how-ai'))
+const StartPage = page(() => import('@/routes/landing/start'))
 const ContactPage = inMarketing(() => import('@/routes/landing/contact'))
 const AboutPage = inMarketing(() => import('@/routes/landing/about'))
 const PrivacyPage = inMarketing(() => import('@/routes/landing/privacy'))
@@ -106,6 +107,13 @@ const howAiRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/how-ai',
   component: HowAiPage,
+})
+
+const startRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/start',
+  validateSearch: (search: Record<string, unknown>): { for?: string } => (typeof search.for === 'string' ? { for: search.for } : {}),
+  component: StartPage,
 })
 
 const contactRoute = createRoute({
@@ -199,6 +207,7 @@ const routeTree = rootRoute.addChildren([
   industriesRoute,
   industryRetailRoute,
   howAiRoute,
+  startRoute,
   contactRoute,
   aboutRoute,
   privacyRoute,

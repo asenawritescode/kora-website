@@ -1,9 +1,8 @@
-// How choosing modules works on the home page. Only modules the Cloud catalog
+// How choosing modules works on the set-up page. Only modules the Cloud catalog
 // lists can be chosen, and only those the catalog attests as available: a
 // preview part, or a part that needs a preview part, cannot be ticked. A
 // template is what Cloud installs, so choosing a module chooses its template,
 // and the template's required parts come with it, each with a stated reason.
-// Roadmap modules are names only: they cannot be chosen.
 import type { Availability, CatalogTemplate } from '@/lib/catalog-client'
 
 export type PickerModule = {
@@ -19,9 +18,6 @@ export type PickerModule = {
 
 // Cloud installs these whatever was ticked.
 const installedAnyway = (selection: string) => selection === 'required' || selection === 'default'
-
-// Modules planned but not published as packs. No dates are given anywhere.
-export const ROADMAP = ['Sales', 'Purchasing', 'Accounting', 'People', 'Projects']
 
 // Reasons checked in a pilot workspace (a sale writes a stock issue). The
 // catalog's `requires` list decides what is needed; this only adds the why,
@@ -44,11 +40,6 @@ export function modulesFrom(templates: CatalogTemplate[]): PickerModule[] {
       template: { slug: t.slug, name: t.name },
     })),
   )
-}
-
-export function roadmapFor(modules: PickerModule[]): string[] {
-  const listed = new Set(modules.map((m) => m.name.toLowerCase()))
-  return ROADMAP.filter((name) => !listed.has(name.toLowerCase()))
 }
 
 export type Inclusion = { by: string; why?: string } | { template: string }

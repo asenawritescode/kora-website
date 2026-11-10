@@ -68,7 +68,7 @@ export default function ModulesPage() {
                 </dl>
                 <div className="mt-auto flex flex-col gap-2 pt-1.5">
                   {m.status === 'available' ? (
-                    <Link to="/" hash="modules" className="flex min-h-12 items-center justify-center rounded-md bg-action text-[0.9375rem] font-semibold text-paper no-underline">Choose {m.short}</Link>
+                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md bg-action text-[0.9375rem] font-semibold text-paper no-underline">Choose {m.short}</Link>
                   ) : (
                     <Link to="/roadmap" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">See the roadmap</Link>
                   )}

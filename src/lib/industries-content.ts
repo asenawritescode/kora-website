@@ -6,6 +6,9 @@ import type { Status } from '@/components/landing/ui'
 
 export type Industry = { name: string; icon: string; preset: string[] }
 
+// The name in a link: "Retail and general shops" is retail-and-general-shops.
+export const industrySlug = (industry: Industry) => industry.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+
 export const INDUSTRIES: Industry[] = [
   { name: 'Retail and general shops', icon: 'shop', preset: ['pos', 'inventory', 'purchasing', 'accounting', 'reports'] },
   { name: 'Wholesale and distribution', icon: 'box', preset: ['inventory', 'pos', 'purchasing', 'accounting', 'fleet', 'crm'] },
