@@ -42,7 +42,7 @@ export function Navigation() {
         </div>
         <nav
           ref={links} aria-label="Main"
-          className="relative -mx-3.5 -my-2 flex gap-0.5 overflow-x-auto px-2 py-2 [mask-image:linear-gradient(to_right,#000_calc(100%-28px),transparent)] [scrollbar-width:none] sm:[mask-image:none] [&::-webkit-scrollbar]:hidden"
+          className="relative -mx-3.5 -my-2 flex gap-0.5 overflow-x-auto px-2 py-2 [mask-image:linear-gradient(to_right,var(--color-ink)_calc(100%-28px),transparent)] [scrollbar-width:none] sm:[mask-image:none] [&::-webkit-scrollbar]:hidden"
         >
           {NAV_LINKS.map((link) => {
             const current = link.href === '/' ? path === '/' : path.startsWith(link.href)
@@ -51,8 +51,8 @@ export function Navigation() {
                 key={link.label}
                 to={link.href}
                 aria-current={current ? 'page' : undefined}
-                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-[0.9375rem] no-underline ${
-                  current ? 'border-action font-bold text-action' : 'border-transparent font-medium text-ink-2'
+                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-[0.9375rem] no-underline focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
+                  current ? 'border-action font-bold text-action' : 'border-transparent font-normal text-ink-2'
                 }`}
               >
                 {link.label}

@@ -76,7 +76,7 @@ export default function ContactPage() {
               <Field id="f-email" title="Email" error={errors.email}>
                 <input id="f-email" name="email" type="email" autoComplete="email" spellCheck={false} value={values.email} onChange={set('email')} className={`${input} ${border('email')}`} {...aria('email')} aria-required enterKeyHint="next" />
               </Field>
-              <Field id="f-phone" title={<>Phone <span className="font-medium text-ink-3">(optional)</span></>}>
+              <Field id="f-phone" title={<>Phone <span className="font-normal text-ink-3">(optional)</span></>}>
                 <input id="f-phone" name="phone" type="tel" autoComplete="tel" enterKeyHint="next" value={values.phone} onChange={set('phone')} className={`${input} border border-line-control`} />
               </Field>
               <Field id="f-topic" title="Topic">

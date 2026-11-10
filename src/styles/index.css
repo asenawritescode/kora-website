@@ -99,6 +99,8 @@ a { text-underline-offset: 0.2em; }
 /* Browser surfaces carry the palette too. */
 ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 html { accent-color: var(--color-action); }
+html, body { overflow-x: clip; }
+html { scrollbar-color: var(--color-line-strong) transparent; }
 html { scroll-padding-bottom: 96px; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 

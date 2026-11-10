@@ -144,7 +144,7 @@ export function ProductScreens({ variant = 'home', autoplay = true }: { variant?
               ))}
             </div>
           </div>
-          <div aria-hidden="true" className="-mx-[3.4%] h-[clamp(12px,2.3vw,22px)] rounded-[2px_2px_22px_22px/2px_2px_14px_14px] bg-deck" />
+          <div aria-hidden="true" className="-mx-[min(3.4%,1rem)] h-[clamp(12px,2.3vw,22px)] rounded-[2px_2px_22px_22px/2px_2px_14px_14px] bg-deck" />
         </div>
       )}
       <div className="flex flex-wrap items-center justify-center gap-2">

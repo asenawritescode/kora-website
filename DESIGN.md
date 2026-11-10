@@ -7,7 +7,7 @@ colors:
   surface-2: "#f4f4ef"
   ink: "#0f0f12"
   ink-2: "#3a3a42"
-  ink-3: "#5c5c66"
+  ink-3: "#51515a"
   action: "#0f0f12"
   accent: "#6495ed"
   on-accent: "#0f0f12"
@@ -76,7 +76,7 @@ file in the light theme and with the dark overrides applied.
 | `surface-2` | `#f4f4ef` | `#141418` | Panels that set a section apart |
 | `ink` | `#0f0f12` | `#f4f4f0` | Text, headings |
 | `ink-2` | `#3a3a42` | `#cfcfc8` | Secondary text |
-| `ink-3` | `#5c5c66` | `#a4a49d` | Muted text, labels |
+| `ink-3` | `#51515a` | `#a4a49d` | Muted text, labels |
 | `action` | `#0f0f12` | `#f4f4f0` | Main button, selected state |
 | `accent` | `#6495ed` | `#6495ed` | Block colour: highlights, focus halo, badges (ink text on it) |
 | `ok-*`, `amber-*`, `slate-*` | tints | tints | Available, Preview, Roadmap badges |

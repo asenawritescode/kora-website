@@ -22,7 +22,7 @@ export function Footer() {
               <LogoMark onBand />
               <span className="min-w-0 truncate font-display text-[1.4375rem] font-bold lowercase">{BRAND}</span>
             </div>
-            <p className="font-display text-[1.375rem] font-medium">From Nairobi to the world</p>
+            <p className="font-display text-[1.375rem] font-semibold">From Nairobi to the world</p>
             <p className="text-[0.9375rem] leading-[1.55] text-on-band-3">
               Zana means “tools” in Swahili. A selling and stock app for Kenyan shops.
             </p>

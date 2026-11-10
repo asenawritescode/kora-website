@@ -103,7 +103,7 @@ export default function PickerPage() {
                 <select
                   value={kind === OTHER ? '' : kind}
                   onChange={(e) => { setKind(e.target.value || OTHER); setError('') }}
-                  className="min-h-12 rounded-md border border-line-control bg-paper px-3 text-base font-medium text-ink"
+                  className="min-h-12 rounded-md border border-line-control bg-paper px-3 text-base font-normal text-ink"
                 >
                   <option value="">Choose one</option>
                   {OTHERS.map((i) => <option key={i.name} value={industrySlug(i)}>{i.name}</option>)}

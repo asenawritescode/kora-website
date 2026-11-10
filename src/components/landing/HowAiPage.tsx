@@ -107,7 +107,7 @@ export default function HowAiPage() {
         {FAQ.map(([q, a]) => (
           <details key={q} className={`${CARD} px-[18px]`}>
             <summary className="flex min-h-14 cursor-pointer items-center text-[1.0625rem] font-semibold">{q}</summary>
-            <p className="mb-[18px] text-base leading-[1.55] text-ink-2">{a}</p>
+            <div className="pb-[18px]"><p className="text-base leading-[1.55] text-ink-2">{a}</p></div>
           </details>
         ))}
         <SignupLink className={`${BUTTON_PRIMARY} mt-3 self-start px-6`} />
