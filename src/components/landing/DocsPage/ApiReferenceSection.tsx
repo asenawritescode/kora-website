@@ -40,7 +40,7 @@ export function ApiReferenceSection() {
 
         <div className="border border-outline-variant rounded-sm overflow-hidden">
           <div className="flex items-center gap-3 p-3 bg-surface-container border-b border-outline-variant">
-            <span className="font-mono px-2 py-0.5 bg-accent text-white rounded-sm text-[11px] font-bold uppercase">POST</span>
+            <span className="font-mono px-2 py-0.5 bg-action text-white rounded-sm text-[11px] font-bold uppercase">POST</span>
             <code className="font-mono text-sm text-black">/api/resource/Customer</code>
           </div>
           <div className="p-4 bg-paper">

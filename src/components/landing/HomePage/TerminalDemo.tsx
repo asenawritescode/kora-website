@@ -3,7 +3,7 @@ export function TerminalDemo() {
     <div className="bg-code rounded-lg p-6 max-w-3xl mx-auto text-left shadow-2xl overflow-hidden border border-code-border">
       <div className="flex gap-2 mb-4">
         <div className="w-3 h-3 rounded-full bg-danger" />
-        <div className="w-3 h-3 rounded-full bg-accent" />
+        <div className="w-3 h-3 rounded-full bg-action" />
         <div className="w-3 h-3 rounded-full bg-success" />
       </div>
 

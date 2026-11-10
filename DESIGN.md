@@ -1,211 +1,129 @@
 ---
-name: Kigae Public Website
-description: Shop software from Nairobi. Pick the modules you need; they work together.
+name: Zana Public Website
+description: A selling and stock app for Kenyan shops. Pick the modules you need; they work together.
 colors:
-  paper: "#f7f3ec"
-  sand: "#ede6da"
-  white: "#ffffff"
-  ink: "#16130f"
-  ink-soft: "#3f3a33"
-  muted: "#5c554c"
-  rule: "#d9d0c2"
-  ochre: "#c84018"
-  ochre-strong: "#a3360f"
-  ochre-tint: "#fef3ed"
-  night: "#12161b"
-  night-raised: "#1c2128"
-  night-ink: "#f4efe6"
-  night-muted: "#b4ada3"
-  ochre-on-night: "#f08a5d"
-  gold: "#e3a13a"
+  paper: "#ffffff"
+  surface: "#fafaf7"
+  surface-2: "#f4f4ef"
+  ink: "#0f0f12"
+  ink-2: "#3a3a42"
+  ink-3: "#5c5c66"
+  action: "#0f0f12"
+  accent: "#6495ed"
+  on-accent: "#0f0f12"
+  line: "#e4e4de"
+  line-control: "#84848c"
+  band: "#0f0f12"
+  on-band: "#f4f4f0"
 typography:
   display:
-    fontFamily: "Archivo Variable, sans-serif"
-    fontSize: "clamp(44px, 6vw, 88px)"
-    fontWeight: 780
-    fontStretch: "112%"
-    lineHeight: 0.96
+    fontFamily: "Space Grotesk Variable, Inter Variable, sans-serif"
+    fontSize: "clamp(2.25rem, 6.4cqw, 4.75rem)"
+    fontWeight: 700
+    lineHeight: 1.03
     letterSpacing: "-0.03em"
-  headline:
-    fontFamily: "Archivo Variable, sans-serif"
-    fontSize: "clamp(32px, 4vw, 56px)"
-    fontWeight: 740
-    fontStretch: "112%"
-    lineHeight: 1.02
-    letterSpacing: "-0.025em"
-  title:
-    fontFamily: "Archivo Variable, sans-serif"
-    fontSize: "clamp(20px, 2vw, 26px)"
-    fontWeight: 680
-    lineHeight: 1.15
+  heading:
+    fontFamily: "Space Grotesk Variable, Inter Variable, sans-serif"
+    fontSize: "2.25rem"
+    fontWeight: 700
+    lineHeight: 1.1
+    letterSpacing: "-0.02em"
   body:
-    fontFamily: "Geist Variable, sans-serif"
-    fontSize: "16px"
+    fontFamily: "Inter Variable, system-ui, sans-serif"
+    fontSize: "1.125rem"
     fontWeight: 400
-    lineHeight: 1.6
-  label:
-    fontFamily: "Geist Mono Variable, monospace"
-    fontSize: "11px"
-    fontWeight: 500
-    letterSpacing: "0.08em"
+    lineHeight: 1.55
 rounded:
-  none: "0"
-spacing:
-  xs: "4px"
   sm: "8px"
-  md: "16px"
-  lg: "24px"
-  xl: "40px"
-  2xl: "64px"
-  section: "clamp(48px, 6vw, 88px)"
+  md: "10px"
+  lg: "12px"
 components:
   button-primary:
-    backgroundColor: "{colors.ochre}"
-    textColor: "{colors.white}"
-    typography: "15px / 600 Geist Variable"
-    padding: "0 22px"
+    backgroundColor: "{colors.action}"
+    textColor: "{colors.paper}"
+    typography: "15px / 600 Inter Variable"
+    rounded: "10px"
+    padding: "0 18px"
     height: "48px"
-  button-on-night:
-    backgroundColor: "{colors.ochre-on-night}"
-    textColor: "{colors.night}"
-    typography: "15px / 600 Geist Variable"
-    padding: "0 22px"
-    height: "48px"
-  text-action:
-    textColor: "{colors.ink}"
-    typography: "15px / 600 Geist Variable, underlined"
-  module-row:
-    backgroundColor: "{colors.white}"
-    textColor: "{colors.ink}"
-    rounded: "0"
-    padding: "18px 20px"
-  navigation-main:
-    backgroundColor: "{colors.paper}"
-    textColor: "{colors.ink}"
-    typography: "14px / 550 Geist Variable"
-    height: "72px"
 ---
 
-# Design System: Kigae Public Website
+# Design System: Zana Public Website
+
+Source of truth: the "Zana design" page of the ERP landing page canvas
+(Components and Dark mode artboards). Where this file and the canvas differ,
+the canvas wins. The page-level sections below (skyline, navigation, footer,
+module picker) still describe the previous Nairobi identity and are replaced
+as each page moves to the canvas design.
 
 ## Overview
 
-**Creative North Star: "From Nairobi to the world."**
-
-Kigae is shop software built in Nairobi. The site sells one idea, the same one
-Odoo, Zoho One and ERPNext sell: pick the modules your business needs, and they
-work together in one workspace. It sells it the way a Nairobi business would:
-plainly, with the real product on screen, and without numbers it cannot back.
-
-The look is bold and warm by day, deep by night. Warm paper and near-black ink
-carry the reading. Red ochre marks every action. A night band holds a one-line
-drawing of the Nairobi skyline in savanna gold, with the owner's line "From
-Nairobi to the world". Headings are a semi-expanded heavy grotesque (Archivo);
-reading text is Geist. Edges are square. Structure comes from rules, rows and
-type size, not from cards and shadows.
-
-**Key characteristics**
-- A business task first, in plain words; the real product next to it.
-- One action colour (red ochre) and one highlight (savanna gold, night only).
-- Square, ruled rows and shelves. No card grids of icon + title + line.
-- Every claim on the page is something the product does today.
+A selling and stock app for Kenyan shops, on phone or computer. The site is
+plain and fast: white paper, near-black ink, black actions, and one block
+colour, cornflower, for highlights and the focus halo. Headings are Space
+Grotesk, bold and tight; reading text is Inter. Corners are rounded 8 to 12 px.
+There is a dark theme for every surface.
 
 ## Colours
 
 All colours live in `src/styles/tokens.css` and nowhere else. Components use
-the generated utilities (`bg-paper`, `text-accent`, `bg-night` ...). The build
-runs `validate:contrast`, which checks every pair listed in that file.
+the generated utilities (`bg-paper`, `text-ink-2`, `bg-action`, `bg-band` ...).
+The build runs `validate:contrast`, which checks every pair listed in that
+file in the light theme and with the dark overrides applied.
 
-| Name | Token | Hex | Use |
+| Token | Light | Dark | Use |
 |---|---|---|---|
-| Morning paper | `paper` | `#f7f3ec` | Page background |
-| Sand | `surface-container` | `#ede6da` | Panels that set a section apart |
-| White | `white` | `#ffffff` | Module rows, product frames |
-| Ink | `ink` | `#16130f` | Text, headings, dark buttons |
-| Ink soft | `on-surface-variant` | `#3f3a33` | Lead paragraphs |
-| Muted | `muted` | `#5c554c` | Secondary text and notes |
-| Rule | `outline-variant` | `#d9d0c2` | Dividers only, never text |
-| Red ochre | `accent` | `#c84018` | Primary buttons, links, selected state, focus ring |
-| Ochre strong | `accent-strong` | `#a3360f` | Primary hover; ochre text on the tint |
-| Ochre tint | `accent-tint` | `#fef3ed` | Selected module row |
-| Night ink | `night` | `#12161b` | Skyline band, footer |
-| Night raised | `night-raised` | `#1c2128` | Panels inside night sections |
-| Night text | `night-ink` | `#f4efe6` | Text on night |
-| Night muted | `night-muted` | `#b4ada3` | Secondary text on night |
-| Ochre on night | `accent-on-night` | `#f08a5d` | Links and the button on night |
-| Savanna gold | `gold` | `#e3a13a` | Skyline line, text selection, small highlights on night |
+| `paper` | `#ffffff` | `#18181d` | Cards and the page ground |
+| `surface` | `#fafaf7` | `#0f0f12` | Quiet ground behind cards |
+| `surface-2` | `#f4f4ef` | `#141418` | Panels that set a section apart |
+| `ink` | `#0f0f12` | `#f4f4f0` | Text, headings |
+| `ink-2` | `#3a3a42` | `#cfcfc8` | Secondary text |
+| `ink-3` | `#5c5c66` | `#a4a49d` | Muted text, labels |
+| `action` | `#0f0f12` | `#f4f4f0` | Main button, selected state |
+| `accent` | `#6495ed` | `#6495ed` | Block colour: highlights, focus halo, badges (ink text on it) |
+| `ok-*`, `amber-*`, `slate-*` | tints | tints | Available, Preview, Roadmap badges |
+| `red`, `red-*` | `#b42318` | `#ff8b7e` | Errors and destructive actions only |
+| `line`, `line-control` | `#e4e4de`, `#84848c` | `#2c2c33`, `#7a7a84` | Dividers; control borders (3:1) |
+| `band`, `on-band*` | `#0f0f12` | `#18181d` | Footer and app bar |
 
-Contrast (WCAG 2.x, from `bun run validate:contrast`):
+Cornflower on white is 2.8:1, so it is never text or a thin line on paper.
+Text on a coloured surface uses that surface's text token (`paper` on
+`action`, `on-accent` on `accent`, `on-band` on `band`), never grey.
 
-| Pair | Ratio | Pair | Ratio |
-|---|---|---|---|
-| ink on paper | 16.74 | night-ink on night | 15.86 |
-| ink-soft on paper | 10.18 | night-muted on night | 8.17 |
-| muted on paper | 6.64 | night-muted on night-raised | 7.28 |
-| muted on sand | 5.92 | ochre-on-night on night | 7.35 |
-| muted on ochre tint | 6.74 | night on ochre-on-night (button) | 7.35 |
-| ochre on paper | 4.52 | gold on night | 8.15 |
-| ochre on white | 5.00 | ink on gold | 8.31 |
-| white on ochre (button) | 5.00 | ochre ring on night | 3.63 (non-text, min 3) |
-| white on ochre strong | 6.79 | ochre strong on ochre tint | 6.23 |
+**Dark theme.** Set `data-theme="dark"` on `<html>`. It is not yet followed
+from the system setting; that switches on once every page uses the tokens
+only (pages still using `text-white`, `bg-white` and `text-black` do not
+flip).
 
-**Why these colours.** PRODUCT.md keeps Kigae's orange and black, so red
-ochre `#c84018` (the existing DESIGN.md accent, AA with white) and ink stay.
-Red ochre is also the colour of murram roads, so it reads as local without a
-flag. The new part is the night: a deep blue-black taken from a Nairobi
-evening, with the skyline in savanna gold. Warm paper replaces the cold
-white.
-
-**Decided against:** Kenya-flag green, red and black together on anything;
-safari browns and khaki; animal prints and shield motifs; jacaranda violet.
-The jacaranda is very Nairobi, but purple is the colour most often seen in
-generic AI-made pages, and a second accent would compete with ochre for
-"this is the action". Gradients of any kind are out.
-
-**Rules.** One ochre action per view. Gold never carries body text on paper
-(it fails there); on night it may set a short line or a highlight. Text on a
-coloured surface uses that surface's text token, never grey.
+**Legacy names.** `surface-container`, `on-surface-variant`, `muted`,
+`outline-variant` and the `night*` tokens are aliases of the names above and
+are removed as the pages that use them move over. `accent` used to mean the
+action colour; that is now `action`.
 
 ## Typography
 
-- **Display and headings:** Archivo Variable at `font-stretch: 112%` (class
-  `font-display`; every `h1` and `h2` gets it from the base layer in
-  `index.css`), weights 680 to 780. Archivo is a grotesque with a wide
-  stance that holds up at 88 px and still reads at 20 px. Latin and latin-ext
-  subsets only.
-- **Body and controls:** Geist Variable, 16 px, line height 1.6, measure up to
-  68 characters.
-- **Labels:** Geist Mono 11 px, uppercase, 0.08em tracking, for states and
-  indices inside components ("Preview", "On the roadmap"). Never as an eyebrow
-  above a heading, never as the reading voice.
+- **Headings (h1, h2, `font-display`):** Space Grotesk Variable, 700, tracking
+  -0.03em. h3 and below are Inter.
+- **Body and controls:** Inter Variable with tabular numerals, 16 to 18 px,
+  line height 1.5.
+- **Code:** Geist Mono, code panels only.
+- Latin and latin-ext subsets only.
 
 | Role | Size | Weight | Line height | Tracking |
 |---|---|---|---|---|
-| Display (one per page, the h1) | clamp(44px, 6vw, 88px) | 780 | 0.96 | -0.03em |
-| Headline (h2) | clamp(32px, 4vw, 56px) | 740 | 1.02 | -0.025em |
-| Title (h3, module names) | clamp(20px, 2vw, 26px) | 680 | 1.15 | -0.01em |
-| Lead | 18-20px | 400 | 1.5 | 0 |
-| Body | 16px | 400 | 1.6 | 0 |
-| Small | 14px | 400 | 1.5 | 0 |
-| Label | 11px mono | 500 | 1.2 | 0.08em |
-
-At 390 px the h1 fits in four lines or fewer.
+| Display (the h1) | clamp(2.25rem, 6.4cqw, 4.75rem) | 700 | 1.03 | -0.03em |
+| Heading 36 | 2.25rem | 700 | 1.1 | -0.02em |
+| Heading 26 | 1.625rem | 700 | 1.15 | -0.02em |
+| Body 18 | 1.125rem | 400 | 1.55 | 0 |
+| Body 16 | 1rem | 400 | 1.5 | 0 |
+| Label 13 | 0.8125rem | 600 | 1.3 | 0 |
 
 ## Motion
 
-- Hover and press: 150-200 ms, `cubic-bezier(0.22, 1, 0.36, 1)`. Primary
-  buttons darken to ochre strong; links thicken their underline.
-- One authored moment: the skyline draws itself once on first view (about
-  1.8 s, buildings slightly staggered). No fade-ins or carousels.
-- The header skyline (below) is the one exception that keeps moving, and it
-  stays calm: it draws in left to right once (each line 0.9 s, ease-out,
-  started across 0.7 s, about 1.6 s in all), then a few windows light up and
-  dim in turn (opacity only, 11-17 s cycles), and its ridge and city drift up
-  to 2 px and 6 px apart on scroll (transform only). It pauses when the tab
-  is hidden or the band is off screen.
-- `prefers-reduced-motion: reduce`: both skylines are shown complete and
-  still (no drawing, no windows, no parallax), and every transition is cut to
-  0.01 ms (global rule in `index.css`).
+- Press scales to 0.97 over 160 ms and hover dims to 0.94 brightness, with
+  `cubic-bezier(0.23, 1, 0.32, 1)`; content enters with a 500 ms fade and
+  8 px rise.
+- `prefers-reduced-motion: reduce`: transitions are cut to 0.01 ms (global
+  rule in `index.css`).
 
 ## Imagery
 
@@ -275,21 +193,24 @@ At 390 px the h1 fits in four lines or fewer.
 
 ## Shape and depth
 
-- Radius 0 everywhere. Corners are square, including buttons, inputs and
-  checkboxes.
-- Depth is tone and rule: paper, sand, white, night. No resting shadows. A
-  product capture sits in a 1 px rule frame with no shadow and no device
-  chrome.
-- Focus: 3 px ochre outline, 3 px offset, on every interactive element, on
-  day and on night (3.63:1 against night).
+- Corners: buttons and inputs 10 px, panels and cards 12 px, chips and badges
+  8 px (`rounded-md`, `rounded-lg`, `rounded-sm`).
+- Depth is tone and line: paper on surface, a 1 px `line` border. No resting
+  shadows.
+- Focus: a 2 px `ink` outline, 2 px offset, plus a 6 px `accent` (cornflower)
+  halo, on every interactive element, in both themes.
+- Press: scale 0.97 over 160 ms. Hover: brightness 0.94.
 
 ## Components
 
 ### Buttons
-- **Primary:** ochre fill, white 15 px semibold label, 48 px tall, square.
-  Hover: ochre strong. One per view.
-- **On night:** ochre-on-night fill, night text.
-- **Text action:** ink, underlined, arrow optional. Turns ochre on hover.
+- **Primary:** `action` fill (ink in light, light in dark), `paper` 15 px
+  semibold label, 48 px tall, 10 px corners. One per view.
+- **Secondary:** `paper` fill, 1 px `line-control` border, `ink` label.
+- **Accent:** `accent` (cornflower) fill, `on-accent` label.
+- **Destructive:** `red` fill, `paper` label.
+- **Disabled:** `line` fill, `ink-3` label. **Loading:** the label, a spinner
+  and `aria-busy="true"`.
 
 ### Navigation
 - Paper header, 72 px, fine lower rule with the header skyline standing on it, fixed at the top. Wordmark in Archivo. Primary

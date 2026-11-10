@@ -91,7 +91,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
       <ArticleShell>
         <header className="mb-[120px] max-w-3xl">
           <div className="flex items-center gap-4 mb-8">
-            <span className="text-sm font-semibold text-accent-strong bg-accent/10 px-2 py-1 rounded-sm">
+            <span className="text-sm font-semibold text-action-busy bg-action/10 px-2 py-1 rounded-sm">
               {post.category}
             </span>
             <span className="text-xs text-muted">{post.date}</span>
@@ -128,11 +128,11 @@ export default function BlogPost({ slug }: BlogPostProps) {
               <div className="absolute inset-0 bg-gradient-to-br from-gray-900 via-gray-800 to-black opacity-90" />
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="flex items-center justify-center gap-3">
-                  <div className="w-3 h-3 rounded-full bg-accent" />
-                  <div className="w-32 h-[1px] bg-accent/50" />
-                  <div className="w-3 h-3 rounded-full bg-accent" />
-                  <div className="w-32 h-[1px] bg-accent/50" />
-                  <div className="w-3 h-3 rounded-full bg-accent" />
+                  <div className="w-3 h-3 rounded-full bg-action" />
+                  <div className="w-32 h-[1px] bg-action/50" />
+                  <div className="w-3 h-3 rounded-full bg-action" />
+                  <div className="w-32 h-[1px] bg-action/50" />
+                  <div className="w-3 h-3 rounded-full bg-action" />
                 </div>
               </div>
             </>

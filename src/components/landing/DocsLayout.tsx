@@ -7,7 +7,7 @@ import { DocsMobileNav } from './DocsPage/MobileNav'
 
 export default function DocsLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="min-h-screen flex flex-col bg-paper text-ink antialiased" style={{ fontFamily: "'Geist Variable', sans-serif" }}>
+    <div className="min-h-screen flex flex-col bg-paper text-ink antialiased">
       <SkipLink />
       <Navigation />
       {/* Mobile section nav — only visible below md */}

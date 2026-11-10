@@ -30,7 +30,7 @@ export default function OpenSourcePage() {
           {BRAND} gives technical teams a self-hostable engine for records, APIs, admin UI, workflows, permissions, and extensions.
         </p>
         <div className="flex flex-wrap gap-3">
-          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-accent text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-accent-strong transition-colors">
+          <a href="https://github.com/asenawritescode/kora" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 bg-action text-white text-sm font-semibold px-6 py-3 rounded-sm hover:bg-action-busy transition-colors">
             View GitHub
             <ArrowRight className="h-4 w-4" />
           </a>
@@ -52,7 +52,7 @@ export default function OpenSourcePage() {
             ['Single binary', 'Go backend with embedded UI for simpler operations.'],
           ].map(([title, description]) => (
             <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
-              <Server className="h-6 w-6 text-accent mb-4" />
+              <Server className="h-6 w-6 text-action mb-4" />
               <h3 className="text-sm font-semibold text-black mb-2">{title}</h3>
               <p className="text-sm text-muted">{description}</p>
             </div>
@@ -72,7 +72,7 @@ export default function OpenSourcePage() {
         <div className="grid md:grid-cols-3 gap-4">
           {CAPABILITIES.map(({ icon: Icon, title, description }) => (
             <div key={title} className="bg-white border border-outline-variant p-6 rounded-sm">
-              <Icon className="h-6 w-6 text-accent mb-4" />
+              <Icon className="h-6 w-6 text-action mb-4" />
               <h3 className="text-lg font-semibold text-black mb-2">{title}</h3>
               <p className="text-sm text-muted">{description}</p>
             </div>
@@ -84,12 +84,12 @@ export default function OpenSourcePage() {
         <Link to="/cloud" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Use managed cloud</h2>
           <p className="text-sm text-muted mb-4">Start with a hosted workspace instead of running your own server.</p>
-          <span className="text-sm font-semibold text-accent">View {BRAND} Cloud →</span>
+          <span className="text-sm font-semibold text-action">View {BRAND} Cloud →</span>
         </Link>
         <Link to="/docs" className="bg-white border border-outline-variant p-6 rounded-sm hover:border-black transition-colors">
           <h2 className="text-2xl font-semibold text-black mb-2">Self-host the engine</h2>
           <p className="text-sm text-muted mb-4">Review setup, configuration, deployment, APIs, SDKs, and extension points.</p>
-          <span className="text-sm font-semibold text-accent">Read docs →</span>
+          <span className="text-sm font-semibold text-action">Read docs →</span>
         </Link>
       </section>
 

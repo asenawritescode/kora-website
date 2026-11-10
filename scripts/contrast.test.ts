@@ -1,7 +1,7 @@
 import { expect, test } from 'bun:test'
 import { readFileSync } from 'node:fs'
 import { join } from 'node:path'
-import { checkPairs, contrastRatio, parseColors, parsePairs } from './contrast'
+import { checkPairs, contrastRatio, parseColors, parseDarkColors, parsePairs } from './contrast'
 
 const tokens = readFileSync(join(import.meta.dir, '../src/styles/tokens.css'), 'utf8')
 
@@ -36,6 +36,20 @@ test('a failing pair and an unknown token are reported', () => {
   const results = checkPairs(css)
   expect(results.map((r) => r.ok)).toEqual([false, true, false])
   expect(results[2].error).toContain('unknown token')
+})
+
+test('the dark block overrides the light colours, and its pairs are checked too', () => {
+  const css = `--color-fg: #000000; --color-bg: #ffffff;
+    :root[data-theme="dark"] { --color-bg: #111111; }
+    pair: fg on bg`
+  expect(parseColors(css).bg).toBe('#ffffff')
+  expect(parseDarkColors(css).bg).toBe('#111111')
+  const results = checkPairs(css)
+  expect(results.map((r) => [r.mode, r.ok])).toEqual([['light', true], ['dark', false]])
+})
+
+test('the real tokens are checked in both themes', () => {
+  expect(new Set(checkPairs(tokens).map((r) => r.mode))).toEqual(new Set(['light', 'dark']))
 })
 
 test('min overrides the default 4.5', () => {

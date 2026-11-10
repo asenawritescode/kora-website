@@ -60,7 +60,7 @@ export function ModulePicker() {
           {state.status === 'error' && (
             <div role="alert" className="border border-outline-variant bg-white px-5 py-6 text-[16px] text-on-surface-variant">
               <p>We could not load the module list.</p>
-              <button type="button" onClick={retry} className="mt-3 min-h-12 font-semibold text-ink underline underline-offset-[6px] hover:decoration-accent hover:decoration-2">Try again</button>
+              <button type="button" onClick={retry} className="mt-3 min-h-12 font-semibold text-ink underline underline-offset-[6px] hover:decoration-action hover:decoration-2">Try again</button>
             </div>
           )}
           {state.status === 'ready' && modules.length === 0 && (
@@ -97,7 +97,7 @@ export function ModulePicker() {
           </p>
           <p className="mt-2 text-[16px] leading-[1.5] text-muted">{PRICE_LINE}</p>
           {result.template ? (
-            <SignupLink className="mt-5 inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px">
+            <SignupLink className="mt-5 inline-flex min-h-12 items-center bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px">
               Set up with {result.template.name}
             </SignupLink>
           ) : (

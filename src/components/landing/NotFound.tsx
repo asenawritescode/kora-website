@@ -16,7 +16,7 @@ export default function NotFound() {
         </p>
         <Link
           to="/"
-          className="mt-8 inline-flex min-h-12 items-center bg-accent px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-accent-strong active:translate-y-px"
+          className="mt-8 inline-flex min-h-12 items-center bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px"
         >
           Go to the home page
         </Link>

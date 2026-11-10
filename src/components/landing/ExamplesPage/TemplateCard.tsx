@@ -6,7 +6,7 @@ export function TemplateCard({ template }: { template: Template }) {
   return (
     <div className="bg-white border border-outline-variant rounded-sm p-8 hover:border-black transition-colors group flex flex-col h-full">
       {/* Initial badge */}
-      <div className="bg-surface-container p-3 rounded-sm w-10 h-10 mb-4 group-hover:bg-accent group-hover:text-white transition-colors flex items-center justify-center">
+      <div className="bg-surface-container p-3 rounded-sm w-10 h-10 mb-4 group-hover:bg-action group-hover:text-white transition-colors flex items-center justify-center">
         <span className="text-sm font-semibold text-black group-hover:text-white">
           {template.name.charAt(0)}
         </span>
@@ -30,7 +30,7 @@ export function TemplateCard({ template }: { template: Template }) {
             </li>
           ))}
         </ul>
-        <Link to="/templates/$slug" params={{ slug: template.slug }} className="mt-2 inline-flex min-h-12 items-center text-sm font-semibold text-accent underline underline-offset-4">
+        <Link to="/templates/$slug" params={{ slug: template.slug }} className="mt-2 inline-flex min-h-12 items-center text-sm font-semibold text-action underline underline-offset-4">
           See what {template.name} includes
         </Link>
       </div>

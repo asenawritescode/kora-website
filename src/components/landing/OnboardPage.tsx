@@ -28,7 +28,7 @@ export default function OnboardPage() {
         <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6 mb-10">
           <a
             href={signupHref}
-            className="inline-flex min-h-12 items-center justify-center bg-accent text-white text-sm font-medium px-8 py-3 hover:bg-accent-strong transition-colors"
+            className="inline-flex min-h-12 items-center justify-center bg-action text-white text-sm font-medium px-8 py-3 hover:bg-action-busy transition-colors"
           >
             Continue to sign up
           </a>

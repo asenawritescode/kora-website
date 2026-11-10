@@ -1,50 +1,44 @@
 /* The only place colours are defined: components use the utilities these
-   generate (text-ink, bg-paper, text-accent, bg-night ...), never a hex value.
+   generate (text-ink, bg-paper, bg-action, bg-accent, bg-band ...), never a hex value.
    DESIGN.md explains each colour and where it may be used. After editing, run
    `bun run validate:contrast`: it reads the colours and the `pair:` lines
-   below and fails when a text pair is under WCAG AA.
-   Format: pair: <fg> on <bg> [min <ratio>]. Default 4.5; `min 3` for rings, icons, line art.
+   below and fails when a text pair is under WCAG AA, in the light theme and,
+   with the dark overrides applied, in the dark theme.
+   Format: pair: <fg> on <bg> [min <ratio>]. Default 4.5; `min 3` for borders and line art.
 
-   Day surfaces (paper, sand, white)
+   Text and surfaces (checked in both themes)
    pair: ink on paper
-   pair: ink on surface-container
-   pair: ink on white
-   pair: black on paper
-   pair: black on surface-container
-   pair: on-surface-variant on paper
-   pair: on-surface-variant on surface-container
-   pair: muted on paper
-   pair: muted on surface-container
-   pair: muted on white
-   pair: muted on accent-tint
-   pair: ink on accent-tint
-   pair: accent on paper
-   pair: accent on white
-   pair: accent-strong on accent-tint
-   pair: white on accent
-   pair: white on accent-strong
-   pair: white on black
-   pair: white on ink
-   pair: ink on gold
+   pair: ink on surface
+   pair: ink on surface-2
+   pair: ink-2 on paper
+   pair: ink-2 on surface
+   pair: ink-3 on paper
+   pair: ink-3 on surface
+   pair: ink-3 on surface-2
 
-   Night surfaces (the skyline band, footer)
-   pair: night-ink on night
-   pair: night-muted on night
-   pair: night-ink on night-raised
-   pair: night-muted on night-raised
-   pair: accent-on-night on night
-   pair: accent-on-night on night-raised
-   pair: night on accent-on-night
-   pair: gold on night
-   pair: gold on night-raised
-   pair: night on gold
-   pair: accent on night min 3
+   Actions and badges
+   pair: paper on action
+   pair: paper on action-busy
+   pair: on-accent on accent
+   pair: ok-ink on ok-tint
+   pair: ok-ink on ok-wash
+   pair: amber-ink on amber-tint
+   pair: slate on slate-tint
+   pair: red on paper
+   pair: red-ink on red-tint
+   pair: red-ink on red-wash
+   pair: line-control on paper min 3
 
-   Code panels
+   Dark band (footer, app bar)
+   pair: on-band on band
+   pair: on-band-2 on band
+   pair: on-band-3 on band
+   pair: on-band-3 on band-line
+   pair: accent on band
+
+   Code panels (the same in both themes)
    pair: code-ink on code
    pair: code-accent on code
-   pair: accent on accent-tint
-   pair: accent-strong on paper
    pair: code-muted on code
    pair: code-muted on code-rule
    pair: success on code
@@ -54,29 +48,66 @@
   --color-white: #ffffff;
   --color-black: #000000;
 
-  /* Day: warm paper, sand panels, near-black ink. */
-  --color-paper: #f7f3ec;
-  --color-surface-container: #ede6da;
-  --color-ink: #16130f;
-  --color-on-surface-variant: #3f3a33;
-  --color-muted: #5c554c;
-  /* Rules and dividers only, never text. */
-  --color-outline-variant: #d9d0c2;
+  /* Paper is the card and page ground; surface is the quiet ground behind
+     cards; surface-2 is a panel that sets a section apart. */
+  --color-paper: #ffffff;
+  --color-surface: #fafaf7;
+  --color-surface-2: #f4f4ef;
+  --color-ink: #0f0f12;
+  --color-ink-2: #3a3a42;
+  --color-ink-3: #5c5c66;
 
-  /* Red ochre: the one action colour on day surfaces. */
-  --color-accent: #c84018;
-  --color-accent-strong: #a3360f;
-  --color-accent-tint: #fef3ed;
+  /* Action: the main button, the selected state. Ink on light, light on dark. */
+  --color-action: #0f0f12;
+  --color-action-busy: #4a4a52;
 
-  /* Night: the skyline band and footer. */
-  --color-night: #12161b;
-  --color-night-raised: #1c2128;
-  --color-night-ink: #f4efe6;
-  --color-night-muted: #b4ada3;
-  /* Red ochre lifted for text and actions on night. */
-  --color-accent-on-night: #f08a5d;
-  /* Savanna gold: the skyline line and small highlights; ink text on gold. */
-  --color-gold: #e3a13a;
+  /* Cornflower: a block colour only (highlights, focus ring, badges behind
+     ink text). On white it is 2.8:1, so never text or a thin line there. */
+  --color-accent: #6495ed;
+  --color-accent-soft: #6495ed;
+  --color-on-accent: #0f0f12;
+
+  /* States. */
+  --color-ok-tint: #e6edfc;
+  --color-ok-wash: #f1f5fe;
+  --color-ok-ink: #2a4a8c;
+  --color-amber-tint: #fdefd3;
+  --color-amber-ink: #7a4a00;
+  --color-slate-tint: #ecece8;
+  --color-slate: #45454f;
+  --color-red: #b42318;
+  --color-red-ink: #8a1c12;
+  --color-red-wash: #fff4f2;
+  --color-red-tint: #fde7e4;
+
+  /* Lines. line-control is the only one for input and button borders (3:1). */
+  --color-line: #e4e4de;
+  --color-line-faint: #efefea;
+  --color-line-2: #d6d6cf;
+  --color-line-control: #84848c;
+  --color-line-strong: #b0b0a9;
+  --color-line-frame: #c8c8c1;
+  --color-skeleton: #f1f1ec;
+
+  /* Band: footer and app bar. */
+  --color-band: #0f0f12;
+  --color-on-band: #f4f4f0;
+  --color-on-band-2: #d4d4ce;
+  --color-on-band-3: #a8a8a2;
+  --color-band-line: #2c2c33;
+
+  /* Legacy names, kept so pages not yet moved to the Zana design still render.
+     Each page PR replaces its uses; delete a line when nothing uses it. */
+  --color-surface-container: var(--color-surface-2);
+  --color-on-surface-variant: var(--color-ink-2);
+  --color-muted: var(--color-ink-3);
+  --color-outline-variant: var(--color-line);
+  --color-night: var(--color-band);
+  --color-night-raised: var(--color-band-line);
+  --color-night-ink: var(--color-on-band);
+  --color-night-muted: var(--color-on-band-3);
+  --color-accent-on-night: var(--color-accent);
+  --color-gold: var(--color-accent);
 
   /* Dark code panels. */
   --color-code: #0a0a0a;
@@ -89,4 +120,39 @@
   --color-success: #10b981;
   --color-success-strong: #15803d;
   --color-danger: #dc2626;
+}
+
+/* Dark theme: set data-theme="dark" on <html>. The light values above are the
+   default; these replace only the tokens that change. Not yet followed from
+   the system setting: that switches on once every page has moved over. */
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --color-paper: #18181d;
+  --color-surface: #0f0f12;
+  --color-surface-2: #141418;
+  --color-ink: #f4f4f0;
+  --color-ink-2: #cfcfc8;
+  --color-ink-3: #a4a49d;
+  --color-action: #f4f4f0;
+  --color-action-busy: #a4a49d;
+  --color-accent-soft: #33476d;
+  --color-ok-tint: #1f2b45;
+  --color-ok-wash: #1a2236;
+  --color-ok-ink: #a8c2f7;
+  --color-amber-tint: #3b2c12;
+  --color-amber-ink: #f1c46e;
+  --color-slate-tint: #26262d;
+  --color-slate: #cfcfd6;
+  --color-red: #ff8b7e;
+  --color-red-ink: #ffb4ab;
+  --color-red-wash: #3a1b18;
+  --color-red-tint: #45201c;
+  --color-line: #2c2c33;
+  --color-line-faint: #232329;
+  --color-line-2: #34343c;
+  --color-line-control: #7a7a84;
+  --color-line-strong: #4a4a53;
+  --color-line-frame: #3a3a42;
+  --color-skeleton: #24242b;
+  --color-band: #18181d;
 }
