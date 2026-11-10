@@ -1,6 +1,5 @@
 import { Link } from '@tanstack/react-router'
 import { COMPANY_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
-import { SignupLink } from '@/components/landing/SignupLink'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { BRAND } from '@/lib/brand'
 import { buildSignInUrl, cloudSignupBase } from '@/lib/cloud-signup'
@@ -14,8 +13,8 @@ const link = 'flex min-h-11 w-fit items-center text-[0.9375rem] text-on-band-2 n
 
 export function Footer() {
   return (
-    <footer className="on-band bg-band px-4 pb-8 pt-12 text-on-band">
-      <div className="mx-auto flex max-w-[1200px] flex-col gap-9">
+    <footer className="on-band bg-band px-4 pb-8 pt-10 text-on-band sm:pt-12">
+      <div className="mx-auto flex max-w-[1200px] flex-col gap-7 sm:gap-9">
         <div className="flex flex-wrap gap-9">
           <div className="flex flex-[2_1_280px] flex-col gap-3">
             <div className="flex min-w-0 items-center gap-2.5">
@@ -33,7 +32,6 @@ export function Footer() {
               {links.map((l) => (
                 <Link key={l.label} to={l.href} className={link}>{l.label}</Link>
               ))}
-              {title === 'Product' && <SignupLink className={link} />}
               {title === 'Company' && <a href={buildSignInUrl(cloudSignupBase())} className={link}>Sign in</a>}
             </nav>
           ))}

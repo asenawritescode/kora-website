@@ -37,7 +37,9 @@ export function HomeBody() {
           <h2 id="for-title" className={h2}>Made for shops like yours</h2>
           <ul className="flex flex-wrap justify-start gap-2.5 sm:justify-center">
             {SHOP_TYPES.map((name) => (
-              <li key={name} className="rounded-full bg-accent px-[18px] py-2.5 text-base font-semibold text-on-accent">{name}</li>
+              <li key={name}>
+                <Link to="/industries/retail" className="flex min-h-11 items-center rounded-full bg-accent px-[18px] text-base font-semibold text-on-accent no-underline">{name}</Link>
+              </li>
             ))}
           </ul>
           <p className="text-base text-ink-2">Run a café, pharmacy or wholesale business? <Link to="/industries" className="font-semibold">See what’s ready for you</Link></p>

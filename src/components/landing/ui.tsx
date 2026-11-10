@@ -14,8 +14,10 @@ const STATUS: Record<Status, { label: string; className: string; icon: string }>
   roadmap: { label: 'On the roadmap', className: 'bg-slate-tint text-slate', icon: 'M5 17.5V3h9l-2 3.25L14 9.5H5' },
 }
 
-export function StatusBadge({ status }: { status: Status }) {
+export function StatusBadge({ status, quiet = false }: { status: Status; quiet?: boolean }) {
   const s = STATUS[status] ?? STATUS.roadmap
+  // quiet: the state is still announced, but not drawn where the section's heading already says it.
+  if (quiet) return <span className="sr-only">{s.label}</span>
   return (
     <span className={`inline-flex items-center gap-[5px] whitespace-nowrap rounded-full py-[3px] pl-[7px] pr-[9px] text-[0.8125rem] font-semibold ${s.className}`}>
       <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
