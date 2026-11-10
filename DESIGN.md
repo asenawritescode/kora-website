@@ -51,8 +51,7 @@ components:
 
 Source of truth: the "Zana design" page of the ERP landing page canvas
 (Components and Dark mode artboards). Where this file and the canvas differ,
-the canvas wins. The page-level sections below (skyline, navigation, footer,
-module picker) still describe the previous Nairobi identity and are replaced
+the canvas wins. The page-level sections below (module picker) still describe the previous Nairobi identity and are replaced
 as each page moves to the canvas design.
 
 ## Overview
@@ -127,38 +126,14 @@ action colour; that is now `action`.
 
 ## Imagery
 
-- Real Kigae Studio captures only, taken from a real workspace and saved as
-  WebP with explicit width and height, each under 120 KB. Today: the owner
-  dashboard in the hero, and the Sell register on a tablet (1280x800, cropped
-  to the register) and a phone (390x844 at 2x) in "What you get today". No
-  device mock-ups, no drawn dashboards, no shadows; a 1 px rule is the frame.
-- Captures show no personal data (real names, emails, tokens) and, where it
-  shows, a plausible shop name. Retake them when the screen changes.
-- Do not show screens that are not built.
-- No stock photography, no illustrated people, no icons as decoration, no
-  emoji.
-
-## The Nairobi skyline
-
-- An original line drawing (`src/components/landing/NairobiSkyline.tsx`),
-  hand-built in SVG. Not traced from any photograph or artwork.
-- One colour (`gold` on night; `ink` if it ever sits on paper), one stroke
-  of about 1.2 px on screen at every width (the width steps with the band
-  size in `index.css`), no fills except the band colour used to hide lines
-  behind a building.
-- Buildings shown, left to right: Britam Tower, Anniversary Towers, Teleposta
-  Towers, Times Tower, the KICC tower with its crown and the conical
-  amphitheatre roof beside it. Low unnamed rooftops fill the rest. One flat
-  acacia at the right edge nods to Nairobi National Park. The sky stays empty:
-  no sun, birds, clouds or stars.
-- Sits as the horizon at the bottom of the first screen, full width at 1440,
-  cropped from both sides around KICC at 390 (`preserveAspectRatio="xMidYMax
-  slice"`).
-- The full drawing appears once per page (the home page), with the line
-  "From Nairobi to the world" in that exact wording, once. The drawing is decorative (`aria-hidden`); the line is
-  real text.
-- When a building is corrected, keep the silhouettes simple: the outline
-  must read at 140 px tall.
+- Real product screens with sample data only, as WebP in `public/screens/`
+  (laptop 2200x1200, phone 780x1480, each under 90 KB), shown in a laptop
+  frame whose lid opens as it scrolls into view, and in a phone frame below
+  640 px (`ProductScreens.tsx`). Four tabs, a slow autoplay with a pause
+  button, no motion under `prefers-reduced-motion`.
+- Screens show no personal data. Retake them when the product changes, and do
+  not show screens that are not built.
+- No stock photography, no illustrated people, no emoji.
 
 ## Layout and spacing
 

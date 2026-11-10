@@ -4,11 +4,11 @@ import { join } from 'node:path'
 
 const read = (p: string) => readFileSync(join(import.meta.dir, p), 'utf8')
 
-test('home page says M-Pesa is recorded by hand, not connected, and names what is unsupported', () => {
+test('home page says mobile money is recorded by hand and lists what is not available yet', () => {
   const home = read('HomePage/HomeBody.tsx')
-  expect(home).toContain('M-Pesa payments can be recorded by hand against a till or paybill number')
-  expect(home).toContain('is not connected to M-Pesa')
-  expect(home).toContain('Card payments, receipt printers and eTIMS are not supported yet.')
+  expect(home).toContain('M-Pesa and other mobile money, recorded by hand')
+  for (const item of ['Card payments', 'Receipt printers', 'KRA eTIMS tax receipts']) expect(home).toContain(`['${item}', 'roadmap']`)
+  expect(home).not.toMatch(/(connects?|integrat\w+) (with|to) M-Pesa/i)
 })
 
 test('Cloud page describes the real steps and none of the removed claims', () => {

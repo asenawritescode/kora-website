@@ -96,6 +96,11 @@
   --color-on-band-3: #a8a8a2;
   --color-band-line: #2c2c33;
 
+  /* The laptop frame around the product screens (Home). */
+  --color-lid: #0b0b0e;
+  --color-lid-edge: #26262e;
+  --color-deck: #c4c4cb;
+
   /* Legacy names, kept so pages not yet moved to the Zana design still render.
      Each page PR replaces its uses; delete a line when nothing uses it. */
   --color-surface-container: var(--color-surface-2);
@@ -155,4 +160,5 @@
   --color-line-frame: #3a3a42;
   --color-skeleton: #24242b;
   --color-band: #18181d;
+  --color-deck: #3a3a44;
 }
