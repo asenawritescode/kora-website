@@ -1,5 +1,6 @@
+import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
-import { BUTTON_PRIMARY, CARD, Tick } from '@/components/landing/ui'
+import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, Tick } from '@/components/landing/ui'
 
 const INCLUDED = [
   'Every Available module: today, Sales and point of sale, and Inventory and stock',
@@ -24,6 +25,7 @@ export default function PricingPage() {
           <p className="max-w-[600px] text-[1.125rem] leading-[1.55] text-ink-2">You’ll see prices before the pilot ends, with time to decide.</p>
           <div className="mt-2 flex flex-wrap justify-center gap-3">
             <SignupLink className={BUTTON_PRIMARY} />
+            <Link to="/contact" className={BUTTON_SECONDARY}>Talk to the team</Link>
           </div>
           <p className="text-[0.9375rem] text-ink-3">Free during the pilot. No card needed.</p>
         </div>
@@ -45,6 +47,8 @@ export default function PricingPage() {
             <p className="text-base leading-[1.55] text-ink-2">Nothing is charged unless you agree.</p>
           </div>
         </div>
+
+        <p className="text-center text-[1.0625rem] leading-[1.55]">Not sure it fits your shop? <Link to="/contact" className="font-semibold">Talk to the team</Link></p>
 
         <section aria-labelledby="pq" className="flex flex-col gap-3">
           <h2 id="pq" className="mb-1.5 text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Pricing questions</h2>

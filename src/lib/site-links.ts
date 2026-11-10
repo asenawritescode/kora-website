@@ -20,4 +20,10 @@ export const EXPLORE_LINKS: SiteLink[] = [
   { label: 'Blog', href: '/blog' },
 ]
 
+export const COMPANY_LINKS: SiteLink[] = [
+  { label: 'About', href: '/about' },
+  { label: 'Contact us', href: '/contact' },
+  { label: 'Privacy and terms', href: '/privacy' },
+]
+
 export const CTA_LINK: SiteLink = { label: 'Set up my shop', href: '/onboard' }

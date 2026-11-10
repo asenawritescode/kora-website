@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from './ProductScreens'
 
@@ -17,9 +18,9 @@ export function HeroSection() {
         </p>
         <div className="flex flex-wrap justify-center gap-3">
           <SignupLink className="flex min-h-[52px] items-center rounded-md bg-action px-[22px] text-base font-semibold text-paper no-underline" />
-          <a href="#modules" className="flex min-h-[52px] items-center rounded-md border border-line-control px-[22px] text-base font-semibold text-ink no-underline">
-            Choose your modules
-          </a>
+          <Link to="/contact" className="flex min-h-[52px] items-center rounded-md border border-line-control px-[22px] text-base font-semibold text-ink no-underline">
+            Talk to the team
+          </Link>
         </div>
         <p className="text-[0.9375rem] text-ink-3">Free during the pilot. No card needed.</p>
       </div>

@@ -2,7 +2,7 @@
 // page that does not exist. Source of truth for routes is src/router.tsx.
 import { readdirSync, readFileSync, statSync } from 'node:fs'
 import { join, relative } from 'node:path'
-import { CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '../src/lib/site-links'
+import { COMPANY_LINKS, CTA_LINK, EXPLORE_LINKS, PRIMARY_LINKS } from '../src/lib/site-links'
 
 const defaultRoot = join(import.meta.dir, '..')
 
@@ -27,7 +27,7 @@ export function findLinkProblems(root = defaultRoot): string[] {
   const exists = (href: string) => routes.some((r) => r.test(pathOf(href)))
   const problems: string[] = []
 
-  for (const link of [...PRIMARY_LINKS, ...EXPLORE_LINKS, CTA_LINK]) {
+  for (const link of [...PRIMARY_LINKS, ...EXPLORE_LINKS, ...COMPANY_LINKS, CTA_LINK]) {
     if (!exists(link.href)) problems.push(`nav/footer link "${link.label}" -> ${link.href} matches no route`)
   }
 

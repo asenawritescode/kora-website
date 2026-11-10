@@ -80,6 +80,31 @@ export const ROUTE_SEO: RouteSeo[] = [
     sitemap: true,
   },
   {
+    path: '/contact',
+    title: `Contact us — ${BRAND}`,
+    description: `Questions about ${BRAND}, the pilot or a problem in your workspace. Based in Nairobi, Kenya.`,
+    sitemap: true,
+  },
+  {
+    path: '/about',
+    title: `About — ${BRAND}`,
+    description: `${BRAND} means “tools” in Swahili. Business tools for small businesses, made in Nairobi.`,
+    sitemap: true,
+  },
+  {
+    // Outlines only until the lawyers' text exists: kept out of search results.
+    path: '/privacy',
+    title: `Privacy (draft) — ${BRAND}`,
+    description: `What ${BRAND}'s privacy policy will cover. Draft.`,
+    noindex: true,
+  },
+  {
+    path: '/terms',
+    title: `Terms of use (draft) — ${BRAND}`,
+    description: `What ${BRAND}'s terms of use will cover. Draft.`,
+    noindex: true,
+  },
+  {
     path: '/roadmap',
     title: `Roadmap — ${BRAND}`,
     description: `What works in ${BRAND} today, what is being built and what is planned, in order. No dates promised.`,

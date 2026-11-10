@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
-import { BUTTON_PRIMARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
+import { BUTTON_PRIMARY, BUTTON_SECONDARY, H2, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 
 // Below the hero: who it is for, before and after, three steps, what works today,
 // the rules, the price and the closing band. Every line is something the pilot
@@ -41,6 +41,7 @@ export function HomeBody() {
               <li key={name} className="rounded-full bg-accent px-[18px] py-2.5 text-base font-semibold text-on-accent">{name}</li>
             ))}
           </ul>
+          <p className="text-base text-ink-2">Run a café, pharmacy or wholesale business? <Link to="/industries" className="font-semibold">See what’s ready for you</Link></p>
         </div>
       </section>
 
@@ -94,6 +95,7 @@ export function HomeBody() {
                     <StatusBadge status={status} />
                   </div>
                 ))}
+                {col.title === 'Not yet' && <Link to="/roadmap" className="mt-2 inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>}
               </div>
             ))}
           </div>
@@ -102,7 +104,10 @@ export function HomeBody() {
 
       <section aria-labelledby="rules-title" className="px-4 py-[clamp(3rem,6vw,5rem)]">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-start gap-x-12 gap-y-6">
-          <h2 id="rules-title" className={`${h2} flex-[1_1_320px]`}>Your rules, for people and AI</h2>
+          <div className="flex flex-[1_1_320px] flex-col gap-2.5">
+            <h2 id="rules-title" className={h2}>Your rules, for people and AI</h2>
+            <Link to="/how-ai" className="inline-flex min-h-11 items-center self-start text-base font-semibold">How AI works with your tools</Link>
+          </div>
           <ul className="flex flex-[2_1_420px] flex-col gap-3.5 text-[1.0625rem] leading-normal">
             <li><strong>Everyone gets a role.</strong> Staff, and later AI agents, can do only what their role allows.</li>
             <li><strong>Every action is logged.</strong> Who, what and when, in one place.</li>
@@ -112,7 +117,7 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section aria-label="Price" className="bg-surface px-4 py-[clamp(3rem,6vw,5rem)]">
+      <section aria-label="Price and help" className="bg-surface px-4 py-[clamp(3rem,6vw,5rem)]">
         <div className="mx-auto grid max-w-[1200px] gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
           <div className={card}>
             <h2 className={h2}>Free during the pilot</h2>
@@ -120,6 +125,11 @@ export function HomeBody() {
               The catch: none. You’ll see prices before the pilot ends, and nothing is charged unless you agree.
             </p>
             <Link to="/pricing" className="inline-flex min-h-11 items-center self-start text-base font-semibold">Pricing questions</Link>
+          </div>
+          <div className={card}>
+            <h2 className={h2}>Talk to a person</h2>
+            <p className="text-[1.0625rem] leading-[1.55] text-ink-2">Not sure Zana fits your shop? Ask the team in Nairobi.</p>
+            <Link to="/contact" className={`${BUTTON_SECONDARY} self-start`}>Contact us</Link>
           </div>
         </div>
       </section>
