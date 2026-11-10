@@ -160,25 +160,6 @@ action colour; that is now `action`.
 - When a building is corrected, keep the silhouettes simple: the outline
   must read at 140 px tall.
 
-### The header skyline
-
-- A compact companion drawing (`src/components/landing/HeaderSkyline.tsx`),
-  also original line art, in an 18 px band (14 px under 768 px) that sits on
-  the header's lower rule, under the link text and behind the action button.
-  It never overlaps link text and the header stays 72 px.
-- Left to right: Upper Hill (Britam Tower, Anniversary Towers), the Uhuru
-  Park trees, Teleposta Towers, Times Tower, the two Nation Centre towers,
-  the I&M towers, KICC with its flared crown and helipad drum, the cone roof
-  of the plenary hall, the Nyayo grounds trees, then the Ngong Hills ridge
-  with its four knuckles and one flat acacia. Low unnamed rooftops fill the
-  wide screens. Phones get the simpler band: the city core, the ridge and the
-  acacia, no rooftop fill and no Upper Hill.
-- City lines in ink soft, the ridge in muted at 60% so it reads as distance,
-  about 1 px on screen. The lit windows are 2 px ochre squares; they are the
-  only colour in the band. Buildings are filled with paper to hide the ridge.
-- Decorative only: `aria-hidden`, `role="presentation"`, nothing focusable,
-  `pointer-events: none`.
-
 ## Layout and spacing
 
 - Content frame 1200 px, side gutter 24 px (16 px at 390). Every section
@@ -212,17 +193,17 @@ action colour; that is now `action`.
 - **Disabled:** `line` fill, `ink-3` label. **Loading:** the label, a spinner
   and `aria-busy="true"`.
 
-### Navigation
-- Paper header, 72 px, fine lower rule with the header skyline standing on it, fixed at the top. Wordmark in Archivo. Primary
-  links visible; Cloud, Open source, Docs and Blog under Explore. One ochre
-  action at the right. Below 1024 px the links fold behind a 44 px menu
-  button into a ruled list.
+### Header
+- Two rows on `paper`, 1 px `line` rule below, not fixed. Row one: the Zana
+  mark and lowercase wordmark (Space Grotesk 700), "Sign in" (Cloud sign-in)
+  and one primary "Set up my shop". Row two: the page links, 48 px targets,
+  the current page bold with a 3 px `action` underline, scrolling sideways on
+  a phone. No menu button.
 
 ### Footer
-- Night surface. Large Archivo wordmark, one plain line, two link columns
-  with small mono headings, then "Kigae by Senumi" from `src/lib/brand.ts`.
-  Links in night-muted, night text and an underline on hover. No sponsor badges, no social icons
-  without accounts behind them.
+- `band` surface. Mark and wordmark, "From Nairobi to the world", one line
+  saying what Zana is, two link columns, then "English now, Kiswahili next"
+  and the copyright line. Links in `on-band-2`, underlined on hover.
 
 ### Module picker (home page; also the rules for Cloud signup, kora-cloud#39)
 

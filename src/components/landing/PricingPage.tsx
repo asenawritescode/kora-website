@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
-import { BRAND } from '@/lib/brand'
+import { BRAND, ENGINE_BRAND } from '@/lib/brand'
 
 const INCLUDED = [
   `A ${BRAND} Cloud workspace for your shop`,
@@ -45,7 +45,7 @@ export default function PricingPage() {
       <section className="space-y-3">
         <h2 className="text-2xl font-semibold text-ink tracking-[-0.02em]">Run it yourself</h2>
         <p className="text-base leading-7 text-ink">
-          {BRAND} Engine is open source (AGPL-3.0). You can run it on your own server for free.{' '}
+          {ENGINE_BRAND} Engine is open source (AGPL-3.0). You can run it on your own server for free.{' '}
           <Link to="/docs" className="underline underline-offset-4 hover:text-action">Read the self-hosting guide</Link>.
         </p>
       </section>

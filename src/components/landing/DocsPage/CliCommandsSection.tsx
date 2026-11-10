@@ -1,4 +1,4 @@
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 const COMMANDS = [
   { cmd: './kora serve --port 8000', desc: 'Start the server' },
   { cmd: './kora setup --site <hostname> --path <dir>', desc: 'Set up a new site from YAML config' },
@@ -27,7 +27,7 @@ export function CliCommandsSection() {
         CLI Commands
       </h2>
       <p className="text-base text-muted mb-6 leading-relaxed">
-        {BRAND} ships as a single binary. Everything you can do in the admin UI, you can
+        {ENGINE_BRAND} ships as a single binary. Everything you can do in the admin UI, you can
         also do from the command line.
       </p>
 

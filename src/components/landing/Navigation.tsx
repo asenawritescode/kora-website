@@ -1,138 +1,49 @@
-import { useState, useEffect } from 'react'
 import { Link, useLocation } from '@tanstack/react-router'
-import { EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { EXPLORE_LINKS, HOME_LINK, PRIMARY_LINKS } from '@/lib/site-links'
 import { SignupLink } from '@/components/landing/SignupLink'
+import { LogoMark } from '@/components/landing/LogoMark'
 import { BRAND } from '@/lib/brand'
-import { HeaderSkyline } from '@/components/landing/HeaderSkyline'
+import { buildSignInUrl, cloudSignupBase } from '@/lib/cloud-signup'
 
+const NAV_LINKS = [HOME_LINK, ...PRIMARY_LINKS, ...EXPLORE_LINKS]
+
+// Two rows, as in the design: the mark and the actions, then the page links in
+// a row that scrolls sideways on a phone.
 export function Navigation() {
-  const [mobileOpen, setMobileOpen] = useState(false)
-  const location = useLocation()
-
-  // Close mobile menu on route change
-  useEffect(() => {
-    setMobileOpen(false)
-  }, [location.pathname])
-
-  const currentPath = location.pathname
+  const path = useLocation().pathname
 
   return (
-    <header className="fixed top-0 w-full z-50 border-b border-outline-variant bg-paper">
-      {/* The skyline sits on the lower rule, under the link text and behind the action button. */}
-      <HeaderSkyline className="absolute inset-x-0 top-[58px] h-[14px] md:top-[54px] md:h-[18px]" />
-      <nav aria-label="Primary" className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 flex justify-between items-center h-[72px] gap-4">
-        {/* Logo + Desktop Links */}
-        <div className="flex items-center gap-4 sm:gap-6 min-w-0">
-          <Link to="/" className="font-display inline-flex min-h-12 items-center text-[26px] leading-[1] font-[800] text-ink tracking-[-0.03em] shrink-0">
-            {BRAND}
+    <header className="border-b border-line bg-paper text-ink">
+      <div className="mx-auto flex max-w-[1200px] flex-col px-4 pt-2">
+        <div className="flex min-h-14 items-center gap-2">
+          <Link to="/" aria-label={`${BRAND} home`} className="flex min-h-12 items-center gap-2.5 no-underline">
+            <LogoMark />
+            <span className="font-display text-[1.4375rem] font-bold lowercase tracking-[-0.02em]">{BRAND}</span>
           </Link>
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 min-w-0">
-            {PRIMARY_LINKS.map((link) => {
-              const isActive = link.href === '/'
-                ? currentPath === '/'
-                : currentPath.startsWith(link.href)
-              return (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`inline-flex min-h-12 items-center text-sm font-medium px-3 transition-colors whitespace-nowrap ${
-                    isActive
-                      ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
-                      : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-            <details className="relative">
-              <summary className="inline-flex min-h-12 items-center list-none cursor-pointer text-sm font-medium px-3 transition-colors whitespace-nowrap text-on-surface-variant hover:text-ink">
-                Explore
-              </summary>
-              <div className="absolute left-0 mt-2 w-44 border border-outline-variant bg-paper py-2 z-20 shadow-[0_15px_38px_color-mix(in_srgb,var(--color-ink)_12%,transparent)]">
-                {EXPLORE_LINKS.map((link) => (
-                  <Link
-                    key={link.label}
-                    to={link.href}
-                    className={`flex min-h-12 items-center px-3 text-sm transition-colors ${
-                      currentPath.startsWith(link.href)
-                        ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
-                        : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </details>
-          </div>
+          <span className="flex-1" />
+          <a href={buildSignInUrl(cloudSignupBase())} className="flex min-h-12 items-center px-2.5 text-[0.9375rem] font-semibold no-underline">
+            Sign in
+          </a>
+          <SignupLink className="flex min-h-12 items-center whitespace-nowrap rounded-md bg-action px-[18px] text-[0.9375rem] font-semibold text-paper no-underline" />
         </div>
-
-        {/* Desktop CTA */}
-        <div className="hidden lg:flex items-center shrink-0">
-          <SignupLink className="inline-flex min-h-12 items-center bg-action text-white text-[15px] font-semibold px-5 hover:bg-action-busy transition-colors whitespace-nowrap" />
-        </div>
-
-        {/* Mobile hamburger — animated */}
-        <button
-          className="lg:hidden group inline-flex min-h-12 min-w-12 items-center justify-center -mr-2 shrink-0"
-          onClick={() => setMobileOpen((prev) => !prev)}
-          aria-expanded={mobileOpen}
-          aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-        >
-          <svg
-            className="pointer-events-none"
-            width={20}
-            height={20}
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path
-              d="M4 12L20 12"
-              className="origin-center -translate-y-[7px] transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
-            />
-            <path
-              d="M4 12H20"
-              className="origin-center transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
-            />
-            <path
-              d="M4 12H20"
-              className="origin-center translate-y-[7px] transition-all duration-300 [transition-timing-function:cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
-            />
-          </svg>
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="lg:hidden border-t border-outline-variant bg-paper">
-          <div className="px-4 py-4 space-y-1">
-            {[...PRIMARY_LINKS, ...EXPLORE_LINKS].map((link) => {
-              const isActive = link.href === '/'
-                ? currentPath === '/'
-                : currentPath.startsWith(link.href)
-              return (
-                <Link
-                  key={link.label}
-                  to={link.href}
-                  className={`block text-sm font-medium px-3 py-3 transition-colors ${
-                    isActive
-                      ? 'text-ink underline decoration-action decoration-2 underline-offset-[8px]'
-                      : 'text-on-surface-variant hover:text-ink hover:underline hover:decoration-1 hover:underline-offset-[8px]'
-                  }`}
-                >
-                  {link.label}
-                </Link>
-              )
-            })}
-            <SignupLink className="flex min-h-12 w-full items-center justify-center bg-action text-white text-[15px] font-semibold px-4 mt-3 hover:bg-action-busy" />
-          </div>
-        </div>
-      )}
+        <nav aria-label="Main" className="-mx-1.5 flex gap-0.5 overflow-x-auto">
+          {NAV_LINKS.map((link) => {
+            const current = link.href === '/' ? path === '/' : path.startsWith(link.href)
+            return (
+              <Link
+                key={link.label}
+                to={link.href}
+                aria-current={current ? 'page' : undefined}
+                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-[0.9375rem] no-underline ${
+                  current ? 'border-action font-bold text-action' : 'border-transparent font-medium text-ink-2'
+                }`}
+              >
+                {link.label}
+              </Link>
+            )
+          })}
+        </nav>
+      </div>
     </header>
   )
 }

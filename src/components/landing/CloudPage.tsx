@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { BRAND } from '@/lib/brand'
+import { BRAND, ENGINE_BRAND } from '@/lib/brand'
 import { SIGNUP_STEPS } from '@/lib/signup-steps'
 import { SignupLink } from '@/components/landing/SignupLink'
 
@@ -40,7 +40,7 @@ export default function CloudPage() {
             ))}
           </ol>
           <p className="mt-6 text-[16px] leading-[1.6] text-muted">
-            Prefer your own server? {BRAND} Engine is open source.{' '}
+            Prefer your own server? {ENGINE_BRAND} Engine is open source.{' '}
             <Link to="/open-source" className="font-semibold text-ink underline underline-offset-[6px] hover:decoration-action hover:decoration-2">Run it yourself</Link>.
           </p>
         </section>

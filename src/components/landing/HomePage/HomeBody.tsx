@@ -1,5 +1,5 @@
 import { Link } from '@tanstack/react-router'
-import { BRAND } from '@/lib/brand'
+import { BRAND, ENGINE_BRAND } from '@/lib/brand'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { PRICE_LINE } from '@/lib/pilot'
 
@@ -19,7 +19,7 @@ const TODAY = [
 ]
 
 const STEPS = [
-  { title: 'Choose your modules', body: 'Pick what your shop needs above. Kigae shows what comes with it and why.' },
+  { title: 'Choose your modules', body: 'Pick what your shop needs above. Zana shows what comes with it and why.' },
   { title: 'Create your account', body: `Sign up on ${BRAND} Cloud with your name, email and business name. Your module choice goes with you. Confirm your email, then sign in.` },
   { title: 'Add items, then sell', body: 'Add your items and opening stock, invite your staff, and record the first sale from a phone or a computer.' },
 ]
@@ -93,7 +93,7 @@ export function HomeBody() {
               <Link to="/cloud" className={`${textLink} mt-2`}>How {BRAND} Cloud works</Link>
             </div>
             <div>
-              <h3 className="font-display text-[22px] font-[680] text-ink">{BRAND} Engine</h3>
+              <h3 className="font-display text-[22px] font-[680] text-ink">{ENGINE_BRAND} Engine</h3>
               <p className="mt-2 text-[16px] leading-[1.6] text-muted">Open source under AGPL-3.0. Run it on your own server with MySQL or LibSQL, and read every line of the code.</p>
               <Link to="/open-source" className={`${textLink} mt-2`}>Run it yourself</Link>
             </div>

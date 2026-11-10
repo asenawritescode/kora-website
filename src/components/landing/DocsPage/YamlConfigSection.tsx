@@ -1,4 +1,4 @@
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 const YAML_EXAMPLE = `name: Customer
 module: CRM
 title_field: customer_name
@@ -39,12 +39,12 @@ export function YamlConfigSection() {
         YAML Configuration
       </h2>
       <p className="text-base text-muted mb-4 leading-relaxed">
-        Define your data model in YAML. {BRAND} reads it and generates the database table,
+        Define your data model in YAML. {ENGINE_BRAND} reads it and generates the database table,
         REST API, React forms, and analytics — automatically.
       </p>
       <p className="text-sm text-muted mb-6 leading-relaxed">
         <strong>Not comfortable writing YAML?</strong> Use the AI Chat instead. Describe
-        your business in plain English and {BRAND} creates validated doctype drafts for you.
+        your business in plain English and {ENGINE_BRAND} creates validated doctype drafts for you.
         Review them, activate when ready — no YAML required.
       </p>
       <div className="bg-code rounded-sm border border-outline-variant overflow-hidden">

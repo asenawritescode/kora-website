@@ -6,7 +6,7 @@ import remarkGfm from 'remark-gfm'
 import { Seo } from '@/components/landing/Seo'
 import { fetchPublicBlogPost } from '@/lib/public-content'
 import type { Article } from './data'
-import { BRAND } from '@/lib/brand'
+import { ENGINE_BRAND } from '@/lib/brand'
 
 interface BlogPostProps {
   slug: string
@@ -38,8 +38,8 @@ export default function BlogPost({ slug }: BlogPostProps) {
     return (
       <>
         <Seo
-          title={`Loading article — ${BRAND} Blog`}
-          description={`Loading the latest article from ${BRAND} CMS.`}
+          title={`Loading article — ${ENGINE_BRAND} Blog`}
+          description={`Loading the latest article from ${ENGINE_BRAND} CMS.`}
           path={`/blog/${slug}`}
           noindex
         />
@@ -54,7 +54,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
     return (
       <>
         <Seo
-          title={`Article unavailable — ${BRAND} Blog`}
+          title={`Article unavailable — ${ENGINE_BRAND} Blog`}
           description="This article is not currently available."
           path={`/blog/${slug}`}
           noindex
@@ -75,7 +75,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
     readTime: cmsPost.readTime,
     description: cmsPost.description,
     body: cmsPost.body,
-    authorName: cmsPost.authorName || `${BRAND} Team`,
+    authorName: cmsPost.authorName || `${ENGINE_BRAND} Team`,
     seoTitle: cmsPost.seoTitle || cmsPost.title,
     seoDescription: cmsPost.seoDescription || cmsPost.description,
   }
@@ -83,7 +83,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
   return (
     <>
       <Seo
-        title={`${post.seoTitle} — ${BRAND} Blog`}
+        title={`${post.seoTitle} — ${ENGINE_BRAND} Blog`}
         description={post.seoDescription}
         path={`/blog/${slug}`}
         image={cmsPost.heroImage || cmsPost.ogImage}
@@ -111,7 +111,7 @@ export default function BlogPost({ slug }: BlogPostProps) {
             </div>
             <div>
               <div className="text-xs text-black">{post.authorName}</div>
-              <div className="text-xs text-muted">{BRAND}</div>
+              <div className="text-xs text-muted">{ENGINE_BRAND}</div>
             </div>
           </div>
         </header>
