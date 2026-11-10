@@ -46,7 +46,6 @@
 */
 @theme static {
   --color-white: #ffffff;
-  --color-black: #000000;
 
   /* Paper is the card and page ground; surface is the quiet ground behind
      cards; surface-2 is a panel that sets a section apart. */
@@ -55,7 +54,7 @@
   --color-surface-2: #f4f4ef;
   --color-ink: #0f0f12;
   --color-ink-2: #3a3a42;
-  --color-ink-3: #5c5c66;
+  --color-ink-3: #51515a;
 
   /* Action: the main button, the selected state. Ink on light, light on dark. */
   --color-action: #0f0f12;

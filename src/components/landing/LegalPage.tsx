@@ -53,7 +53,7 @@ export default function LegalPage({ doc }: { doc: Doc }) {
           <strong>Draft.</strong> The final text comes from Zana’s lawyers before launch. Headings show what it will cover.
         </p>
         <div className="flex flex-wrap items-start gap-8">
-          <nav aria-label="On this page" className="flex flex-[1_1_220px] flex-col gap-0.5 lg:sticky lg:top-4">
+          <nav aria-label="On this page" className="flex flex-[1_1_280px] flex-col gap-0.5 lg:sticky lg:top-4">
             <span className="mb-1 text-[0.8125rem] font-bold text-ink-3">On this page</span>
             {d.sections.map(([title], i) => (
               <a key={title} href={`#${doc}-${i + 1}`} className="flex min-h-10 items-center text-[0.9375rem] text-ink-2 no-underline">{i + 1}. {title}</a>
