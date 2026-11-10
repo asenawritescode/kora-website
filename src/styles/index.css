@@ -127,11 +127,9 @@ html { scroll-padding-top: 7rem; scroll-padding-bottom: 96px; }
   }
 }
 
-/* Nairobi skyline (Home closing band, DESIGN.md). It scales with its band, so the
-   stroke width steps with the band height to stay about 1.2 px on screen. Static. */
-.skyline { stroke-width: 2; }
-@media (min-width: 768px) { .skyline { stroke-width: 1.6; } }
-@media (min-width: 1200px) { .skyline { stroke-width: 1.2; } }
+/* Nairobi skyline (Home closing band, DESIGN.md): lines keep their screen width
+   as the drawing scales with its band. Static. */
+.skyline :is(path, rect, circle, ellipse) { vector-effect: non-scaling-stroke; }
 
 /* Disclosure rows: a chevron that turns over, since the marker is hidden. */
 summary { list-style: none; gap: 12px; }
