@@ -100,7 +100,7 @@ export default function ModulesPage() {
                 {planned.map((m, i) => (
                   <li key={m.id} className={`flex flex-col gap-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
                     <h3 className="text-[1.0625rem]">{m.name} <StatusBadge status={m.status} quiet /></h3>
-                    <p className="text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
+                    <p className="text-base leading-normal text-ink-2">{m.desc}</p>
                   </li>
                 ))}
               </ul>

@@ -32,8 +32,8 @@ export default function RoadmapPage() {
                       <h3 className="text-base leading-snug">{item.name}</h3>
                       {item.feature && <span className="rounded-full border border-line-2 px-2 py-px text-xs font-semibold text-ink-3">Feature</span>}
                     </div>
-                    <p className="text-sm leading-[1.45] text-ink-2">{item.desc}</p>
-                    {item.missing && <p className="text-sm leading-[1.45] text-amber-ink"><strong>Missing:</strong> {item.missing}</p>}
+                    <p className="text-base leading-[1.45] text-ink-2">{item.desc}</p>
+                    {item.missing && <p className="text-base leading-[1.45] text-amber-ink"><strong>Missing:</strong> {item.missing}</p>}
                   </li>
                 ))}
               </ul>

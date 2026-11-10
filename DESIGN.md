@@ -210,3 +210,48 @@ action colour; that is now `action`.
 - Use eyebrows above headings, pill labels, icon chips or three-up icon cards.
 - Use gradients, glass, blobs, glows or drop shadows on resting surfaces.
 - Repeat "From Nairobi to the world" as filler.
+
+## Checks and accepted deviations
+
+Run before shipping a change: `bun test`, `bun run build` (claims, links, contrast
+in both themes, tokens, SEO). Two outside checkers were also run on every page at
+phone and desktop widths: Hallmark's `sloplint --render` and the taste-skill
+`consistency.mjs`. What they still report is listed here, each with the reason it
+stays. Nothing below is an open bug; changing any of it means changing the canvas
+first.
+
+**Comes from the canvas design**
+- The Home hero holds the laptop and its tabs, so it is taller than the first
+  screen (about 1255 px; Hallmark 44c, 44d, taste hero-screen). The headline, the
+  sentence and both actions are inside the first screen at 1280 x 800.
+- Several screens carry more than 80 words (Hallmark 58, taste copy-length): Home
+  sections, About, Roadmap. They are the canvas copy.
+- Thin sections, section heads smaller than the hero head, a hero that stops
+  short (Hallmark 77, 78, 79) on Home, How AI, About and Contact; About and
+  Contact are two-section pages (77).
+- About's "Why Zana" band is full-bleed cornflower (Hallmark 23, about 36% of the
+  first screen), with ink text at 6.4:1 on it (AA; the taste checker asks 7:1).
+- A highlighted word in the Home headline, a centred hero stack (judged 6b,
+  38iii), and "Free during the pilot" repeated across pages (69).
+- The hero of About, Privacy and How AI has no button, and the Roadmap's action is
+  its closing band (taste cta, fold-action).
+- The taste checker's own page skeleton rules (one section per screen, its page
+  structure, container-edges, section-height, one-section, one-heading,
+  no-visual, card-visual, button-styles, same-action) describe a different kind
+  of page than this one. The design uses a primary, a secondary and an accent
+  button on purpose.
+- Section gaps are 56 to 72 px (Hallmark 59 asks 120); the Retail page shows it.
+
+**Decided here**
+- The header page-links row scrolls sideways on a phone, so its tabs sit past
+  the content edge by design (taste nav). It fades at the edge and brings the
+  current page into view.
+- The footer is about 590 px tall on a phone: five 44 px link rows set its
+  height. Shrinking them or collapsing navigation would cost touch targets, so
+  neither is done.
+- Body text is held at 7:1 on the tinted surfaces (checked in both themes); ink
+  on cornflower stays at 6.4:1.
+
+**False positive**
+- Hallmark 72 ("text crowds the edge of its box") on the Pricing and How AI FAQ
+  rows measures the answer text inside the closed rows, which is hidden.

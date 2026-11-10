@@ -35,7 +35,7 @@ export function Navigation() {
             <span className="min-w-0 truncate font-display text-[1.4375rem] font-bold lowercase tracking-[-0.02em]">{BRAND}</span>
           </Link>
           <span className="flex-1" />
-          <a href={buildSignInUrl(cloudSignupBase())} className="flex min-h-12 shrink-0 items-center whitespace-nowrap px-2.5 text-[0.9375rem] font-semibold no-underline">
+          <a href={buildSignInUrl(cloudSignupBase())} className="flex min-h-12 shrink-0 items-center whitespace-nowrap px-2.5 text-[0.9375rem] font-semibold no-underline hover:underline hover:underline-offset-[0.25em]">
             Sign in
           </a>
           <SignupLink className="flex min-h-12 shrink-0 items-center whitespace-nowrap rounded-md bg-action px-[18px] text-[0.9375rem] font-semibold text-paper no-underline" />
@@ -52,7 +52,7 @@ export function Navigation() {
                 to={link.href}
                 aria-current={current ? 'page' : undefined}
                 className={`box-border flex min-h-11 flex-none items-center border-b-[3px] sm:min-h-12 px-2.5 text-base no-underline sm:text-[0.9375rem] focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
-                  current ? 'border-action font-bold text-action' : 'border-transparent font-normal text-ink-2'
+                  current ? 'border-action font-bold text-action' : 'border-transparent font-normal text-ink-2 hover:border-line-strong hover:text-ink'
                 }`}
               >
                 {link.label}

@@ -49,17 +49,17 @@ export default function HowAiPage() {
         <div className="flex flex-wrap items-stretch gap-4">
           <div className={`${CARD} flex flex-[1_1_240px] flex-col gap-2 p-5`}>
             <strong className="text-[1.125rem]">People</strong>
-            <span className="text-[0.9375rem] leading-normal text-ink-2">Use screens on a phone or computer.</span>
+            <span className="text-base leading-normal text-ink-2">Use screens on a phone or computer.</span>
             <span className="self-start"><StatusBadge status="available" /></span>
           </div>
           <div className={`${CARD} flex flex-[1_1_240px] flex-col gap-2 p-5`}>
             <strong className="text-[1.125rem]">AI agents</strong>
-            <span className="text-[0.9375rem] leading-normal text-ink-2">Use the same actions, without screens.</span>
+            <span className="text-base leading-normal text-ink-2">Use the same actions, without screens.</span>
             <span className="self-start"><StatusBadge status="roadmap" /></span>
           </div>
           <div className="flex flex-[2_1_380px] flex-col gap-2.5 rounded-xl bg-band p-5 text-on-band">
             <strong className="text-[1.125rem]">Both go through the same three things</strong>
-            <ol className="text-[0.9375rem] leading-[1.6] text-on-band-2">
+            <ol className="text-base leading-[1.6] text-on-band-2">
               <li>1. The role’s permissions</li>
               <li>2. Approval, if the action is risky</li>
               <li>3. One activity log: who, what and when</li>

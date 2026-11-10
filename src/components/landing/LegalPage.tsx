@@ -49,7 +49,7 @@ export default function LegalPage({ doc }: { doc: Doc }) {
           <h1 className={H1}>{d.title}</h1>
           <p className="text-[0.9375rem] text-ink-3">Draft.</p>
         </div>
-        <p role="note" className="rounded-lg bg-amber-tint px-4 py-3.5 text-[0.9375rem] leading-normal text-amber-ink">
+        <p role="note" className="rounded-lg bg-amber-tint px-4 py-3.5 text-base leading-normal text-amber-ink">
           <strong>Draft.</strong> The final text comes from Zana’s lawyers before launch. Headings show what it will cover.
         </p>
         <div className="flex flex-wrap items-start gap-8">
