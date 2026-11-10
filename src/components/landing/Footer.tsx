@@ -18,9 +18,9 @@ export function Footer() {
       <div className="mx-auto flex max-w-[1200px] flex-col gap-9">
         <div className="flex flex-wrap gap-9">
           <div className="flex flex-[2_1_280px] flex-col gap-3">
-            <div className="flex items-center gap-2.5">
+            <div className="flex min-w-0 items-center gap-2.5">
               <LogoMark onBand />
-              <span className="font-display text-[1.4375rem] font-bold lowercase">{BRAND}</span>
+              <span className="min-w-0 truncate font-display text-[1.4375rem] font-bold lowercase">{BRAND}</span>
             </div>
             <p className="font-display text-[1.375rem] font-medium">From Nairobi to the world</p>
             <p className="text-[0.9375rem] leading-[1.55] text-on-band-3">

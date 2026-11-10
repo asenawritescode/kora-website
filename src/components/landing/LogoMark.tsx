@@ -2,7 +2,7 @@
 // is ink on paper; on the dark band it flips to cornflower with ink.
 export function LogoMark({ onBand = false }: { onBand?: boolean }) {
   return (
-    <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true">
+    <svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true" className="flex-none">
       <rect width="32" height="32" rx="8" className={onBand ? 'fill-accent' : 'fill-action'} />
       <path
         d="M9 10h14L9 22h14"

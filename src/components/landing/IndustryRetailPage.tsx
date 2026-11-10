@@ -16,7 +16,7 @@ export default function IndustryRetailPage() {
       <section className="bg-surface px-4 pb-[clamp(36px,5vw,64px)] pt-[clamp(28px,4vw,56px)]">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-4">
           <nav aria-label="Breadcrumb" className="text-sm text-ink-3">
-            <Link to="/industries">Industries</Link> / <span aria-current="page">{industry.name}</span>
+            <Link to="/industries" className="inline-flex min-h-11 items-center">Industries</Link> / <span aria-current="page">{industry.name}</span>
           </nav>
           <div className="flex max-w-[760px] flex-col gap-3">
             <h1 className={H1}>Zana for {industry.name.toLowerCase()}</h1>

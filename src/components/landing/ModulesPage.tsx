@@ -36,7 +36,7 @@ export default function ModulesPage() {
           <div className="w-full max-w-[880px]"><ProductScreens variant="modules" /></div>
         </section>
 
-        <div role="group" aria-label="Filter by state" className="flex gap-2 overflow-x-auto pb-1">
+        <div role="group" aria-label="Filter by state" className="flex flex-wrap gap-2">
           {FILTERS.map(([id, label]) => {
             const on = id === filter
             return (
@@ -44,16 +44,16 @@ export default function ModulesPage() {
                 key={id} type="button" aria-pressed={on} onClick={() => setFilter(id)}
                 className={`inline-flex min-h-12 flex-none items-center gap-2 whitespace-nowrap rounded-full border px-4 text-[0.9375rem] font-semibold ${on ? 'border-ink bg-ink text-paper' : 'border-line-control bg-paper text-ink'}`}
               >
-                {on && <Tick className="size-4" />}
-                {label} ({countFor(id)})
+                <Tick className={`size-4 ${on ? '' : 'invisible'}`} />
+                {label} ({countFor(id).toLocaleString('en-US')})
               </button>
             )
           })}
         </div>
-        <p role="status" className="text-[0.9375rem] text-ink-3">Showing {shown.length} of {MODULES.length} modules</p>
+        <p role="status" className="text-[0.9375rem] text-ink-3">Showing {shown.length.toLocaleString('en-US')} of {MODULES.length.toLocaleString('en-US')} modules</p>
 
         {cards.length > 0 && (
-          <div className="grid gap-4 [grid-template-columns:repeat(auto-fill,minmax(min(100%,360px),1fr))]">
+          <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))]">
             {cards.map((m) => (
               <article key={m.id} className={`${CARD} flex flex-col gap-3 p-[22px]`}>
                 <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
