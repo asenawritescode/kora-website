@@ -34,7 +34,7 @@ export default function LegalPage({ doc }: { doc: Doc }) {
   const d = DOCS[doc]
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1000px] flex-col gap-6 px-4 pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
+      <div className="mx-auto flex max-w-[1000px] flex-col gap-6 px-4 pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <nav aria-label="Document" className="inline-flex self-start rounded-lg border border-line bg-paper p-1">
           {(Object.keys(DOCS) as Doc[]).map((id) => (
             <Link

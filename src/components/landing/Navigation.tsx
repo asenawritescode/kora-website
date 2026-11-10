@@ -51,7 +51,7 @@ export function Navigation() {
                 key={link.label}
                 to={link.href}
                 aria-current={current ? 'page' : undefined}
-                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-[0.9375rem] no-underline focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
+                className={`box-border flex min-h-12 flex-none items-center border-b-[3px] px-2.5 text-base no-underline sm:text-[0.9375rem] focus-visible:shadow-none focus-visible:outline-offset-[-4px] ${
                   current ? 'border-action font-bold text-action' : 'border-transparent font-normal text-ink-2'
                 }`}
               >

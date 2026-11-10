@@ -44,7 +44,7 @@ export default function HowAiPage() {
         </div>
       </section>
 
-      <section aria-labelledby="two-ways" className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 py-[clamp(40px,5vw,80px)]">
+      <section aria-labelledby="two-ways" className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 py-[clamp(56px,5vw,80px)]">
         <h2 id="two-ways" className={h2}>Built once, used two ways</h2>
         <div className="flex flex-wrap items-stretch gap-4">
           <div className={`${CARD} flex flex-[1_1_240px] flex-col gap-2 p-5`}>
@@ -69,7 +69,7 @@ export default function HowAiPage() {
       </section>
 
       {RULES.map((r) => (
-        <section key={r.title} className={`px-4 py-[clamp(40px,5vw,72px)] ${r.surface ? 'bg-surface' : ''}`}>
+        <section key={r.title} className={`px-4 py-[clamp(56px,5vw,72px)] ${r.surface ? 'bg-surface' : ''}`}>
           <div className="mx-auto flex max-w-[1200px] flex-wrap items-center gap-8">
             <div className="flex flex-[1_1_400px] flex-col gap-3">
               <h2 className={h2}>{r.title}</h2>
@@ -102,7 +102,7 @@ export default function HowAiPage() {
         </section>
       ))}
 
-      <section aria-labelledby="faq" className="mx-auto flex max-w-[860px] flex-col gap-3 px-4 py-[clamp(40px,5vw,80px)]">
+      <section aria-labelledby="faq" className="mx-auto flex max-w-[860px] flex-col gap-3 px-4 py-[clamp(56px,5vw,80px)]">
         <h2 id="faq" className={`${h2} mb-2`}>Questions owners ask</h2>
         {FAQ.map(([q, a]) => (
           <details key={q} className={`${CARD} px-[18px]`}>

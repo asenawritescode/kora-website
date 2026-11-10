@@ -19,7 +19,7 @@ export default function ModulesPage() {
 
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 pb-[clamp(48px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
+      <div className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex max-w-[760px] flex-col gap-2.5">
           <h1 className={H1}>Pick only what your business needs</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">
@@ -36,15 +36,17 @@ export default function ModulesPage() {
           <div className="w-full max-w-[880px]"><ProductScreens variant="modules" autoplay={false} /></div>
         </section>
 
-        <div role="group" aria-label="Filter by state" className="flex flex-wrap gap-2">
+        <div role="group" aria-label="Filter by state" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {FILTERS.map(([id, label]) => {
             const on = id === filter
             return (
               <button
                 key={id} type="button" aria-pressed={on} onClick={() => setFilter(id)}
-                className={`inline-flex min-h-12 flex-none items-center gap-2 whitespace-nowrap rounded-full border px-4 text-[0.9375rem] font-semibold ${on ? 'border-ink bg-ink text-paper' : 'border-line-control bg-paper text-ink'}`}
+                className={`inline-flex min-h-11 items-center justify-center whitespace-nowrap rounded-full border px-3.5 text-[0.9375rem] font-semibold transition-colors duration-200 sm:flex-none ${on ? 'border-ink bg-ink text-paper' : 'border-line-control bg-paper text-ink'}`}
               >
-                <Tick className={`size-4 ${on ? '' : 'invisible'}`} />
+                <span aria-hidden="true" className={`grid transition-[grid-template-columns,opacity] duration-200 ease-out ${on ? 'grid-cols-[1fr] opacity-100' : 'grid-cols-[0fr] opacity-0'}`}>
+                  <span className="overflow-hidden"><Tick className="mr-1.5 size-4" /></span>
+                </span>
                 {label} ({countFor(id).toLocaleString('en-US')})
               </button>
             )
@@ -85,12 +87,10 @@ export default function ModulesPage() {
             <Link to="/roadmap" className="inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>
             <ul className={CARD}>
               {planned.map((m, i) => (
-                <li key={m.id} className={`flex flex-col gap-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
-                  <div className="flex flex-wrap items-center gap-x-2.5 gap-y-1.5">
-                    <h3 className="text-[1.0625rem]">{m.name}</h3>
-                    <StatusBadge status={m.status} />
-                  </div>
-                  <p className="text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
+                <li key={m.id} className={`grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 gap-y-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
+                  <h3 className="text-[1.0625rem]">{m.name}</h3>
+                  <StatusBadge status={m.status} />
+                  <p className="col-span-2 text-[0.9375rem] leading-normal text-ink-2">{m.desc}</p>
                 </li>
               ))}
             </ul>

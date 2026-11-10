@@ -122,7 +122,7 @@ export function ProductScreens({ variant = 'home', autoplay = true }: { variant?
       {narrow ? (
         <div
           id="screen-panel" role="tabpanel" aria-labelledby={`screen-tab-${index}`}
-          className="relative aspect-[780/1480] w-full max-w-[300px] overflow-hidden rounded-xl border border-line bg-skeleton shadow-[0_16px_36px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
+          className="relative aspect-[780/1480] w-full max-w-[264px] overflow-hidden sm:max-w-[300px] rounded-xl border border-line bg-skeleton shadow-[0_16px_36px_color-mix(in_srgb,var(--color-ink)_8%,transparent)]"
         >
           {SCREENS.map((s, i) => (
             <img key={s.id} src={`/screens/${s.id}-phone.webp`} alt={s.alt} aria-hidden={i !== index} width={780} height={1480} decoding="async" className={frame} style={fade(i)} />
