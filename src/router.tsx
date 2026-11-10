@@ -45,6 +45,9 @@ const CloudPage = inMarketing(() => import('@/routes/landing/cloud'))
 const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
 const ModulesPage = inMarketing(() => import('@/routes/landing/modules'))
 const RoadmapPage = inMarketing(() => import('@/routes/landing/roadmap'))
+const IndustriesPage = inMarketing(() => import('@/routes/landing/industries'))
+const IndustryRetailPage = inMarketing(() => import('@/routes/landing/industry-retail'))
+const HowAiPage = inMarketing(() => import('@/routes/landing/how-ai'))
 const OpenSourcePage = inMarketing(() => import('@/routes/landing/open-source'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
 const DocsPage = withLayout(() => import('@/components/landing/DocsLayout'), () => import('@/routes/landing/docs'))
@@ -81,6 +84,24 @@ const roadmapRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/roadmap',
   component: RoadmapPage,
+})
+
+const industriesRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/industries',
+  component: IndustriesPage,
+})
+
+const industryRetailRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/industries/retail',
+  component: IndustryRetailPage,
+})
+
+const howAiRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/how-ai',
+  component: HowAiPage,
 })
 
 const openSourceRoute = createRoute({
@@ -147,6 +168,9 @@ const routeTree = rootRoute.addChildren([
   pricingRoute,
   modulesRoute,
   roadmapRoute,
+  industriesRoute,
+  industryRetailRoute,
+  howAiRoute,
   openSourceRoute,
   homeRoute,
   examplesRoute,

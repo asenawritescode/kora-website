@@ -6,7 +6,9 @@ export const HOME_LINK: SiteLink = { label: 'Home', href: '/' }
 
 export const PRIMARY_LINKS: SiteLink[] = [
   { label: 'Modules', href: '/modules' },
+  { label: 'Industries', href: '/industries' },
   { label: 'Roadmap', href: '/roadmap' },
+  { label: 'How AI works', href: '/how-ai' },
   { label: 'Pricing', href: '/pricing' },
 ]
 
