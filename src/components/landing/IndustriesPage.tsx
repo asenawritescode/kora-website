@@ -28,7 +28,7 @@ export default function IndustriesPage() {
             const total = presetModules(industry).length
             const lead = idx === 0
             const none = ready.length === 0
-            const row = `grid min-h-12 items-center gap-x-6 gap-y-1 px-5 py-4 text-ink no-underline sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)_9.5rem] ${lead ? 'bg-ok-wash py-6' : idx ? 'border-t border-line-faint' : ''}`
+            const row = `grid min-h-12 items-center gap-x-6 gap-y-1 px-5 py-4 text-ink no-underline transition-colors duration-150 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)_9.5rem] ${lead ? 'bg-ok-wash py-6 hover:bg-ok-tint' : `hover:bg-surface-2 ${idx ? 'border-t border-line-faint' : ''}`}`
             const body = (
               <>
                 <h2 className={`flex min-w-0 items-center gap-3 leading-tight ${lead ? 'text-xl' : 'text-lg'} ${none ? 'text-ink-3' : ''}`}>
