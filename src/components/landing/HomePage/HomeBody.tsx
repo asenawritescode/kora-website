@@ -151,9 +151,14 @@ export function ClosingBand() {
         <p className="max-w-[560px] text-[1.125rem] leading-[1.55]">Start with your shop today. Add more as Zana grows.</p>
         <SignupLink className="flex min-h-[52px] items-center rounded-md bg-band px-6 text-base font-semibold text-on-band no-underline" />
       </div>
-      {/* The skyline is the horizon of this band: decorative, the heading above is the text. */}
-      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(150px,22.9vw,330px)]">
-        <NairobiSkyline className="absolute inset-0 h-full w-full" />
+      {/* The skyline is the horizon of this band: decorative, the heading above is the text.
+          Its height follows the drawing (1440 x 330), so no tower is cut at any width; below
+          655 px the sides are cropped instead. Past 1600 px the ground line keeps going. */}
+      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(150px,22.9vw,367px)]">
+        <div className="absolute inset-x-0 bottom-[3.03%] h-[1.8px] bg-current" />
+        <div className="mx-auto h-full max-w-[1600px]">
+          <NairobiSkyline className="h-full w-full" />
+        </div>
       </div>
     </section>
   )
