@@ -154,8 +154,8 @@ export function ClosingBand() {
       {/* The skyline is the horizon of this band: decorative, the heading above is the text.
           Its height follows the drawing (1440 x 330), so no tower is cut at any width; below
           655 px the sides are cropped instead. Past 1600 px the ground line keeps going. */}
-      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(150px,22.9vw,367px)]">
-        <div className="absolute inset-x-0 bottom-[3.03%] h-[1.8px] bg-current" />
+      <div aria-hidden="true" className="relative mt-[clamp(2rem,5vw,4rem)] h-[clamp(180px,22.9vw,367px)]">
+        <div className="absolute inset-x-0 bottom-[3.03%] h-[1.8px] bg-current max-[654px]:h-[1.3px]" />
         <div className="mx-auto h-full max-w-[1600px]">
           <NairobiSkyline className="h-full w-full" />
         </div>
