@@ -26,4 +26,4 @@ export const COMPANY_LINKS: SiteLink[] = [
   { label: 'Privacy and terms', href: '/privacy' },
 ]
 
-export const CTA_LINK: SiteLink = { label: 'Set up my shop', href: '/onboard' }
+export const CTA_LINK: SiteLink = { label: 'Set up my shop', href: '/start' }

@@ -80,6 +80,11 @@ export const ROUTE_SEO: RouteSeo[] = [
     sitemap: true,
   },
   {
+    path: '/start',
+    title: `Set up your shop — ${BRAND}`,
+    description: `Choose the kind of business you run and the modules you need. ${BRAND} is free during the pilot.`,
+  },
+  {
     path: '/contact',
     title: `Contact us — ${BRAND}`,
     description: `Questions about ${BRAND}, the pilot or a problem in your workspace. Based in Nairobi, Kenya.`,

@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router'
 import { CARD, H1 } from '@/components/landing/ui'
-import { ICONS, INDUSTRIES, presetModules, readyModules } from '@/lib/industries-content'
+import { ICONS, INDUSTRIES, industrySlug, presetModules, readyModules } from '@/lib/industries-content'
 
 export default function IndustriesPage() {
   return (
@@ -47,13 +47,13 @@ export default function IndustriesPage() {
             )
             if (idx === 0) return <Link key={industry.name} to="/industries/retail" className={cardClass}>{body}</Link>
             return ready.length
-              ? <Link key={industry.name} to="/" hash="modules" className={cardClass}>{body}</Link>
+              ? <Link key={industry.name} to="/start" search={{ for: industrySlug(industry) }} className={cardClass}>{body}</Link>
               : <Link key={industry.name} to="/roadmap" className={cardClass}>{body}</Link>
           })}
         </div>
 
         <p className="text-[0.9375rem] text-ink-3">
-          Don’t see your business? <Link to="/" hash="modules" className="font-semibold">Start from scratch</Link> and pick the modules yourself, or <Link to="/contact" className="font-semibold">talk to the team</Link>.
+          Don’t see your business? <Link to="/start" className="font-semibold">Start from scratch</Link> and pick the modules yourself, or <Link to="/contact" className="font-semibold">talk to the team</Link>.
         </p>
       </div>
     </div>

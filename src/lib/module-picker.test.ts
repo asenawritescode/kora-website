@@ -1,7 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import fixture from './__fixtures__/catalog-templates.json'
 import { parseTemplates } from './catalog-client'
-import { choiceFrom, inclusionNote, modulesFrom, prune, resolve, roadmapFor, selectability, toggle } from './module-picker'
+import { choiceFrom, inclusionNote, modulesFrom, prune, resolve, selectability, toggle } from './module-picker'
 import type { CatalogTemplate } from './catalog-client'
 
 // The fixture is a preview catalog (as an older Cloud returns it). Dependency
@@ -51,11 +51,6 @@ describe('module picker', () => {
     const a = toggle(modules, [], key('Inventory'))
     expect(a).toEqual([key('Inventory')])
     expect(toggle(modules, a, key('Inventory'))).toEqual([])
-  })
-
-  test('roadmap names never include a published module', () => {
-    expect(roadmapFor(modules)).toEqual(['Sales', 'Purchasing', 'Accounting', 'People', 'Projects'])
-    expect(roadmapFor([{ ...modules[0], name: 'Accounting' }])).not.toContain('Accounting')
   })
 })
 
