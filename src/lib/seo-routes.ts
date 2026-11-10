@@ -62,6 +62,24 @@ export const ROUTE_SEO: RouteSeo[] = [
     sitemap: true,
   },
   {
+    path: '/industries',
+    title: `Industries — ${BRAND}`,
+    description: `Start from your kind of business: preset ${BRAND} modules, your own words and your day, step by step.`,
+    sitemap: true,
+  },
+  {
+    path: '/industries/retail',
+    title: `${BRAND} for retail and general shops`,
+    description: `For dukas, minimarts and general shops: sell, track stock and see today’s sales with ${BRAND}.`,
+    sitemap: true,
+  },
+  {
+    path: '/how-ai',
+    title: `How AI works with your tools — ${BRAND}`,
+    description: `People use ${BRAND} through screens. AI agents will follow the same rules: a role, approval for risky actions and one activity log.`,
+    sitemap: true,
+  },
+  {
     path: '/roadmap',
     title: `Roadmap — ${BRAND}`,
     description: `What works in ${BRAND} today, what is being built and what is planned, in order. No dates promised.`,
