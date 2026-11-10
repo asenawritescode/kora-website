@@ -106,6 +106,10 @@ html { scrollbar-color: var(--color-line-strong) transparent; }
 html { scroll-padding-bottom: 96px; }
 @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
 
+/* On a dark band the ink outline would vanish into it, so the ring is drawn in the
+   band's own light text colour (the cornflower halo stays). */
+.on-band :focus-visible { outline-color: var(--color-on-band); }
+
 /* Press and hover (DESIGN.md "Motion"): buttons and button-shaped links dip a
    little when pressed and dim a little on hover. Plain text links are left alone. */
 @layer base {

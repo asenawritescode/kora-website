@@ -14,7 +14,7 @@ const link = 'flex min-h-11 w-fit items-center text-[0.9375rem] text-on-band-2 n
 
 export function Footer() {
   return (
-    <footer className="bg-band px-4 pb-8 pt-12 text-on-band">
+    <footer className="on-band bg-band px-4 pb-8 pt-12 text-on-band">
       <div className="mx-auto flex max-w-[1200px] flex-col gap-9">
         <div className="flex flex-wrap gap-9">
           <div className="flex flex-[2_1_280px] flex-col gap-3">

@@ -41,7 +41,7 @@ export default function RoadmapPage() {
           ))}
         </ol>
 
-        <section aria-label="Get started" className="flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(1.5rem,4vw,2.75rem)] text-on-band">
+        <section aria-label="Get started" className="on-band flex flex-wrap items-center justify-between gap-5 rounded-xl bg-band p-[clamp(1.5rem,4vw,2.75rem)] text-on-band">
           <div className="flex flex-[1_1_360px] flex-col gap-1.5">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Start with what works today</h2>
             <p className="text-base text-on-band-2">Free during the pilot.</p>
