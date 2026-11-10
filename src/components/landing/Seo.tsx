@@ -73,7 +73,7 @@ export function Seo({ title, description, path, canonical, noindex, jsonLd, imag
     upsertMeta('meta[property="og:title"]', { property: 'og:title', content: title })
     upsertMeta('meta[property="og:description"]', { property: 'og:description', content: description })
     upsertMeta('meta[property="og:url"]', { property: 'og:url', content: url })
-    upsertMeta('meta[property="og:type"]', { property: 'og:type', content: path?.startsWith('/blog/') ? 'article' : 'website' })
+    upsertMeta('meta[property="og:type"]', { property: 'og:type', content: 'website' })
     if (imageUrl) {
       upsertMeta('meta[property="og:image"]', { property: 'og:image', content: imageUrl })
       upsertMeta('meta[property="og:image:alt"]', { property: 'og:image:alt', content: image === OG_IMAGE_PATH ? OG_IMAGE_ALT : title })

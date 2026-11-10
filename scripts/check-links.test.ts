@@ -10,8 +10,7 @@ test('the real site has no dead internal links, sitemap entries or redirects', (
 
 test('removed pages are not routes', () => {
   const routes = routePatterns()
-  for (const gone of ['/benefits', '/ai-builder']) expect(routes.some((r) => r.test(gone))).toBe(false)
-  expect(routes.some((r) => r.test('/blog/some-post'))).toBe(true)
+  for (const gone of ['/benefits', '/ai-builder', '/cloud', '/open-source', '/docs', '/blog', '/blog/some-post', '/examples', '/templates/retail-pos']) expect(routes.some((r) => r.test(gone))).toBe(false)
 })
 
 test('reports a dead link, a stale sitemap entry and a missing nginx redirect', () => {
