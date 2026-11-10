@@ -4,14 +4,29 @@ import { useEffect, useRef, useState, type KeyboardEvent } from 'react'
 // view (a phone below 640 px). Four tabs, an optional slow autoplay with a
 // pause button, and no motion at all under prefers-reduced-motion.
 
-type Screen = { id: string; label: string; caption: string; alt: string }
+type Screen = { id: string; label: string; module?: string; caption: string; alt: string }
 
-const SCREENS: Screen[] = [
-  { id: 'sell', label: 'Sell', caption: 'Tap products, watch the total build, and see how many are left.', alt: 'The point of sale: product tiles with how many are left, and a cart of five items totalling KES 975' },
-  { id: 'stock', label: 'Stock', caption: 'Every product, its price and how many are left.', alt: 'The product list with category, price, SKU and stock quantity for each product' },
-  { id: 'sales', label: 'Sales', caption: 'Every sale, with the time and how it was paid.', alt: 'The sales list: every sale with its date and time, payment method and register' },
-  { id: 'deliveries', label: 'Deliveries', caption: 'Every delivery logged, so counts stay right.', alt: 'Stock movement history: deliveries received for each product' },
-]
+const ALL = {
+  sell: { id: 'sell', alt: 'The point of sale: product tiles with how many are left, and a cart of five items totalling KES 975' },
+  stock: { id: 'stock', alt: 'The product list with category, price, SKU and stock quantity for each product' },
+  sales: { id: 'sales', alt: 'The sales list: every sale with its date and time, payment method and register' },
+  deliveries: { id: 'deliveries', alt: 'Stock movement history: deliveries received for each product' },
+}
+
+const SETS: Record<'home' | 'modules', Screen[]> = {
+  home: [
+    { ...ALL.sell, label: 'Sell', caption: 'Tap products, watch the total build, and see how many are left.' },
+    { ...ALL.stock, label: 'Stock', caption: 'Every product, its price and how many are left.' },
+    { ...ALL.sales, label: 'Sales', caption: 'Every sale, with the time and how it was paid.' },
+    { ...ALL.deliveries, label: 'Deliveries', caption: 'Every delivery logged, so counts stay right.' },
+  ],
+  modules: [
+    { ...ALL.sell, label: 'Point of sale', module: 'Sales and point of sale', caption: 'Tap products and the total builds as you go.' },
+    { ...ALL.sales, label: 'Sales history', module: 'Sales and point of sale', caption: 'Every sale, with the time and how it was paid.' },
+    { ...ALL.stock, label: 'Stock', module: 'Inventory and stock', caption: 'Every product, its price and how many are left.' },
+    { ...ALL.deliveries, label: 'Deliveries', module: 'Inventory and stock', caption: 'Every delivery logged, so counts stay right.' },
+  ],
+}
 
 const AUTOPLAY_MS = 4500
 const NARROW_PX = 640
@@ -20,7 +35,8 @@ function reducedMotion(): boolean {
   return typeof window !== 'undefined' && !!window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
 }
 
-export function ProductScreens() {
+export function ProductScreens({ variant = 'home' }: { variant?: 'home' | 'modules' }) {
+  const SCREENS = SETS[variant]
   const root = useRef<HTMLDivElement>(null)
   const visible = useRef(true)
   const [index, setIndex] = useState(0)
@@ -146,7 +162,7 @@ export function ProductScreens() {
         )}
       </div>
       <p aria-live={announce ? 'polite' : 'off'} className="min-h-[3em] max-w-[36em] text-base leading-normal text-ink-2">
-        {current.caption} <span className="text-ink-3">Real screens with sample data.</span>
+        {current.module && <strong className="text-ink">{current.module}. </strong>}{current.caption} <span className="text-ink-3">Real screens with sample data.</span>
       </p>
     </div>
   )

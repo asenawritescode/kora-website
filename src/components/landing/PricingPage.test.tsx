@@ -4,8 +4,10 @@ import { join } from 'node:path'
 
 const source = readFileSync(join(import.meta.dir, 'PricingPage.tsx'), 'utf8')
 
-test('states the pilot terms exactly as decided', () => {
-  expect(source).toContain('Free during the pilot. Pricing will be announced before the pilot ends.')
+test('states the pilot terms: free now, prices announced before the pilot ends', () => {
+  expect(source).toContain('Free during the pilot')
+  expect(source).toContain('You’ll see prices before the pilot ends')
+  expect(source).toContain('Nothing is charged unless you agree.')
 })
 
 test('has no USD amount, tier, per-seat number, "from" price or support claim', () => {
@@ -13,10 +15,8 @@ test('has no USD amount, tier, per-seat number, "from" price or support claim', 
   expect(source).not.toMatch(/BadgeCheck|lucide/)
 })
 
-test('lists what is not supported yet and links to signup and the self-hosting docs', () => {
-  for (const item of ['M-Pesa', 'Receipt printers', 'eTIMS']) expect(source).toContain(item)
+test('links to signup', () => {
   expect(source).toContain('<SignupLink')
-  expect(source).toContain('to="/docs"')
 })
 
 test('does not link to legal pages that do not exist (#15)', () => {

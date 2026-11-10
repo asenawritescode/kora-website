@@ -52,7 +52,19 @@ export const ROUTE_SEO: RouteSeo[] = [
   {
     path: '/pricing',
     title: `Pricing — ${BRAND}`,
-    description: `Free during the pilot. Pricing will be announced before the pilot ends. ${ENGINE_BRAND} Engine is open source, and you can run it yourself.`,
+    description: `${BRAND} is free during the pilot. Pricing will be announced before the pilot ends.`,
+    sitemap: true,
+  },
+  {
+    path: '/modules',
+    title: `Modules — ${BRAND}`,
+    description: `Every ${BRAND} module, with what works today, what is in preview and what is planned.`,
+    sitemap: true,
+  },
+  {
+    path: '/roadmap',
+    title: `Roadmap — ${BRAND}`,
+    description: `What works in ${BRAND} today, what is being built and what is planned, in order. No dates promised.`,
     sitemap: true,
   },
   {
