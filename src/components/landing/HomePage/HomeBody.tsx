@@ -1,117 +1,161 @@
 import { Link } from '@tanstack/react-router'
-import { BRAND, ENGINE_BRAND } from '@/lib/brand'
 import { SignupLink } from '@/components/landing/SignupLink'
-import { PRICE_LINE } from '@/lib/pilot'
 
-// Below the picker: what works today (real captures), how setup goes, where it
-// runs, and one closing action. Every line is something the pilot does today;
-// see the truthfulness table in kora-website#1.
+// Below the hero: who it is for, before and after, three steps, what works today,
+// the rules, the price and the closing band. Every line is something the pilot
+// does today or is marked as not yet; see the truthfulness table in kora-website#1.
 
-const h2 = 'font-display text-[clamp(32px,3.6vw,52px)] font-[740] leading-[1.02] tracking-[-0.025em] text-ink [text-wrap:balance]'
-const wrap = 'max-w-[1200px] mx-auto px-4 sm:px-6 py-[clamp(48px,6vw,88px)]'
-const textLink = 'inline-flex min-h-12 items-center font-semibold text-ink underline decoration-1 underline-offset-[6px] transition-[text-decoration-color] hover:decoration-action hover:decoration-2'
+const h2 = 'text-[clamp(1.75rem,3.4vw,2.625rem)] leading-[1.1] tracking-[-0.02em]'
+const button = 'flex min-h-[52px] items-center rounded-md bg-action px-[22px] text-base font-semibold text-paper no-underline'
+const card = 'flex flex-col gap-3 rounded-xl border border-line bg-paper p-[clamp(1.5rem,3vw,2.25rem)]'
 
-const TODAY = [
-  ['Sales at the counter', 'Each sale gets a number, a total in KES and the till session it was rung up in. Cash is taken at the till; mobile-money payments are recorded by hand.'],
-  ['Stock that moves with each sale', 'Every item has a count for each location and a reorder level, so low stock shows up.'],
-  ['An owner dashboard', "Today's totals, recent sales, payments by method and items running low."],
-  ['Your team, with set access', 'Invite staff and choose what each person can see and change.'],
+const SHOP_TYPES = ['Dukas', 'Minimarts', 'Kiosks', 'Hardware stores', 'Boutiques']
+
+const SWAPS = [
+  ['Counting stock at night', 'Stock updates with every sale'],
+  ['Sales written in a notebook', 'Every sale saved, with the time and how it was paid'],
+  ['Guessing what to restock', 'See how many of each product are left'],
+  ['M-Pesa codes on scraps of paper', 'Type the M-Pesa code into the sale'],
 ]
 
 const STEPS = [
-  { title: 'Choose your modules', body: 'Pick what your shop needs above. Zana shows what comes with it and why.' },
-  { title: 'Create your account', body: `Sign up on ${BRAND} Cloud with your name, email and business name. Your module choice goes with you. Confirm your email, then sign in.` },
-  { title: 'Add items, then sell', body: 'Add your items and opening stock, invite your staff, and record the first sale from a phone or a computer.' },
+  { title: 'Pick your business', text: 'Shops come with selling and stock ticked. Change anything.' },
+  { title: 'Create your account', text: 'Your name, your shop’s name, email and a password.' },
+  { title: 'Make your first sale', text: 'Add your products, open the till and sell.' },
 ]
+
+type Status = 'available' | 'preview' | 'roadmap'
+const STATUS: Record<Status, { label: string; className: string; icon: string }> = {
+  available: { label: 'Available', className: 'bg-ok-tint text-ok-ink', icon: 'M4.5 10.5l3.5 3.5 7.5-8' },
+  preview: { label: 'Preview', className: 'bg-amber-tint text-amber-ink', icon: 'M10 3a7 7 0 1 1 0 14a7 7 0 1 1 0-14M10 6.5V10l2.5 1.5' },
+  roadmap: { label: 'On the roadmap', className: 'bg-slate-tint text-slate', icon: 'M5 17.5V3h9l-2 3.25L14 9.5H5' },
+}
+
+const TODAY: { title: string; items: [string, Status][] }[] = [
+  { title: 'Works today', items: [['Selling at the counter', 'available'], ['Stock that updates with every sale', 'available'], ['Cash sales', 'available'], ['M-Pesa and other mobile money, recorded by hand', 'available']] },
+  { title: 'Not yet', items: [['Purchase orders and supplier bills', 'preview'], ['Card payments', 'roadmap'], ['Receipt printers', 'roadmap'], ['KRA eTIMS tax receipts', 'roadmap'], ['AI agents working in your workspace', 'roadmap']] },
+]
+
+function Badge({ status }: { status: Status }) {
+  const s = STATUS[status]
+  return (
+    <span className={`inline-flex items-center gap-[5px] rounded-full py-[3px] pl-[7px] pr-[9px] text-xs font-semibold ${s.className}`}>
+      <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
+        <path d={s.icon} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+      </svg>
+      {s.label}
+    </span>
+  )
+}
 
 export function HomeBody() {
   return (
     <>
-      <section aria-labelledby="today-title" className="border-t border-outline-variant">
-        <div className={`${wrap} grid gap-10 pb-10! lg:grid-cols-12`}>
-          <div className="lg:col-span-5">
-            <h2 id="today-title" className={h2}>What you get today</h2>
-            <p className="mt-6 text-[16px] leading-[1.5] text-on-surface-variant">
-              M-Pesa payments can be recorded by hand against a till or paybill number, but {BRAND} is not connected to M-Pesa. Card payments, receipt printers and eTIMS are not supported yet.
-            </p>
-          </div>
-          <dl className="lg:col-span-7 border-t border-ink lg:mt-3">
-            {TODAY.map(([term, detail]) => (
-              <div key={term} className="border-b border-outline-variant py-4">
-                <dt className="text-[17px] font-semibold text-ink">{term}</dt>
-                <dd className="mt-1 text-[16px] leading-[1.5] text-muted">{detail}</dd>
-              </div>
+      <section aria-labelledby="for-title" className="border-t border-line px-4 py-[clamp(2.5rem,5vw,4rem)]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-[18px] text-center">
+          <h2 id="for-title" className={h2}>Made for shops like yours</h2>
+          <ul className="flex flex-wrap justify-center gap-2.5">
+            {SHOP_TYPES.map((name) => (
+              <li key={name} className="rounded-full bg-accent px-[18px] py-2.5 text-base font-semibold text-on-accent">{name}</li>
             ))}
-          </dl>
+          </ul>
         </div>
-        <figure className="mx-auto max-w-[1200px] px-4 sm:px-6 pb-[clamp(48px,6vw,88px)]">
-          <div className="grid items-start gap-6 lg:grid-cols-[minmax(0,1fr)_auto]">
-            <img
-              src="/studio-register-tablet.webp"
-              width={1030}
-              height={720}
-              loading="lazy"
-              alt="The register on a tablet in a pilot shop: items with prices in KES on the left, and on the right a cart with two loaves of bread and a 2L cola, a total of KES 527.00 and a Charge button."
-              className="hidden sm:block w-full h-auto border border-outline-variant bg-white"
-            />
-            <img
-              src="/studio-register-phone.webp"
-              width={390}
-              height={844}
-              loading="lazy"
-              alt="The same register on a phone: the open till, a barcode search, item prices in KES and a bar showing 3 items, KES 527.00 and Charge."
-              className="block w-full max-w-[390px] sm:max-w-[290px] mx-auto sm:mx-0 lg:w-[clamp(240px,24vw,290px)] h-auto border border-outline-variant bg-white"
-            />
-          </div>
-          {/* Screens are real Studio captures of the Sell register. Retake both when the register changes. */}
-          <figcaption className="mt-3 text-[14px] text-muted">The register, on a tablet and on a phone.</figcaption>
-        </figure>
       </section>
 
-      <section aria-labelledby="how-title" className="bg-surface-container">
-        <div className={wrap}>
-          <h2 id="how-title" className={`${h2} max-w-[18ch]`}>How setting up works</h2>
-          <ol className="mt-10 grid gap-10 md:grid-cols-3 md:gap-0">
+      <section aria-labelledby="swap-title" className="bg-surface px-4 py-[clamp(3rem,6vw,5.5rem)]">
+        <div className="mx-auto flex max-w-[1000px] flex-col gap-6">
+          <h2 id="swap-title" className={`${h2} text-center`}>From the notebook to your phone</h2>
+          <div role="table" aria-label="Before and with Zana" className="overflow-hidden rounded-2xl border border-line bg-paper">
+            <div role="row" className="grid grid-cols-2 border-b border-line bg-surface-2">
+              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink-3">Before</span>
+              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink">With Zana</span>
+            </div>
+            {SWAPS.map(([before, after], i) => (
+              <div key={before} role="row" className={`grid grid-cols-2 ${i ? 'border-t border-line-faint' : ''}`}>
+                <span role="cell" className="px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] leading-snug text-ink-3">{before}</span>
+                <span role="cell" className="flex gap-2.5 px-5 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] font-semibold leading-snug">
+                  <svg width="20" height="20" viewBox="0 0 20 20" aria-hidden="true" className="mt-0.5 flex-none">
+                    <path d="M4.5 10.5l3.5 3.5 7.5-8" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                  {after}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="steps-title" className="px-4 py-[clamp(3rem,6vw,5.5rem)]">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-7">
+          <h2 id="steps-title" className={h2}>Selling in three steps</h2>
+          <ol className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
             {STEPS.map((s, i) => (
-              <li key={s.title} className={`border-t-2 border-ink pt-5 md:pr-8 ${i === 2 ? 'md:border-action' : ''}`}>
-                <span aria-hidden="true" className={`block font-display text-[clamp(56px,7vw,96px)] font-[780] leading-[0.9] tracking-[-0.04em] ${i === 2 ? 'text-action' : 'text-ink'}`}>{i + 1}</span>
-                <h3 className="mt-4 font-display text-[clamp(20px,2vw,26px)] font-[680] leading-[1.15] text-ink">{s.title}</h3>
-                <p className="mt-2 max-w-[22rem] text-[16px] leading-[1.6] text-muted">{s.body}</p>
+              <li key={s.title} className="flex flex-col gap-2.5 border-t-[3px] border-ink pt-[18px]">
+                <span className="font-display text-[2.5rem] font-bold leading-none">{i + 1}</span>
+                <h3 className="text-xl">{s.title}</h3>
+                <p className="text-base leading-normal text-ink-2">{s.text}</p>
               </li>
             ))}
           </ol>
+          <SignupLink className={`${button} self-start`} />
         </div>
       </section>
 
-      <section aria-labelledby="where-title">
-        <div className={`${wrap} grid gap-10 md:grid-cols-12`}>
-          <h2 id="where-title" className={`${h2} md:col-span-6`}>Hosted for you, or on your own server</h2>
-          <div className="md:col-span-6 grid gap-8 sm:grid-cols-2">
-            <div>
-              <h3 className="font-display text-[22px] font-[680] text-ink">{BRAND} Cloud</h3>
-              <p className="mt-2 text-[16px] leading-[1.6] text-muted">We run it for you. You and your staff sign in from the browser.</p>
-              <Link to="/cloud" className={`${textLink} mt-2`}>How {BRAND} Cloud works</Link>
-            </div>
-            <div>
-              <h3 className="font-display text-[22px] font-[680] text-ink">{ENGINE_BRAND} Engine</h3>
-              <p className="mt-2 text-[16px] leading-[1.6] text-muted">Open source under AGPL-3.0. Run it on your own server with MySQL or LibSQL, and read every line of the code.</p>
-              <Link to="/open-source" className={`${textLink} mt-2`}>Run it yourself</Link>
-            </div>
+      <section id="today" aria-labelledby="today-title" className="bg-surface px-4 py-[clamp(48px,6vw,88px)]">
+        <div className="mx-auto flex max-w-[1200px] flex-col gap-7">
+          <h2 id="today-title" className={`${h2} max-w-[720px]`}>What works today, and what doesn’t</h2>
+          <div className="flex flex-wrap gap-5">
+            {TODAY.map((col) => (
+              <div key={col.title} className="flex flex-[1_1_340px] flex-col gap-1 rounded-2xl border border-line bg-paper p-[22px]">
+                <h3 className="mb-2 text-[1.1875rem]">{col.title}</h3>
+                {col.items.map(([text, status]) => (
+                  <div key={text} className="flex flex-wrap items-center justify-between gap-2 border-t border-line-faint py-3">
+                    <span className="flex-[1_1_200px] text-base leading-snug">{text}</span>
+                    <Badge status={status} />
+                  </div>
+                ))}
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
-      <section aria-labelledby="start-title" className="border-t border-outline-variant">
-        <div className={`${wrap} flex flex-col gap-8 md:flex-row md:items-end md:justify-between`}>
-          <div>
-            <h2 id="start-title" className="font-display text-[clamp(40px,5.6vw,80px)] font-[780] leading-[0.96] tracking-[-0.03em] text-ink max-w-[16ch] [text-wrap:balance]">
-              Start with the till and the stock count.
-            </h2>
-            <p className="mt-5 text-[16px] text-muted">{PRICE_LINE}</p>
-          </div>
-          <SignupLink className="inline-flex min-h-12 shrink-0 items-center self-start bg-action px-[22px] text-[15px] font-semibold text-white transition-colors duration-150 hover:bg-action-busy active:translate-y-px md:self-auto" />
+      <section aria-labelledby="rules-title" className="px-4 py-[clamp(3rem,6vw,5rem)]">
+        <div className="mx-auto flex max-w-[1200px] flex-wrap items-start gap-x-12 gap-y-6">
+          <h2 id="rules-title" className={`${h2} flex-[1_1_320px]`}>Your rules, for people and AI</h2>
+          <ul className="flex flex-[2_1_420px] flex-col gap-3.5 text-[1.0625rem] leading-normal">
+            <li><strong>Everyone gets a role.</strong> Staff, and later AI agents, can do only what their role allows.</li>
+            <li><strong>Every action is logged.</strong> Who, what and when, in one place.</li>
+            <li><strong>Risky actions wait for you.</strong> Voids, price changes and write-offs need your approval.</li>
+            <li className="text-ink-2">AI agents are on the roadmap. No dates promised.</li>
+          </ul>
         </div>
       </section>
+
+      <section aria-label="Price" className="bg-surface px-4 py-[clamp(3rem,6vw,5rem)]">
+        <div className="mx-auto grid max-w-[1200px] gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
+          <div className={card}>
+            <h2 className={h2}>Free during the pilot</h2>
+            <p className="text-[1.0625rem] leading-[1.55] text-ink-2">
+              The catch: none. You’ll see prices before the pilot ends, and nothing is charged unless you agree.
+            </p>
+            <Link to="/pricing" className="inline-flex min-h-11 items-center self-start text-base font-semibold">Pricing questions</Link>
+          </div>
+        </div>
+      </section>
+
     </>
+  )
+}
+
+export function ClosingBand() {
+  return (
+    <section aria-labelledby="world-title" className="bg-accent px-4 py-[clamp(3.5rem,7vw,6.5rem)] text-on-accent">
+      <div className="mx-auto flex max-w-[1000px] flex-col items-center gap-[18px] text-center">
+        <h2 id="world-title" className="text-[clamp(2.25rem,6vw,4.75rem)] leading-[1.02]">From Nairobi to the world</h2>
+        <p className="max-w-[560px] text-[1.125rem] leading-[1.55]">Start with your shop today. Add more as Zana grows.</p>
+        <SignupLink className="flex min-h-[52px] items-center rounded-md bg-band px-6 text-base font-semibold text-on-band no-underline" />
+      </div>
+    </section>
   )
 }
