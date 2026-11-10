@@ -31,7 +31,7 @@ export default function PricingPage() {
         </div>
 
         <div className="flex flex-wrap gap-4">
-          <div className="flex flex-[3_1_420px] flex-col gap-4 rounded-2xl border-2 border-action bg-paper p-[clamp(22px,3.4vw,36px)]">
+          <div className="flex flex-[3_1_420px] flex-col gap-4 rounded-xl border-2 border-action bg-paper p-[clamp(22px,3.4vw,36px)]">
             <h2 className="text-[2.125rem] leading-[1.1] tracking-[-0.02em]">What’s included</h2>
             <span className="text-base text-ink-2">No payment details needed to sign up.</span>
             <ul className="flex flex-col gap-2.5">
@@ -39,7 +39,7 @@ export default function PricingPage() {
                 <li key={text} className="flex gap-2.5 text-base leading-[1.45]"><Tick className="text-action" />{text}</li>
               ))}
             </ul>
-            <SignupLink className={`${BUTTON_PRIMARY} justify-center`} />
+            <SignupLink className={`${BUTTON_SECONDARY} justify-center`} />
           </div>
           <div className={`${CARD} flex flex-[2_1_280px] flex-col gap-3.5 p-[clamp(22px,3.4vw,36px)]`}>
             <h2 className="text-[1.75rem] leading-[1.15] tracking-[-0.02em]">After the pilot: to be announced</h2>

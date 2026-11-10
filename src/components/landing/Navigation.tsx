@@ -28,7 +28,7 @@ export function Navigation() {
 
   return (
     <header className="border-b border-line bg-paper text-ink">
-      <div className="mx-auto flex max-w-[1200px] flex-col px-4 pt-2">
+      <div className="mx-auto flex max-w-[1232px] flex-col px-4 pt-2">
         <div className="flex min-h-14 items-center gap-2">
           <Link to="/" aria-label={`${BRAND} home`} className="flex min-h-12 min-w-0 items-center gap-2.5 no-underline">
             <LogoMark />

@@ -91,7 +91,7 @@ export default function PickerPage() {
             {[...POPULAR, [OTHER, 'Another kind of business', `Choose from ${OTHERS.length} more, or pick modules yourself`]].map(([id, title, hint]) => {
               const on = id === OTHER ? showOther : kind === id
               return (
-                <label key={id} className={`flex min-h-16 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 ${on ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
+                <label key={id} className={`flex min-h-16 cursor-pointer items-center gap-3.5 rounded-xl px-4 py-3.5 ${on ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
                   <input type="radio" name="kind" value={id} checked={on} onChange={() => { setKind(id === OTHER ? OTHER : id); setError('') }} className="m-0 size-[22px] flex-none accent-action" />
                   <span className="flex min-w-0 flex-col gap-0.5"><span className="text-[1.0625rem] font-bold">{title}</span><span className="text-sm text-ink-2">{hint}</span></span>
                 </label>
@@ -125,11 +125,11 @@ export default function PickerPage() {
             {state.status === 'loading' && (
               <>
                 <p role="status" className="text-[0.9375rem] text-ink-2">Loading modules…</p>
-                {[0, 1].map((i) => <div key={i} data-skeleton="" aria-hidden="true" className="h-[92px] rounded-2xl bg-skeleton" />)}
+                {[0, 1].map((i) => <div key={i} data-skeleton="" aria-hidden="true" className="h-[92px] rounded-xl bg-skeleton" />)}
               </>
             )}
             {state.status === 'error' && (
-              <div role="alert" className="flex flex-col gap-2.5 rounded-2xl border-2 border-red bg-red-wash p-4 text-red-ink">
+              <div role="alert" className="flex flex-col gap-2.5 rounded-xl border-2 border-red bg-red-wash p-4 text-red-ink">
                 <p className="flex gap-2 text-base leading-normal"><Warn /><span><strong>The modules didn’t load.</strong> Check your connection and try again. Your choices are kept.</span></p>
                 <button type="button" onClick={retry} className="min-h-12 self-start rounded-md bg-action px-[18px] text-base font-semibold text-paper">Try again</button>
               </div>
@@ -137,7 +137,7 @@ export default function PickerPage() {
             {state.status === 'ready' && (
               <>
                 {modules.length === 0 && (
-                  <div className="flex flex-col items-start gap-1 rounded-2xl border border-line bg-paper p-4 text-base text-ink-2">
+                  <div className="flex flex-col items-start gap-1 rounded-xl border border-line bg-paper p-4 text-base text-ink-2">
                     <p>No modules are published yet.</p>
                     <Link to="/contact" className="inline-flex min-h-11 items-center font-semibold text-ink">Contact us</Link>
                   </div>
@@ -147,7 +147,7 @@ export default function PickerPage() {
                     const inc = result.included.get(m.key)
                     const checked = chosen.has(m.key) || !!inc
                     return (
-                      <li key={m.key} className={`rounded-2xl ${checked ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
+                      <li key={m.key} className={`rounded-xl ${checked ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
                         <label className="flex cursor-pointer items-start gap-3.5 p-4 has-[:disabled]:cursor-default">
                           <input
                             type="checkbox" checked={checked} disabled={!!inc}
@@ -165,7 +165,7 @@ export default function PickerPage() {
                   })}
                 </ul>
                 {later.length > 0 && (
-                  <details className="rounded-2xl border border-line bg-paper px-4">
+                  <details className="rounded-xl border border-line bg-paper px-4">
                     <summary className="flex min-h-14 cursor-pointer items-center text-base font-semibold">
                       {later.length} more {industry ? 'in this setup aren’t' : 'modules aren’t'} ready yet
                     </summary>

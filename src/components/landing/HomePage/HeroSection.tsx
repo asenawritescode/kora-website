@@ -7,7 +7,7 @@ import { ProductScreens } from './ProductScreens'
 // docs/african-b2b-copywriting-principles.md.
 export function HeroSection() {
   return (
-    <section aria-labelledby="hero-title" className="mx-auto flex max-w-[1200px] flex-col items-center gap-[clamp(1.75rem,4vw,3rem)] px-4 pb-[clamp(2.5rem,6vw,4.5rem)] pt-[clamp(2rem,6vw,5rem)] text-center">
+    <section aria-labelledby="hero-title" className="mx-auto flex max-w-[1232px] flex-col items-center gap-[clamp(1.75rem,4vw,3rem)] px-4 pb-[clamp(2.5rem,6vw,4.5rem)] pt-[clamp(2rem,6vw,5rem)] text-center">
       <div className="flex max-w-[780px] flex-col items-center gap-[18px]">
         <h1 id="hero-title" className="text-[clamp(2.25rem,6.4vw,4.75rem)] leading-[1.03]">
           Know what you sold and{' '}

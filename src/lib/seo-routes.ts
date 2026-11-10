@@ -102,12 +102,6 @@ export const ROUTE_SEO: RouteSeo[] = [
     description: `What works in ${BRAND} today, what is being built and what is planned, in order. No dates promised.`,
     sitemap: true,
   },
-  {
-    path: '/onboard',
-    title: `Set up your shop on ${BRAND} Cloud`,
-    description: `Create a ${BRAND} Cloud account to set up your shop. ${BRAND} records sales and stock.`,
-    sitemap: true,
-  },
 ]
 
 export const NOT_FOUND_SEO: RouteSeo = {

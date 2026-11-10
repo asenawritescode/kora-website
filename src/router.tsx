@@ -30,7 +30,6 @@ function inMarketing(load: Loader) {
 }
 
 const HomePage = inMarketing(() => import('@/routes/landing/home'))
-const OnboardPage = inMarketing(() => import('@/routes/landing/onboard'))
 const PricingPage = inMarketing(() => import('@/routes/landing/pricing'))
 const ModulesPage = inMarketing(() => import('@/routes/landing/modules'))
 const RoadmapPage = inMarketing(() => import('@/routes/landing/roadmap'))
@@ -45,12 +44,6 @@ const TermsPage = inMarketing(() => import('@/routes/landing/terms'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
 
 const rootRoute = createRootRoute()
-
-const onboardRoute = createRoute({
-  getParentRoute: () => rootRoute,
-  path: '/onboard',
-  component: OnboardPage,
-})
 
 const pricingRoute = createRoute({
   getParentRoute: () => rootRoute,
@@ -141,7 +134,6 @@ const homeRoute = createRoute({
 })
 
 const routeTree = rootRoute.addChildren([
-  onboardRoute,
   ...redirectRoutes,
   pricingRoute,
   modulesRoute,

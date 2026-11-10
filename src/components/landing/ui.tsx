@@ -4,7 +4,7 @@ export const BUTTON_PRIMARY = 'flex min-h-[52px] items-center rounded-md bg-acti
 export const BUTTON_SECONDARY = 'flex min-h-[52px] items-center rounded-md border border-line-control bg-paper px-[22px] text-base font-semibold text-ink no-underline'
 export const H1 = 'text-[clamp(2.125rem,4.6vw,3.5rem)] leading-[1.05]'
 export const H2 = 'text-[clamp(1.75rem,3.4vw,2.625rem)] leading-[1.1] tracking-[-0.02em]'
-export const CARD = 'rounded-2xl border border-line bg-paper'
+export const CARD = 'rounded-xl border border-line bg-paper'
 
 export type Status = 'available' | 'preview' | 'roadmap'
 

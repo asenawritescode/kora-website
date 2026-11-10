@@ -37,6 +37,7 @@ rounded:
   sm: "8px"
   md: "10px"
   lg: "12px"
+  xl: "16px"
 components:
   button-primary:
     backgroundColor: "{colors.action}"
@@ -58,7 +59,7 @@ the canvas wins.
 A selling and stock app for Kenyan shops, on phone or computer. The site is
 plain and fast: white paper, near-black ink, black actions, and one block
 colour, cornflower, for highlights and the focus halo. Headings are Space
-Grotesk, bold and tight; reading text is Inter. Corners are rounded 8 to 12 px.
+Grotesk, bold and tight; reading text is Inter. Corners are rounded: 10 px on controls, 16 px on cards.
 There is a dark theme for every surface.
 
 ## Colours
@@ -148,10 +149,12 @@ action colour; that is now `action`.
 
 ## Shape and depth
 
-- Corners: buttons and inputs 10 px, panels and cards 12 px, chips and badges
-  8 px (`rounded-md`, `rounded-lg`, `rounded-sm`).
-- Depth is tone and line: paper on surface, a 1 px `line` border. No resting
-  shadows.
+- Corners (as drawn in the canvas): buttons and inputs 10 px (`rounded-md`),
+  cards, panels and the dark CTA bands 16 px (`rounded-xl`), badges and pills
+  fully round (`rounded-full`).
+- Depth is tone and line: paper on surface, a 1 px `line` border. The only
+  resting shadows are the ones in the canvas: the How AI example card and the
+  phone frame.
 - Focus: a 2 px `ink` outline, 2 px offset, plus a 6 px `accent` (cornflower)
   halo, on every interactive element, in both themes.
 - Press: scale 0.97 over 160 ms. Hover: brightness 0.94.
