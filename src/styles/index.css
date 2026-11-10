@@ -99,6 +99,39 @@ a { text-underline-offset: 0.2em; }
 /* Browser surfaces carry the palette too. */
 ::selection { background: var(--color-accent-soft); color: var(--color-ink); }
 html { accent-color: var(--color-action); }
+html { scroll-padding-bottom: 96px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+
+/* Press and hover (DESIGN.md "Motion"): buttons and button-shaped links dip a
+   little when pressed and dim a little on hover. Plain text links are left alone. */
+a, button, summary { touch-action: manipulation; -webkit-tap-highlight-color: transparent; }
+button, a[class*="rounded"] {
+  transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), background-color 150ms ease, border-color 150ms ease;
+}
+button:not(:disabled):active, a[class*="rounded"]:active { transform: scale(0.97); }
+@media (hover: hover) and (pointer: fine) {
+  button:not(:disabled):hover, a[class*="rounded"]:hover { filter: brightness(0.94); }
+}
+
+/* Disclosure rows: a chevron that turns over, since the marker is hidden. */
+summary { list-style: none; gap: 12px; }
+summary::-webkit-details-marker { display: none; }
+summary::after {
+  content: "";
+  flex: 0 0 9px;
+  height: 9px;
+  margin-left: auto;
+  margin-right: 4px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 200ms var(--ease-out);
+}
+details[open] > summary::after { transform: translateY(2px) rotate(-135deg); }
+
+/* Loading rows pulse quietly. */
+[data-skeleton] { animation: skeleton-pulse 1.4s ease-in-out infinite; }
+@keyframes skeleton-pulse { 50% { opacity: 0.55; } }
 
 /* Headings: Space Grotesk, bold, tight. The type scale lives in DESIGN.md.
    Page and section headings (h1, h2) use it everywhere; h3 and below stay Inter. */

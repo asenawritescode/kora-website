@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from '@tanstack/react-router'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { SkipLink } from '@/components/landing/SkipLink'
@@ -39,6 +39,14 @@ export default function PickerPage() {
   const [kind, setKind] = useState('')
   const [error, setError] = useState('')
   const [tried, setTried] = useState(false)
+  const heading = useRef<HTMLHeadingElement>(null)
+  const firstScreen = useRef(true)
+  // Changing screens starts at the top, with the heading focused for screen readers.
+  useEffect(() => {
+    if (firstScreen.current) { firstScreen.current = false; return }
+    window.scrollTo(0, 0)
+    heading.current?.focus({ preventScroll: true })
+  }, [screen])
 
   const modules = useMemo(() => (state.status === 'ready' ? modulesFrom(state.templates) : []), [state])
   const result = useMemo(() => resolve(modules, choice.keys), [modules, choice.keys])
@@ -84,12 +92,12 @@ export default function PickerPage() {
       <main id="main" tabIndex={-1} className="mx-auto flex w-full max-w-[720px] flex-1 flex-col gap-5 px-4 pb-8 pt-[clamp(1.5rem,5vw,3rem)] focus:outline-none">
         {screen === 'business' ? (
           <fieldset className="flex min-w-0 flex-col gap-3">
-            <legend className="mb-4 p-0"><h1 className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1]`}>What kind of business do you run?</h1></legend>
+            <legend className="mb-4 p-0"><h1 ref={heading} tabIndex={-1} className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] focus:outline-none`}>What kind of business do you run?</h1></legend>
             {error && <p role="alert" className="flex gap-2 text-[0.9375rem] font-semibold text-red"><Warn />{error}</p>}
             {[...POPULAR, [OTHER, 'Another kind of business', `Choose from ${OTHERS.length} more, or pick modules yourself`]].map(([id, title, hint]) => {
               const on = id === OTHER ? showOther : kind === id
               return (
-                <label key={id} className={`flex min-h-16 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 ${on ? 'border-2 border-action bg-ok-wash' : 'border border-line bg-paper'}`}>
+                <label key={id} className={`flex min-h-16 cursor-pointer items-center gap-3.5 rounded-2xl px-4 py-3.5 ${on ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
                   <input type="radio" name="kind" value={id} checked={on} onChange={() => { setKind(id === OTHER ? OTHER : id); setError('') }} className="m-0 size-[22px] accent-action" />
                   <span className="flex flex-col gap-0.5"><span className="text-[1.0625rem] font-bold">{title}</span><span className="text-sm text-ink-2">{hint}</span></span>
                 </label>
@@ -113,7 +121,7 @@ export default function PickerPage() {
         ) : (
           <>
             <div className="flex flex-col gap-1.5">
-              <h1 className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1]`}>Your setup</h1>
+              <h1 ref={heading} tabIndex={-1} className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] focus:outline-none`}>Your setup</h1>
               <p className="flex flex-wrap items-center gap-x-2 text-base text-ink-2">
                 {forLine}
                 <button type="button" onClick={() => { setScreen('business'); setTried(false) }} className="min-h-11 px-1 font-semibold text-ink underline underline-offset-[0.18em]">Change</button>
@@ -140,8 +148,8 @@ export default function PickerPage() {
                     const inc = result.included.get(m.key)
                     const checked = chosen.has(m.key) || !!inc
                     return (
-                      <li key={m.key} className={`rounded-2xl ${checked ? 'border-2 border-action bg-ok-wash' : 'border border-line bg-paper'}`}>
-                        <label className="flex cursor-pointer items-start gap-3.5 p-4">
+                      <li key={m.key} className={`rounded-2xl ${checked ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
+                        <label className="flex cursor-pointer items-start gap-3.5 p-4 has-[:disabled]:cursor-default">
                           <input
                             type="checkbox" checked={checked} disabled={!!inc}
                             onChange={() => setChoice(choiceFrom(modules, toggle(modules, choice.keys, m.key)))}
