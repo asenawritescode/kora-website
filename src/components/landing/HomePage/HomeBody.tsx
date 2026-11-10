@@ -152,7 +152,7 @@ export function ClosingBand() {
         <SignupLink className="flex min-h-[52px] items-center rounded-md bg-band px-6 text-base font-semibold text-on-band no-underline" />
       </div>
       {/* The skyline is the horizon of this band: decorative, the heading above is the text. */}
-      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(120px,15vw,220px)]">
+      <div aria-hidden="true" className="relative mt-[clamp(2.5rem,5vw,4rem)] h-[clamp(150px,22.9vw,330px)]">
         <NairobiSkyline className="absolute inset-0 h-full w-full" />
       </div>
     </section>
