@@ -25,7 +25,7 @@ export default function IndustryRetailPage() {
             </p>
             <div className="mt-1 flex flex-wrap gap-3">
               <SignupLink className={BUTTON_PRIMARY}>Start with this preset</SignupLink>
-              <a href="#day" className="flex min-h-[52px] items-center px-[18px] text-base font-semibold">See the day it supports</a>
+              <a href="#day" className="flex min-h-[52px] items-center px-0 text-base font-semibold sm:px-[18px]">See the day it supports</a>
             </div>
             <p className="text-[0.9375rem] text-ink-3">Free during the pilot. No card needed.</p>
           </div>
@@ -36,7 +36,7 @@ export default function IndustryRetailPage() {
         <div className="mx-auto max-w-[880px]"><ProductScreens autoplay={false} /></div>
       </section>
 
-      <section aria-labelledby="preset-title" className="mx-auto flex max-w-[1232px] flex-wrap gap-8 px-4 py-[clamp(40px,5vw,72px)]">
+      <section aria-labelledby="preset-title" className="mx-auto flex max-w-[1232px] flex-wrap gap-8 px-4 py-[clamp(56px,5vw,72px)]">
         <div className="flex flex-[2_1_480px] flex-col gap-3">
           <h2 id="preset-title" className={h2}>Modules in this preset</h2>
           <p className="text-base text-ink-2">Ready modules come ticked. The rest are coming.</p>
@@ -76,15 +76,17 @@ export default function IndustryRetailPage() {
         </div>
       </section>
 
-      <section id="day" aria-labelledby="day-title" className="bg-surface px-4 py-[clamp(40px,5vw,72px)]">
+      <section id="day" aria-labelledby="day-title" className="bg-surface px-4 py-[clamp(56px,5vw,72px)]">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-5">
           <h2 id="day-title" className={h2}>The day it supports</h2>
           <ol className="grid gap-3 [grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr))]">
             {RETAIL.day.map(([title, text], i) => (
               <li key={title} className={`${CARD} flex flex-col gap-2.5 p-[18px]`}>
-                <span className="flex size-9 items-center justify-center rounded-full bg-ink font-bold text-paper">{i + 1}</span>
-                <strong className="text-[1.125rem]">{title}</strong>
-                <StatusBadge status="available" />
+                <span className="flex items-center gap-3">
+                  <span className="flex size-9 flex-none items-center justify-center rounded-full bg-ink font-bold text-paper">{i + 1}</span>
+                  <strong className="text-[1.125rem]">{title}</strong>
+                </span>
+                <span className="self-start"><StatusBadge status="available" /></span>
                 <span className="text-[0.9375rem] leading-normal text-ink-2">{text}</span>
               </li>
             ))}
@@ -98,7 +100,7 @@ export default function IndustryRetailPage() {
         </div>
       </section>
 
-      <section aria-label="Get started" className="px-4 py-[clamp(40px,5vw,72px)]">
+      <section aria-label="Get started" className="px-4 py-[clamp(56px,5vw,72px)]">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-center justify-between gap-5 rounded-xl bg-accent p-[clamp(24px,4vw,44px)] text-on-accent">
           <div className="flex flex-[1_1_360px] flex-col gap-1.5">
             <h2 className="text-[clamp(1.625rem,3vw,2.25rem)]">Open your till this week</h2>

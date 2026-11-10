@@ -9,7 +9,7 @@ const RAIL: Record<Lane['status'], string> = { available: 'border-action text-ac
 export default function RoadmapPage() {
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
+      <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <div className="flex max-w-[560px] flex-col gap-2.5">
           <h1 className={H1}>Roadmap</h1>
           <p className="text-[1.125rem] leading-[1.55] text-ink-2">What works now, what’s being built and what’s planned. Order may change. No dates promised.</p>

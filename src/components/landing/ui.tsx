@@ -2,8 +2,8 @@
 // badge used on Home, Modules and Roadmap.
 export const BUTTON_PRIMARY = 'flex min-h-[52px] items-center rounded-md bg-action px-[22px] text-base font-semibold text-paper no-underline'
 export const BUTTON_SECONDARY = 'flex min-h-[52px] items-center rounded-md border border-line-control bg-paper px-[22px] text-base font-semibold text-ink no-underline'
-export const H1 = 'text-[clamp(2.125rem,4.6vw,3.5rem)] leading-[1.05]'
-export const H2 = 'text-[clamp(1.75rem,3.4vw,2.625rem)] leading-[1.1] tracking-[-0.02em]'
+export const H1 = 'text-[clamp(2.25rem,4.6vw,3.5rem)] leading-[1.05]'
+export const H2 = 'text-[clamp(2rem,3.4vw,2.625rem)] leading-[1.1] tracking-[-0.02em]'
 export const CARD = 'rounded-xl border border-line bg-paper'
 
 export type Status = 'available' | 'preview' | 'roadmap'
@@ -17,7 +17,7 @@ const STATUS: Record<Status, { label: string; className: string; icon: string }>
 export function StatusBadge({ status }: { status: Status }) {
   const s = STATUS[status] ?? STATUS.roadmap
   return (
-    <span className={`inline-flex items-center gap-[5px] whitespace-nowrap rounded-full py-1 pl-[7px] pr-[9px] text-[0.8125rem] font-semibold ${s.className}`}>
+    <span className={`inline-flex items-center gap-[5px] whitespace-nowrap rounded-full py-[3px] pl-[7px] pr-[9px] text-[0.8125rem] font-semibold ${s.className}`}>
       <svg width="14" height="14" viewBox="0 0 20 20" aria-hidden="true">
         <path d={s.icon} fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
       </svg>

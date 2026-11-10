@@ -44,7 +44,7 @@ export default function ContactPage() {
 
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1000px] flex-wrap items-start gap-8 px-4 pb-[clamp(3rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
+      <div className="mx-auto flex max-w-[1000px] flex-wrap items-start gap-8 px-4 pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <div className="flex flex-[1_1_280px] flex-col gap-3">
           <h1 className={H1}>Contact us</h1>
           <p className="max-w-[620px] text-[1.125rem] leading-[1.55] text-ink-2">Questions about Zana, the pilot or a problem in your workspace.</p>

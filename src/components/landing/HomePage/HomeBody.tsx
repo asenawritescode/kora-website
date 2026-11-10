@@ -32,10 +32,10 @@ const TODAY: { title: string; items: [string, Status][] }[] = [
 export function HomeBody() {
   return (
     <>
-      <section aria-labelledby="for-title" className="border-t border-line px-4 py-[clamp(2.5rem,5vw,4rem)]">
-        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-[18px] text-center">
+      <section aria-labelledby="for-title" className="border-t border-line px-4 py-[clamp(3rem,5vw,4rem)]">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-start gap-[18px] text-left sm:items-center sm:text-center">
           <h2 id="for-title" className={h2}>Made for shops like yours</h2>
-          <ul className="flex flex-wrap justify-center gap-2.5">
+          <ul className="flex flex-wrap justify-start gap-2.5 sm:justify-center">
             {SHOP_TYPES.map((name) => (
               <li key={name} className="rounded-full bg-accent px-[18px] py-2.5 text-base font-semibold text-on-accent">{name}</li>
             ))}
@@ -44,20 +44,23 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section aria-labelledby="swap-title" className="bg-surface px-4 py-[clamp(3rem,6vw,5.5rem)]">
+      <section aria-labelledby="swap-title" className="bg-surface px-4 py-[clamp(3.5rem,6vw,5.5rem)]">
         <div className="mx-auto flex max-w-[1000px] flex-col gap-6">
-          <h2 id="swap-title" className={`${h2} text-center`}>From the notebook to your phone</h2>
+          <h2 id="swap-title" className={`${h2} sm:text-center`}>From the notebook to your phone</h2>
           <div role="table" aria-label="Before and with Zana" className="overflow-hidden rounded-xl border border-line bg-paper">
-            <div role="row" className="grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] border-b border-line bg-surface-2 sm:grid-cols-2">
-              <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink-3 sm:px-5">Before</span>
-              <span role="columnheader" className="px-4 py-3 text-sm font-bold text-ink sm:px-5">With Zana</span>
+            <div role="row" className="hidden grid-cols-2 border-b border-line bg-surface-2 sm:grid">
+              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink-3">Before</span>
+              <span role="columnheader" className="px-5 py-3 text-sm font-bold text-ink">With Zana</span>
             </div>
             {SWAPS.map(([before, after], i) => (
-              <div key={before} role="row" className={`grid grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] sm:grid-cols-2 ${i ? 'border-t border-line-faint' : ''}`}>
-                <span role="cell" className="px-4 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] leading-snug text-ink-3 sm:px-5">{before}</span>
-                <span role="cell" className="flex gap-2.5 px-4 py-[18px] text-[clamp(1rem,1.6vw,1.125rem)] font-semibold leading-snug sm:px-5">
-                  <Tick className="mt-0.5" />
-                  {after}
+              <div key={before} role="row" className={`flex flex-col gap-3 px-4 py-5 sm:grid sm:grid-cols-2 sm:gap-0 sm:p-0 ${i ? 'border-t border-line-faint' : ''}`}>
+                <span role="cell" className="text-base leading-snug text-ink-3 before:mb-0.5 before:block before:text-[0.8125rem] before:font-bold before:content-['Before'] sm:px-5 sm:py-[18px] sm:text-[clamp(1rem,1.6vw,1.125rem)] sm:before:hidden">{before}</span>
+                <span role="cell" className="block sm:px-5 sm:py-[18px]">
+                  <span className="mb-0.5 block text-[0.8125rem] font-bold text-ink-3 sm:hidden">With Zana</span>
+                  <span className="flex gap-2.5 text-[1.0625rem] font-semibold leading-snug sm:text-[clamp(1rem,1.6vw,1.125rem)]">
+                    <Tick className="mt-0.5" />
+                    {after}
+                  </span>
                 </span>
               </div>
             ))}
@@ -65,7 +68,7 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section aria-labelledby="steps-title" className="px-4 py-[clamp(3rem,6vw,5.5rem)]">
+      <section aria-labelledby="steps-title" className="px-4 py-[clamp(3.5rem,6vw,5.5rem)]">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-7">
           <h2 id="steps-title" className={h2}>Selling in three steps</h2>
           <ol className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr))]">
@@ -81,7 +84,7 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section id="today" aria-labelledby="today-title" className="bg-surface px-4 py-[clamp(48px,6vw,88px)]">
+      <section id="today" aria-labelledby="today-title" className="bg-surface px-4 py-[clamp(56px,6vw,88px)]">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-7">
           <h2 id="today-title" className={`${h2} max-w-[720px]`}>What works today, and what doesn’t</h2>
           <div className="flex flex-wrap gap-5">
@@ -89,8 +92,8 @@ export function HomeBody() {
               <div key={col.title} className="flex flex-[1_1_340px] flex-col gap-1 rounded-xl border border-line bg-paper p-[22px]">
                 <h3 className="mb-2 text-[1.1875rem]">{col.title}</h3>
                 {col.items.map(([text, status]) => (
-                  <div key={text} className="flex flex-wrap items-center justify-between gap-2 border-t border-line-faint py-3">
-                    <span className="flex-[1_1_200px] text-base leading-snug">{text}</span>
+                  <div key={text} className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-x-3 border-t border-line-faint py-3">
+                    <span className="text-base leading-snug">{text}</span>
                     <StatusBadge status={status} />
                   </div>
                 ))}
@@ -101,7 +104,7 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section aria-labelledby="rules-title" className="px-4 py-[clamp(3rem,6vw,5rem)]">
+      <section aria-labelledby="rules-title" className="px-4 py-[clamp(3.5rem,6vw,5rem)]">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-start gap-x-12 gap-y-6">
           <div className="flex flex-[1_1_320px] flex-col gap-2.5">
             <h2 id="rules-title" className={h2}>Your rules, for people and AI</h2>
@@ -116,7 +119,7 @@ export function HomeBody() {
         </div>
       </section>
 
-      <section aria-label="Price and help" className="bg-surface px-4 py-[clamp(3rem,6vw,5rem)]">
+      <section aria-label="Price and help" className="bg-surface px-4 py-[clamp(3.5rem,6vw,5rem)]">
         <div className="mx-auto grid max-w-[1200px] gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))]">
           <div className={card}>
             <h2 className={h2}>Free during the pilot</h2>

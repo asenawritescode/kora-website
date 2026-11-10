@@ -8,7 +8,7 @@ import { ICONS, INDUSTRIES, industrySlug, presetModules, readyModules } from '@/
 export default function IndustriesPage() {
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1232px] flex-col gap-7 px-4 pb-[clamp(48px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
+      <div className="mx-auto flex max-w-[1232px] flex-col gap-7 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex flex-wrap items-end gap-6">
           <div className="flex flex-[1_1_520px] flex-col gap-2.5">
             <h1 className={H1}>Start from your kind of business</h1>

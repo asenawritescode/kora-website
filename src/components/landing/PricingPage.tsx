@@ -19,7 +19,7 @@ const FAQ = [
 export default function PricingPage() {
   return (
     <div className="flex-1 bg-surface">
-      <div className="mx-auto flex max-w-[1000px] flex-col gap-8 px-4 pb-[clamp(48px,6vw,88px)] pt-[clamp(32px,5vw,72px)]">
+      <div className="mx-auto flex max-w-[1000px] flex-col gap-8 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,72px)]">
         <div className="flex flex-col items-center gap-2.5 text-center">
           <h1 className="text-[clamp(2.25rem,5vw,4rem)] leading-[1.04]">Free during the pilot</h1>
           <p className="max-w-[600px] text-[1.125rem] leading-[1.55] text-ink-2">You’ll see prices before the pilot ends, with time to decide.</p>

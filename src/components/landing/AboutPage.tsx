@@ -17,7 +17,7 @@ export default function AboutPage() {
         <h1 className={`${H1} max-w-[820px]`}>Business tools, made in Nairobi</h1>
         <p className="max-w-[620px] text-[1.125rem] leading-[1.55] text-ink-2">Zana means “tools” in Swahili. One system for small businesses.</p>
       </section>
-      <section className="bg-accent px-4 py-[clamp(2.5rem,6vw,5rem)] text-on-accent">
+      <section className="bg-accent px-4 py-[clamp(3.5rem,6vw,5rem)] text-on-accent">
         <div className="mx-auto flex max-w-[1200px] flex-wrap items-start gap-x-12 gap-y-6">
           <h2 className={`${h2} flex-[1_1_280px]`}>Why Zana</h2>
           <div className="flex flex-[2_1_420px] flex-col gap-3.5 text-[1.125rem] leading-[1.6]">
@@ -26,7 +26,7 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 py-[clamp(2.5rem,6vw,5rem)]">
+      <section className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 py-[clamp(3.5rem,6vw,5rem)]">
         <h2 className={h2}>How Zana is built</h2>
         <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))]">
           {PRINCIPLES.map(([title, text]) => (
@@ -37,7 +37,7 @@ export default function AboutPage() {
           ))}
         </div>
       </section>
-      <section className="mx-auto flex max-w-[1232px] flex-wrap items-center justify-between gap-4 px-4 pb-[clamp(3rem,6vw,5rem)]">
+      <section className="mx-auto flex max-w-[1232px] flex-wrap items-center justify-between gap-4 px-4 pb-[clamp(3.5rem,6vw,5rem)]">
         <p className="text-[1.125rem] font-semibold">From Nairobi to the world.</p>
         <div className="flex flex-wrap gap-3">
           <SignupLink className={BUTTON_PRIMARY} />
