@@ -48,6 +48,10 @@ const RoadmapPage = inMarketing(() => import('@/routes/landing/roadmap'))
 const IndustriesPage = inMarketing(() => import('@/routes/landing/industries'))
 const IndustryRetailPage = inMarketing(() => import('@/routes/landing/industry-retail'))
 const HowAiPage = inMarketing(() => import('@/routes/landing/how-ai'))
+const ContactPage = inMarketing(() => import('@/routes/landing/contact'))
+const AboutPage = inMarketing(() => import('@/routes/landing/about'))
+const PrivacyPage = inMarketing(() => import('@/routes/landing/privacy'))
+const TermsPage = inMarketing(() => import('@/routes/landing/terms'))
 const OpenSourcePage = inMarketing(() => import('@/routes/landing/open-source'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
 const DocsPage = withLayout(() => import('@/components/landing/DocsLayout'), () => import('@/routes/landing/docs'))
@@ -102,6 +106,30 @@ const howAiRoute = createRoute({
   getParentRoute: () => rootRoute,
   path: '/how-ai',
   component: HowAiPage,
+})
+
+const contactRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/contact',
+  component: ContactPage,
+})
+
+const aboutRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/about',
+  component: AboutPage,
+})
+
+const privacyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/privacy',
+  component: PrivacyPage,
+})
+
+const termsRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/terms',
+  component: TermsPage,
 })
 
 const openSourceRoute = createRoute({
@@ -171,6 +199,10 @@ const routeTree = rootRoute.addChildren([
   industriesRoute,
   industryRetailRoute,
   howAiRoute,
+  contactRoute,
+  aboutRoute,
+  privacyRoute,
+  termsRoute,
   openSourceRoute,
   homeRoute,
   examplesRoute,

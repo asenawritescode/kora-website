@@ -53,7 +53,7 @@ export default function IndustriesPage() {
         </div>
 
         <p className="text-[0.9375rem] text-ink-3">
-          Don’t see your business? <Link to="/" hash="modules" className="font-semibold">Start from scratch</Link> and pick the modules yourself.
+          Don’t see your business? <Link to="/" hash="modules" className="font-semibold">Start from scratch</Link> and pick the modules yourself, or <Link to="/contact" className="font-semibold">talk to the team</Link>.
         </p>
       </div>
     </div>

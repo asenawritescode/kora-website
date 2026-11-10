@@ -3,7 +3,7 @@ import { NOT_FOUND_SEO } from '@/lib/seo-routes'
 import { Seo } from './Seo'
 import { PRIMARY_LINKS } from '@/lib/site-links'
 
-const POPULAR = PRIMARY_LINKS
+const POPULAR = PRIMARY_LINKS.filter((l) => ['Modules', 'Roadmap', 'Pricing'].includes(l.label))
 
 export default function NotFound() {
   return (
@@ -21,6 +21,9 @@ export default function NotFound() {
               className="flex min-h-[52px] items-center rounded-md bg-action px-[22px] text-base font-semibold text-paper no-underline"
             >
               Go to the home page
+            </Link>
+            <Link to="/contact" className="flex min-h-[52px] items-center rounded-md border border-line-control px-[22px] text-base font-semibold text-ink no-underline">
+              Report a broken link
             </Link>
           </div>
           <nav aria-label="Popular pages" className="mt-6 flex flex-col gap-1 border-t border-line pt-5">

@@ -1,12 +1,14 @@
 import { Link } from '@tanstack/react-router'
-import { EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
+import { COMPANY_LINKS, EXPLORE_LINKS, PRIMARY_LINKS } from '@/lib/site-links'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { LogoMark } from '@/components/landing/LogoMark'
 import { BRAND } from '@/lib/brand'
+import { buildSignInUrl, cloudSignupBase } from '@/lib/cloud-signup'
 
 const FOOTER_LINKS = {
   Product: PRIMARY_LINKS,
   Explore: EXPLORE_LINKS,
+  Company: COMPANY_LINKS,
 }
 
 const link = 'flex min-h-11 w-fit items-center text-[0.9375rem] text-on-band-2 no-underline hover:text-on-band hover:underline'
@@ -33,6 +35,7 @@ export function Footer() {
                 <Link key={l.label} to={l.href} className={link}>{l.label}</Link>
               ))}
               {title === 'Product' && <SignupLink className={link} />}
+              {title === 'Company' && <a href={buildSignInUrl(cloudSignupBase())} className={link}>Sign in</a>}
             </nav>
           ))}
         </div>

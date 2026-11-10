@@ -57,8 +57,9 @@ export function findSeoProblems(dist = defaultDist, siteUrl = siteUrlFrom(proces
       if (!h.robots?.includes('noindex')) problems.push('404.html must be noindex')
       if (h.canonical) problems.push('404.html must not have a canonical URL')
     } else if (page.file !== '200.html') {
-      if (h.robots?.includes('noindex')) problems.push(`${page.file} is noindex`)
-      if (route) {
+      const wantsNoindex = route?.noindex === true
+      if (!!h.robots?.includes('noindex') !== wantsNoindex) problems.push(`${page.file} ${wantsNoindex ? 'must be' : 'is'} noindex`)
+      if (route && !wantsNoindex) {
         const url = `${siteUrl}${route.path === '/' ? '' : route.path}`
         if (h.canonical !== url || h.ogUrl !== url) problems.push(`${page.file}: canonical and og:url must be ${url}`)
       }
