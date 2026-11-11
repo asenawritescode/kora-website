@@ -41,12 +41,17 @@ RELEASES = [
     ("erp-sell", "Selling and cash", "Sell at the counter in any currency, take payments, work a till, track expenses.", "POS Sale", "available", "Sell"),
     ("erp-stock", "Stock", "Change stock with a reason, and see it change from any screen.", "Stock Item", "available", "Stock"),
     ("erp-buy", "Buying", "Order from suppliers, record deliveries, bills and payments.", "Purchase Order", "preview", "Money"),
+    ("erp-books", "Books", "Accounts, periods and balanced journal entries.", "Journal Entry", "available", "Money"),
 ]
+
+# What a release needs, by release slug: Books posts against stock, so ticking it
+# makes Cloud explain that Stock comes with it.
+REQUIRES = {"erp-books": ["erp-stock"]}
 
 # Templates are what the /start picker lists. Each composes module releases.
 TEMPLATES = [
     ("retail-shop", "Retail shop", "Sell, track stock and buy from suppliers.", "Retail Shop",
-     [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-buy-1.0.0", "optional")]),
+     [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-books-1.0.0", "optional"), ("erp-buy-1.0.0", "optional")]),
 ]
 
 def publish(slug, name, summary, doctype, level, category="", kind="module", composition=()):
@@ -55,6 +60,8 @@ def publish(slug, name, summary, doctype, level, category="", kind="module", com
                 "public": {"slug": slug, "name": name, "summary": summary, **({"category": category} if category else {})},
                 "exports": {"doctypes": [doctype], "capabilities": [slug + ".use"]},
                 "engine": {"min_version": "1.0.0"}}
+    if REQUIRES.get(slug):
+        manifest["requires"] = [{"package_id": r, "release_id": r + "-1.0.0"} for r in REQUIRES[slug]]
     if composition:
         manifest["composition"] = [{"release_id": rid, "selection": sel} for rid, sel in composition]
     files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": f"name: {doctype}\nmodule: {name}\nfields: []\n"}]

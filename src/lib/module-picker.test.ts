@@ -1,193 +1,100 @@
 import { describe, expect, test } from 'bun:test'
 import fixture from './__fixtures__/catalog-templates.json'
-import { parseTemplates } from './catalog-client'
-import { choiceFrom, inclusionNote, modulesFrom, prune, resolve, selectability, toggle } from './module-picker'
-import type { CatalogTemplate } from './catalog-client'
+import { parseTemplates, type CatalogTemplate } from './catalog-client'
+import { choiceFrom, inclusionNote, isSelectable, modulesFrom, prune, templateOf, toggle } from './module-picker'
 
-// The fixture is a preview catalog (as an older Cloud returns it). Dependency
-// logic is tested on an attested copy; preview behaviour has its own tests below.
-const attested = structuredClone(fixture) as any
-attested.data.items[0].availability = 'available'
-for (const c of attested.data.items[0].components) c.availability = 'available'
-const modules = modulesFrom(parseTemplates(attested))
+const template = (slug: string, availability: 'available' | 'preview', components: [string, string, string, string][], releaseId = `${slug}-1.0.0`): CatalogTemplate => ({
+  slug, releaseId, name: slug, summary: '', availability,
+  components: components.map(([id, name, selection, avail]) => ({ id, name, summary: '', selection, availability: avail as 'available' | 'preview' })),
+})
+const retail = template('retail', 'available', [
+  ['sell-1', 'Selling', 'required', 'available'],
+  ['stock-1', 'Stock', 'default', 'available'],
+  ['books-1', 'Books', 'optional', 'available'],
+  ['buy-1', 'Buying', 'optional', 'preview'],
+])
+const modules = modulesFrom([retail])
 const key = (name: string) => modules.find((m) => m.name === name)!.key
 
-describe('module picker', () => {
-  test('lists every catalog component with its template', () => {
-    expect(modules.map((m) => [m.name, m.template.slug])).toEqual([
-      ['Point of Sale', 'retail-pos'],
-      ['Inventory', 'retail-pos'],
-      ['Reports', 'retail-pos'],
+describe('listing the parts', () => {
+  test('every component comes with its template and its release id', () => {
+    expect(modules.map((m) => [m.name, m.template.slug, m.id])).toEqual([
+      ['Selling', 'retail', 'sell-1'], ['Stock', 'retail', 'stock-1'], ['Books', 'retail', 'books-1'], ['Buying', 'retail', 'buy-1'],
     ])
-    expect(modules[0].id).toBe('pos-1.0.3')
+    expect(modules[0].template.releaseId).toBe('retail-1.0.0')
   })
 
-  test('nothing chosen: no template, nothing included', () => {
-    const r = resolve(modules, [])
-    expect(r.template).toBeUndefined()
-    expect(r.included.size).toBe(0)
+  test('nothing under a template that is not attested can be chosen', () => {
+    const preview = modulesFrom([template('later', 'preview', [['a-1', 'A', 'optional', 'available']])])
+    expect(preview.map(isSelectable)).toEqual([false])
   })
 
-  test('choosing Point of Sale includes what the catalog says it requires', () => {
-    const withRequires = modules.map((m) => (m.name === 'Point of Sale' ? { ...m, requires: ['Inventory'] } : m))
-    const r = resolve(withRequires, [withRequires.find((m) => m.name === 'Point of Sale')!.key])
-    expect(r.template?.slug).toBe('retail-pos')
-    expect(inclusionNote(r.included.get(key('Inventory'))!, 'Inventory')).toBe('Included: Point of Sale needs Inventory.')
-    expect(r.included.has(key('Reports'))).toBe(false)
-  })
-
-  test('a catalog that lists no requires adds no need of its own', () => {
-    const r = resolve(modules, [key('Point of Sale')])
-    const inc = r.included.get(key('Inventory'))
-    expect(inc && 'by' in inc).toBe(false)
-  })
-
-  test('choosing Inventory alone still sets up the template parts, with the template as the reason', () => {
-    const r = resolve(modules, [key('Inventory')])
-    expect(inclusionNote(r.included.get(key('Point of Sale'))!, 'Point of Sale')).toBe('Included: the Retail POS template sets up Point of Sale with your choice.')
-  })
-
-  test('a catalog requires list wins and is followed', () => {
-    const r = resolve(modules, [key('Reports')])
-    expect(r.included.get(key('Point of Sale'))).toEqual({ by: 'Reports', why: undefined })
-    expect(r.optional).toEqual(['reports-1.0.0'])
-  })
-
-  test('toggle adds and removes', () => {
-    const a = toggle(modules, [], key('Inventory'))
-    expect(a).toEqual([key('Inventory')])
-    expect(toggle(modules, a, key('Inventory'))).toEqual([])
+  test('the fixture of an older Cloud, which says nothing about availability, offers nothing', () => {
+    expect(modulesFrom(parseTemplates(fixture)).filter(isSelectable)).toEqual([])
   })
 })
 
-// A catalog shaped like the local Cloud's: every part optional.
-function template(slug: string, availability: 'available' | 'preview', components: [string, string, string, string, string[]?][]): CatalogTemplate {
-  return {
-    slug,
-    name: slug,
-    summary: '',
-    availability,
-    components: components.map(([id, name, selection, avail, requires]) => ({
-      id,
-      name,
-      summary: '',
-      selection,
-      availability: avail as 'available' | 'preview',
-      requires: requires ?? [],
-    })),
-  }
-}
-const retail = template('retail-pos', 'available', [
-  ['pos-1.0.8', 'Point of Sale', 'optional', 'available', ['Inventory']],
-  ['inventory-1.0.8', 'Inventory', 'optional', 'available'],
-])
-const local = modulesFrom([retail])
-const k = (ms: ReturnType<typeof modulesFrom>, name: string) => ms.find((m) => m.name === name)!.key
+describe('ticking', () => {
+  test('toggle adds and removes', () => {
+    const on = toggle(modules, [], key('Books'))
+    expect(on).toEqual([key('Books')])
+    expect(toggle(modules, on, key('Books'))).toEqual([])
+  })
+
+  test('a part that is not ready changes nothing', () => {
+    expect(toggle(modules, [], key('Buying'))).toEqual([])
+  })
+
+  test('a part from another template starts a new choice', () => {
+    const both = modulesFrom([retail, template('farm', 'available', [['crop-1', 'Crops', 'optional', 'available']])])
+    const k = (name: string) => both.find((m) => m.name === name)!.key
+    expect(toggle(both, [k('Books')], k('Crops'))).toEqual([k('Crops')])
+  })
+
+  test('stale keys for parts that are gone or not ready are pruned', () => {
+    expect(prune(modules, [key('Books'), key('Buying'), 'gone:Missing'])).toEqual([key('Books')])
+  })
+
+  test('the template of the ticked parts', () => {
+    expect(templateOf(modules, [])).toBeUndefined()
+    expect(templateOf(modules, [key('Books')])).toEqual({ slug: 'retail', name: 'retail', releaseId: 'retail-1.0.0' })
+  })
+})
 
 describe('the choice carried to Cloud', () => {
   test('nothing chosen carries nothing', () => {
-    expect(choiceFrom(local, [])).toEqual({ template: undefined, optional: [], keys: [] })
+    expect(choiceFrom(modules, [])).toEqual({ template: undefined, optional: [], keys: [] })
   })
 
-  test('ticking Point of Sale includes Inventory, and both optional ids are carried in catalog order', () => {
-    const c = choiceFrom(local, [k(local, 'Point of Sale')])
-    expect(c.template).toBe('retail-pos')
-    expect(c.optional).toEqual(['pos-1.0.8', 'inventory-1.0.8'])
-    expect(c.keys).toEqual([k(local, 'Point of Sale')])
+  test('only optional parts are carried as optional; what the template installs anyway is not', () => {
+    expect(choiceFrom(modules, [key('Selling'), key('Books')])).toEqual({ template: 'retail', optional: ['books-1'], keys: [key('Selling'), key('Books')] })
+    expect(choiceFrom(modules, [key('Stock')]).optional).toEqual([])
   })
 
-  test('ticking Inventory alone carries only Inventory', () => {
-    expect(choiceFrom(local, [k(local, 'Inventory')]).optional).toEqual(['inventory-1.0.8'])
-  })
-
-  test('parts the template installs anyway are never carried as optional', () => {
-    const ms = modulesFrom([
-      template('t', 'available', [
-        ['core-1', 'Core', 'required', 'available'],
-        ['extra-1', 'Extra', 'default', 'available'],
-        ['more-1', 'More', 'optional', 'available', ['Core']],
-      ]),
-    ])
-    const c = choiceFrom(ms, [k(ms, 'More')])
-    expect(c.optional).toEqual(['more-1'])
-    const r = resolve(ms, [k(ms, 'More')])
-    expect(r.included.get(k(ms, 'Core'))).toBeDefined()
-    expect(r.included.get(k(ms, 'Extra'))).toEqual({ template: 't' })
-  })
-
-  test('a chain of needs is followed to its end', () => {
-    const ms = modulesFrom([
-      template('t', 'available', [
-        ['a-1', 'A', 'optional', 'available', ['B']],
-        ['b-1', 'B', 'optional', 'available', ['C']],
-        ['c-1', 'C', 'optional', 'available'],
-        ['d-1', 'D', 'optional', 'available'],
-      ]),
-    ])
-    expect(choiceFrom(ms, [k(ms, 'A')]).optional).toEqual(['a-1', 'b-1', 'c-1'])
-  })
-
-  test('needs that loop back do not hang', () => {
-    const ms = modulesFrom([
-      template('t', 'available', [
-        ['a-1', 'A', 'optional', 'available', ['B']],
-        ['b-1', 'B', 'optional', 'available', ['A']],
-      ]),
-    ])
-    expect(choiceFrom(ms, [k(ms, 'A')]).optional).toEqual(['a-1', 'b-1'])
+  test('a part that is not ready is not carried', () => {
+    expect(choiceFrom(modules, [key('Buying')])).toEqual({ template: undefined, optional: [], keys: [] })
   })
 
   test('a part without a release id cannot be carried', () => {
     const t = template('t', 'available', [['x-1', 'X', 'optional', 'available']])
     delete t.components[0].id
     const ms = modulesFrom([t])
-    expect(choiceFrom(ms, [k(ms, 'X')]).optional).toEqual([])
+    expect(choiceFrom(ms, [ms[0].key]).optional).toEqual([])
   })
 })
 
-describe('preview parts cannot be chosen', () => {
-  const mixed = modulesFrom([
-    template('t', 'available', [
-      ['pos-1', 'Point of Sale', 'optional', 'available', ['Inventory']],
-      ['inv-1', 'Inventory', 'optional', 'preview'],
-      ['rep-1', 'Reports', 'optional', 'preview'],
-      ['cus-1', 'Customers', 'optional', 'available'],
-    ]),
-  ])
+describe('the line under an included part', () => {
+  const part = (reason: string, explanation = '') => ({ releaseId: 'stock-1', name: 'Stock', reason, explanation })
 
-  test('a preview part is not selectable and toggling it changes nothing', () => {
-    expect(selectability(mixed, mixed.find((m) => m.name === 'Reports')!)).toEqual({ ok: false, reason: 'preview' })
-    expect(toggle(mixed, [], k(mixed, 'Reports'))).toEqual([])
+  test('a part the visitor ticked needs no line', () => {
+    expect(inclusionNote(part('selected'), 'Retail')).toBeUndefined()
   })
 
-  test('an available part that needs a preview part is not selectable either', () => {
-    expect(selectability(mixed, mixed.find((m) => m.name === 'Point of Sale')!)).toEqual({ ok: false, reason: 'needs-preview', by: 'Inventory' })
-    expect(toggle(mixed, [], k(mixed, 'Point of Sale'))).toEqual([])
+  test("Cloud's sentence is used when another part needs it", () => {
+    expect(inclusionNote(part('dependency_of:books-1', 'Books needs Stock, so Stock is included.'), 'Retail')).toBe('Included: Books needs Stock, so Stock is included.')
   })
 
-  test('an available part with available needs is selectable', () => {
-    expect(selectability(mixed, mixed.find((m) => m.name === 'Customers')!)).toEqual({ ok: true })
-    expect(toggle(mixed, [], k(mixed, 'Customers'))).toEqual([k(mixed, 'Customers')])
-  })
-
-  test('stale keys for unselectable parts are ignored and pruned', () => {
-    const stale = [k(mixed, 'Customers'), k(mixed, 'Reports'), 'gone:Missing']
-    expect(prune(mixed, stale)).toEqual([k(mixed, 'Customers')])
-    expect(choiceFrom(mixed, stale).optional).toEqual(['cus-1'])
-  })
-
-  test('every part of a preview template is preview', () => {
-    const ms = modulesFrom([template('t', 'preview', [['a-1', 'A', 'optional', 'available']])])
-    expect(ms[0].availability).toBe('preview')
-    expect(toggle(ms, [], ms[0].key)).toEqual([])
-  })
-
-  test('two templates: a choice from the other template starts over', () => {
-    const ms = modulesFrom([
-      template('one', 'available', [['a-1', 'A', 'optional', 'available']]),
-      template('two', 'available', [['b-1', 'B', 'optional', 'available']]),
-    ])
-    expect(toggle(ms, [k(ms, 'A')], k(ms, 'B'))).toEqual([k(ms, 'B')])
-    expect(prune(ms, [k(ms, 'A'), k(ms, 'B')])).toEqual([k(ms, 'A')])
+  test('otherwise the template is the reason', () => {
+    expect(inclusionNote(part('included_by_default'), 'Retail shop')).toBe('Included: the Retail shop template sets up Stock with your choice.')
   })
 })

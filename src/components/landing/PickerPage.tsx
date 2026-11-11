@@ -4,10 +4,11 @@ import { LogoMark } from '@/components/landing/LogoMark'
 import { SkipLink } from '@/components/landing/SkipLink'
 import { H1, StatusBadge, Warn, type Status } from '@/components/landing/ui'
 import { INDUSTRIES, industrySlug, type Industry } from '@/lib/industries-content'
-import { choiceFrom, inclusionNote, modulesFrom, resolve, selectability, toggle } from '@/lib/module-picker'
+import { choiceFrom, inclusionNote, isSelectable, modulesFrom, prune, templateOf, toggle } from '@/lib/module-picker'
 import { industryFor, infoFor, notReady, presetKeys } from '@/lib/picker-preset'
 import { setChoice, useChoice, useSignupHref } from '@/lib/signup-choice'
 import { useCatalog } from '@/lib/use-catalog'
+import { useResolution } from '@/lib/use-resolution'
 import { BRAND } from '@/lib/brand'
 
 const POPULAR: [string, string, string][] = [
@@ -46,7 +47,12 @@ export default function PickerPage() {
   // Presets join template parts to the site's modules, which needs both answers.
   const waiting = state.status === 'loading' || source === 'loading'
   const dir = { catalog, info }
-  const result = useMemo(() => resolve(modules, choice.keys), [modules, choice.keys])
+  // What Cloud says the choice installs: the parts it adds on its own and why.
+  const keys = useMemo(() => prune(modules, choice.keys), [modules, choice.keys])
+  const template = templateOf(modules, keys)
+  const resolution = useResolution(template?.releaseId, choice.optional)
+  const answer = resolution.status === 'ready' ? resolution.resolution : resolution.status === 'checking' ? resolution.last : undefined
+  const included = new Map((answer?.included ?? []).map((part) => [part.releaseId, part]))
   const industry: Industry | undefined = industryFor(kind)
 
   // A link from an industry page starts on the setup screen for that industry.
@@ -58,8 +64,8 @@ export default function PickerPage() {
     setPreset(null)
   }, [state.status, waiting, preset, modules])
 
-  const chosen = new Set(result.chosen.map((m) => m.key))
-  const count = result.chosen.length + result.included.size
+  const chosen = new Set(keys)
+  const count = answer ? answer.included.length : keys.length
   const later = notReady(modules, dir, industry)
   const showOther = kind === OTHER || (!!kind && kind !== SCRATCH && !POPULAR_SLUGS.has(kind))
 
@@ -148,27 +154,36 @@ export default function PickerPage() {
                   </div>
                 )}
                 <ul aria-label="Modules you can choose" className="flex flex-col gap-2.5">
-                  {modules.filter((m) => selectability(modules, m).ok).map((m) => {
-                    const inc = result.included.get(m.key)
-                    const checked = chosen.has(m.key) || !!inc
+                  {modules.filter(isSelectable).map((m) => {
+                    const inc = included.get(m.id ?? '')
+                    const auto = !!inc && inc.reason !== 'selected'
+                    const checked = chosen.has(m.key) || auto
                     return (
                       <li key={m.key} className={`rounded-xl ${checked ? 'border-2 border-action bg-ok-wash' : 'border-2 border-line bg-paper'} has-[:focus-visible]:shadow-[0_0_0_4px_var(--color-accent)]`}>
                         <label className="flex cursor-pointer items-start gap-3.5 p-4 has-[:disabled]:cursor-default">
                           <input
-                            type="checkbox" checked={checked} disabled={!!inc}
-                            onChange={() => setChoice(choiceFrom(modules, toggle(modules, choice.keys, m.key)))}
+                            type="checkbox" checked={checked} disabled={auto}
+                            onChange={() => setChoice(choiceFrom(modules, toggle(modules, keys, m.key)))}
                             className="mt-0.5 size-6 flex-none accent-action"
                           />
                           <span className="flex min-w-0 flex-col gap-1">
                             <span className="text-[1.0625rem] font-bold">{m.name}</span>
                             <span className="line-clamp-3 text-base leading-[1.45] text-ink-2">{m.summary || infoFor(m, dir)?.desc}</span>
-                            {inc && <span className="text-sm font-semibold leading-[1.45] text-ok-ink">{inclusionNote(inc, m.name)}</span>}
+                            {inc && template && inclusionNote(inc, template.name) && <span className="text-sm font-semibold leading-[1.45] text-ok-ink">{inclusionNote(inc, template.name)}</span>}
                           </span>
                         </label>
                       </li>
                     )
                   })}
                 </ul>
+                {resolution.status === 'refused' && (
+                  <p role="alert" className="flex gap-2 text-[0.9375rem] font-semibold text-red"><Warn />{resolution.message}</p>
+                )}
+                {resolution.status === 'failed' && (
+                  <p role="status" className="text-[0.9375rem] text-amber-ink">
+                    {resolution.reason === 'rate_limited' ? 'Too many checks just now.' : 'We could not check this setup.'} It is checked again when you create your account.
+                  </p>
+                )}
                 {later.length > 0 && (
                   <details className="rounded-xl border border-line bg-paper px-4">
                     <summary className="flex min-h-14 cursor-pointer items-center text-base font-semibold">
@@ -200,7 +215,9 @@ export default function PickerPage() {
             <p className="text-[0.9375rem]">
               {screen === 'setup' && <strong>{count === 0 ? 'No modules ticked.' : `${count.toLocaleString('en-US')} ${count === 1 ? 'module' : 'modules'}.`}</strong>} <span className="text-ink-3">Free during the pilot.</span>
             </p>
-            {screen === 'setup' && count > 0
+            {screen === 'setup' && count > 0 && resolution.status === 'refused'
+              ? <button type="button" disabled className={`${primary} cursor-not-allowed opacity-60`}>Continue to create account</button>
+              : screen === 'setup' && count > 0
               ? <a href={signupHref} className={primary}>Continue to create account</a>
               : <button type="button" onClick={next} className={primary}>{screen === 'business' ? 'Continue' : 'Continue to create account'}</button>}
           </div>

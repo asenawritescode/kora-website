@@ -1,8 +1,9 @@
-# The set-up page lists the parts Cloud publishes under Cloud's own names and ticks a
-# preset by release, not by name: Cloud calls these "Selling and cash" and "Stock",
-# which the site never does.
+# The set-up page lists the parts Cloud publishes under Cloud's own names, ticks a
+# preset by release, and shows what Cloud says a choice installs. "Books needs Stock,
+# so Stock is included." is Cloud's sentence from its resolve answer; the site has
+# no such text, so seeing it means the page asked Cloud.
 url: ${BASE}
-name: the set-up page joins Cloud's parts to the preset by release
+name: the set-up page shows what Cloud says the choice installs
 ---
 - openLink: ${BASE}/start
 - tapOn: "Shop or kiosk.*"
@@ -12,3 +13,6 @@ name: the set-up page joins Cloud's parts to the preset by release
 - assertVisible: "2 modules.*"
 - assertNotVisible: "No modules ticked.*"
 - assertVisible: ".*3 more in this setup.*"
+- tapOn: "Books.*"
+- assertVisible: "3 modules.*"
+- assertVisible: ".*Books needs Stock, so Stock is included.*"

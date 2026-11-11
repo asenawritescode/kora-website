@@ -3,6 +3,12 @@
     "data": {
       "items": [
         {
+          "slug": "erp-books",
+          "package_id": "erp-books",
+          "name": "Books",
+          "availability": "available"
+        },
+        {
           "slug": "erp-buy",
           "package_id": "erp-buy",
           "name": "Buying",

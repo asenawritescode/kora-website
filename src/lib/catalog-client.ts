@@ -9,10 +9,11 @@ export interface CatalogComponent {
   summary: string
   selection: string
   availability: Availability
-  requires: string[]
 }
 
 export interface CatalogTemplate {
+  // The release Cloud installs for this template ("retail-erp-1.0.6").
+  releaseId?: string
   slug: string
   name: string
   summary: string
@@ -90,7 +91,6 @@ function parseComponent(raw: unknown): CatalogComponent | null {
     summary: text(raw.summary),
     selection: text(raw.selection) || 'required',
     availability: level,
-    requires: Array.isArray(raw.requires) ? raw.requires.map(text).filter(Boolean) : [],
   }
 }
 
@@ -101,6 +101,7 @@ function parseTemplate(raw: unknown): CatalogTemplate | null {
   const level = levelOf(raw.availability)
   if (!slug || !name || level === 'hidden') return null
   return {
+    releaseId: text(raw.release_id) || undefined,
     slug,
     name,
     summary: text(raw.summary),

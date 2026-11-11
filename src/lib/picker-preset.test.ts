@@ -8,7 +8,7 @@ import { industryFor, infoFor, notReady, packageOf, presetKeys, slugOfRelease, t
 
 // Names as the real local Cloud publishes them: none of them is a name the site uses.
 const part = (id: string, name: string, selection: string, availability: CatalogComponent['availability'] = 'available'): CatalogComponent =>
-  ({ id, name, summary: '', selection, availability, requires: [] })
+  ({ id, name, summary: '', selection, availability })
 const template: CatalogTemplate = {
   slug: 'retail-erp', name: 'Retail with back office', summary: '', availability: 'available',
   components: [

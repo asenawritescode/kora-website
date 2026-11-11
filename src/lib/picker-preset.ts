@@ -6,7 +6,7 @@
 import type { CatalogModule } from './catalog-client'
 import { INDUSTRIES, industrySlug, type Industry } from './industries-content'
 import type { ModuleInfo } from './live-catalog'
-import { selectability, toggle, type PickerModule } from './module-picker'
+import { isSelectable, toggle, type PickerModule } from './module-picker'
 
 // What the join needs: the catalog's module list and the site's modules, each
 // carrying the slug Cloud links it to.
@@ -36,14 +36,14 @@ export function presetKeys(modules: PickerModule[], industry: Industry, dir: Dir
   let keys: string[] = []
   for (const m of modules) {
     const info = infoFor(m, dir)
-    if (info && wanted.has(info.id) && selectability(modules, m).ok) keys = toggle(modules, keys, m.key)
+    if (info && wanted.has(info.id) && isSelectable(m)) keys = toggle(modules, keys, m.key)
   }
   return keys
 }
 
 // Preset modules with nothing the catalog can offer yet, for "not ready" lists.
 export function notReady(modules: PickerModule[], dir: Directory, industry?: Industry): ModuleInfo[] {
-  const offered = new Set(modules.filter((m) => selectability(modules, m).ok).flatMap((m) => infoFor(m, dir)?.id ?? []))
+  const offered = new Set(modules.filter(isSelectable).flatMap((m) => infoFor(m, dir)?.id ?? []))
   const ids = industry ? industry.preset : dir.info.map((m) => m.id)
   return ids.filter((id) => !offered.has(id)).flatMap((id) => dir.info.find((m) => m.id === id) ?? [])
 }
