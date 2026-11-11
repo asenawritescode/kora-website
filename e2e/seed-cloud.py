@@ -58,7 +58,7 @@ REQUIRES = {"erp-books": ["erp-stock"]}
 # are immutable, so a stack seeded with 1.0.0 keeps those and gets 1.1.0 beside them; the
 # newest published release of a slug is the one the catalog shows.
 VERSION = "1.2.0"
-def rid(slug): return f"{slug}-{VERSION}"
+def rid(slug, version=None): return f"{slug}-{version or VERSION}"
 
 # Templates are what the /start picker lists. Each composes module releases.
 TEMPLATES = [
@@ -107,8 +107,8 @@ FIELDS = {
     "Shop Day": ("reference", [REF, NOTE]),
 }
 
-def doctype_yaml(doctype, module):
-    search, fields = FIELDS[doctype]
+def doctype_yaml(doctype, module, spec=None):
+    search, fields = spec or FIELDS[doctype]
     out = [f"name: {doctype}", f"module: {module}", f"title_field: {fields[0][0]}", f"search_fields: {search}", "sort_field: creation", "sort_order: DESC", "", "fields:"]
     for fieldname, fieldtype, label, flags in fields:
         out += [f"  - fieldname: {fieldname}", f"    fieldtype: {fieldtype}", f"    label: {label}"]
@@ -119,17 +119,18 @@ def doctype_yaml(doctype, module):
                 out.append(f"    {key}: {'true' if value else 'false'}")
     return "\n".join(out) + "\n"
 
-def publish(slug, name, summary, doctype, level, category="", kind="module", composition=()):
-    release_id = rid(slug)
-    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": VERSION, "kind": kind,
+def publish(slug, name, summary, doctype, level, category="", kind="module", composition=(), version=None, spec=None):
+    version = version or VERSION
+    release_id = rid(slug, version)
+    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": version, "kind": kind,
                 "public": {"slug": slug, "name": name, "summary": summary, **({"category": category} if category else {})},
                 "exports": {"doctypes": [doctype], "capabilities": [slug + ".use"]},
                 "engine": {"min_version": "1.0.0"}}
     if REQUIRES.get(slug):
-        manifest["requires"] = [{"package_id": r, "release_id": rid(r)} for r in REQUIRES[slug]]
+        manifest["requires"] = [{"package_id": r, "release_id": rid(r, version)} for r in REQUIRES[slug]]
     if composition:
         manifest["composition"] = [{"release_id": rid, "selection": sel} for rid, sel in composition]
-    files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": doctype_yaml(doctype, name)}]
+    files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": doctype_yaml(doctype, name, spec)}]
     status, payload = call("POST", "/api/cloud/marketplace/releases", "author", {"manifest": manifest, "files": files})
     if status == 409 or "duplicate entry" in json.dumps(payload).lower():
         # Releases are immutable and attestations append-only: a release that

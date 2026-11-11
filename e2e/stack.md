@@ -43,3 +43,22 @@ Cloud allows 10 new workspace setups per connection per hour (5 per email). One 
 
 Check the Engine's advertised capabilities with `GET /api/management/v2/capabilities`; it must list
 `tenant.package.apply` and `tenant.provision`.
+
+## Upgrading a live workspace
+
+A workspace made from an older release of a template can be moved to a newer one by an operator (the
+`upgrade-package/plan` and `upgrade-package` calls, which need the operator token and a support reason).
+`e2e/upgrade-e2e.py` checks the whole path through the real APIs on this stack: it publishes its own
+fixture releases, signs up two workspaces, and asserts a safe upgrade keeps records and adds fields, an
+upgrade that would add a unique field to a table that holds records is refused with the reason, the same
+change on an empty table works and the unique rule is then enforced, and `GET /api/cloud/sites` shows
+who is on which release and who is outdated.
+
+```
+CLOUD=... ENGINE=... MAILPIT=... ADMIN=... AUTHOR=... REVIEWER=... PUBLISHER=... python3 e2e/upgrade-e2e.py
+```
+
+It needs an Engine that has both upgrade fixes: a unique field gets its unique index on an existing table,
+and a package that would invalidate existing records is refused before any change. Run against an Engine
+without them it fails exactly those checks. Give a freshly restarted Engine a minute before running it:
+creating a workspace while it is still loading tenants can take longer than Cloud will wait.
