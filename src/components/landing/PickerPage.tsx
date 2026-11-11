@@ -26,7 +26,7 @@ const primary = 'flex min-h-[52px] w-full items-center justify-center rounded-md
 // What can be ticked comes from Cloud's catalog; what is not ready yet comes
 // from the module list.
 export default function PickerPage() {
-  const { state, retry, source } = useCatalog()
+  const { state, retry, source, modules: info, catalog } = useCatalog()
   const choice = useChoice()
   const signupHref = useSignupHref()
   const [screen, setScreen] = useState<'business' | 'setup'>('business')
@@ -43,27 +43,32 @@ export default function PickerPage() {
   }, [screen])
 
   const modules = useMemo(() => (state.status === 'ready' ? modulesFrom(state.templates) : []), [state])
+  // Presets join template parts to the site's modules, which needs both answers.
+  const waiting = state.status === 'loading' || source === 'loading'
+  const dir = { catalog, info }
   const result = useMemo(() => resolve(modules, choice.keys), [modules, choice.keys])
   const industry: Industry | undefined = industryFor(kind)
 
   // A link from an industry page starts on the setup screen for that industry.
   const [preset, setPreset] = useState<string | null>(() => (typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('for')))
   useEffect(() => {
-    if (state.status !== 'ready' || !preset) return
+    if (state.status !== 'ready' || waiting || !preset) return
     const found = industryFor(preset)
-    if (found) { setKind(industrySlug(found)); setChoice(choiceFrom(modules, presetKeys(modules, found))); setScreen('setup') }
+    if (found) { setKind(industrySlug(found)); setChoice(choiceFrom(modules, presetKeys(modules, found, dir))); setScreen('setup') }
     setPreset(null)
-  }, [state.status, preset, modules])
+  }, [state.status, waiting, preset, modules])
 
   const chosen = new Set(result.chosen.map((m) => m.key))
   const count = result.chosen.length + result.included.size
-  const later = notReady(modules, industry)
+  const later = notReady(modules, dir, industry)
   const showOther = kind === OTHER || (!!kind && kind !== SCRATCH && !POPULAR_SLUGS.has(kind))
 
   function next() {
     if (screen === 'business') {
       if (!kind || kind === OTHER) { setError(kind === OTHER ? 'Choose your business from the list, or pick modules yourself.' : 'Choose the kind of business you run.'); return }
-      setChoice(choiceFrom(modules, industry ? presetKeys(modules, industry) : []))
+      // Still loading: the preset is applied when both answers are in.
+      if (waiting) setPreset(kind)
+      else setChoice(choiceFrom(modules, industry ? presetKeys(modules, industry, dir) : []))
       setScreen('setup'); setError(''); setTried(false)
     } else if (count === 0) setTried(true)
   }
@@ -122,7 +127,7 @@ export default function PickerPage() {
               </p>
             </div>
 
-            {state.status === 'loading' && (
+            {waiting && state.status !== 'error' && (
               <>
                 <p role="status" className="text-[0.9375rem] text-ink-2">Loading modules…</p>
                 {[0, 1].map((i) => <div key={i} data-skeleton="" aria-hidden="true" className="h-[92px] rounded-xl bg-skeleton" />)}
@@ -134,7 +139,7 @@ export default function PickerPage() {
                 <button type="button" onClick={retry} className="min-h-12 self-start rounded-md bg-action px-[18px] text-base font-semibold text-paper">Try again</button>
               </div>
             )}
-            {state.status === 'ready' && (
+            {state.status === 'ready' && !waiting && (
               <>
                 {modules.length === 0 && (
                   <div className="flex flex-col items-start gap-1 rounded-xl border border-line bg-paper p-4 text-base text-ink-2">
@@ -156,7 +161,7 @@ export default function PickerPage() {
                           />
                           <span className="flex min-w-0 flex-col gap-1">
                             <span className="text-[1.0625rem] font-bold">{m.name}</span>
-                            <span className="line-clamp-3 text-base leading-[1.45] text-ink-2">{m.summary || infoFor(m.name)?.desc}</span>
+                            <span className="line-clamp-3 text-base leading-[1.45] text-ink-2">{m.summary || infoFor(m, dir)?.desc}</span>
                             {inc && <span className="text-sm font-semibold leading-[1.45] text-ok-ink">{inclusionNote(inc, m.name)}</span>}
                           </span>
                         </label>

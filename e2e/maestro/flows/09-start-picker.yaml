@@ -1,0 +1,14 @@
+# The set-up page lists the parts Cloud publishes under Cloud's own names and ticks a
+# preset by release, not by name: Cloud calls these "Selling and cash" and "Stock",
+# which the site never does.
+url: ${BASE}
+name: the set-up page joins Cloud's parts to the preset by release
+---
+- openLink: ${BASE}/start
+- tapOn: "Shop or kiosk.*"
+- tapOn: "Continue"
+- assertVisible: "Selling and cash"
+- assertVisible: "Stock"
+- assertVisible: "2 modules.*"
+- assertNotVisible: "No modules ticked.*"
+- assertVisible: ".*3 more in this setup.*"

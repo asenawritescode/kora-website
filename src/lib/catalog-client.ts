@@ -24,6 +24,9 @@ export interface CatalogTemplate {
 // A module the catalog lists, reduced to what the Modules and Roadmap pages read.
 export interface CatalogModule {
   slug: string
+  // The id releases are named after ("erp-sell" for release "erp-sell-1.0.6"); the
+  // slug is what the roadmap links to. They are usually the same.
+  packageId: string
   name: string
   availability: Availability
 }
@@ -128,7 +131,7 @@ export function parseCatalogModules(payload: unknown): CatalogModule[] {
     const level = levelOf(raw.availability)
     const slug = text(raw.slug)
     const name = text(raw.name)
-    return slug && name && level !== 'hidden' ? [{ slug, name, availability: level }] : []
+    return slug && name && level !== 'hidden' ? [{ slug, packageId: text(raw.package_id) || slug, name, availability: level }] : []
   })
 }
 

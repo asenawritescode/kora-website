@@ -6,7 +6,7 @@ import { LOADING, viewOf } from '@/lib/use-catalog'
 
 const templates: CatalogTemplate[] = [{ slug: 'retail-shop', name: 'Retail shop', summary: '', availability: 'available', components: [] }]
 const live: LiveCatalog = {
-  modules: [{ slug: 'erp-sell', name: 'Selling', summary: '', availability: 'available' } as LiveCatalog['modules'][number]],
+  modules: [{ slug: 'erp-sell', packageId: 'erp-sell', name: 'Selling', availability: 'available' }],
   roadmap: [{ slug: 'pos', kind: 'module', name: 'Sales and point of sale', summary: '', horizon: 'building', requires: [], limitations: [], releaseSlug: 'erp-sell', sort: 1 }],
 }
 

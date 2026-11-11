@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { CatalogTemplate } from '@/lib/catalog-client'
+import type { CatalogModule, CatalogTemplate } from '@/lib/catalog-client'
 import { buildLanes, mergeModules, type LiveCatalog } from '@/lib/live-catalog'
 import { LANES, MODULES, type Lane, type ModuleInfo } from '@/lib/modules-content'
 import { getCatalogTemplates, getLiveCatalog } from '@/lib/public-content'
@@ -23,15 +23,17 @@ export type CatalogParts = {
   live: LiveCatalog | 'failed' | null
 }
 
-export type CatalogView = { state: CatalogState; modules: ModuleInfo[]; lanes: Lane[]; source: CatalogSource }
+// `catalog` is the module list as Cloud publishes it (empty until it answers); `modules` is the
+// site's own list with Cloud's readiness merged in.
+export type CatalogView = { state: CatalogState; modules: ModuleInfo[]; catalog: CatalogModule[]; lanes: Lane[]; source: CatalogSource }
 
 export const LOADING: CatalogParts = { templates: null, live: null }
 
 export function viewOf({ templates, live }: CatalogParts): CatalogView {
   const state: CatalogState =
     templates === null ? { status: 'loading' } : templates === 'failed' ? { status: 'error' } : { status: 'ready', templates }
-  if (live && live !== 'failed') return { state, modules: mergeModules(MODULES, live), lanes: buildLanes(live), source: 'live' }
-  return { state, modules: MODULES, lanes: LANES, source: live === 'failed' ? 'fallback' : 'loading' }
+  if (live && live !== 'failed') return { state, modules: mergeModules(MODULES, live), catalog: live.modules, lanes: buildLanes(live), source: 'live' }
+  return { state, modules: MODULES, catalog: [], lanes: LANES, source: live === 'failed' ? 'fallback' : 'loading' }
 }
 
 export function useCatalog(): CatalogView & { retry: () => void } {

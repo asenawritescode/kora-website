@@ -28,12 +28,18 @@ describe('module picker', () => {
     expect(r.included.size).toBe(0)
   })
 
-  test('choosing Point of Sale includes Inventory and says why', () => {
-    const r = resolve(modules, [key('Point of Sale')])
+  test('choosing Point of Sale includes what the catalog says it requires', () => {
+    const withRequires = modules.map((m) => (m.name === 'Point of Sale' ? { ...m, requires: ['Inventory'] } : m))
+    const r = resolve(withRequires, [withRequires.find((m) => m.name === 'Point of Sale')!.key])
     expect(r.template?.slug).toBe('retail-pos')
-    const inc = r.included.get(key('Inventory'))!
-    expect(inclusionNote(inc, 'Inventory')).toBe('Included: Point of Sale needs Inventory, because each sale takes the items off the stock count.')
+    expect(inclusionNote(r.included.get(key('Inventory'))!, 'Inventory')).toBe('Included: Point of Sale needs Inventory.')
     expect(r.included.has(key('Reports'))).toBe(false)
+  })
+
+  test('a catalog that lists no requires adds no need of its own', () => {
+    const r = resolve(modules, [key('Point of Sale')])
+    const inc = r.included.get(key('Inventory'))
+    expect(inc && 'by' in inc).toBe(false)
   })
 
   test('choosing Inventory alone still sets up the template parts, with the template as the reason', () => {
@@ -52,12 +58,6 @@ describe('module picker', () => {
     expect(a).toEqual([key('Inventory')])
     expect(toggle(modules, a, key('Inventory'))).toEqual([])
   })
-})
-
-test('a catalog requires list keeps the checked reason when it matches', () => {
-  const withRequires = modules.map((m) => (m.name === 'Point of Sale' ? { ...m, requires: ['Inventory'] } : m))
-  const r = resolve(withRequires, [key('Point of Sale')])
-  expect(r.included.get(key('Inventory'))).toEqual({ by: 'Point of Sale', why: 'each sale takes the items off the stock count' })
 })
 
 // A catalog shaped like the local Cloud's: every part optional.

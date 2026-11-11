@@ -34,16 +34,18 @@ def must(result, what, ok=(200, 201, 204)):
         sys.exit(f"{what} failed: {status} {payload}")
     return payload
 
-# Releases: website id -> (release slug, name, summary, doctype, availability)
+# Releases as the real Cloud names them. None of these is a name the website uses:
+# the site joins to them by release slug, so a seed that echoed the site's names
+# would hide a broken join. (release slug, name, summary, doctype, availability)
 RELEASES = [
-    ("erp-sell", "Sales and point of sale", "Sell, take cash or mobile money, and see every sale.", "POS Sale", "available"),
-    ("erp-stock", "Inventory and stock", "Know what you have and when to restock.", "Stock Item", "available"),
-    ("erp-buy", "Purchasing and suppliers", "Track what you buy and what you owe suppliers.", "Purchase Order", "preview"),
+    ("erp-sell", "Selling and cash", "Sell at the counter in any currency, take payments, work a till, track expenses.", "POS Sale", "available"),
+    ("erp-stock", "Stock", "Change stock with a reason, and see it change from any screen.", "Stock Item", "available"),
+    ("erp-buy", "Buying", "Order from suppliers, record deliveries, bills and payments.", "Purchase Order", "preview"),
 ]
 
 # Templates are what the /start picker lists. Each composes module releases.
 TEMPLATES = [
-    ("retail-shop", "Retail shop", "Sell, track stock and buy from suppliers.", "POS Sale",
+    ("retail-shop", "Retail shop", "Sell, track stock and buy from suppliers.", "Retail Shop",
      [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-buy-1.0.0", "optional")]),
 ]
 

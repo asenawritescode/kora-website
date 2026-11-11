@@ -12,22 +12,23 @@ export type ModuleInfo = {
   desc: string
   needs: string
   missing?: string
-  // Names the Cloud catalog uses for this module, where it has one.
-  catalog?: string[]
+  // The catalog slug of the module's release, where one exists. Cloud's roadmap
+  // link (release_slug) wins over this committed value when it answers.
+  slug?: string
 }
 
 const TBC = 'To be confirmed'
 
 export const MODULES: ModuleInfo[] = [
-  { id: 'pos', name: 'Sales and point of sale', short: 'point of sale', status: 'available', desc: 'Sell, take cash or mobile money, and see every sale.', needs: 'Inventory and stock (each sale updates the count)', catalog: ['Point of Sale'] },
-  { id: 'inventory', name: 'Inventory and stock', short: 'inventory', status: 'available', desc: 'Know what you have and when to restock.', needs: 'Nothing else', catalog: ['Inventory'] },
-  { id: 'purchasing', name: 'Purchasing and suppliers', status: 'preview', desc: 'Track what you buy and what you owe suppliers.', needs: 'Inventory and stock', missing: 'Purchase orders and supplier bills.', catalog: ['Purchasing'] },
-  { id: 'accounting', name: 'Accounting and tax', status: 'roadmap', desc: 'Track money in and out, and your tax figures.', needs: TBC, catalog: ['Accounting'] },
+  { id: 'pos', name: 'Sales and point of sale', short: 'point of sale', status: 'available', desc: 'Sell, take cash or mobile money, and see every sale.', needs: 'Inventory and stock (each sale updates the count)', slug: 'erp-sell' },
+  { id: 'inventory', name: 'Inventory and stock', short: 'inventory', status: 'available', desc: 'Know what you have and when to restock.', needs: 'Nothing else', slug: 'erp-stock' },
+  { id: 'purchasing', name: 'Purchasing and suppliers', status: 'preview', desc: 'Track what you buy and what you owe suppliers.', needs: 'Inventory and stock', missing: 'Purchase orders and supplier bills.', slug: 'erp-buy' },
+  { id: 'accounting', name: 'Accounting and tax', status: 'roadmap', desc: 'Track money in and out, and your tax figures.', needs: TBC, slug: 'erp-books' },
   { id: 'people', name: 'People, payroll and leave', status: 'roadmap', desc: 'Keep staff records, pay salaries and manage leave.', needs: TBC },
   { id: 'projects', name: 'Projects and tasks', status: 'roadmap', desc: 'Plan work and track tasks.', needs: TBC },
   { id: 'crm', name: 'Customers (CRM) and support', status: 'roadmap', desc: 'Keep customer details and answer questions.', needs: TBC },
   { id: 'documents', name: 'Documents and approvals', status: 'roadmap', desc: 'Store documents and get sign-off.', needs: TBC },
-  { id: 'reports', name: 'Reports and owner dashboards', status: 'roadmap', desc: 'See the business on one screen.', needs: TBC, catalog: ['Reports'] },
+  { id: 'reports', name: 'Reports and owner dashboards', status: 'roadmap', desc: 'See the business on one screen.', needs: TBC },
   { id: 'assets', name: 'Assets and maintenance', status: 'roadmap', desc: 'Track equipment and plan repairs.', needs: TBC },
   { id: 'subscriptions', name: 'Subscriptions and recurring billing', status: 'roadmap', desc: 'Bill customers on a schedule.', needs: TBC },
   { id: 'manufacturing', name: 'Manufacturing and bills of materials', status: 'roadmap', desc: 'Turn materials into products with a recipe.', needs: TBC },

@@ -26,6 +26,7 @@ export function mergeModules(base: ModuleInfo[], live: LiveCatalog): ModuleInfo[
     return {
       ...m,
       status: statusOf(entry, live.modules),
+      slug: entry.releaseSlug,
       desc: entry.summary || m.desc,
       needs: entry.requires.length ? entry.requires.map(name).join(', ') : m.needs,
       missing: entry.limitations.length ? entry.limitations.join(' ') : undefined,

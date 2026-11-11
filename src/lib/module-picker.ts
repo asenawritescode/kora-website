@@ -19,13 +19,6 @@ export type PickerModule = {
 // Cloud installs these whatever was ticked.
 const installedAnyway = (selection: string) => selection === 'required' || selection === 'default'
 
-// Reasons checked in a pilot workspace (a sale writes a stock issue). The
-// catalog's `requires` list decides what is needed; this only adds the why,
-// and stands in for `requires` when an older catalog leaves it out.
-const KNOWN_NEEDS: Record<string, { name: string; why: string }[]> = {
-  'Point of Sale': [{ name: 'Inventory', why: 'each sale takes the items off the stock count' }],
-}
-
 export function modulesFrom(templates: CatalogTemplate[]): PickerModule[] {
   return templates.flatMap((t) =>
     t.components.map((c) => ({
@@ -55,11 +48,8 @@ export type Resolved = {
 
 type Need = { name: string; why?: string }
 
-// What a module needs: the catalog's `requires`, or the checked fallback.
-function needsOf(m: PickerModule): Need[] {
-  const known = KNOWN_NEEDS[m.name] ?? []
-  return m.requires.length ? m.requires.map((name) => ({ name, why: known.find((k) => k.name === name)?.why })) : known
-}
+// What a module needs: the catalog's `requires`, nothing else.
+const needsOf = (m: PickerModule): Need[] => m.requires.map((name) => ({ name }))
 
 export type Selectability = { ok: true } | { ok: false; reason: 'preview' } | { ok: false; reason: 'needs-preview'; by: string }
 
