@@ -37,7 +37,7 @@ serve $DOWN "http://127.0.0.1:1"
 status=0
 for flow in e2e/maestro/flows/*.yaml; do
   echo "== $(basename "$flow")"
-  maestro -p web test --headless --screen-size 1280x1800 --test-output-dir "$OUT/$(basename "$flow" .yaml)" \
+  maestro -p web test --headless --screen-size 1280x4000 --test-output-dir "$OUT/$(basename "$flow" .yaml)" \
     -e BASE="$BASE" -e BASE_DOWN="$BASE_DOWN" -e CLOUD="$CLOUD" -e ADMIN="$ADMIN" -e AUTHOR="$AUTHOR" -e PUBLISHER="$PUBLISHER" \
     "$flow" || status=1
 done

@@ -3,7 +3,9 @@ import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, H1, StatusBadge, Tick, type Status } from '@/components/landing/ui'
-import type { ModuleInfo } from '@/lib/live-catalog'
+import { INDUSTRIES, industrySlug, inPreset } from '@/lib/industries-content'
+import { groupByJob, type ModuleInfo } from '@/lib/live-catalog'
+import { industryFor } from '@/lib/picker-preset'
 import { useCatalog } from '@/lib/use-catalog'
 import { usePhone } from '@/lib/use-phone'
 
@@ -18,12 +20,18 @@ const countByStatus = (modules: ModuleInfo[], status: Status) => modules.filter(
 
 export default function ModulesPage() {
   const { modules: MODULES, source } = useCatalog()
-  const countFor = (f: Filter) => (f === 'all' ? MODULES.length : countByStatus(MODULES, f))
   const [filter, setFilter] = useState<Filter>('all')
+  // "For my business" keeps the modules a kind of business starts with. A link can set it: /modules?for=retail-and-general-shops.
+  const [business, setBusiness] = useState(() => {
+    const asked = typeof window === 'undefined' ? null : new URLSearchParams(window.location.search).get('for')
+    return industryFor(asked) ? asked! : ''
+  })
+  const scope = inPreset(industryFor(business), MODULES)
+  const countFor = (f: Filter) => (f === 'all' ? scope.length : countByStatus(scope, f))
   const phone = usePhone()
   // null follows the screen (closed on a phone, open elsewhere) until the visitor toggles it.
   const [plannedOpen, setPlannedOpen] = useState<boolean | null>(null)
-  const shown = MODULES.filter((m) => filter === 'all' || m.status === filter)
+  const shown = scope.filter((m) => filter === 'all' || m.status === filter)
   const cards = shown.filter((m) => m.status !== 'roadmap')
   const planned = shown.filter((m) => m.status === 'roadmap')
 
@@ -46,6 +54,17 @@ export default function ModulesPage() {
           <div className="w-full max-w-[880px]"><ProductScreens variant="modules" autoplay={false} /></div>
         </section>
 
+        <label className="flex flex-col gap-1.5 text-[0.9375rem] font-bold sm:flex-row sm:items-center sm:gap-3">
+          For my business
+          <select
+            value={business} onChange={(e) => setBusiness(e.target.value)}
+            className="min-h-11 min-w-0 rounded-md border border-line-control bg-paper px-3 text-base font-normal text-ink sm:w-[320px]"
+          >
+            <option value="">Any kind of business</option>
+            {INDUSTRIES.map((i) => <option key={i.name} value={industrySlug(i)}>{i.name}</option>)}
+          </select>
+        </label>
+
         <div role="group" aria-label="Filter by state" className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
           {FILTERS.map(([id, label]) => {
             const on = id === filter
@@ -65,31 +84,34 @@ export default function ModulesPage() {
         {source === 'fallback' && <p role="alert" className="text-[0.9375rem] text-amber-ink">Live status could not be loaded, so this is the last published list. Try again shortly.</p>}
         <p role="status" className="text-[0.9375rem] text-ink-3">Showing {shown.length.toLocaleString('en-US')} of {MODULES.length.toLocaleString('en-US')} modules</p>
 
-        {cards.length > 0 && (
-          <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))]">
-            {cards.map((m) => (
-              <article key={m.id} className={`${CARD} flex flex-col gap-3 p-[22px]`}>
-                <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                  <h2 className="text-[1.3125rem] leading-tight">{m.name}</h2>
-                  <StatusBadge status={m.status} />
-                </div>
-                <p className="text-base leading-normal text-ink-2">{m.desc}</p>
-                <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm leading-[1.45]">
-                  <dt className="font-bold text-ink-3">Needs</dt><dd>{m.needs}</dd>
-                  {m.missing && (<><dt className="font-bold text-amber-ink">Missing</dt><dd className="text-amber-ink">{m.missing}</dd></>)}
-                  {m.status !== 'available' && (<><dt className="font-bold text-ink-3">Screens</dt><dd className="text-ink-3">No screenshots yet</dd></>)}
-                </dl>
-                <div className="mt-auto flex flex-col gap-2 pt-1.5">
-                  {m.status === 'available' ? (
-                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">Choose {SHORT[m.id] ?? m.name.toLowerCase()}</Link>
-                  ) : (
-                    <Link to="/roadmap" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">See the roadmap</Link>
-                  )}
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
+        {groupByJob(cards).map((group) => group.modules.length > 0 && (
+          <section key={group.job ?? 'all'} aria-label={group.job} className="flex flex-col gap-3">
+            {group.job && <h2 className={h2}>{group.job}</h2>}
+            <div className="grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(min(100%,360px),1fr))]">
+              {group.modules.map((m) => (
+                <article key={m.id} className={`${CARD} flex flex-col gap-3 p-[22px]`}>
+                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                    {group.job ? <h3 className="text-[1.3125rem] leading-tight">{m.name}</h3> : <h2 className="text-[1.3125rem] leading-tight">{m.name}</h2>}
+                    <StatusBadge status={m.status} />
+                  </div>
+                  <p className="text-base leading-normal text-ink-2">{m.desc}</p>
+                  <dl className="grid grid-cols-[auto_1fr] gap-x-3 gap-y-1.5 text-sm leading-[1.45]">
+                    <dt className="font-bold text-ink-3">Needs</dt><dd>{m.needs}</dd>
+                    {m.missing && (<><dt className="font-bold text-amber-ink">Missing</dt><dd className="text-amber-ink">{m.missing}</dd></>)}
+                    {m.status !== 'available' && (<><dt className="font-bold text-ink-3">Screens</dt><dd className="text-ink-3">No screenshots yet</dd></>)}
+                  </dl>
+                  <div className="mt-auto flex flex-col gap-2 pt-1.5">
+                    {m.status === 'available' ? (
+                      <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">Choose {SHORT[m.id] ?? m.name.toLowerCase()}</Link>
+                    ) : (
+                      <Link to="/roadmap" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">See the roadmap</Link>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+        ))}
 
         {planned.length > 0 && (
           <details
@@ -103,14 +125,19 @@ export default function ModulesPage() {
             <div className="flex flex-col gap-2.5 pt-2.5">
               <p className="mb-1.5 max-w-[680px] text-base leading-normal text-ink-2">No dates promised. Needs to be confirmed. No screenshots yet.</p>
               <Link to="/roadmap" className="inline-flex min-h-11 items-center self-start text-[0.9375rem] font-semibold">See the roadmap</Link>
-              <ul className={CARD}>
-                {planned.map((m, i) => (
-                  <li key={m.id} className={`flex flex-col gap-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
-                    <h3 className="text-[1.0625rem]">{m.name} <StatusBadge status={m.status} quiet /></h3>
-                    <p className="text-base leading-normal text-ink-2">{m.desc}</p>
-                  </li>
-                ))}
-              </ul>
+              {groupByJob(planned).map((group) => (
+                <div key={group.job ?? 'all'} className="flex flex-col gap-2">
+                  {group.job && <h3 className="mt-2 text-[1.25rem] font-bold">{group.job}</h3>}
+                  <ul className={CARD}>
+                    {group.modules.map((m, i) => (
+                      <li key={m.id} className={`flex flex-col gap-1 px-5 py-4 ${i ? 'border-t border-line-faint' : ''}`}>
+                        {group.job ? <h4 className="text-[1.0625rem]">{m.name} <StatusBadge status={m.status} quiet /></h4> : <h3 className="text-[1.0625rem]">{m.name} <StatusBadge status={m.status} quiet /></h3>}
+                        <p className="text-base leading-normal text-ink-2">{m.desc}</p>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
           </details>
         )}

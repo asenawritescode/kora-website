@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import fixture from './__fixtures__/public-site-v1.json'
 import { fetchRoadmap, parseCatalogModules, parseRoadmap, CatalogError, type Fetcher } from './catalog-client'
-import { buildLanes, modulesOf, statusOf, type LiveCatalog } from './live-catalog'
+import { SNAPSHOT } from './catalog-snapshot'
+import { buildLanes, groupByJob, modulesOf, statusOf, type LiveCatalog } from './live-catalog'
 import type { Status } from '@/components/landing/ui'
 
 // public-site-v1.json holds real payloads from a seeded Cloud: releases erp-sell and
@@ -122,5 +123,31 @@ describe('buildLanes', () => {
     const next = buildLanes(attested)
     expect(next.find((l) => l.title === 'Now')!.items.map((i) => i.name)).toContain('Purchasing and suppliers')
     expect(next.find((l) => l.title === 'Building')!.items).toEqual([])
+  })
+})
+
+describe('groupByJob', () => {
+  const mod = (id: string, category?: string) => ({ id, name: id, status: 'roadmap' as const, desc: '', needs: '', category })
+  const six = [mod('a', 'Money'), mod('b', 'Operations'), mod('c', 'Money'), mod('d', 'Operations'), mod('e', 'Money'), mod('f')]
+
+  test('groups by job in the order Cloud lists them, and puts a module with no job last', () => {
+    expect(groupByJob(six).map((g) => [g.job, g.modules.map((m) => m.id)])).toEqual([
+      ['Money', ['a', 'c', 'e']], ['Operations', ['b', 'd']], ['Other', ['f']],
+    ])
+  })
+
+  test('a short list is not grouped', () => {
+    expect(groupByJob(six.slice(0, 5))).toEqual([{ modules: six.slice(0, 5) }])
+  })
+
+  test('a list where Cloud names no jobs is not grouped', () => {
+    const none = six.map((m) => mod(m.id))
+    expect(groupByJob(none)).toEqual([{ modules: none }])
+  })
+
+  test('the planned modules in the snapshot group by the jobs Cloud names', () => {
+    const planned = modulesOf(SNAPSHOT).filter((m) => m.status === 'roadmap')
+    expect(planned.length).toBeGreaterThanOrEqual(6)
+    expect(groupByJob(planned).map((g) => g.job)).toEqual(['Money', 'Operations', 'Customers', 'People', 'Connect'])
   })
 })

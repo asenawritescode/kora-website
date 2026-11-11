@@ -1,6 +1,6 @@
 import { expect, test } from 'bun:test'
 import { SNAPSHOT } from './catalog-snapshot'
-import { INDUSTRIES, presetModules, readyModules } from './industries-content'
+import { INDUSTRIES, inPreset, presetModules, readyModules } from './industries-content'
 import { modulesOf } from './live-catalog'
 
 const modules = modulesOf(SNAPSHOT)
@@ -29,4 +29,10 @@ test('a module Cloud no longer lists is skipped, not a crash', () => {
   const retail = INDUSTRIES[0]
   expect(presetModules(retail, modules.filter((m) => m.id !== 'purchasing')).map((m) => m.id)).not.toContain('purchasing')
   expect(presetModules(retail, [])).toEqual([])
+})
+
+test('a business starts with its preset, in the order of the module list', () => {
+  const retail = INDUSTRIES[0]
+  expect(inPreset(retail, modules).map((m) => m.id)).toEqual(['pos', 'inventory', 'purchasing', 'accounting', 'reports'])
+  expect(inPreset(undefined, modules)).toBe(modules)
 })

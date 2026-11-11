@@ -78,3 +78,17 @@ export function buildLanes(live: LiveCatalog): Lane[] {
     lane('building'), lane('next'), lane('later'),
   ]
 }
+
+export type JobGroup = { job?: string; modules: ModuleInfo[] }
+
+// Modules grouped by the job they do, in the order Cloud lists them. A short list is
+// not grouped (a heading over every module is noise), and nor is one where Cloud
+// names no jobs. A module with no job goes last, under "Other".
+export function groupByJob(modules: ModuleInfo[], minimum = 6): JobGroup[] {
+  if (modules.length < minimum || !modules.some((m) => m.category)) return [{ modules }]
+  const groups = new Map<string, ModuleInfo[]>()
+  for (const m of modules) groups.set(m.category ?? 'Other', [...(groups.get(m.category ?? 'Other') ?? []), m])
+  const other = groups.get('Other')
+  groups.delete('Other')
+  return [...groups, ...(other ? [['Other', other] as const] : [])].map(([job, list]) => ({ job, modules: list }))
+}

@@ -1,0 +1,18 @@
+# The Modules page groups the planned modules by the job Cloud names for them, and
+# "For my business" narrows the list to what a kind of business starts with.
+url: ${BASE}
+name: the Modules page groups by job and narrows to a kind of business
+---
+- openLink: ${BASE}/modules
+- assertVisible: "Showing 14 of 14 modules"
+- assertVisible: "Operations"
+- assertVisible: "Money"
+- assertVisible: "Fleet and delivery.*"
+- openLink: ${BASE}/modules?for=retail-and-general-shops
+- assertVisible: "Showing 5 of 14 modules"
+- assertVisible: "All \\(5\\)"
+- assertVisible: "Available \\(2\\)"
+- assertNotVisible: "Fleet and delivery.*"
+- openLink: ${BASE}/modules?for=schools-and-training
+- assertVisible: "Showing 5 of 14 modules"
+- assertVisible: "Available \\(0\\)"

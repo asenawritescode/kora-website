@@ -48,6 +48,9 @@ export function presetModules(industry: Industry, modules: ModuleInfo[]): Module
   return industry.preset.flatMap((id) => modules.find((m) => m.id === id) ?? [])
 }
 
+// The modules a kind of business starts with, in the order the list gives them.
+export const inPreset = (industry: Industry | undefined, modules: ModuleInfo[]) => (industry ? modules.filter((m) => industry.preset.includes(m.id)) : modules)
+
 export const readyModules = (industry: Industry, modules: ModuleInfo[]) => presetModules(industry, modules).filter((m) => m.status === 'available')
 
 export const RETAIL = {
