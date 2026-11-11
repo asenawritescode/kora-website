@@ -1,6 +1,7 @@
 import { useRef, useState, type FormEvent } from 'react'
 import { H1, Warn } from '@/components/landing/ui'
 import { TOPICS, mailtoHref, supportEmail, validateContact, type ContactErrors, type ContactFields } from '@/lib/contact'
+import { sendLead } from '@/lib/contact-lead'
 
 const EMPTY: ContactFields = { name: '', email: '', phone: '', topic: TOPICS[0], message: '' }
 const input = 'min-h-12 w-full min-w-0 rounded-md bg-paper px-3 text-base text-ink'
@@ -20,8 +21,11 @@ export default function ContactPage() {
   const to = supportEmail()
   const [values, setValues] = useState(EMPTY)
   const [errors, setErrors] = useState<ContactErrors>({})
-  const [opened, setOpened] = useState(false)
+  const [done, setDone] = useState<'sent' | 'mailto' | null>(null)
+  const [sending, setSending] = useState(false)
+  const [problem, setProblem] = useState<string | null>(null)
   const form = useRef<HTMLFormElement>(null)
+  const key = useRef(crypto.randomUUID())
 
   const set = (key: keyof ContactFields) => (e: { target: { value: string } }) => {
     setValues((v) => ({ ...v, [key]: e.target.value }))
@@ -30,14 +34,27 @@ export default function ContactPage() {
   const border = (key: keyof ContactErrors) => (errors[key] ? 'border border-red shadow-[inset_0_0_0_1px_var(--color-red)]' : 'border border-line-control')
   const aria = (key: keyof ContactErrors) => ({ 'aria-invalid': !!errors[key], 'aria-describedby': errors[key] ? `f-${key}-err` : undefined })
 
-  function submit(e: FormEvent) {
+  const focusFirst = (found: ContactErrors) => {
+    const first = Object.keys(found)[0]
+    if (first) document.getElementById(`f-${first}`)?.focus()
+  }
+
+  async function submit(e: FormEvent) {
     e.preventDefault()
+    if (sending) return
     const found = validateContact(values)
     setErrors(found)
-    const first = Object.keys(found)[0]
-    if (first) { document.getElementById(`f-${first}`)?.focus(); return }
-    window.location.href = mailtoHref(to!, values)
-    setOpened(true)
+    setProblem(null)
+    if (Object.keys(found).length) { focusFirst(found); return }
+    setSending(true)
+    const honeypot = new FormData(form.current ?? undefined).get('website')
+    const result = await sendLead(values, key.current, typeof honeypot === 'string' ? honeypot : '')
+    setSending(false)
+    if (result.kind === 'sent') { key.current = crypto.randomUUID(); setDone('sent'); return }
+    if (result.kind === 'invalid') { setErrors(result.errors); focusFirst(result.errors); return }
+    // Cloud did not take it. Keep the visitor's words and offer the next way in.
+    if (to) { window.location.href = mailtoHref(to, values); setDone('mailto'); return }
+    setProblem(result.reason === 'rate_limited' ? 'Too many messages from this connection. Try again in a minute.' : 'We could not send your message. Try again, or open an issue on GitHub.')
   }
 
   const count = Object.values(errors).filter(Boolean).length
@@ -51,20 +68,28 @@ export default function ContactPage() {
           <p className="text-[0.9375rem] text-ink-3">Based in Nairobi, Kenya.</p>
         </div>
         <div className="flex-[2_1_420px] rounded-xl border border-line bg-paper p-4 sm:p-6">
-          {!to ? (
-            <div className="flex flex-col gap-2.5">
-              <h2 className="text-2xl tracking-[-0.02em]">Ask on GitHub</h2>
-              <p className="text-base leading-normal text-ink-2">The team reads the public issue tracker. Open an issue with your question or the problem you hit.</p>
-              <a href="https://github.com/asenawritescode/kora/issues" target="_blank" rel="noopener noreferrer" className="flex min-h-12 items-center self-start rounded-md bg-action px-4 text-base font-semibold text-paper no-underline">Open an issue</a>
-            </div>
-          ) : opened ? (
+          {done ? (
             <div role="status" className="flex flex-col gap-2.5">
-              <h2 className="text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]">Your email app should open</h2>
-              <p className="text-base leading-normal text-ink-2">Send the message from there, and the reply comes to <strong className="text-ink">{values.email}</strong>.</p>
-              <button type="button" onClick={() => { setOpened(false); setValues(EMPTY) }} className="min-h-12 self-start rounded-md border border-line-control bg-paper px-4 text-base font-semibold text-ink">Write another message</button>
+              {done === 'sent' ? (
+                <>
+                  <h2 className="text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]">Message sent</h2>
+                  <p className="text-base leading-normal text-ink-2">The team will reply to <strong className="text-ink">{values.email}</strong>.</p>
+                </>
+              ) : (
+                <>
+                  <h2 className="text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]">Your email app should open</h2>
+                  <p className="text-base leading-normal text-ink-2">Send the message from there, and the reply comes to <strong className="text-ink">{values.email}</strong>.</p>
+                </>
+              )}
+              <button type="button" onClick={() => { setDone(null); setValues(EMPTY) }} className="min-h-12 self-start rounded-md border border-line-control bg-paper px-4 text-base font-semibold text-ink">Write another message</button>
             </div>
           ) : (
             <form ref={form} noValidate onSubmit={submit} className="flex flex-col gap-[18px]">
+              {problem && (
+                <p role="alert" className="flex flex-wrap gap-x-1.5 rounded-md border-2 border-red bg-red-wash px-3.5 py-3 text-[0.9375rem] font-semibold text-red-ink">
+                  {problem} <a href="https://github.com/asenawritescode/kora/issues" target="_blank" rel="noopener noreferrer">Open an issue</a>
+                </p>
+              )}
               {count > 0 && (
                 <p role="alert" className="rounded-md border-2 border-red bg-red-wash px-3.5 py-3 text-[0.9375rem] font-semibold text-red-ink">
                   {count === 1 ? 'Fix 1 thing to send your message.' : `Fix ${count} things to send your message.`}
@@ -87,7 +112,10 @@ export default function ContactPage() {
               <Field id="f-message" title="Message" error={errors.message}>
                 <textarea id="f-message" name="message" rows={5} value={values.message} onChange={set('message')} className={`min-h-[120px] w-full resize-y rounded-md bg-paper p-3 text-base leading-normal text-ink ${border('message')}`} {...aria('message')} aria-required maxLength={1200} />
               </Field>
-              <button type="submit" className="flex min-h-[52px] items-center justify-center rounded-md bg-action text-[1.0625rem] font-semibold text-paper">Send message</button>
+              <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+                <label>Leave this empty<input name="website" tabIndex={-1} autoComplete="off" /></label>
+              </div>
+              <button type="submit" disabled={sending} className="flex min-h-[52px] items-center justify-center rounded-md bg-action text-[1.0625rem] font-semibold text-paper disabled:opacity-60">{sending ? 'Sending…' : 'Send message'}</button>
             </form>
           )}
         </div>
