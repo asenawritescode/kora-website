@@ -72,6 +72,13 @@ export const ROUTE_SEO: RouteSeo[] = [
     description: `Choose the kind of business you run and the modules you need. ${BRAND} is free during the pilot.`,
   },
   {
+    // Where the emailed link lands. It acts once and never belongs in search results.
+    path: '/verify',
+    title: `Opening your workspace — ${BRAND}`,
+    description: `Confirming your email and opening your ${BRAND} workspace.`,
+    noindex: true,
+  },
+  {
     path: '/contact',
     title: `Contact us — ${BRAND}`,
     description: `Questions about ${BRAND}, the pilot or a problem in your workspace. Based in Nairobi, Kenya.`,

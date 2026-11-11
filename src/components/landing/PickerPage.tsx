@@ -9,7 +9,9 @@ import { industryFor, infoFor, modulesFor, notReady, presetKeys } from '@/lib/pi
 import { setChoice, useChoice, useSignupHref } from '@/lib/signup-choice'
 import { useCatalog } from '@/lib/use-catalog'
 import { useResolution } from '@/lib/use-resolution'
+import AccountStep from '@/components/landing/AccountStep'
 import WaitlistForm from '@/components/landing/WaitlistForm'
+import { onboardingEnabled, type Selection } from '@/lib/onboard-client'
 import { BRAND } from '@/lib/brand'
 
 const POPULAR: [string, string, string][] = [
@@ -31,7 +33,7 @@ export default function PickerPage() {
   const { state, retry, source, modules: info, catalog } = useCatalog()
   const choice = useChoice()
   const signupHref = useSignupHref()
-  const [screen, setScreen] = useState<'business' | 'setup'>('business')
+  const [screen, setScreen] = useState<'business' | 'setup' | 'account'>('business')
   const [kind, setKind] = useState('')
   const [error, setError] = useState('')
   const [tried, setTried] = useState(false)
@@ -70,6 +72,11 @@ export default function PickerPage() {
   const later = notReady(modules, dir, industry)
   const listed = modulesFor(modules, industry).filter(isSelectable)
   // A kind of business with nothing ready to set up gets the waitlist, not a list of modules that do not fit it.
+  // The site finishes onboarding itself when it knows where workspaces open; otherwise the last
+  // button leaves for Cloud's portal, as before.
+  const selection: Selection | undefined = template?.releaseId ? { template_release_id: template.releaseId, optional_release_ids: choice.optional } : undefined
+  const inSite = onboardingEnabled() && !!selection
+  const [notice, setNotice] = useState('')
   const waitlisted = screen === 'setup' && !!industry && state.status === 'ready' && !waiting && presetKeys(modules, industry, dir).length === 0
   const showOther = kind === OTHER || (!!kind && kind !== SCRATCH && !POPULAR_SLUGS.has(kind))
 
@@ -94,7 +101,7 @@ export default function PickerPage() {
             <LogoMark />
             <span className="font-display text-[1.4375rem] font-bold lowercase">{BRAND}</span>
           </Link>
-          <span className="text-sm text-ink-3">Step {screen === 'business' ? 1 : 2} of 3</span>
+          <span className="text-sm text-ink-3">Step {screen === 'business' ? 1 : screen === 'setup' ? 2 : 3} of 3</span>
         </div>
       </header>
 
@@ -127,8 +134,17 @@ export default function PickerPage() {
               </label>
             )}
           </fieldset>
+        ) : screen === 'account' && selection ? (
+          <AccountStep
+            selection={selection}
+            setupLine={`${template?.name}, ${count.toLocaleString('en-US')} ${count === 1 ? 'module' : 'modules'}.`}
+            headingRef={heading}
+            onChange={() => setScreen('setup')}
+            onSelectionRefused={(message) => { setNotice(message); retry(); setScreen('setup') }}
+          />
         ) : (
           <>
+            {notice && screen === 'setup' && <p role="alert" className="flex gap-2 text-[0.9375rem] font-semibold text-red"><Warn />{notice}</p>}
             <div className="flex flex-col gap-1.5">
               <h1 ref={heading} tabIndex={-1} className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] focus:outline-none`}>{waitlisted && industry ? `${industry.name} isn’t ready yet` : 'Your setup'}</h1>
               <p className="flex flex-wrap items-center gap-x-2 text-base text-ink-2">
@@ -210,7 +226,7 @@ export default function PickerPage() {
         )}
       </main>
 
-      {!waitlisted && <div className="sticky bottom-0 border-t border-line-2 bg-paper shadow-[0_-4px_16px_color-mix(in_srgb,var(--color-ink)_6%,transparent)]">
+      {!waitlisted && screen !== 'account' && <div className="sticky bottom-0 border-t border-line-2 bg-paper shadow-[0_-4px_16px_color-mix(in_srgb,var(--color-ink)_6%,transparent)]">
         <div className="mx-auto flex max-w-[720px] flex-col gap-2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
           {screen === 'setup' && tried && count === 0 && (
             <p role="alert" className="flex gap-2 text-sm font-semibold text-red"><Warn />Tick at least one module. Most shops start with Sales and point of sale.</p>
@@ -221,6 +237,8 @@ export default function PickerPage() {
             </p>
             {screen === 'setup' && count > 0 && resolution.status === 'refused'
               ? <button type="button" disabled className={`${primary} cursor-not-allowed opacity-60`}>Continue to create account</button>
+              : screen === 'setup' && count > 0 && inSite
+              ? <button type="button" onClick={() => { setNotice(''); setScreen('account') }} className={primary}>Continue to create account</button>
               : screen === 'setup' && count > 0
               ? <a href={signupHref} className={primary}>Continue to create account</a>
               : <button type="button" onClick={next} className={primary}>{screen === 'business' ? 'Continue' : 'Continue to create account'}</button>}
