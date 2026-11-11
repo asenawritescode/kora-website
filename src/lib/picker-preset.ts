@@ -23,10 +23,16 @@ export function slugOfRelease(releaseId: string, catalog: CatalogModule[]): stri
   return catalog.find((c) => c.packageId === id)?.slug ?? id
 }
 
-export function infoFor(m: Pick<PickerModule, 'id'>, dir: Directory): ModuleInfo | undefined {
-  if (!m.id) return undefined
+// Every site module a release is linked to. More than one can share a release: Reports points at the
+// Selling release, which ships the owner dashboard, so a Selling part offers both.
+export function infosFor(m: Pick<PickerModule, 'id'>, dir: Directory): ModuleInfo[] {
+  if (!m.id) return []
   const slug = slugOfRelease(m.id, dir.catalog)
-  return dir.info.find((i) => i.slug === slug)
+  return dir.info.filter((i) => i.slug === slug)
+}
+
+export function infoFor(m: Pick<PickerModule, 'id'>, dir: Directory): ModuleInfo | undefined {
+  return infosFor(m, dir)[0]
 }
 
 // The parts a business is set up from: those of the template its industry names when
@@ -42,15 +48,14 @@ export function presetKeys(modules: PickerModule[], industry: Industry, dir: Dir
   const wanted = new Set(industry.preset)
   let keys: string[] = []
   for (const m of modulesFor(modules, industry)) {
-    const info = infoFor(m, dir)
-    if (info && wanted.has(info.id) && isSelectable(m)) keys = toggle(modules, keys, m.key)
+    if (infosFor(m, dir).some((info) => wanted.has(info.id)) && isSelectable(m)) keys = toggle(modules, keys, m.key)
   }
   return keys
 }
 
 // Preset modules with nothing the catalog can offer yet, for "not ready" lists.
 export function notReady(modules: PickerModule[], dir: Directory, industry?: Industry): ModuleInfo[] {
-  const offered = new Set(modulesFor(modules, industry).filter(isSelectable).flatMap((m) => infoFor(m, dir)?.id ?? []))
+  const offered = new Set(modulesFor(modules, industry).filter(isSelectable).flatMap((m) => infosFor(m, dir).map((info) => info.id)))
   const ids = industry ? industry.preset : dir.info.map((m) => m.id)
   return ids.filter((id) => !offered.has(id)).flatMap((id) => dir.info.find((m) => m.id === id) ?? [])
 }

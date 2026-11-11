@@ -4,7 +4,7 @@ import { INDUSTRIES } from './industries-content'
 import { SNAPSHOT } from './catalog-snapshot'
 import { modulesOf } from './live-catalog'
 import { modulesFrom } from './module-picker'
-import { industryFor, infoFor, modulesFor, notReady, packageOf, presetKeys, slugOfRelease, type Directory } from './picker-preset'
+import { industryFor, infoFor, infosFor, modulesFor, notReady, packageOf, presetKeys, slugOfRelease, type Directory } from './picker-preset'
 
 // Names as the real local Cloud publishes them: none of them is a name the site uses.
 const part = (id: string, name: string, selection: string, availability: CatalogComponent['availability'] = 'available'): CatalogComponent =>
@@ -55,6 +55,21 @@ describe('joining a template part to a site module', () => {
   test('where Cloud says a module has no release, nothing joins to it', () => {
     expect(dir.info.find((m) => m.id === 'accounting')?.slug).toBeUndefined()
     expect(infoFor(modules[3], dir)).toBeUndefined()
+  })
+})
+
+describe('a release linked to two site modules', () => {
+  // Reports points at the Selling release, which ships the owner dashboard.
+  const shared: Directory = { catalog, info: dir.info.map((m) => (m.id === 'reports' ? { ...m, slug: 'erp-sell' } : m)) }
+
+  test('its part offers both modules', () => {
+    expect(infosFor(modules[0], shared).map((m) => m.id).sort()).toEqual(['pos', 'reports'])
+    expect(infoFor(modules[0], shared)?.id).toBe('pos')
+  })
+
+  test('the second module is not reported as unready, and a part is not ticked twice', () => {
+    expect(notReady(modules, shared, retail).map((m) => m.id)).toEqual(['purchasing', 'accounting'])
+    expect(presetKeys(modules, retail, shared)).toEqual(['retail-erp:Selling and cash', 'retail-erp:Stock'])
   })
 })
 
