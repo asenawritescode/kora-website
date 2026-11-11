@@ -1,0 +1,44 @@
+# Onboarding is finished on the site, with no visit to Cloud's own pages: choose a shop,
+# create the account, wait for the workspace, open the emailed link and arrive in the
+# workspace. Needs STUDIO (where workspaces open) and MAILPIT (the mail catcher), and a
+# Cloud whose verification link points at the site (KORA_CLOUD_SIGNUP_VERIFY_BASE_URL).
+url: ${BASE}
+name: a shop is set up and opened without leaving the site's own onboarding
+---
+- evalScript: ${output.marker = 'e2e' + Date.now()}
+- openLink: ${BASE}/start
+- tapOn: "Shop or kiosk.*"
+- tapOn: "Continue"
+- assertVisible: "Selling and cash"
+- assertVisible: "Step 2 of 3"
+- tapOn: "Continue to create account"
+- assertVisible: "Step 3 of 3"
+- assertVisible: "Create your account"
+- tapOn: "Create workspace"
+- assertVisible: "Enter your name."
+- assertVisible: "Use at least 8 characters."
+- tapOn: "Your name"
+- inputText: "Njeri Mwangi"
+- tapOn: "Business name"
+- inputText: "Njeri Hardware"
+- tapOn: "Email"
+- inputText: "owner.${output.marker}@example.com"
+- tapOn: "Password"
+- inputText: "correct-horse-battery-9"
+- tapOn: "Create workspace"
+- extendedWaitUntil:
+    visible: "Check your email"
+    timeout: 120000
+- assertVisible: ".*owner.${output.marker}@example.com.*"
+- runScript:
+    file: ../scripts/mail.js
+    env:
+      EMAIL: owner.${output.marker}@example.com
+      MAILPIT: ${MAILPIT}
+- openLink: ${output.link}
+- extendedWaitUntil:
+    visible: "Available modules"
+    timeout: 60000
+- assertVisible: "Njeri Hardware"
+- assertVisible: "POS Sale"
+- assertVisible: "Stock Item"
