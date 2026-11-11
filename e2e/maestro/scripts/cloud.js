@@ -37,6 +37,28 @@ function expect(what, got, want) {
   if (got !== want) throw new Error(what + ': got ' + got + ', want ' + want)
 }
 
+function plan(code) {
+  var all = call('GET', '/api/cloud/plans', ADMIN).json.items
+  for (var i = 0; i < all.length; i++) if (all[i].code === code) return all[i]
+  throw new Error('no plan ' + code)
+}
+
+function setPricing(mode, notice) {
+  var res = call('PUT', '/api/cloud/pricing-mode', ADMIN, { mode: mode, notice: notice })
+  if (res.status !== 200) throw new Error('pricing-mode ' + mode + ': ' + res.status + ' ' + JSON.stringify(res.json))
+}
+
+// The contact flow passes the text it typed as MARKER; the lead must be in Cloud exactly once.
+function expectOneLead(marker) {
+  var all = call('GET', '/api/cloud/leads', ADMIN).json.items
+  var found = []
+  for (var i = 0; i < all.length; i++) if (all[i].notes.indexOf(marker) >= 0) found.push(all[i])
+  expect('leads with ' + marker, found.length, 1)
+  expect('lead source', found[0].source, 'website:contact')
+  expect('lead email', found[0].contact_email, 'amina.e2e@example.com')
+  expect('lead status', found[0].status, 'new')
+}
+
 var BUY = 'erp-buy-1.0.0'
 var actions = {
   'attest-purchasing-available': function () { expect('attest available', attest(BUY, 'available', PUBLISHER, digest(BUY), 'maestro-flow').status, 200) },
@@ -51,6 +73,15 @@ var actions = {
   'restore-purchasing-limitation': function () { var it = item('purchasing'); it.limitations = ['Purchase orders and supplier bills.']; save(it) },
   'move-accounting-to-building': function () { var it = item('accounting'); it.horizon = 'building'; save(it) },
   'restore-accounting': function () { var it = item('accounting'); it.horizon = 'next'; save(it) },
+  // A plan row with a price exists in every Cloud (the defaults), yet the site stays on the
+  // pilot terms until the operator switches the mode.
+  'pricing-priced': function () {
+    var growth = plan('growth')
+    if (!growth.active) throw new Error('the growth plan is not active')
+    setPricing('priced', 'Prices apply from the first of March.')
+  },
+  'pricing-pilot': function () { setPricing('pilot', '') },
+  'expect-one-lead': function () { expectOneLead(MARKER) },
 }
 if (!actions[ACTION]) throw new Error('unknown ACTION ' + ACTION)
 actions[ACTION]()

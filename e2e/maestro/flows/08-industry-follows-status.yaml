@@ -1,0 +1,19 @@
+# An industry preset counts what is ready from the live status, so one attestation in
+# Cloud moves the Retail page as well as the Modules page.
+url: ${BASE}
+name: the Retail preset follows an attestation in Cloud
+---
+- openLink: ${BASE}/industries/retail
+- assertVisible: ".*2 of the 5 modules in this preset work today.*"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: attest-purchasing-available
+- openLink: ${BASE}/industries/retail
+- assertVisible: ".*3 of the 5 modules in this preset work today.*"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: attest-purchasing-preview
+- openLink: ${BASE}/industries/retail
+- assertVisible: ".*2 of the 5 modules in this preset work today.*"
