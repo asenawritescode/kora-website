@@ -1,15 +1,15 @@
 import { Link } from '@tanstack/react-router'
 import { CARD, H1 } from '@/components/landing/ui'
 import { ICONS, INDUSTRIES, industrySlug, presetModules, readyModules } from '@/lib/industries-content'
-import { useModules } from '@/lib/use-modules'
+import { useCatalog } from '@/lib/use-catalog'
 
 // A ruled list rather than a grid of identical cards: the ready count carries the
 // weight, Retail (the only preset with its own page) leads, and presets with
 // nothing ready are quieter.
 export default function IndustriesPage() {
-  const { modules } = useModules()
+  const { modules, source } = useCatalog()
   return (
-    <div className="flex-1 bg-surface">
+    <div className="flex-1 bg-surface" data-catalog-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-7 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex flex-wrap items-end gap-6">
           <div className="flex flex-[1_1_520px] flex-col gap-2.5">

@@ -4,7 +4,7 @@ import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, H1, StatusBadge, Tick, type Status } from '@/components/landing/ui'
 import type { ModuleInfo } from '@/lib/modules-content'
-import { useModules } from '@/lib/use-modules'
+import { useCatalog } from '@/lib/use-catalog'
 import { usePhone } from '@/lib/use-phone'
 
 type Filter = 'all' | Status
@@ -14,7 +14,7 @@ const h2 = 'text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]'
 const countByStatus = (modules: ModuleInfo[], status: Status) => modules.filter((m) => m.status === status).length
 
 export default function ModulesPage() {
-  const { modules: MODULES, source } = useModules()
+  const { modules: MODULES, source } = useCatalog()
   const countFor = (f: Filter) => (f === 'all' ? MODULES.length : countByStatus(MODULES, f))
   const [filter, setFilter] = useState<Filter>('all')
   const phone = usePhone()
@@ -25,7 +25,7 @@ export default function ModulesPage() {
   const planned = shown.filter((m) => m.status === 'roadmap')
 
   return (
-    <div className="flex-1 bg-surface" data-modules-source={source}>
+    <div className="flex-1 bg-surface" data-catalog-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-6 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex max-w-[760px] flex-col gap-2.5">
           <h1 className={H1}>Pick only what your business needs</h1>

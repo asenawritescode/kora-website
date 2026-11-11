@@ -1,16 +1,16 @@
 import { SignupLink } from '@/components/landing/SignupLink'
 import { CARD, H1, StatusBadge } from '@/components/landing/ui'
 import type { Lane } from '@/lib/modules-content'
-import { useModules } from '@/lib/use-modules'
+import { useCatalog } from '@/lib/use-catalog'
 
 const RAIL: Record<Lane['status'], string> = { available: 'border-action text-action', preview: 'border-amber-ink text-amber-ink', roadmap: 'border-line-strong text-ink-3' }
 
 // What works now, what is being built and what is planned. No dates, no email
 // capture: there is no endpoint to send roadmap updates yet.
 export default function RoadmapPage() {
-  const { lanes: LANES, source } = useModules()
+  const { lanes: LANES, source } = useCatalog()
   return (
-    <div className="flex-1 bg-surface" data-modules-source={source}>
+    <div className="flex-1 bg-surface" data-catalog-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-8 px-4 pb-[clamp(3.5rem,6vw,5.5rem)] pt-[clamp(2rem,5vw,4.5rem)]">
         <div className="flex max-w-[560px] flex-col gap-2.5">
           <h1 className={H1}>Roadmap</h1>

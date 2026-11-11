@@ -26,7 +26,7 @@ const primary = 'flex min-h-[52px] w-full items-center justify-center rounded-md
 // What can be ticked comes from Cloud's catalog; what is not ready yet comes
 // from the module list.
 export default function PickerPage() {
-  const { state, retry } = useCatalog()
+  const { state, retry, source } = useCatalog()
   const choice = useChoice()
   const signupHref = useSignupHref()
   const [screen, setScreen] = useState<'business' | 'setup'>('business')
@@ -71,7 +71,7 @@ export default function PickerPage() {
   const forLine = kind === SCRATCH ? 'You’re choosing modules yourself.' : industry ? `Set up for ${industry.name.toLowerCase()}.` : ''
 
   return (
-    <div className="flex min-h-screen flex-col bg-surface">
+    <div className="flex min-h-screen flex-col bg-surface" data-catalog-source={source}>
       <SkipLink />
       <header className="border-b border-line bg-paper">
         <div className="mx-auto flex max-w-[720px] items-center justify-between gap-3 px-4 py-2">
