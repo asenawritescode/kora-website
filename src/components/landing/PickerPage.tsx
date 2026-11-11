@@ -5,10 +5,11 @@ import { SkipLink } from '@/components/landing/SkipLink'
 import { H1, StatusBadge, Warn, type Status } from '@/components/landing/ui'
 import { INDUSTRIES, industrySlug, type Industry } from '@/lib/industries-content'
 import { choiceFrom, inclusionNote, isSelectable, modulesFrom, prune, templateOf, toggle } from '@/lib/module-picker'
-import { industryFor, infoFor, notReady, presetKeys } from '@/lib/picker-preset'
+import { industryFor, infoFor, modulesFor, notReady, presetKeys } from '@/lib/picker-preset'
 import { setChoice, useChoice, useSignupHref } from '@/lib/signup-choice'
 import { useCatalog } from '@/lib/use-catalog'
 import { useResolution } from '@/lib/use-resolution'
+import WaitlistForm from '@/components/landing/WaitlistForm'
 import { BRAND } from '@/lib/brand'
 
 const POPULAR: [string, string, string][] = [
@@ -67,6 +68,9 @@ export default function PickerPage() {
   const chosen = new Set(keys)
   const count = answer ? answer.included.length : keys.length
   const later = notReady(modules, dir, industry)
+  const listed = modulesFor(modules, industry).filter(isSelectable)
+  // A kind of business with nothing ready to set up gets the waitlist, not a list of modules that do not fit it.
+  const waitlisted = screen === 'setup' && !!industry && state.status === 'ready' && !waiting && presetKeys(modules, industry, dir).length === 0
   const showOther = kind === OTHER || (!!kind && kind !== SCRATCH && !POPULAR_SLUGS.has(kind))
 
   function next() {
@@ -90,7 +94,7 @@ export default function PickerPage() {
             <LogoMark />
             <span className="font-display text-[1.4375rem] font-bold lowercase">{BRAND}</span>
           </Link>
-          <span className="text-sm text-ink-3">Step 1 of 3</span>
+          <span className="text-sm text-ink-3">Step {screen === 'business' ? 1 : 2} of 3</span>
         </div>
       </header>
 
@@ -126,7 +130,7 @@ export default function PickerPage() {
         ) : (
           <>
             <div className="flex flex-col gap-1.5">
-              <h1 ref={heading} tabIndex={-1} className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] focus:outline-none`}>Your setup</h1>
+              <h1 ref={heading} tabIndex={-1} className={`${H1} text-[clamp(1.75rem,5vw,2.5rem)] leading-[1.1] focus:outline-none`}>{waitlisted && industry ? `${industry.name} isn’t ready yet` : 'Your setup'}</h1>
               <p className="flex flex-wrap items-center gap-x-2 text-base text-ink-2">
                 {forLine}
                 <button type="button" onClick={() => { setScreen('business'); setTried(false) }} className="min-h-11 px-1 font-semibold text-ink underline underline-offset-[0.18em]">Change</button>
@@ -145,7 +149,7 @@ export default function PickerPage() {
                 <button type="button" onClick={retry} className="min-h-12 self-start rounded-md bg-action px-[18px] text-base font-semibold text-paper">Try again</button>
               </div>
             )}
-            {state.status === 'ready' && !waiting && (
+            {state.status === 'ready' && !waiting && (waitlisted && industry ? <WaitlistForm industry={industry} planned={later.map((m) => m.name)} /> : (
               <>
                 {modules.length === 0 && (
                   <div className="flex flex-col items-start gap-1 rounded-xl border border-line bg-paper p-4 text-base text-ink-2">
@@ -154,7 +158,7 @@ export default function PickerPage() {
                   </div>
                 )}
                 <ul aria-label="Modules you can choose" className="flex flex-col gap-2.5">
-                  {modules.filter(isSelectable).map((m) => {
+                  {listed.map((m) => {
                     const inc = included.get(m.id ?? '')
                     const auto = !!inc && inc.reason !== 'selected'
                     const checked = chosen.has(m.key) || auto
@@ -201,12 +205,12 @@ export default function PickerPage() {
                   </details>
                 )}
               </>
-            )}
+            ))}
           </>
         )}
       </main>
 
-      <div className="sticky bottom-0 border-t border-line-2 bg-paper shadow-[0_-4px_16px_color-mix(in_srgb,var(--color-ink)_6%,transparent)]">
+      {!waitlisted && <div className="sticky bottom-0 border-t border-line-2 bg-paper shadow-[0_-4px_16px_color-mix(in_srgb,var(--color-ink)_6%,transparent)]">
         <div className="mx-auto flex max-w-[720px] flex-col gap-2 px-4 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-3">
           {screen === 'setup' && tried && count === 0 && (
             <p role="alert" className="flex gap-2 text-sm font-semibold text-red"><Warn />Tick at least one module. Most shops start with Sales and point of sale.</p>
@@ -222,7 +226,7 @@ export default function PickerPage() {
               : <button type="button" onClick={next} className={primary}>{screen === 'business' ? 'Continue' : 'Continue to create account'}</button>}
           </div>
         </div>
-      </div>
+      </div>}
     </div>
   )
 }

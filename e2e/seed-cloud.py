@@ -42,6 +42,10 @@ RELEASES = [
     ("erp-stock", "Stock", "Change stock with a reason, and see it change from any screen.", "Stock Item", "available", "Stock"),
     ("erp-buy", "Buying", "Order from suppliers, record deliveries, bills and payments.", "Purchase Order", "preview", "Money"),
     ("erp-books", "Books", "Accounts, periods and balanced journal entries.", "Journal Entry", "available", "Money"),
+    # The parts of a second retail template, as the real Cloud has: the picker must
+    # not mix them with the first template's.
+    ("shop-sell", "Selling at the counter", "Ring up sales, take payment and close the day.", "Shop Sale", "available", "Sell"),
+    ("shop-stock", "Products and stock", "Your product list, prices and stock counts.", "Shop Item", "available", "Stock"),
 ]
 
 # What a release needs, by release slug: Books posts against stock, so ticking it
@@ -50,8 +54,10 @@ REQUIRES = {"erp-books": ["erp-stock"]}
 
 # Templates are what the /start picker lists. Each composes module releases.
 TEMPLATES = [
-    ("retail-shop", "Retail shop", "Sell, track stock and buy from suppliers.", "Retail Shop",
+    ("retail-erp", "Retail with back office", "Sell, track stock and buy from suppliers.", "Retail Back Office",
      [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-books-1.0.0", "optional"), ("erp-buy-1.0.0", "optional")]),
+    ("shop", "Shop", "Sell, count stock and see what you earned.", "Shop Day",
+     [("shop-sell-1.0.0", "required"), ("shop-stock-1.0.0", "default")]),
 ]
 
 def publish(slug, name, summary, doctype, level, category="", kind="module", composition=()):

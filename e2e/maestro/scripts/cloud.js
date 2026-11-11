@@ -49,13 +49,13 @@ function setPricing(mode, notice) {
 }
 
 // The contact flow passes the text it typed as MARKER; the lead must be in Cloud exactly once.
-function expectOneLead(marker) {
+function expectOneLead(marker, source, email) {
   var all = call('GET', '/api/cloud/leads', ADMIN).json.items
   var found = []
   for (var i = 0; i < all.length; i++) if (all[i].notes.indexOf(marker) >= 0) found.push(all[i])
   expect('leads with ' + marker, found.length, 1)
-  expect('lead source', found[0].source, 'website:contact')
-  expect('lead email', found[0].contact_email, 'amina.e2e@example.com')
+  expect('lead source', found[0].source, source)
+  expect('lead email', found[0].contact_email, email)
   expect('lead status', found[0].status, 'new')
 }
 
@@ -81,7 +81,8 @@ var actions = {
     setPricing('priced', 'Prices apply from the first of March.')
   },
   'pricing-pilot': function () { setPricing('pilot', '') },
-  'expect-one-lead': function () { expectOneLead(MARKER) },
+  'expect-one-lead': function () { expectOneLead(MARKER, 'website:contact', 'amina.e2e@example.com') },
+  'expect-waitlist-lead': function () { expectOneLead(MARKER, 'website:waitlist:schools-and-training', 'waitlist.e2e@example.com') },
 }
 if (!actions[ACTION]) throw new Error('unknown ACTION ' + ACTION)
 actions[ACTION]()

@@ -29,12 +29,19 @@ export function infoFor(m: Pick<PickerModule, 'id'>, dir: Directory): ModuleInfo
   return dir.info.find((i) => i.slug === slug)
 }
 
+// The parts a business is set up from: those of the template its industry names when
+// the catalog lists it, otherwise every template's.
+export function modulesFor(modules: PickerModule[], industry?: Industry): PickerModule[] {
+  const own = industry?.template ? modules.filter((m) => m.template.slug === industry.template) : []
+  return own.length ? own : modules
+}
+
 // Catalog keys to tick for a preset: the preset's modules the catalog lists and
-// attests, all from one template (the first it finds).
+// attests, all from one template.
 export function presetKeys(modules: PickerModule[], industry: Industry, dir: Directory): string[] {
   const wanted = new Set(industry.preset)
   let keys: string[] = []
-  for (const m of modules) {
+  for (const m of modulesFor(modules, industry)) {
     const info = infoFor(m, dir)
     if (info && wanted.has(info.id) && isSelectable(m)) keys = toggle(modules, keys, m.key)
   }
@@ -43,7 +50,7 @@ export function presetKeys(modules: PickerModule[], industry: Industry, dir: Dir
 
 // Preset modules with nothing the catalog can offer yet, for "not ready" lists.
 export function notReady(modules: PickerModule[], dir: Directory, industry?: Industry): ModuleInfo[] {
-  const offered = new Set(modules.filter(isSelectable).flatMap((m) => infoFor(m, dir)?.id ?? []))
+  const offered = new Set(modulesFor(modules, industry).filter(isSelectable).flatMap((m) => infoFor(m, dir)?.id ?? []))
   const ids = industry ? industry.preset : dir.info.map((m) => m.id)
   return ids.filter((id) => !offered.has(id)).flatMap((id) => dir.info.find((m) => m.id === id) ?? [])
 }

@@ -4,13 +4,15 @@
 import type { ModuleInfo } from './live-catalog'
 import type { Status } from '@/components/landing/ui'
 
-export type Industry = { name: string; icon: string; preset: string[] }
+// `template` names the Cloud template this kind of business is set up from, where more
+// than one could fit. Without it the picker uses whatever the catalog lists.
+export type Industry = { name: string; icon: string; preset: string[]; template?: string }
 
 // The name in a link: "Retail and general shops" is retail-and-general-shops.
 export const industrySlug = (industry: Industry) => industry.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 export const INDUSTRIES: Industry[] = [
-  { name: 'Retail and general shops', icon: 'shop', preset: ['pos', 'inventory', 'purchasing', 'accounting', 'reports'] },
+  { name: 'Retail and general shops', icon: 'shop', preset: ['pos', 'inventory', 'purchasing', 'accounting', 'reports'], template: 'retail-erp' },
   { name: 'Wholesale and distribution', icon: 'box', preset: ['inventory', 'pos', 'purchasing', 'accounting', 'fleet', 'crm'] },
   { name: 'Restaurants and cafes', icon: 'cup', preset: ['pos', 'inventory', 'purchasing', 'people', 'reports'] },
   { name: 'Pharmacies and clinics', icon: 'plus', preset: ['pos', 'inventory', 'purchasing', 'crm', 'accounting'] },

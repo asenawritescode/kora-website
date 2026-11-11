@@ -25,6 +25,18 @@
           "package_id": "erp-stock",
           "name": "Stock",
           "availability": "available"
+        },
+        {
+          "slug": "shop-sell",
+          "package_id": "shop-sell",
+          "name": "Selling at the counter",
+          "availability": "available"
+        },
+        {
+          "slug": "shop-stock",
+          "package_id": "shop-stock",
+          "name": "Products and stock",
+          "availability": "available"
         }
       ]
     }

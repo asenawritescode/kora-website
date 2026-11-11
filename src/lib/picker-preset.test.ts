@@ -4,7 +4,7 @@ import { INDUSTRIES } from './industries-content'
 import { SNAPSHOT } from './catalog-snapshot'
 import { modulesOf } from './live-catalog'
 import { modulesFrom } from './module-picker'
-import { industryFor, infoFor, notReady, packageOf, presetKeys, slugOfRelease, type Directory } from './picker-preset'
+import { industryFor, infoFor, modulesFor, notReady, packageOf, presetKeys, slugOfRelease, type Directory } from './picker-preset'
 
 // Names as the real local Cloud publishes them: none of them is a name the site uses.
 const part = (id: string, name: string, selection: string, availability: CatalogComponent['availability'] = 'available'): CatalogComponent =>
@@ -72,4 +72,32 @@ test('without Cloud\'s module list a part still joins by its package id', () => 
 
 test('not-ready lists what the catalog cannot offer yet', () => {
   expect(notReady(modules, dir, retail).map((m) => m.id)).toEqual(['purchasing', 'accounting', 'reports'])
+})
+
+describe('an industry that names its template', () => {
+  // The real catalog has two retail templates; their parts must not be mixed.
+  const shop: CatalogTemplate = {
+    slug: 'shop', name: 'Shop', summary: '', availability: 'available',
+    components: [part('shop-sell-1.0.0', 'Selling at the counter', 'required'), part('shop-stock-1.0.0', 'Products and stock', 'default')],
+  }
+  const both = modulesFrom([shop, template])
+  const named = { ...retail, template: 'retail-erp' }
+  // Cloud also links the shop template's release slugs to the same site modules.
+  const twoDir: Directory = { catalog, info: dir.info.map((m) => (m.id === 'pos' ? { ...m, slug: 'erp-sell' } : m)) }
+
+  test('its parts come from that template only', () => {
+    expect(modulesFor(both, named).every((m) => m.template.slug === 'retail-erp')).toBe(true)
+    expect(presetKeys(both, named, twoDir)).toEqual(['retail-erp:Selling and cash', 'retail-erp:Stock'])
+  })
+
+  test('without a template of its own it uses every template', () => {
+    const wholesale = INDUSTRIES.find((i) => i.name === 'Wholesale and distribution')!
+    expect(wholesale.template).toBeUndefined()
+    expect(modulesFor(both, wholesale)).toBe(both)
+    expect(modulesFor(both, undefined)).toBe(both)
+  })
+
+  test('a template the catalog does not list falls back to every template', () => {
+    expect(modulesFor(both, { ...retail, template: 'gone' })).toBe(both)
+  })
 })

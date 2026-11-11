@@ -1,21 +1,10 @@
 import { useRef, useState, type FormEvent } from 'react'
-import { H1, Warn } from '@/components/landing/ui'
+import { FIELD_INPUT, Field, H1 } from '@/components/landing/ui'
 import { TOPICS, mailtoHref, supportEmail, validateContact, type ContactErrors, type ContactFields } from '@/lib/contact'
 import { sendLead } from '@/lib/contact-lead'
 
 const EMPTY: ContactFields = { name: '', email: '', phone: '', topic: TOPICS[0], message: '' }
-const input = 'min-h-12 w-full min-w-0 rounded-md bg-paper px-3 text-base text-ink'
-const label = 'text-[0.9375rem] font-bold'
-
-function Field({ id, title, error, children }: { id: string; title: React.ReactNode; error?: string; children: React.ReactNode }) {
-  return (
-    <div className="flex flex-col gap-1.5">
-      <label htmlFor={id} className={label}>{title}</label>
-      {error && <span id={`${id}-err`} className="flex gap-1.5 text-sm font-semibold leading-[1.45] text-red"><Warn />{error}</span>}
-      {children}
-    </div>
-  )
-}
+const input = FIELD_INPUT
 
 export default function ContactPage() {
   const to = supportEmail()

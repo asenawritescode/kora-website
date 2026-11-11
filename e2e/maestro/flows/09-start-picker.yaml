@@ -8,7 +8,10 @@ name: the set-up page shows what Cloud says the choice installs
 - openLink: ${BASE}/start
 - tapOn: "Shop or kiosk.*"
 - tapOn: "Continue"
+- assertVisible: "Step 2 of 3"
 - assertVisible: "Selling and cash"
+# Retail names its template: the other retail template's parts are not mixed in.
+- assertNotVisible: "Selling at the counter"
 - assertVisible: "Stock"
 - assertVisible: "2 modules.*"
 - assertNotVisible: "No modules ticked.*"

@@ -18,10 +18,13 @@ export function leadBody(f: ContactFields, honeypot: string) {
   return { name: f.name.trim(), email: f.email.trim(), message, source: 'contact', website: honeypot }
 }
 
-export async function sendLead(
-  f: ContactFields,
+export const sendLead = (f: ContactFields, idempotencyKey: string, honeypot = '', doFetch: typeof fetch = fetch) =>
+  postLead(leadBody(f, honeypot), idempotencyKey, doFetch)
+
+// What every form that leaves a lead sends: one POST to Cloud, safe to repeat with the same key.
+export async function postLead(
+  body: { name: string; email: string; message: string; source: string; website: string },
   idempotencyKey: string,
-  honeypot = '',
   doFetch: typeof fetch = fetch,
 ): Promise<LeadResult> {
   let res: Response
@@ -29,7 +32,7 @@ export async function sendLead(
     res = await doFetch(`${catalogBaseURL}/api/public/leads/v1`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'Idempotency-Key': idempotencyKey },
-      body: JSON.stringify(leadBody(f, honeypot)),
+      body: JSON.stringify(body),
     })
   } catch {
     return { kind: 'failed', reason: 'unreachable' }
