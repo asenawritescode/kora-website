@@ -50,7 +50,7 @@ export default function ModulesPage() {
         </div>
 
         <section aria-labelledby="mod-today" className="flex flex-col items-center gap-3 py-2">
-          <h2 id="mod-today" className={`${h2} text-center`}>The two Available modules, as they look today</h2>
+          <h2 id="mod-today" className={`${h2} text-center`}>Selling and stock, as they look today</h2>
           <div className="w-full max-w-[880px]"><ProductScreens variant="modules" autoplay={false} /></div>
         </section>
 
