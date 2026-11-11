@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Seed a disposable Kora Cloud with the data the website shows.
 
-Publishes three module releases through the real review flow (author, reviewer,
+Publishes three module releases and one template that composes them, through the real review flow (author, reviewer,
 publisher), attests two as available and leaves one as preview, then loads the
 roadmap items that mirror the website's module list. Re-running skips releases
 that already exist (releases are immutable) and upserts roadmap items.
@@ -41,12 +41,20 @@ RELEASES = [
     ("erp-buy", "Purchasing and suppliers", "Track what you buy and what you owe suppliers.", "Purchase Order", "preview"),
 ]
 
-def publish(slug, name, summary, doctype, level):
+# Templates are what the /start picker lists. Each composes module releases.
+TEMPLATES = [
+    ("retail-shop", "Retail shop", "Sell, track stock and buy from suppliers.", "POS Sale",
+     [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-buy-1.0.0", "optional")]),
+]
+
+def publish(slug, name, summary, doctype, level, kind="module", composition=()):
     release_id = f"{slug}-1.0.0"
-    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": "1.0.0", "kind": "module",
+    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": "1.0.0", "kind": kind,
                 "public": {"slug": slug, "name": name, "summary": summary},
                 "exports": {"doctypes": [doctype], "capabilities": [slug + ".use"]},
                 "engine": {"min_version": "1.0.0"}}
+    if composition:
+        manifest["composition"] = [{"release_id": rid, "selection": sel} for rid, sel in composition]
     files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": f"name: {doctype}\nmodule: {name}\nfields: []\n"}]
     status, payload = call("POST", "/api/cloud/marketplace/releases", "author", {"manifest": manifest, "files": files})
     if status == 409 or "duplicate entry" in json.dumps(payload).lower():
@@ -97,6 +105,9 @@ def main():
     print("releases:")
     for r in RELEASES:
         publish(*r)
+    print("templates:")
+    for slug, name, summary, doctype, composition in TEMPLATES:
+        publish(slug, name, summary, doctype, "preview", kind="template", composition=composition)
     print("roadmap items:")
     for slug, kind, name, summary, horizon, requires, limits, release_slug, sort in ITEMS:
         item = {"slug": slug, "kind": kind, "name": name, "summary": summary, "horizon": horizon, "requires": requires,
