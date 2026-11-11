@@ -3,13 +3,15 @@ import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, CARD, H1, StatusBadge, Tick } from '@/components/landing/ui'
 import { INDUSTRIES, RETAIL, presetModules, readyModules } from '@/lib/industries-content'
+import { useModules } from '@/lib/use-modules'
 
 const industry = INDUSTRIES[0]
 const h2 = 'text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]'
 
 export default function IndustryRetailPage() {
-  const modules = presetModules(industry)
-  const ready = readyModules(industry).length
+  const live = useModules().modules
+  const modules = presetModules(industry, live)
+  const ready = readyModules(industry, live).length
 
   return (
     <>

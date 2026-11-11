@@ -1,5 +1,5 @@
 // Starting points by kind of business: which modules each preset holds. A preset
-// is not a separate product. Whether a module is ready is read from MODULES, so a
+// is not a separate product. Whether a module is ready is read from the module list, so a
 // module that becomes Available updates every preset at once.
 import { MODULES, type ModuleInfo } from './modules-content'
 import type { Status } from '@/components/landing/ui'
@@ -40,11 +40,13 @@ export const ICONS: Record<string, string> = {
   heart: 'M10 16s-6-3.6-6-8a3.5 3.5 0 0 1 6-2.4A3.5 3.5 0 0 1 16 8c0 4.4-6 8-6 8z', bed: 'M2 15V6 M2 11h16v4 M18 15v-2 M6 11V9h5v2',
 }
 
-export function presetModules(industry: Industry): ModuleInfo[] {
-  return industry.preset.map((id) => MODULES.find((m) => m.id === id)!)
+// `modules` is the committed list by default; the pages pass the list merged with
+// what Cloud attests, so a preset's "ready" count follows the live status.
+export function presetModules(industry: Industry, modules: ModuleInfo[] = MODULES): ModuleInfo[] {
+  return industry.preset.map((id) => modules.find((m) => m.id === id)!)
 }
 
-export const readyModules = (industry: Industry) => presetModules(industry).filter((m) => m.status === 'available')
+export const readyModules = (industry: Industry, modules: ModuleInfo[] = MODULES) => presetModules(industry, modules).filter((m) => m.status === 'available')
 
 export const RETAIL = {
   slug: 'retail',
