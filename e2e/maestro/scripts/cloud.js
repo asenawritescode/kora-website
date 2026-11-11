@@ -59,7 +59,13 @@ function expectOneLead(marker, source, email) {
   expect('lead status', found[0].status, 'new')
 }
 
-var BUY = 'erp-buy-1.0.0'
+// The release the catalog currently shows for Buying, whatever version the seed is at.
+function currentRelease(slug) {
+  var items = json(http.get(CLOUD + '/api/public/catalog/v1/modules').body).data.items
+  for (var i = 0; i < items.length; i++) if (items[i].slug === slug) return items[i].release_id
+  throw new Error('the catalog lists no module ' + slug)
+}
+var BUY = currentRelease('erp-buy')
 var actions = {
   'attest-purchasing-available': function () { expect('attest available', attest(BUY, 'available', PUBLISHER, digest(BUY), 'maestro-flow').status, 200) },
   'attest-purchasing-preview': function () { expect('attest preview', attest(BUY, 'preview', PUBLISHER, digest(BUY), '').status, 200) },

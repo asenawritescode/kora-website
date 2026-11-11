@@ -42,3 +42,22 @@ name: a shop is set up and opened without leaving the site's own onboarding
 - assertVisible: "Njeri Hardware"
 - assertVisible: "POS Sale"
 - assertVisible: "Stock Item"
+# The record types have real fields, and a sale can be taken and found again.
+- tapOn: "Open POS Sale"
+- extendedWaitUntil:
+    visible: "Add row"
+    timeout: 20000
+- tapOn: "Add row"
+- extendedWaitUntil:
+    visible: "Save row"
+    timeout: 20000
+- assertVisible: "Customer"
+- tapOn: "Reference, required"
+- inputText: "SALE-${output.marker}"
+- tapOn: "Total, required"
+- inputText: "1250"
+- tapOn: "Save row"
+- extendedWaitUntil:
+    visible: ".*SALE-${output.marker}.*"
+    timeout: 30000
+- assertNotVisible: "This page could not be shown"

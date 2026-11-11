@@ -35,6 +35,7 @@ needed for the loop to finish; a missing item shows up as the failure named besi
 2. Still on the site, step 3 of 3: name, business, email, password. The site checks each field against Cloud's rules (Cloud itself answers every bad field with one sentence) and posts `POST /api/cloud/signup`.
 3. The site repeats that request with one Idempotency-Key until Cloud answers 201 (about 20 to 30 seconds), showing "Setting up ...".
 4. "Check your email". Open the link from the catcher: it lands on the site's `/verify`, which verifies, redeems the handoff code at Studio and goes to the workspace.
+5. In the workspace, "Open POS Sale", "Add row", a reference and a total, "Save row": the sale is saved (`GET /s/<tenant>/api/v1/resource/pos-sale` returns it). This needs the seed's record types to have fields; the seed publishes them from version 1.1.0 (1.0.0 had none, which the Engine accepts but which leaves nothing to fill in), and the newest published release of a slug is the one the catalog shows.
 
 Cloud allows 10 new workspace setups per connection per hour (5 per email). One flow run uses one; when iterating by hand, clear the rows in the `auth_rate_limits` table whose `rate_key` starts with `cloud-signup-selection`.
 

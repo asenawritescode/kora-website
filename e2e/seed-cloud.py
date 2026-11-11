@@ -52,25 +52,84 @@ RELEASES = [
 # makes Cloud explain that Stock comes with it.
 REQUIRES = {"erp-books": ["erp-stock"]}
 
+# 1.0.0 published record types with no fields at all, which the Engine accepts but nobody
+# can use (and which used to crash Studio's pages). Later versions have real ones; 1.2.0 asks
+# only for what a till needs to take a sale (a reference and a total). Releases
+# are immutable, so a stack seeded with 1.0.0 keeps those and gets 1.1.0 beside them; the
+# newest published release of a slug is the one the catalog shows.
+VERSION = "1.2.0"
+def rid(slug): return f"{slug}-{VERSION}"
+
 # Templates are what the /start picker lists. Each composes module releases.
 TEMPLATES = [
     ("retail-erp", "Retail with back office", "Sell, track stock and buy from suppliers.", "Retail Back Office",
-     [("erp-sell-1.0.0", "required"), ("erp-stock-1.0.0", "default"), ("erp-books-1.0.0", "optional"), ("erp-buy-1.0.0", "optional")]),
+     [(rid("erp-sell"), "required"), (rid("erp-stock"), "default"), (rid("erp-books"), "optional"), (rid("erp-buy"), "optional")]),
     ("shop", "Shop", "Sell, count stock and see what you earned.", "Shop Day",
-     [("shop-sell-1.0.0", "required"), ("shop-stock-1.0.0", "default")]),
+     [(rid("shop-sell"), "required"), (rid("shop-stock"), "default")]),
 ]
 
+# The fields of each record type, in the format of the packs under kora/config:
+# (fieldname, fieldtype, label, flags). A "options" flag is a list for a Select.
+REF = ("reference", "Data", "Reference", {"reqd": True, "unique": True, "in_list_view": True})
+NOTE = ("note", "Text", "Note", {})
+FIELDS = {
+    "POS Sale": ("reference, customer", [REF,
+        ("customer", "Data", "Customer", {"in_list_view": True}),
+        ("sale_date", "Date", "Sale date", {"in_list_view": True}),
+        ("payment_method", "Select", "Payment method", {"options": ["Cash", "M-Pesa", "Card"], "in_list_view": True, "in_standard_filter": True}),
+        ("total", "Currency", "Total", {"reqd": True, "in_list_view": True}), NOTE]),
+    "Stock Item": ("sku, item_name", [
+        ("sku", "Data", "SKU", {"reqd": True, "unique": True, "in_list_view": True}),
+        ("item_name", "Data", "Item", {"reqd": True, "in_list_view": True}),
+        ("unit", "Select", "Unit", {"options": ["Piece", "Kg", "Litre", "Box"], "reqd": True, "in_standard_filter": True}),
+        ("stock_qty", "Float", "In stock", {"in_list_view": True}),
+        ("reorder_level", "Float", "Reorder at", {}),
+        ("selling_price", "Currency", "Selling price", {"in_list_view": True})]),
+    "Purchase Order": ("reference, supplier", [REF,
+        ("supplier", "Data", "Supplier", {"reqd": True, "in_list_view": True}),
+        ("order_date", "Date", "Order date", {"reqd": True, "in_list_view": True}),
+        ("status", "Select", "Status", {"options": ["Draft", "Ordered", "Received"], "reqd": True, "in_list_view": True, "in_standard_filter": True}),
+        ("total", "Currency", "Total", {"in_list_view": True})]),
+    "Journal Entry": ("reference, description", [REF,
+        ("posting_date", "Date", "Posting date", {"reqd": True, "in_list_view": True}),
+        ("description", "Data", "Description", {"in_list_view": True}),
+        ("debit_account", "Data", "Debit account", {"reqd": True}),
+        ("credit_account", "Data", "Credit account", {"reqd": True}),
+        ("amount", "Currency", "Amount", {"reqd": True, "in_list_view": True})]),
+    "Shop Sale": ("reference", [REF,
+        ("sale_date", "Date", "Sale date", {"reqd": True, "in_list_view": True}),
+        ("total", "Currency", "Total", {"reqd": True, "in_list_view": True})]),
+    "Shop Item": ("item_name", [
+        ("item_name", "Data", "Item", {"reqd": True, "unique": True, "in_list_view": True}),
+        ("stock_qty", "Float", "In stock", {"in_list_view": True}),
+        ("selling_price", "Currency", "Selling price", {"in_list_view": True})]),
+    "Retail Back Office": ("reference", [REF, NOTE]),
+    "Shop Day": ("reference", [REF, NOTE]),
+}
+
+def doctype_yaml(doctype, module):
+    search, fields = FIELDS[doctype]
+    out = [f"name: {doctype}", f"module: {module}", f"title_field: {fields[0][0]}", f"search_fields: {search}", "sort_field: creation", "sort_order: DESC", "", "fields:"]
+    for fieldname, fieldtype, label, flags in fields:
+        out += [f"  - fieldname: {fieldname}", f"    fieldtype: {fieldtype}", f"    label: {label}"]
+        for key, value in flags.items():
+            if key == "options":
+                out += ["    options: |"] + [f"      {o}" for o in value]
+            else:
+                out.append(f"    {key}: {'true' if value else 'false'}")
+    return "\n".join(out) + "\n"
+
 def publish(slug, name, summary, doctype, level, category="", kind="module", composition=()):
-    release_id = f"{slug}-1.0.0"
-    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": "1.0.0", "kind": kind,
+    release_id = rid(slug)
+    manifest = {"schema_version": 1, "package_id": slug, "release_id": release_id, "version": VERSION, "kind": kind,
                 "public": {"slug": slug, "name": name, "summary": summary, **({"category": category} if category else {})},
                 "exports": {"doctypes": [doctype], "capabilities": [slug + ".use"]},
                 "engine": {"min_version": "1.0.0"}}
     if REQUIRES.get(slug):
-        manifest["requires"] = [{"package_id": r, "release_id": r + "-1.0.0"} for r in REQUIRES[slug]]
+        manifest["requires"] = [{"package_id": r, "release_id": rid(r)} for r in REQUIRES[slug]]
     if composition:
         manifest["composition"] = [{"release_id": rid, "selection": sel} for rid, sel in composition]
-    files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": f"name: {doctype}\nmodule: {name}\nfields: []\n"}]
+    files = [{"path": f"doctypes/{slug}.yaml", "content_type": "doctype", "content": doctype_yaml(doctype, name)}]
     status, payload = call("POST", "/api/cloud/marketplace/releases", "author", {"manifest": manifest, "files": files})
     if status == 409 or "duplicate entry" in json.dumps(payload).lower():
         # Releases are immutable and attestations append-only: a release that
