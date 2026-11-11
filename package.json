@@ -14,7 +14,8 @@
     "og:image": "bun scripts/generate-og-image.ts",
     "build": "bun run validate:claims && bun run validate:catalog && bun run validate:links && bun run validate:contrast && bun run validate:tokens && tsc -b && vite build && bun run validate:seo",
     "preview": "vite preview",
-    "test": "bun test"
+    "test": "bun test",
+    "validate:industry-templates": "bun scripts/check-industry-templates.ts"
   },
   "dependencies": {
     "@fontsource-variable/geist-mono": "^5.2.8",

@@ -91,9 +91,9 @@ describe('an industry that names its template', () => {
   })
 
   test('without a template of its own it uses every template', () => {
-    const wholesale = INDUSTRIES.find((i) => i.name === 'Wholesale and distribution')!
-    expect(wholesale.template).toBeUndefined()
-    expect(modulesFor(both, wholesale)).toBe(both)
+    const untemplated = { ...INDUSTRIES.find((i) => i.name === 'Wholesale and distribution')!, template: undefined }
+    expect(untemplated.template).toBeUndefined()
+    expect(modulesFor(both, untemplated)).toBe(both)
     expect(modulesFor(both, undefined)).toBe(both)
   })
 
