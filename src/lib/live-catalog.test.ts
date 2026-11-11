@@ -1,8 +1,7 @@
 import { describe, expect, test } from 'bun:test'
 import fixture from './__fixtures__/public-site-v1.json'
 import { fetchRoadmap, parseCatalogModules, parseRoadmap, CatalogError, type Fetcher } from './catalog-client'
-import { buildLanes, mergeModules, statusOf, type LiveCatalog } from './live-catalog'
-import { MODULES } from './modules-content'
+import { buildLanes, modulesOf, statusOf, type LiveCatalog } from './live-catalog'
 import type { Status } from '@/components/landing/ui'
 
 // public-site-v1.json holds real payloads from a seeded Cloud: releases erp-sell and
@@ -58,9 +57,15 @@ describe('statusOf', () => {
   })
 })
 
-describe('mergeModules', () => {
-  const merged = mergeModules(MODULES, live)
-  const byId = (id: string) => merged.find((m) => m.id === id)!
+describe('modulesOf', () => {
+  const modules = modulesOf(live)
+  const byId = (id: string) => modules.find((m) => m.id === id)!
+
+  test('lists the roadmap\'s modules, not its features, in Cloud\'s order', () => {
+    expect(modules).toHaveLength(14)
+    expect(modules.slice(0, 4).map((m) => m.id)).toEqual(['pos', 'inventory', 'purchasing', 'accounting'])
+    expect(modules.some((m) => m.id === 'card-payments')).toBe(false)
+  })
 
   test('takes readiness from Cloud', () => {
     expect(byId('pos').status).toBe('available')
@@ -71,7 +76,7 @@ describe('mergeModules', () => {
 
   test('a change in Cloud changes the page: Purchasing attested available', () => {
     const attested: LiveCatalog = { ...live, modules: live.modules.map((m) => (m.slug === 'erp-buy' ? { ...m, availability: 'available' as const } : m)) }
-    expect(mergeModules(MODULES, attested).find((m) => m.id === 'purchasing')?.status).toBe('available')
+    expect(modulesOf(attested).find((m) => m.id === 'purchasing')?.status).toBe('available')
   })
 
   test('turns requires and limitations into the needs and missing lines', () => {
@@ -80,9 +85,19 @@ describe('mergeModules', () => {
     expect(byId('inventory').missing).toBeUndefined()
   })
 
-  test('keeps the committed entry when Cloud has no roadmap item for it', () => {
-    const none = mergeModules(MODULES, { ...live, roadmap: [] })
-    expect(none.map((m) => m.status)).toEqual(MODULES.map((m) => m.status))
+  test('a released module that needs nothing says so; a planned one has not decided', () => {
+    expect(byId('inventory').needs).toBe('Nothing else')
+    expect(byId('accounting').needs).toBe('To be confirmed')
+  })
+
+  test('carries the release link and the job Cloud names', () => {
+    const withJob: LiveCatalog = { ...live, roadmap: live.roadmap.map((e) => (e.slug === 'pos' ? { ...e, category: 'Sell' } : e)) }
+    expect(modulesOf(withJob).find((m) => m.id === 'pos')).toMatchObject({ slug: 'erp-sell', category: 'Sell' })
+    expect(byId('accounting').slug).toBeUndefined()
+  })
+
+  test('an empty roadmap lists nothing rather than guessing', () => {
+    expect(modulesOf({ ...live, roadmap: [] })).toEqual([])
   })
 })
 

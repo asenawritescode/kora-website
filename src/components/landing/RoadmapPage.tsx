@@ -1,6 +1,6 @@
 import { SignupLink } from '@/components/landing/SignupLink'
 import { CARD, H1, StatusBadge } from '@/components/landing/ui'
-import type { Lane } from '@/lib/modules-content'
+import type { Lane } from '@/lib/live-catalog'
 import { useCatalog } from '@/lib/use-catalog'
 
 const RAIL: Record<Lane['status'], string> = { available: 'border-action text-action', preview: 'border-amber-ink text-amber-ink', roadmap: 'border-line-strong text-ink-3' }

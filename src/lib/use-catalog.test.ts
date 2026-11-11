@@ -1,7 +1,8 @@
 import { describe, expect, test } from 'bun:test'
 import type { CatalogTemplate } from '@/lib/catalog-client'
 import type { LiveCatalog } from '@/lib/live-catalog'
-import { LANES, MODULES } from '@/lib/modules-content'
+import { SNAPSHOT } from '@/lib/catalog-snapshot'
+import { buildLanes, modulesOf } from '@/lib/live-catalog'
 import { LOADING, viewOf } from '@/lib/use-catalog'
 
 const templates: CatalogTemplate[] = [{ slug: 'retail-shop', name: 'Retail shop', summary: '', availability: 'available', components: [] }]
@@ -15,15 +16,16 @@ describe('viewOf', () => {
     const v = viewOf(LOADING)
     expect(v.state.status).toBe('loading')
     expect(v.source).toBe('loading')
-    expect(v.modules).toBe(MODULES)
-    expect(v.lanes).toBe(LANES)
+    expect(v.modules).toEqual(modulesOf(SNAPSHOT))
+    expect(v.lanes).toEqual(buildLanes(SNAPSHOT))
+    expect(v.catalog).toEqual(SNAPSHOT.modules)
   })
 
   test('templates answered, live list failed: the picker works, the pages say fallback', () => {
     const v = viewOf({ templates, live: 'failed' })
     expect(v.state).toEqual({ status: 'ready', templates })
     expect(v.source).toBe('fallback')
-    expect(v.modules).toBe(MODULES)
+    expect(v.modules).toEqual(modulesOf(SNAPSHOT))
   })
 
   test('live list answered, templates failed: pages are live, the picker shows its error', () => {

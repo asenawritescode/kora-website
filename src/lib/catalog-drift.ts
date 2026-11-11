@@ -1,23 +1,26 @@
-// Compares the committed module list (the copy and the offline fallback) with
-// what Cloud publishes. The two should say the same thing about readiness;
-// when they do not, the committed list is the one that is wrong, because Cloud
-// holds the attestation.
-import { statusOf, type LiveCatalog } from '@/lib/live-catalog'
-import type { ModuleInfo } from '@/lib/modules-content'
+// Compares the committed snapshot with what Cloud publishes. Cloud holds the
+// attestation and the words, so when the two differ the snapshot is the one
+// that is stale: run `bun run sync:catalog` and commit the result.
+import { wire } from '@/lib/catalog-snapshot'
+import type { LiveCatalog } from '@/lib/live-catalog'
 
-export function catalogDrift(committed: ModuleInfo[], live: LiveCatalog): string[] {
-  const bySlug = new Map(live.roadmap.map((e) => [e.slug, e]))
-  const drift: string[] = []
-  for (const m of committed) {
-    const entry = bySlug.get(m.id)
-    if (!entry) {
-      drift.push(`${m.id}: in the committed list but not in Cloud's roadmap`)
-      continue
-    }
-    const level = statusOf(entry, live.modules)
-    if (level !== m.status) drift.push(`${m.id}: committed ${m.status}, Cloud ${level}`)
+function differences(what: string, committed: { slug: string }[], live: { slug: string }[]): string[] {
+  const mine = new Map(committed.map((i) => [i.slug, JSON.stringify(i)]))
+  const theirs = new Map(live.map((i) => [i.slug, JSON.stringify(i)]))
+  const out: string[] = []
+  for (const [slug, text] of mine) {
+    if (!theirs.has(slug)) out.push(`${what} ${slug}: in the snapshot but not in Cloud`)
+    else if (theirs.get(slug) !== text) out.push(`${what} ${slug}: the snapshot differs from Cloud`)
   }
-  const known = new Set(committed.map((m) => m.id))
-  for (const e of live.roadmap) if (e.kind === 'module' && !known.has(e.slug)) drift.push(`${e.slug}: in Cloud's roadmap but not in the committed list`)
-  return drift
+  for (const slug of theirs.keys()) if (!mine.has(slug)) out.push(`${what} ${slug}: in Cloud but not in the snapshot`)
+  return out
+}
+
+export function catalogDrift(committed: LiveCatalog, live: LiveCatalog): string[] {
+  const a = wire(committed)
+  const b = wire(live)
+  return [
+    ...differences('module', a.modules.data.items, b.modules.data.items),
+    ...differences('roadmap', a.roadmap.data.items, b.roadmap.data.items),
+  ]
 }

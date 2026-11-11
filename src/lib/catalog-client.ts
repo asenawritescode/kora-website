@@ -39,6 +39,8 @@ export interface RoadmapEntry {
   kind: 'module' | 'feature'
   name: string
   summary: string
+  // The job the item does ("Sell", "Stock", "Money"); empty when Cloud sets none.
+  category?: string
   horizon: RoadmapHorizon
   requires: string[]
   limitations: string[]
@@ -145,7 +147,7 @@ export function parseRoadmap(payload: unknown): RoadmapEntry[] {
     const kind = text(raw.kind) === 'feature' ? 'feature' : text(raw.kind) === 'module' ? 'module' : undefined
     if (!slug || !name || !horizon || !kind) return []
     return [{
-      slug, kind, name, summary: text(raw.summary), horizon,
+      slug, kind, name, summary: text(raw.summary), category: text(raw.category) || undefined, horizon,
       requires: strings(raw.requires), limitations: strings(raw.limitations),
       releaseSlug: text(raw.release_slug) || undefined,
       sort: typeof raw.sort === 'number' ? raw.sort : 0,

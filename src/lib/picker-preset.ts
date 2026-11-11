@@ -5,7 +5,7 @@
 // slug to the site's id.
 import type { CatalogModule } from './catalog-client'
 import { INDUSTRIES, industrySlug, type Industry } from './industries-content'
-import type { ModuleInfo } from './modules-content'
+import type { ModuleInfo } from './live-catalog'
 import { selectability, toggle, type PickerModule } from './module-picker'
 
 // What the join needs: the catalog's module list and the site's modules, each
@@ -45,5 +45,5 @@ export function presetKeys(modules: PickerModule[], industry: Industry, dir: Dir
 export function notReady(modules: PickerModule[], dir: Directory, industry?: Industry): ModuleInfo[] {
   const offered = new Set(modules.filter((m) => selectability(modules, m).ok).flatMap((m) => infoFor(m, dir)?.id ?? []))
   const ids = industry ? industry.preset : dir.info.map((m) => m.id)
-  return ids.filter((id) => !offered.has(id)).map((id) => dir.info.find((m) => m.id === id)!)
+  return ids.filter((id) => !offered.has(id)).flatMap((id) => dir.info.find((m) => m.id === id) ?? [])
 }

@@ -1,11 +1,27 @@
-// Merges what Cloud publishes (attested availability and the roadmap) into the
-// module list the Modules and Roadmap pages draw. The committed list in
-// modules-content.ts stays the copy and the fallback; Cloud decides readiness.
+// Derives what the Modules, Roadmap and Industries pages draw from what Cloud
+// publishes: the module list (attested availability) and the roadmap. The same
+// functions run on live data and on the committed snapshot, so the fallback can
+// never say something Cloud's data could not.
 import type { CatalogModule, RoadmapEntry } from '@/lib/catalog-client'
-import type { Lane, ModuleInfo, RoadmapItem } from '@/lib/modules-content'
 import type { Status } from '@/components/landing/ui'
 
 export type LiveCatalog = { modules: CatalogModule[]; roadmap: RoadmapEntry[] }
+
+export type ModuleInfo = {
+  id: string
+  name: string
+  status: Status
+  desc: string
+  needs: string
+  missing?: string
+  // The catalog slug of the module's release, where Cloud has linked one.
+  slug?: string
+  // The job it does, where Cloud says.
+  category?: string
+}
+
+export type RoadmapItem = { name: string; desc: string; feature?: boolean; missing?: string }
+export type Lane = { title: string; status: Status; sub: string; items: RoadmapItem[] }
 
 // An entry is available or preview only when the catalog lists the module it links to
 // and attests that level. A link to a module the catalog does not list, or no link,
@@ -16,22 +32,28 @@ export function statusOf(entry: RoadmapEntry, modules: CatalogModule[]): Status 
 }
 
 const lowerFirst = (text: string) => text.replace(/^./, (c) => c.toLowerCase())
+const inOrder = (entries: RoadmapEntry[]) => [...entries].sort((a, b) => a.sort - b.sort || a.slug.localeCompare(b.slug))
 
-export function mergeModules(base: ModuleInfo[], live: LiveCatalog): ModuleInfo[] {
-  const bySlug = new Map(live.roadmap.map((entry) => [entry.slug, entry]))
-  const name = (slug: string) => bySlug.get(slug)?.name ?? base.find((m) => m.id === slug)?.name ?? slug
-  return base.map((m) => {
-    const entry = bySlug.get(m.id)
-    if (!entry) return m
-    return {
-      ...m,
-      status: statusOf(entry, live.modules),
-      slug: entry.releaseSlug,
-      desc: entry.summary || m.desc,
-      needs: entry.requires.length ? entry.requires.map(name).join(', ') : m.needs,
-      missing: entry.limitations.length ? entry.limitations.join(' ') : undefined,
-    }
-  })
+// What a module needs, in words: the names of what its roadmap entry requires.
+// A module with a release and nothing required needs nothing; a planned one
+// has not decided its parts yet.
+function needsOf(entry: RoadmapEntry, names: Map<string, string>): string {
+  if (entry.requires.length) return entry.requires.map((slug) => names.get(slug) ?? slug).join(', ')
+  return entry.releaseSlug ? 'Nothing else' : 'To be confirmed'
+}
+
+export function modulesOf(live: LiveCatalog): ModuleInfo[] {
+  const names = new Map(live.roadmap.map((e) => [e.slug, e.name]))
+  return inOrder(live.roadmap).filter((e) => e.kind === 'module').map((e) => ({
+    id: e.slug,
+    name: e.name,
+    status: statusOf(e, live.modules),
+    desc: e.summary,
+    needs: needsOf(e, names),
+    missing: e.limitations.length ? e.limitations.join(' ') : undefined,
+    slug: e.releaseSlug,
+    category: e.category,
+  }))
 }
 
 const LANE_COPY: Record<'building' | 'next' | 'later', { title: string; sub: string; status: Status }> = {
@@ -43,7 +65,7 @@ const LANE_COPY: Record<'building' | 'next' | 'later', { title: string; sub: str
 // Lanes follow readiness first: what is Available is "Now" whatever its horizon, then
 // each remaining entry sits in the lane Cloud's horizon names.
 export function buildLanes(live: LiveCatalog): Lane[] {
-  const sorted = [...live.roadmap].sort((a, b) => a.sort - b.sort || a.slug.localeCompare(b.slug))
+  const sorted = inOrder(live.roadmap)
   const item = (e: RoadmapEntry): RoadmapItem => ({
     name: e.name, desc: e.summary, feature: e.kind === 'feature' || undefined,
     missing: e.limitations.length ? lowerFirst(e.limitations.join(' ')) : undefined,

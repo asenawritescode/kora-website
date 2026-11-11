@@ -6,6 +6,7 @@
     "dev": "vite",
     "validate:claims": "bun scripts/check-claims.ts",
     "validate:catalog": "bun scripts/check-catalog-drift.ts",
+    "sync:catalog": "bun scripts/sync-catalog.ts",
     "validate:links": "bun scripts/check-links.ts",
     "validate:contrast": "bun scripts/contrast.ts",
     "validate:tokens": "bun scripts/check-tokens.ts",

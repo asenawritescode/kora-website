@@ -3,13 +3,16 @@ import { Link } from '@tanstack/react-router'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, H1, StatusBadge, Tick, type Status } from '@/components/landing/ui'
-import type { ModuleInfo } from '@/lib/modules-content'
+import type { ModuleInfo } from '@/lib/live-catalog'
 import { useCatalog } from '@/lib/use-catalog'
 import { usePhone } from '@/lib/use-phone'
 
 type Filter = 'all' | Status
 const FILTERS: [Filter, string][] = [['all', 'All'], ['available', 'Available'], ['preview', 'Preview'], ['roadmap', 'On the roadmap']]
 const h2 = 'text-[clamp(1.5rem,2.6vw,2rem)] tracking-[-0.02em]'
+
+// How the design words the button for a module: "Choose point of sale".
+const SHORT: Record<string, string> = { pos: 'point of sale', inventory: 'inventory' }
 
 const countByStatus = (modules: ModuleInfo[], status: Status) => modules.filter((m) => m.status === status).length
 
@@ -78,7 +81,7 @@ export default function ModulesPage() {
                 </dl>
                 <div className="mt-auto flex flex-col gap-2 pt-1.5">
                   {m.status === 'available' ? (
-                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">Choose {m.short}</Link>
+                    <Link to="/start" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">Choose {SHORT[m.id] ?? m.name.toLowerCase()}</Link>
                   ) : (
                     <Link to="/roadmap" className="flex min-h-12 items-center justify-center rounded-md border border-line-control bg-paper text-[0.9375rem] font-semibold text-ink no-underline">See the roadmap</Link>
                   )}

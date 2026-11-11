@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test'
-import type { CatalogComponent, CatalogModule, CatalogTemplate, RoadmapEntry } from './catalog-client'
+import type { CatalogComponent, CatalogModule, CatalogTemplate } from './catalog-client'
 import { INDUSTRIES } from './industries-content'
-import { mergeModules } from './live-catalog'
-import { MODULES } from './modules-content'
+import { SNAPSHOT } from './catalog-snapshot'
+import { modulesOf } from './live-catalog'
 import { modulesFrom } from './module-picker'
 import { industryFor, infoFor, notReady, packageOf, presetKeys, slugOfRelease, type Directory } from './picker-preset'
 
@@ -19,11 +19,8 @@ const template: CatalogTemplate = {
   ],
 }
 const catalog: CatalogModule[] = ['erp-sell', 'erp-stock', 'erp-buy', 'erp-books'].map((slug) => ({ slug, packageId: slug, name: slug, availability: 'available' }))
-const link = (slug: string, releaseSlug?: string): RoadmapEntry =>
-  ({ slug, kind: 'module', name: slug, summary: '', horizon: 'building', requires: [], limitations: [], releaseSlug, sort: 1 })
-// Cloud links the first three; accounting is not linked to its release yet.
-const roadmap = [link('pos', 'erp-sell'), link('inventory', 'erp-stock'), link('purchasing', 'erp-buy'), link('accounting')]
-const dir: Directory = { catalog, info: mergeModules(MODULES, { modules: catalog, roadmap }) }
+// The snapshot's roadmap: Cloud links the first three, accounting has no release yet.
+const dir: Directory = { catalog, info: modulesOf({ modules: catalog, roadmap: SNAPSHOT.roadmap }) }
 const modules = modulesFrom([template])
 const retail = INDUSTRIES[0]
 
@@ -55,7 +52,7 @@ describe('joining a template part to a site module', () => {
     expect(infoFor(impostor[0], dir)).toBeUndefined()
   })
 
-  test('where Cloud says a module has no release, the committed slug does not win', () => {
+  test('where Cloud says a module has no release, nothing joins to it', () => {
     expect(dir.info.find((m) => m.id === 'accounting')?.slug).toBeUndefined()
     expect(infoFor(modules[3], dir)).toBeUndefined()
   })
@@ -69,8 +66,8 @@ test('a preset with no module in the catalog ticks nothing', () => {
   expect(presetKeys(modules, INDUSTRIES.find((i) => i.name === 'Schools and training')!, dir)).toEqual([])
 })
 
-test('without Cloud\'s module list a part still joins by its package id and the committed slugs', () => {
-  expect(presetKeys(modules, retail, { catalog: [], info: MODULES })).toEqual(['retail-erp:Selling and cash', 'retail-erp:Stock', 'retail-erp:Books'])
+test('without Cloud\'s module list a part still joins by its package id', () => {
+  expect(presetKeys(modules, retail, { catalog: [], info: dir.info })).toEqual(['retail-erp:Selling and cash', 'retail-erp:Stock'])
 })
 
 test('not-ready lists what the catalog cannot offer yet', () => {

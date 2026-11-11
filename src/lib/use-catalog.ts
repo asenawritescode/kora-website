@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import type { CatalogModule, CatalogTemplate } from '@/lib/catalog-client'
-import { buildLanes, mergeModules, type LiveCatalog } from '@/lib/live-catalog'
-import { LANES, MODULES, type Lane, type ModuleInfo } from '@/lib/modules-content'
+import { SNAPSHOT } from '@/lib/catalog-snapshot'
+import { buildLanes, modulesOf, type Lane, type LiveCatalog, type ModuleInfo } from '@/lib/live-catalog'
 import { getCatalogTemplates, getLiveCatalog } from '@/lib/public-content'
 
 // The one place the site reads Cloud's catalog. Every page that shows modules,
@@ -23,8 +23,8 @@ export type CatalogParts = {
   live: LiveCatalog | 'failed' | null
 }
 
-// `catalog` is the module list as Cloud publishes it (empty until it answers); `modules` is the
-// site's own list with Cloud's readiness merged in.
+// `catalog` is the module list as Cloud publishes it, `modules` the site's modules derived from
+// Cloud's roadmap. Until Cloud answers (and if it cannot) both come from the committed snapshot.
 export type CatalogView = { state: CatalogState; modules: ModuleInfo[]; catalog: CatalogModule[]; lanes: Lane[]; source: CatalogSource }
 
 export const LOADING: CatalogParts = { templates: null, live: null }
@@ -32,8 +32,9 @@ export const LOADING: CatalogParts = { templates: null, live: null }
 export function viewOf({ templates, live }: CatalogParts): CatalogView {
   const state: CatalogState =
     templates === null ? { status: 'loading' } : templates === 'failed' ? { status: 'error' } : { status: 'ready', templates }
-  if (live && live !== 'failed') return { state, modules: mergeModules(MODULES, live), catalog: live.modules, lanes: buildLanes(live), source: 'live' }
-  return { state, modules: MODULES, catalog: [], lanes: LANES, source: live === 'failed' ? 'fallback' : 'loading' }
+  const answered = live && live !== 'failed' ? live : SNAPSHOT
+  const source: CatalogSource = answered === SNAPSHOT ? (live === 'failed' ? 'fallback' : 'loading') : 'live'
+  return { state, modules: modulesOf(answered), catalog: answered.modules, lanes: buildLanes(answered), source }
 }
 
 export function useCatalog(): CatalogView & { retry: () => void } {
