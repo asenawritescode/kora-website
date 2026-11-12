@@ -1,0 +1,131 @@
+{
+ "template_only": {
+  "status": 200,
+  "body": {
+   "data": {
+    "provisionable": true,
+    "template": {
+     "release_id": "retail-shop-1.0.0",
+     "name": "Retail shop",
+     "summary": "Sell, track stock and buy from suppliers.",
+     "availability": "available"
+    },
+    "included": [
+     {
+      "release_id": "erp-sell-1.0.0",
+      "name": "Selling and cash",
+      "summary": "Sell at the counter in any currency, take payments, work a till, track expenses.",
+      "availability": "available",
+      "reason": "required_by_template"
+     },
+     {
+      "release_id": "erp-stock-1.0.0",
+      "name": "Stock",
+      "summary": "Change stock with a reason, and see it change from any screen.",
+      "availability": "available",
+      "reason": "included_by_default"
+     }
+    ],
+    "optional": [
+     {
+      "release_id": "erp-books-1.0.0",
+      "name": "Books",
+      "summary": "Accounts, periods and balanced journal entries.",
+      "availability": "available",
+      "selectable": true,
+      "requires": [
+       "Stock"
+      ]
+     },
+     {
+      "release_id": "erp-buy-1.0.0",
+      "name": "Buying",
+      "summary": "Order from suppliers, record deliveries, bills and payments.",
+      "availability": "preview",
+      "selectable": false
+     }
+    ],
+    "conflicts": [],
+    "price": {
+     "lines": [],
+     "totals": [],
+     "requires_confirmation": false,
+     "message": "Included in your trial"
+    },
+    "selection_digest": "sha256:0b44745900ae5be9b2490b43ac721cdb66b86342306ebd3a9567a01a5f1797c4"
+   }
+  }
+ },
+ "with_books": {
+  "status": 200,
+  "body": {
+   "data": {
+    "provisionable": true,
+    "template": {
+     "release_id": "retail-shop-1.0.0",
+     "name": "Retail shop",
+     "summary": "Sell, track stock and buy from suppliers.",
+     "availability": "available"
+    },
+    "included": [
+     {
+      "release_id": "erp-sell-1.0.0",
+      "name": "Selling and cash",
+      "summary": "Sell at the counter in any currency, take payments, work a till, track expenses.",
+      "availability": "available",
+      "reason": "required_by_template"
+     },
+     {
+      "release_id": "erp-stock-1.0.0",
+      "name": "Stock",
+      "summary": "Change stock with a reason, and see it change from any screen.",
+      "availability": "available",
+      "reason": "included_by_default",
+      "required_by": [
+       "erp-books-1.0.0"
+      ],
+      "explanation": "Books needs Stock, so Stock is included."
+     },
+     {
+      "release_id": "erp-books-1.0.0",
+      "name": "Books",
+      "summary": "Accounts, periods and balanced journal entries.",
+      "availability": "available",
+      "reason": "selected"
+     }
+    ],
+    "optional": [
+     {
+      "release_id": "erp-buy-1.0.0",
+      "name": "Buying",
+      "summary": "Order from suppliers, record deliveries, bills and payments.",
+      "availability": "preview",
+      "selectable": false
+     }
+    ],
+    "conflicts": [],
+    "price": {
+     "lines": [],
+     "totals": [],
+     "requires_confirmation": false,
+     "message": "Included in your trial"
+    },
+    "selection_digest": "sha256:66c0ad58e71dba86db5f5289baf53e1377f7378ab2ac4a33ee54f698331e4467"
+   }
+  }
+ },
+ "preview_part": {
+  "status": 409,
+  "body": {
+   "error": "selection_unavailable",
+   "message": "This template is not available for setup yet. Choose an available template before continuing."
+  }
+ },
+ "changed": {
+  "status": 409,
+  "body": {
+   "error": "selection_changed",
+   "message": "This template release is no longer available. Review the current template before continuing."
+  }
+ }
+}

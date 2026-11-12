@@ -1,0 +1,21 @@
+# With Cloud unreachable the page keeps the committed list and says so. It must not
+# present a status as freshly checked.
+url: ${BASE_DOWN}
+name: the page says so when Cloud cannot be reached
+---
+- openLink: ${BASE_DOWN}/modules
+- assertVisible: "Live status could not be loaded, so this is the last published list.*"
+- assertVisible: "14 modules.*"
+- openLink: ${BASE_DOWN}/roadmap
+- assertVisible: "Live status could not be loaded, so this is the last published roadmap.*"
+# A message that cannot be sent keeps what the visitor typed and says so.
+- openLink: ${BASE_DOWN}/contact
+- tapOn: "Your name"
+- inputText: "Amina"
+- tapOn: "Email"
+- inputText: "amina.e2e@example.com"
+- tapOn: "Message"
+- inputText: "Is anyone there?"
+- tapOn: "Send message"
+- assertVisible: "We could not send your message.*"
+- assertVisible: "Send message"

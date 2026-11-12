@@ -1,19 +1,57 @@
 import { useCallback, useEffect, useState } from 'react'
-import type { CatalogTemplate } from '@/lib/catalog-client'
-import { getCatalogTemplates } from '@/lib/public-content'
+import type { CatalogModule, CatalogTemplate } from '@/lib/catalog-client'
+import { SNAPSHOT } from '@/lib/catalog-snapshot'
+import { buildLanes, modulesOf, type Lane, type LiveCatalog, type ModuleInfo } from '@/lib/live-catalog'
+import { getCatalogTemplates, getLiveCatalog } from '@/lib/public-content'
+
+// The one place the site reads Cloud's catalog. Every page that shows modules,
+// the roadmap, an industry preset or the set-up picker reads this, so they all
+// see the same answer.
+//
+// Templates and the live list (modules + roadmap) load side by side and fail
+// separately: a Cloud that lists templates but has no roadmap still lets the
+// picker work, and the other pages say their status is the last published list.
 
 export type CatalogState = { status: 'loading' } | { status: 'error' } | { status: 'ready'; templates: CatalogTemplate[] }
 
-export function useCatalog() {
-  const [state, setState] = useState<CatalogState>({ status: 'loading' })
+// where the module list came from: Cloud, the committed list while Cloud answers,
+// or the committed list because Cloud could not be reached.
+export type CatalogSource = 'live' | 'loading' | 'fallback'
+
+export type CatalogParts = {
+  templates: CatalogTemplate[] | 'failed' | null
+  live: LiveCatalog | 'failed' | null
+}
+
+// `catalog` is the module list as Cloud publishes it, `modules` the site's modules derived from
+// Cloud's roadmap. Until Cloud answers (and if it cannot) both come from the committed snapshot.
+export type CatalogView = { state: CatalogState; modules: ModuleInfo[]; catalog: CatalogModule[]; lanes: Lane[]; source: CatalogSource }
+
+export const LOADING: CatalogParts = { templates: null, live: null }
+
+export function viewOf({ templates, live }: CatalogParts): CatalogView {
+  const state: CatalogState =
+    templates === null ? { status: 'loading' } : templates === 'failed' ? { status: 'error' } : { status: 'ready', templates }
+  const answered = live && live !== 'failed' ? live : SNAPSHOT
+  const source: CatalogSource = answered === SNAPSHOT ? (live === 'failed' ? 'fallback' : 'loading') : 'live'
+  return { state, modules: modulesOf(answered), catalog: answered.modules, lanes: buildLanes(answered), source }
+}
+
+export function useCatalog(): CatalogView & { retry: () => void } {
+  const [parts, setParts] = useState<CatalogParts>(LOADING)
   const [attempt, setAttempt] = useState(0)
   useEffect(() => {
     let alive = true
-    setState({ status: 'loading' })
-    getCatalogTemplates()
-      .then((templates) => alive && setState({ status: 'ready', templates }))
-      .catch(() => alive && setState({ status: 'error' }))
+    setParts(LOADING)
+    getCatalogTemplates().then(
+      (templates) => alive && setParts((p) => ({ ...p, templates })),
+      () => alive && setParts((p) => ({ ...p, templates: 'failed' })),
+    )
+    getLiveCatalog().then(
+      (live) => alive && setParts((p) => ({ ...p, live })),
+      () => alive && setParts((p) => ({ ...p, live: 'failed' })),
+    )
     return () => { alive = false }
   }, [attempt])
-  return { state, retry: useCallback(() => setAttempt((n) => n + 1), []) }
+  return { ...viewOf(parts), retry: useCallback(() => setAttempt((n) => n + 1), []) }
 }

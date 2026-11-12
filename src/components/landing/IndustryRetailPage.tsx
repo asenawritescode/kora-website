@@ -3,17 +3,19 @@ import { SignupLink } from '@/components/landing/SignupLink'
 import { ProductScreens } from '@/components/landing/HomePage/ProductScreens'
 import { BUTTON_PRIMARY, CARD, H1, StatusBadge, Tick } from '@/components/landing/ui'
 import { INDUSTRIES, RETAIL, presetModules, readyModules } from '@/lib/industries-content'
+import { useCatalog } from '@/lib/use-catalog'
 
 const industry = INDUSTRIES[0]
 const h2 = 'text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]'
 
 export default function IndustryRetailPage() {
-  const modules = presetModules(industry)
-  const ready = readyModules(industry).length
+  const { modules: live, source } = useCatalog()
+  const modules = presetModules(industry, live)
+  const ready = readyModules(industry, live).length
 
   return (
     <>
-      <section className="bg-surface px-4 pb-[clamp(36px,5vw,64px)] pt-[clamp(28px,4vw,56px)]">
+      <section data-catalog-source={source} className="bg-surface px-4 pb-[clamp(36px,5vw,64px)] pt-[clamp(28px,4vw,56px)]">
         <div className="mx-auto flex max-w-[1200px] flex-col gap-4">
           <nav aria-label="Breadcrumb" className="text-sm text-ink-3">
             <Link to="/industries" className="inline-flex min-h-11 items-center">Industries</Link> / <span aria-current="page">{industry.name}</span>

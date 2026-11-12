@@ -1,0 +1,246 @@
+{
+  "modules": {
+    "data": {
+      "items": [
+        {
+          "slug": "erp-books",
+          "package_id": "erp-books",
+          "name": "Books",
+          "availability": "available"
+        },
+        {
+          "slug": "erp-buy",
+          "package_id": "erp-buy",
+          "name": "Buying",
+          "availability": "preview"
+        },
+        {
+          "slug": "erp-sell",
+          "package_id": "erp-sell",
+          "name": "Selling and cash",
+          "availability": "available"
+        },
+        {
+          "slug": "erp-stock",
+          "package_id": "erp-stock",
+          "name": "Stock",
+          "availability": "available"
+        },
+        {
+          "slug": "shop-sell",
+          "package_id": "shop-sell",
+          "name": "Selling at the counter",
+          "availability": "available"
+        },
+        {
+          "slug": "shop-stock",
+          "package_id": "shop-stock",
+          "name": "Products and stock",
+          "availability": "available"
+        }
+      ]
+    }
+  },
+  "roadmap": {
+    "data": {
+      "items": [
+        {
+          "slug": "pos",
+          "kind": "module",
+          "name": "Sales and point of sale",
+          "summary": "Sell, take cash or mobile money, and see every sale.",
+          "category": "Sell",
+          "horizon": "building",
+          "requires": [
+            "inventory"
+          ],
+          "limitations": [],
+          "release_slug": "erp-sell",
+          "sort": 1
+        },
+        {
+          "slug": "inventory",
+          "kind": "module",
+          "name": "Inventory and stock",
+          "summary": "Know what you have and when to restock.",
+          "category": "Stock",
+          "horizon": "building",
+          "requires": [],
+          "limitations": [],
+          "release_slug": "erp-stock",
+          "sort": 2
+        },
+        {
+          "slug": "purchasing",
+          "kind": "module",
+          "name": "Purchasing and suppliers",
+          "summary": "Track what you buy and what you owe suppliers.",
+          "category": "Money",
+          "horizon": "building",
+          "requires": [
+            "inventory"
+          ],
+          "limitations": [
+            "Purchase orders and supplier bills."
+          ],
+          "release_slug": "erp-buy",
+          "sort": 3
+        },
+        {
+          "slug": "accounting",
+          "kind": "module",
+          "name": "Accounting and tax",
+          "summary": "Track money in and out, and your tax figures.",
+          "category": "Money",
+          "horizon": "next",
+          "requires": [],
+          "limitations": [],
+          "sort": 10
+        },
+        {
+          "slug": "reports",
+          "kind": "module",
+          "name": "Reports and owner dashboards",
+          "summary": "See the business on one screen.",
+          "category": "Operations",
+          "horizon": "next",
+          "requires": [],
+          "limitations": [],
+          "sort": 11
+        },
+        {
+          "slug": "card-payments",
+          "kind": "feature",
+          "name": "Card payments",
+          "summary": "Take card payments at the till.",
+          "category": "Sell",
+          "horizon": "next",
+          "requires": [],
+          "limitations": [],
+          "sort": 12
+        },
+        {
+          "slug": "receipt-printers",
+          "kind": "feature",
+          "name": "Receipt printers",
+          "summary": "Print a receipt for each sale.",
+          "category": "Sell",
+          "horizon": "next",
+          "requires": [],
+          "limitations": [],
+          "sort": 13
+        },
+        {
+          "slug": "kra-etims",
+          "kind": "feature",
+          "name": "KRA eTIMS tax receipts",
+          "summary": "Issue tax receipts that meet KRA rules.",
+          "category": "Money",
+          "horizon": "next",
+          "requires": [],
+          "limitations": [],
+          "sort": 14
+        },
+        {
+          "slug": "crm",
+          "kind": "module",
+          "name": "Customers (CRM) and support",
+          "summary": "Keep customer details and answer questions.",
+          "category": "Customers",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 20
+        },
+        {
+          "slug": "people",
+          "kind": "module",
+          "name": "People, payroll and leave",
+          "summary": "Keep staff records, pay salaries and manage leave.",
+          "category": "People",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 21
+        },
+        {
+          "slug": "projects",
+          "kind": "module",
+          "name": "Projects and tasks",
+          "summary": "Plan work and track tasks.",
+          "category": "Operations",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 22
+        },
+        {
+          "slug": "documents",
+          "kind": "module",
+          "name": "Documents and approvals",
+          "summary": "Store documents and get sign-off.",
+          "category": "Operations",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 23
+        },
+        {
+          "slug": "assets",
+          "kind": "module",
+          "name": "Assets and maintenance",
+          "summary": "Track equipment and plan repairs.",
+          "category": "Operations",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 24
+        },
+        {
+          "slug": "subscriptions",
+          "kind": "module",
+          "name": "Subscriptions and recurring billing",
+          "summary": "Bill customers on a schedule.",
+          "category": "Money",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 25
+        },
+        {
+          "slug": "manufacturing",
+          "kind": "module",
+          "name": "Manufacturing and bills of materials",
+          "summary": "Turn materials into products with a recipe.",
+          "category": "Operations",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 26
+        },
+        {
+          "slug": "fleet",
+          "kind": "module",
+          "name": "Fleet and delivery",
+          "summary": "Manage vehicles, drivers and deliveries.",
+          "category": "Operations",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 27
+        },
+        {
+          "slug": "integrations",
+          "kind": "module",
+          "name": "Integrations and AI tools",
+          "summary": "Connect other tools. AI agents later.",
+          "category": "Connect",
+          "horizon": "later",
+          "requires": [],
+          "limitations": [],
+          "sort": 28
+        }
+      ]
+    }
+  }
+}

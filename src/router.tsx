@@ -41,6 +41,7 @@ const ContactPage = inMarketing(() => import('@/routes/landing/contact'))
 const AboutPage = inMarketing(() => import('@/routes/landing/about'))
 const PrivacyPage = inMarketing(() => import('@/routes/landing/privacy'))
 const TermsPage = inMarketing(() => import('@/routes/landing/terms'))
+const VerifyPage = inMarketing(() => import('@/routes/landing/verify'))
 const NotFoundPage = inMarketing(() => import('@/components/landing/NotFound'))
 
 const rootRoute = createRootRoute()
@@ -86,6 +87,12 @@ const startRoute = createRoute({
   path: '/start',
   validateSearch: (search: Record<string, unknown>): { for?: string } => (typeof search.for === 'string' ? { for: search.for } : {}),
   component: StartPage,
+})
+
+const verifyRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: '/verify',
+  component: VerifyPage,
 })
 
 const contactRoute = createRoute({
@@ -142,6 +149,7 @@ const routeTree = rootRoute.addChildren([
   industryRetailRoute,
   howAiRoute,
   startRoute,
+  verifyRoute,
   contactRoute,
   aboutRoute,
   privacyRoute,

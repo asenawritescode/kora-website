@@ -22,7 +22,7 @@ describe('parseTemplates', () => {
       ['Inventory', 'required'],
       ['Reports', 'optional'],
     ])
-    expect(retail.components[2].requires).toEqual(['Point of Sale'])
+    expect(retail.releaseId).toBe('retail-pos-1.0.3')
     expect(templates[1].category).toBe('Retail')
   })
 

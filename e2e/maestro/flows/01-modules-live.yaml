@@ -1,0 +1,15 @@
+# The Modules page shows what Cloud published, not the committed copy.
+url: ${BASE}
+name: modules read live from Cloud
+---
+- openLink: ${BASE}/modules
+- assertVisible: "14 modules: 2 available, 1 in preview, 11 on the roadmap. Pick only what you need."
+- assertNotVisible: "Live status could not be loaded.*"
+- tapOn: "Preview \\(1\\)"
+- assertVisible: "Showing 1 of 14 modules"
+- assertVisible: "Purchasing and suppliers"
+- assertVisible: "Purchase orders and supplier bills."
+- tapOn: "Available \\(2\\)"
+- assertVisible: "Showing 2 of 14 modules"
+- assertVisible: "Sales and point of sale"
+- assertVisible: "Inventory and stock"

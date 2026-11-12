@@ -1,0 +1,39 @@
+# The Roadmap lanes and the "Missing" line come from Cloud's roadmap items.
+url: ${BASE}
+name: roadmap lanes and limitations come from Cloud
+---
+- openLink: ${BASE}/roadmap
+- assertVisible: "Now"
+- assertVisible: "Building"
+- assertVisible: "Planned next"
+- assertVisible: "Planned later"
+- assertVisible: "KRA eTIMS tax receipts"
+- assertNotVisible:
+    text: "Accounting and tax"
+    leftOf: "Planned next"
+- assertVisible: ".*purchase orders and supplier bills.*"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: edit-purchasing-limitation
+- openLink: ${BASE}/roadmap
+- assertVisible: ".*supplier returns are not built yet.*"
+- assertNotVisible: ".*purchase orders and supplier bills.*"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: restore-purchasing-limitation
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: move-accounting-to-building
+- openLink: ${BASE}/roadmap
+- assertVisible:
+    text: "Accounting and tax"
+    leftOf: "Planned next"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: restore-accounting
+- openLink: ${BASE}/roadmap
+- assertVisible: ".*purchase orders and supplier bills.*"

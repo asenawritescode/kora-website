@@ -1,0 +1,21 @@
+# The set-up page lists the parts Cloud publishes under Cloud's own names, ticks a
+# preset by release, and shows what Cloud says a choice installs. "Books needs Stock,
+# so Stock is included." is Cloud's sentence from its resolve answer; the site has
+# no such text, so seeing it means the page asked Cloud.
+url: ${BASE}
+name: the set-up page shows what Cloud says the choice installs
+---
+- openLink: ${BASE}/start
+- tapOn: "Shop or kiosk.*"
+- tapOn: "Continue"
+- assertVisible: "Step 2 of 3"
+- assertVisible: "Selling and cash"
+# Retail names its template: the other retail template's parts are not mixed in.
+- assertNotVisible: "Selling at the counter"
+- assertVisible: "Stock"
+- assertVisible: "2 modules.*"
+- assertNotVisible: "No modules ticked.*"
+- assertVisible: ".*3 more in this setup.*"
+- tapOn: "Books.*"
+- assertVisible: "3 modules.*"
+- assertVisible: ".*Books needs Stock, so Stock is included.*"

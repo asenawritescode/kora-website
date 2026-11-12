@@ -1,6 +1,8 @@
 import { Link } from '@tanstack/react-router'
+import PricedPlans from '@/components/landing/PricedPlans'
 import { SignupLink } from '@/components/landing/SignupLink'
 import { BUTTON_PRIMARY, BUTTON_SECONDARY, CARD, Tick } from '@/components/landing/ui'
+import { usePricing } from '@/lib/use-pricing'
 
 const INCLUDED = [
   'Every Available module: today, Sales and point of sale, and Inventory and stock',
@@ -17,48 +19,51 @@ const FAQ = [
 ]
 
 export default function PricingPage() {
+  const pricing = usePricing()
   return (
-    <div className="flex-1 bg-surface">
+    <div className="flex-1 bg-surface" data-pricing-mode={pricing.mode}>
       <div className="mx-auto flex max-w-[1000px] flex-col gap-8 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,72px)]">
-        <div className="flex flex-col items-center gap-2.5 text-center">
-          <h1 className="text-[clamp(2.25rem,5vw,4rem)] leading-[1.04]">Free during the pilot</h1>
-          <p className="max-w-[600px] text-[1.125rem] leading-[1.55] text-ink-2">You’ll see prices before the pilot ends, with time to decide.</p>
-          <div className="mt-2 flex flex-wrap justify-center gap-3">
-            <SignupLink className={BUTTON_PRIMARY} />
-            <Link to="/contact" className={BUTTON_SECONDARY}>Talk to the team</Link>
+        {pricing.mode === 'priced' ? <PricedPlans plans={pricing.plans} notice={pricing.notice} /> : <>
+          <div className="flex flex-col items-center gap-2.5 text-center">
+            <h1 className="text-[clamp(2.25rem,5vw,4rem)] leading-[1.04]">Free during the pilot</h1>
+            <p className="max-w-[600px] text-[1.125rem] leading-[1.55] text-ink-2">You’ll see prices before the pilot ends, with time to decide.</p>
+            <div className="mt-2 flex flex-wrap justify-center gap-3">
+              <SignupLink className={BUTTON_PRIMARY} />
+              <Link to="/contact" className={BUTTON_SECONDARY}>Talk to the team</Link>
+            </div>
+            <p className="text-[0.9375rem] text-ink-3">Free during the pilot. No card needed.</p>
           </div>
-          <p className="text-[0.9375rem] text-ink-3">Free during the pilot. No card needed.</p>
-        </div>
 
-        <div className="flex flex-wrap gap-4">
-          <div className="flex flex-[3_1_420px] flex-col gap-4 rounded-xl border-2 border-action bg-paper p-[clamp(22px,3.4vw,36px)]">
-            <h2 className="text-[2.125rem] leading-[1.1] tracking-[-0.02em]">What’s included</h2>
-            <span className="text-base text-ink-2">No payment details needed to sign up.</span>
-            <ul className="flex flex-col gap-2.5">
-              {INCLUDED.map((text) => (
-                <li key={text} className="flex gap-2.5 text-base leading-[1.45]"><Tick className="text-action" />{text}</li>
-              ))}
-            </ul>
-            <SignupLink className={`${BUTTON_SECONDARY} justify-center`} />
+          <div className="flex flex-wrap gap-4">
+            <div className="flex flex-[3_1_420px] flex-col gap-4 rounded-xl border-2 border-action bg-paper p-[clamp(22px,3.4vw,36px)]">
+              <h2 className="text-[2.125rem] leading-[1.1] tracking-[-0.02em]">What’s included</h2>
+              <span className="text-base text-ink-2">No payment details needed to sign up.</span>
+              <ul className="flex flex-col gap-2.5">
+                {INCLUDED.map((text) => (
+                  <li key={text} className="flex gap-2.5 text-base leading-[1.45]"><Tick className="text-action" />{text}</li>
+                ))}
+              </ul>
+              <SignupLink className={`${BUTTON_SECONDARY} justify-center`} />
+            </div>
+            <div className={`${CARD} flex flex-[2_1_280px] flex-col gap-3.5 p-[clamp(22px,3.4vw,36px)]`}>
+              <h2 className="text-[1.75rem] leading-[1.15] tracking-[-0.02em]">After the pilot: to be announced</h2>
+              <p className="text-base leading-[1.55] text-ink-2">Prices aren’t set yet. When they are, they’ll be here in full. No hidden totals.</p>
+              <p className="text-base leading-[1.55] text-ink-2">Nothing is charged unless you agree.</p>
+            </div>
           </div>
-          <div className={`${CARD} flex flex-[2_1_280px] flex-col gap-3.5 p-[clamp(22px,3.4vw,36px)]`}>
-            <h2 className="text-[1.75rem] leading-[1.15] tracking-[-0.02em]">After the pilot: to be announced</h2>
-            <p className="text-base leading-[1.55] text-ink-2">Prices aren’t set yet. When they are, they’ll be here in full. No hidden totals.</p>
-            <p className="text-base leading-[1.55] text-ink-2">Nothing is charged unless you agree.</p>
-          </div>
-        </div>
 
-        <p className="text-center text-[1.0625rem] leading-[1.55]">Not sure it fits your shop? <Link to="/contact" className="font-semibold">Talk to the team</Link></p>
+          <p className="text-center text-[1.0625rem] leading-[1.55]">Not sure it fits your shop? <Link to="/contact" className="font-semibold">Talk to the team</Link></p>
 
-        <section aria-labelledby="pq" className="flex flex-col gap-3">
-          <h2 id="pq" className="mb-1.5 text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Pricing questions</h2>
-          {FAQ.map(([q, a]) => (
-            <details key={q} className={`${CARD} px-[18px]`}>
-              <summary className="flex min-h-14 cursor-pointer items-center text-[1.0625rem] font-semibold">{q}</summary>
-              <div className="pb-[18px]"><p className="text-base leading-[1.55] text-ink-2">{a}</p></div>
-            </details>
-          ))}
-        </section>
+          <section aria-labelledby="pq" className="flex flex-col gap-3">
+            <h2 id="pq" className="mb-1.5 text-[clamp(1.625rem,3vw,2.25rem)] tracking-[-0.02em]">Pricing questions</h2>
+            {FAQ.map(([q, a]) => (
+              <details key={q} className={`${CARD} px-[18px]`}>
+                <summary className="flex min-h-14 cursor-pointer items-center text-[1.0625rem] font-semibold">{q}</summary>
+                <div className="pb-[18px]"><p className="text-base leading-[1.55] text-ink-2">{a}</p></div>
+              </details>
+            ))}
+          </section>
+        </>}
       </div>
     </div>
   )

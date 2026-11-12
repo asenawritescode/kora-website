@@ -1,0 +1,22 @@
+# The Contact form reaches Cloud as a lead, once, and a bad form is refused before sending.
+url: ${BASE}
+name: a contact message becomes one lead in Cloud
+---
+- evalScript: ${output.marker = 'e2e-' + Date.now()}
+- openLink: ${BASE}/contact
+- tapOn: "Send message"
+- assertVisible: "Fix 3 things to send your message."
+- tapOn: "Your name"
+- inputText: "Amina"
+- tapOn: "Email"
+- inputText: "amina.e2e@example.com"
+- tapOn: "Message"
+- inputText: "Do you support two shops? ${output.marker}"
+- tapOn: "Send message"
+- assertVisible: "Message sent"
+- assertVisible: "amina.e2e@example.com"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: expect-one-lead
+      MARKER: ${output.marker}

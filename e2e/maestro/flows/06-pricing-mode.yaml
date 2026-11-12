@@ -1,0 +1,27 @@
+# Cloud decides whether prices show. Plan rows with prices exist from the start, and the
+# site must stay on the pilot terms until the operator switches the mode.
+url: ${BASE}
+name: pricing follows the mode set in Cloud
+---
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: pricing-pilot
+- openLink: ${BASE}/pricing
+- assertVisible: "Free during the pilot"
+- assertNotVisible: "KES.*"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: pricing-priced
+- openLink: ${BASE}/pricing
+- assertVisible: "Prices apply from the first of March."
+- assertVisible: "KES 5,000 a month"
+- assertNotVisible: "Free during the pilot"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: pricing-pilot
+- openLink: ${BASE}/pricing
+- assertVisible: "Free during the pilot"
+- assertNotVisible: "KES.*"

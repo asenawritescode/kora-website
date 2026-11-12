@@ -43,3 +43,15 @@ export function Warn() {
     </svg>
   )
 }
+
+// A labelled form field with its error above the input.
+export const FIELD_INPUT = 'min-h-12 w-full min-w-0 rounded-md bg-paper px-3 text-base text-ink'
+export function Field({ id, title, error, children }: { id: string; title: React.ReactNode; error?: string; children: React.ReactNode }) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="text-[0.9375rem] font-bold">{title}</label>
+      {error && <span id={`${id}-err`} className="flex gap-1.5 text-sm font-semibold leading-[1.45] text-red"><Warn />{error}</span>}
+      {children}
+    </div>
+  )
+}

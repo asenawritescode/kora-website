@@ -1,0 +1,27 @@
+# A kind of business with nothing ready to set up is not shown a list of modules that do
+# not fit it: it gets a waitlist, and the lead reaches Cloud with the business in its source.
+url: ${BASE}
+name: a business with nothing ready joins the waitlist
+---
+- evalScript: ${output.marker = 'e2e-' + Date.now()}
+- openLink: ${BASE}/start?for=schools-and-training
+- assertVisible: "Schools and training isn.t ready yet"
+- assertVisible: "Step 2 of 3"
+- assertNotVisible: "Continue to create account"
+- assertNotVisible: "Selling and cash"
+- tapOn: "Tell me when it is ready"
+- assertVisible: "Enter your name."
+- tapOn: "Your name"
+- inputText: "Wanjiru"
+- tapOn: "Email"
+- inputText: "waitlist.e2e@example.com"
+- tapOn: "What you would use it for.*"
+- inputText: "Fee collection for two campuses ${output.marker}"
+- tapOn: "Tell me when it is ready"
+- assertVisible: "You are on the list"
+- assertVisible: "waitlist.e2e@example.com"
+- runScript:
+    file: ../scripts/cloud.js
+    env:
+      ACTION: expect-waitlist-lead
+      MARKER: ${output.marker}

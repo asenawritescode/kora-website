@@ -1,13 +1,15 @@
 import { Link } from '@tanstack/react-router'
 import { CARD, H1 } from '@/components/landing/ui'
 import { ICONS, INDUSTRIES, industrySlug, presetModules, readyModules } from '@/lib/industries-content'
+import { useCatalog } from '@/lib/use-catalog'
 
 // A ruled list rather than a grid of identical cards: the ready count carries the
 // weight, Retail (the only preset with its own page) leads, and presets with
 // nothing ready are quieter.
 export default function IndustriesPage() {
+  const { modules, source } = useCatalog()
   return (
-    <div className="flex-1 bg-surface">
+    <div className="flex-1 bg-surface" data-catalog-source={source}>
       <div className="mx-auto flex max-w-[1232px] flex-col gap-7 px-4 pb-[clamp(56px,6vw,88px)] pt-[clamp(32px,5vw,64px)]">
         <div className="flex flex-wrap items-end gap-6">
           <div className="flex flex-[1_1_520px] flex-col gap-2.5">
@@ -24,8 +26,8 @@ export default function IndustriesPage() {
 
         <ul className={`${CARD} overflow-hidden`}>
           {INDUSTRIES.map((industry, idx) => {
-            const ready = readyModules(industry)
-            const total = presetModules(industry).length
+            const ready = readyModules(industry, modules)
+            const total = presetModules(industry, modules).length
             const lead = idx === 0
             const none = ready.length === 0
             const row = `grid min-h-12 items-center gap-x-6 gap-y-1 px-5 py-4 text-ink no-underline transition-colors duration-150 sm:grid-cols-[minmax(0,1.1fr)_minmax(0,1.6fr)_9.5rem] ${lead ? 'bg-ok-wash py-6 hover:bg-ok-tint' : `hover:bg-surface-2 ${idx ? 'border-t border-line-faint' : ''}`}`

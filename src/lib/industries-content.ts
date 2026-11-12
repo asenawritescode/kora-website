@@ -1,31 +1,33 @@
 // Starting points by kind of business: which modules each preset holds. A preset
-// is not a separate product. Whether a module is ready is read from MODULES, so a
+// is not a separate product. Whether a module is ready is read from the module list, so a
 // module that becomes Available updates every preset at once.
-import { MODULES, type ModuleInfo } from './modules-content'
+import type { ModuleInfo } from './live-catalog'
 import type { Status } from '@/components/landing/ui'
 
-export type Industry = { name: string; icon: string; preset: string[] }
+// `template` names the Cloud template this kind of business is set up from, where more
+// than one could fit. Without it the picker uses whatever the catalog lists.
+export type Industry = { name: string; icon: string; preset: string[]; template?: string }
 
 // The name in a link: "Retail and general shops" is retail-and-general-shops.
 export const industrySlug = (industry: Industry) => industry.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 
 export const INDUSTRIES: Industry[] = [
-  { name: 'Retail and general shops', icon: 'shop', preset: ['pos', 'inventory', 'purchasing', 'accounting', 'reports'] },
-  { name: 'Wholesale and distribution', icon: 'box', preset: ['inventory', 'pos', 'purchasing', 'accounting', 'fleet', 'crm'] },
-  { name: 'Restaurants and cafes', icon: 'cup', preset: ['pos', 'inventory', 'purchasing', 'people', 'reports'] },
-  { name: 'Pharmacies and clinics', icon: 'plus', preset: ['pos', 'inventory', 'purchasing', 'crm', 'accounting'] },
-  { name: 'Agribusiness and cooperatives', icon: 'leaf', preset: ['inventory', 'purchasing', 'accounting', 'crm', 'reports'] },
-  { name: 'Manufacturing', icon: 'gear', preset: ['manufacturing', 'inventory', 'purchasing', 'pos', 'accounting'] },
-  { name: 'Construction and hardware', icon: 'hammer', preset: ['pos', 'inventory', 'purchasing', 'projects', 'accounting'] },
-  { name: 'Schools and training', icon: 'cap', preset: ['subscriptions', 'crm', 'people', 'accounting', 'documents'] },
-  { name: 'Logistics and transport', icon: 'truck', preset: ['fleet', 'crm', 'accounting', 'people', 'assets'] },
-  { name: 'Real estate and property', icon: 'home', preset: ['subscriptions', 'crm', 'assets', 'accounting', 'documents'] },
-  { name: 'Professional services', icon: 'brief', preset: ['projects', 'crm', 'accounting', 'documents', 'subscriptions'] },
-  { name: 'Salons and wellness', icon: 'scissors', preset: ['pos', 'inventory', 'crm', 'people', 'reports'] },
-  { name: 'Garages and workshops', icon: 'wrench', preset: ['pos', 'inventory', 'projects', 'crm', 'assets'] },
-  { name: 'SACCOs and microfinance', icon: 'coins', preset: ['accounting', 'crm', 'documents', 'reports', 'people'] },
-  { name: 'NGOs and projects', icon: 'heart', preset: ['projects', 'accounting', 'documents', 'people', 'reports'] },
-  { name: 'Hotels and hospitality', icon: 'bed', preset: ['pos', 'inventory', 'crm', 'people', 'reports'] },
+  { name: 'Retail and general shops', icon: 'shop', preset: ['pos', 'inventory', 'purchasing', 'accounting', 'reports'], template: 'retail-erp' },
+  { name: 'Wholesale and distribution', icon: 'box', preset: ['inventory', 'pos', 'purchasing', 'accounting', 'fleet', 'crm'], template: 'wholesale-erp' },
+  { name: 'Restaurants and cafes', icon: 'cup', preset: ['pos', 'inventory', 'purchasing', 'people', 'reports'], template: 'restaurants-erp' },
+  { name: 'Pharmacies and clinics', icon: 'plus', preset: ['pos', 'inventory', 'purchasing', 'crm', 'accounting'], template: 'pharmacy-erp' },
+  { name: 'Agribusiness and cooperatives', icon: 'leaf', preset: ['inventory', 'purchasing', 'accounting', 'crm', 'reports'], template: 'agri-erp' },
+  { name: 'Manufacturing', icon: 'gear', preset: ['manufacturing', 'inventory', 'purchasing', 'pos', 'accounting'], template: 'manufacturing-erp' },
+  { name: 'Construction and hardware', icon: 'hammer', preset: ['pos', 'inventory', 'purchasing', 'projects', 'accounting'], template: 'construction-erp' },
+  { name: 'Schools and training', icon: 'cap', preset: ['subscriptions', 'crm', 'people', 'accounting', 'documents'], template: 'schools-erp' },
+  { name: 'Logistics and transport', icon: 'truck', preset: ['fleet', 'crm', 'accounting', 'people', 'assets'], template: 'logistics-erp' },
+  { name: 'Real estate and property', icon: 'home', preset: ['subscriptions', 'crm', 'assets', 'accounting', 'documents'], template: 'realestate-erp' },
+  { name: 'Professional services', icon: 'brief', preset: ['projects', 'crm', 'accounting', 'documents', 'subscriptions'], template: 'services-erp' },
+  { name: 'Salons and wellness', icon: 'scissors', preset: ['pos', 'inventory', 'crm', 'people', 'reports'], template: 'salon-erp' },
+  { name: 'Garages and workshops', icon: 'wrench', preset: ['pos', 'inventory', 'projects', 'crm', 'assets'], template: 'garage-erp' },
+  { name: 'SACCOs and microfinance', icon: 'coins', preset: ['accounting', 'crm', 'documents', 'reports', 'people'], template: 'sacco-erp' },
+  { name: 'NGOs and projects', icon: 'heart', preset: ['projects', 'accounting', 'documents', 'people', 'reports'], template: 'ngo-erp' },
+  { name: 'Hotels and hospitality', icon: 'bed', preset: ['pos', 'inventory', 'crm', 'people', 'reports'], template: 'hotel-erp' },
 ]
 
 export const ICONS: Record<string, string> = {
@@ -40,11 +42,16 @@ export const ICONS: Record<string, string> = {
   heart: 'M10 16s-6-3.6-6-8a3.5 3.5 0 0 1 6-2.4A3.5 3.5 0 0 1 16 8c0 4.4-6 8-6 8z', bed: 'M2 15V6 M2 11h16v4 M18 15v-2 M6 11V9h5v2',
 }
 
-export function presetModules(industry: Industry): ModuleInfo[] {
-  return industry.preset.map((id) => MODULES.find((m) => m.id === id)!)
+// `modules` is what the page got from the catalog hook, so a preset's "ready" count
+// follows the live status. A preset id Cloud's roadmap does not list is skipped.
+export function presetModules(industry: Industry, modules: ModuleInfo[]): ModuleInfo[] {
+  return industry.preset.flatMap((id) => modules.find((m) => m.id === id) ?? [])
 }
 
-export const readyModules = (industry: Industry) => presetModules(industry).filter((m) => m.status === 'available')
+// The modules a kind of business starts with, in the order the list gives them.
+export const inPreset = (industry: Industry | undefined, modules: ModuleInfo[]) => (industry ? modules.filter((m) => industry.preset.includes(m.id)) : modules)
+
+export const readyModules = (industry: Industry, modules: ModuleInfo[]) => presetModules(industry, modules).filter((m) => m.status === 'available')
 
 export const RETAIL = {
   slug: 'retail',
