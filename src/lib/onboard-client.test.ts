@@ -32,6 +32,7 @@ describe('postSignup', () => {
     ['too many setups from here', 429, { error: 'signup_rate_limited' }, { kind: 'failed', reason: 'rate_limited' }],
     ['a server error', 503, { status: 'verification_pending', retryable: true }, { kind: 'failed', reason: 'server' }],
     ['Cloud cannot start it', 400, { error: 'workspace provisioning could not start', retryable: false }, { kind: 'refused', message: 'We could not start your workspace just now. Try again in a few minutes.' }],
+    ['setup failed after its retry', 422, { error: 'provisioning_failed', message: 'We could not finish setting up your workspace. Contact support and we will complete it for you.' }, { kind: 'refused', message: 'We could not finish setting up your workspace. Contact support and we will complete it for you.' }],
     ['Cloud says a field is wrong', 400, { error: 'full_name, email, password, organization_name, and idempotency key are required' }, { kind: 'refused', message: 'full_name, email, password, organization_name, and idempotency key are required' }],
   ]
   test.each(cases)('%s', async (_, status, body, want) => {
@@ -77,6 +78,12 @@ describe('followSignup', () => {
 
   test('a refusal ends it, whenever it comes', async () => {
     expect((await run([{ kind: 'working' }, { kind: 'selection', code: 'selection_changed' }])).result).toEqual({ kind: 'selection', code: 'selection_changed' })
+  })
+
+  test('a failed setup ends it while following', async () => {
+    const refused: SignupResult = { kind: 'refused', message: 'We could not finish setting up your workspace.' }
+    const r = await run([{ kind: 'working' }, { kind: 'working' }, refused])
+    expect(r).toEqual({ result: refused, calls: 3, working: 1 })
   })
 
   test('gives up after the time allowed', async () => {
